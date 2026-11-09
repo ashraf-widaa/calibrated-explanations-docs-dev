@@ -200,6 +200,20 @@ html_theme_options = {
     ],
 }
 
+# Show the Beta notice only on the independent Beta RTD project, or in a local
+# preview with CE_DOCS_BETA=true. Official documentation builds are unaffected.
+if (
+    os.environ.get("READTHEDOCS_PROJECT") == "calibrated-explanations-beta"
+    or os.environ.get("CE_DOCS_BETA", "").lower() == "true"
+):
+    html_theme_options["announcement"] = (
+        "<strong>Beta Documentation</strong> — This is an independent development "
+        "version of Calibrated Explanations documentation. Content is under review "
+        "and may change. For official documentation, visit "
+        '<a href="https://calibrated-explanations.readthedocs.io/">'
+        "https://calibrated-explanations.readthedocs.io/</a>."
+    )
+
 # HTML title
 html_title = f"{project} v{release}"
 
