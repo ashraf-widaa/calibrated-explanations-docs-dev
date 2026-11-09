@@ -11,12 +11,3 @@ performance tooling while maintaining the calibrated explanation contract.
   consent messaging.
 - {doc}`../../foundations/how-to/plot_with_plotspec` – Optional PlotSpec helpers
   for plugins that emit visual artefacts.
-
-```{toctree}
-:maxdepth: 1
-:hidden:
-
-../../foundations/how-to/tune_runtime_performance
-../../foundations/governance/optional_telemetry
-../../foundations/how-to/plot_with_plotspec
-```

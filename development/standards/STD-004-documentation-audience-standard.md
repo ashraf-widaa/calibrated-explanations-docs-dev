@@ -4,6 +4,8 @@
 
 > **Status note (2026-03-18):** Last edited 2026-03-18 · Retain indefinitely as an engineering standard.
 
+> **Amendment note (2026-11-09):** Sections 4.1 and 7.6 were revised for the five-section documentation navigation approved by the documentation Product Owner. **Pending formal standard-owner approval.**
+
 Formerly ADR-027. Reclassified as an engineering standard to keep ADRs scoped to
 architectural or contract decisions.
 
@@ -31,8 +33,11 @@ workflow, or conceptual understanding. Entry points are grouped into three tiers
 
 ## 4. Audience-first structure requirements
 
-1. Documentation navigation **MUST** start with getting-started and audience hubs
-   (practitioner, researcher, contributor/maintainer) before deep architecture.
+1. Documentation navigation **MUST** follow the five approved sections: CE: What & Why;
+   How CE Works: The Theory Behind It; CE in Practice: Explore & Apply; CE Software &
+   Integration; and CE Project, Vision & Evolution. Getting-started and the audience hubs
+   (practitioner, researcher, contributor/maintainer) **MUST** remain directly reachable
+   from the sidebar and the landing page.
 2. Tier 1 pages **MUST** stay brief and action-oriented; they are not the place for
    full semantics prose.
 3. Tier 2 pages **MUST** include runnable guidance for the task they cover.
@@ -126,8 +131,9 @@ A PR changing docs passes this standard only if all applicable checks pass:
    non-guarantees aligned with ADR-021.
 5. **Link routing correct:** Tier 1/2 link first to internal RTD semantics page;
    direct raw GitHub ADR links are only in Tier 3 or deeper technical pages.
-6. **Audience-first preserved:** Navigation and page order keep getting-started and
-   audience hubs ahead of deep architecture references.
+6. **Audience access preserved:** Navigation follows the five approved sections, and
+   getting-started and audience hubs remain directly reachable from the sidebar and
+   the landing page.
 7. **Bloat check:** Tier 1 remains concise; Tier 2 semantics note remains concise and
    scoped to the workflow mode.
 

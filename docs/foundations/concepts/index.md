@@ -26,13 +26,10 @@ guides.
 ```{toctree}
 :maxdepth: 1
 
-probabilistic_regression
 alternatives
-architecture
 error_handling
 explanation_structures
 guarded_explanations
-calibrated_interval_semantics
 terminology
 terminology_thresholded_vs_probabilistic_regression
 parameter-reference

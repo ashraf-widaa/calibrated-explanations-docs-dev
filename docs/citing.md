@@ -187,11 +187,11 @@ Jönköping International Business School.
 Hanna, A. (2025).
 [Explainable AI for Multi-Class Machine Failure Prediction: A Focus on Calibrated Explainability and Model Uncertainty](https://hj.diva-portal.org/smash/record.jsf?pid=diva2%3A1968367).
 
-# BibTeX entries
+## BibTeX entries
 
-## Bibtex to Published papers
+### Bibtex to Published papers
 
-### Calibrated Explanations: with Uncertainty Information and Counterfactuals
+#### Calibrated Explanations: with Uncertainty Information and Counterfactuals
 
 ```bibtex
 @article{lofstrom2024ce_classification,
@@ -206,7 +206,7 @@ Hanna, A. (2025).
 }
 ````
 
-### Calibrated Explanations for Regression
+#### Calibrated Explanations for Regression
 
 ```bibtex
 @article{lofstrom2025ce_regression,
@@ -221,7 +221,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Conditional Calibrated Explanations: Finding a Path Between Bias and Uncertainty
+#### Conditional Calibrated Explanations: Finding a Path Between Bias and Uncertainty
 
 ```bibtex
 @inproceedings{lofstrom2024ce_conditional,
@@ -240,7 +240,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Calibrated Explanations for Multi-class
+#### Calibrated Explanations for Multi-class
 
 ```bibtex
 @inproceedings{pmlr-v230-lofstrom24a,
@@ -257,7 +257,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Fast Calibrated Explanations
+#### Fast Calibrated Explanations
 
 ```bibtex
 @inproceedings{lofstrom2026fast,
@@ -276,7 +276,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Beyond the Predicted Class: Calibrated Explanations for Real Multiclass Decisions
+#### Beyond the Predicted Class: Calibrated Explanations for Real Multiclass Decisions
 
 ```bibtex
 @inproceedings{pmlr-v329-hanna26a,
@@ -293,7 +293,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Guarded Explanations: Conformal-Style Filtering for Distribution-Aware Rule Conditions
+#### Guarded Explanations: Conformal-Style Filtering for Distribution-Aware Rule Conditions
 
 ```bibtex
 @inproceedings{pmlr-v329-lofstrom26a,
@@ -310,7 +310,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Uncertainty-aware Decision Support in Power Grid Demand Forecasting
+#### Uncertainty-aware Decision Support in Power Grid Demand Forecasting
 
 ```bibtex
 @inproceedings{pmlr-v329-lofstrom26c,
@@ -327,7 +327,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Concerning uncertainty—a systematic survey of uncertainty-aware XAI
+#### Concerning uncertainty—a systematic survey of uncertainty-aware XAI
 
 ```bibtex
 @article{lofstrom2026uaxai_survey,
@@ -343,7 +343,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Calibrated Explanations: Trustworthy Uncertainty for Every Prediction and Explanation
+#### Calibrated Explanations: Trustworthy Uncertainty for Every Prediction and Explanation
 
 ```bibtex
 @inproceedings{lofstrom2026ce_demo,
@@ -359,7 +359,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Investigating the impact of calibration on the quality of explanations
+#### Investigating the impact of calibration on the quality of explanations
 
 ```bibtex
 @article{lofstrom2026calibration_quality,
@@ -375,9 +375,9 @@ Hanna, A. (2025).
 }
 ```
 
-## Related conformal reject-option research
+### Related conformal reject-option research
 
-### Classification with reject option: Distribution-free error guarantees via conformal prediction
+#### Classification with reject option: Distribution-free error guarantees via conformal prediction
 
 ```bibtex
 @article{hallbergszabadvary2025reject,
@@ -392,9 +392,9 @@ Hanna, A. (2025).
 }
 ```
 
-## Preprints and in-press
+### Preprints and in-press
 
-### Ensured: Explanations for Decreasing the Epistemic Uncertainty in Predictions
+#### Ensured: Explanations for Decreasing the Epistemic Uncertainty in Predictions
 
 ```bibtex
 @misc{lofstrom2024ce_ensured,
@@ -408,7 +408,7 @@ Hanna, A. (2025).
 }
 ```
 
-### Calibrated Explanations for Within-Spec Risk Prediction: Uncertainty-Aware Decision Support
+#### Calibrated Explanations for Within-Spec Risk Prediction: Uncertainty-Aware Decision Support
 
 ```bibtex
 @unpublished{lofstrom_withinspec_inpress,
@@ -418,9 +418,9 @@ Hanna, A. (2025).
 }
 ```
 
-## Other research outputs
+### Other research outputs
 
-### Trustworthy explanations: Improved decision support through well-calibrated uncertainty quantification
+#### Trustworthy explanations: Improved decision support through well-calibrated uncertainty quantification
 
 ```bibtex
 @phdthesis{lofstrom2023dissertation,
@@ -435,7 +435,7 @@ Hanna, A. (2025).
 }
 ```
 
-## Software
+### Software
 
 To cite this software, use the following BibTeX entry:
 

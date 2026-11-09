@@ -18,13 +18,3 @@ surfaces, or configuration toggles.
   documentation updates in sync.
 - {doc}`../../../foundations/reference/api` – API reference for docstring
   cross-links.
-
-```{toctree}
-:maxdepth: 1
-:hidden:
-
-../../../foundations/how-to/integrate_with_pipelines
-../../../foundations/how-to/configure_telemetry
-../../../foundations/governance/nav_crosswalk
-../../../foundations/reference/api
-```

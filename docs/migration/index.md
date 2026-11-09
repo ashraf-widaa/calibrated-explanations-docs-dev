@@ -5,7 +5,6 @@ Guides for upgrading between major releases and understanding breaking changes o
 ```{toctree}
 :maxdepth: 2
 
-../foundations/concepts/terminology
 deprecations
 adr033_v0_11_0
 ```

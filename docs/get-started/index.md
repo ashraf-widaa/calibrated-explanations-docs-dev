@@ -17,16 +17,17 @@ For interpretation, use {doc}`../foundations/how-to/interpret_explanations`.
 Semantics are mode-specific. Start with
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+- {doc}`installation`
+- {doc}`troubleshooting`
+
 ```{toctree}
 :maxdepth: 1
 
-installation
 quick_api
 quickstart_classification
 quickstart_regression
 quickstart_guarded
 ../getting_started_60s
-troubleshooting
 ```
 
 Entry-point tier: Tier 1.

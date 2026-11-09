@@ -42,10 +42,5 @@ when promoting calibrated explanations into production pipelines.
 mondrian-calibration
 ensured-explanations
 decision-policies
-eu-ai-act-compliance
 eu-data-liability-compliance
-../../foundations/how-to/integrate_with_pipelines
-../../foundations/how-to/export_explanations
-../../foundations/governance/release_checklist
-../../foundations/governance/section_owners
 ```

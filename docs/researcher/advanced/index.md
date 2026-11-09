@@ -22,7 +22,4 @@ experiments, or surveying the broader calibrated explanations literature.
 
 theory_and_literature
 difficulty_normalized_reject
-../../foundations/concepts/probabilistic_regression
-../../foundations/concepts/alternatives
-../../foundations/how-to/configure_telemetry
 ```

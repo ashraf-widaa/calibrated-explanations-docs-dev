@@ -94,6 +94,9 @@ This page maps the public RTD pages to STD-004 tiers.
 | `researcher/replication/index.md` | Tier 2 |
 | `ROADMAP.md` | Tier 3 |
 | `schema_v1.md` | Tier 3 |
+| `sections/api-technical-reference.md` | Tier 3 |
+| `sections/architecture-integration.md` | Tier 3 |
+| `sections/getting-started-configuration.md` | Tier 3 |
 | `standards/index.md` | Tier 3 |
 | `standards/STD-001-nomenclature-standardization.md` | Tier 3 |
 | `standards/STD-002-code-documentation-standard.md` | Tier 3 |

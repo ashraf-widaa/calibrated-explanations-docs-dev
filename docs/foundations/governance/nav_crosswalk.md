@@ -1,9 +1,9 @@
 # Navigation crosswalk
 
-Track where legacy documentation pages now live in the **Standard-004** audience-first
-information architecture. Update this checklist whenever a page moves or is retired.
+Track where legacy documentation pages now live in the **Standard-004** five-section
+navigation, which keeps direct audience routes. Update this checklist whenever a page moves or is retired.
 
-> **Status note:** Last updated 2025-11-10 · Per Standard-004 (Documentation Audience Standard) · Supersedes ADR-022.
+> **Status note:** Last updated 2026-11-09 · Per Standard-004 (Documentation Audience Standard; five-section amendment pending formal standard-owner approval) · Supersedes ADR-022.
 
 ## Legacy → New location mapping
 
@@ -21,16 +21,17 @@ information architecture. Update this checklist whenever a page moves or is reti
 | `pr_guide.md` | :doc:`../governance/pr_guide` and :doc:`../governance/section_owners` | Governance actions captured under maintainership docs with owners and release narrative under shared foundations. |
 | *(new)* migration guides | :doc:`../../migration/index` | Terminology changes, breaking changes, and upgrade guidance captured in a dedicated section linked from all audience hubs. |
 
-## Audience-first structure verification
+## Five-section structure verification
 
-Per Standard-004, the documentation now follows an audience-led structure:
+Per Standard-004 (amendment pending formal standard-owner approval), the sidebar uses
+the five approved sections and keeps direct audience routes:
 
-- [x] **Getting Started** appears first in the main toctree (`:doc:`../../get-started/index``)
-- [x] **Practitioner hub** includes core workflow (quickstarts → interpretation) and advanced extras (telemetry, performance, PlotSpec)
-- [x] **Researcher hub** consolidates theory, replication, and benchmarks with equal coverage for classification and regression
-- [x] **Contributor hub** foregrounds plugin contract and extending guides; defers optional telemetry/performance to advanced section
-- [x] **Shared Foundations** (concepts, how-to, reference, governance) linked from all audience hubs
-- [x] **Appendices & Migration** segregated for upgrade guidance and external plugin references
+- [x] **CE: What & Why** holds orientation pages
+- [x] **How CE Works: The Theory Behind It** holds shared foundations and core theory pages
+- [x] **CE in Practice: Explore & Apply** holds Get started, Tasks and capabilities, the Practitioner hub, and How-to guides
+- [x] **CE Software & Integration** groups setup and upgrades, architecture and integration, and API and technical reference
+- [x] **CE Project, Vision & Evolution** holds the Researcher hub, Contributor hub, roadmap, citation, changelog, and governance pages
+- [x] Each page has one sidebar parent, and page paths are unchanged
 - [ ] Re-run the gating commands in :doc:`release_checklist` after updating cross-references
 
 ## Verification checklist

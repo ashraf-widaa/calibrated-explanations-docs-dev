@@ -32,7 +32,8 @@ extending/plugin-advanced-contract
 extending/guides/index
 extending/advanced
 agent_skills
-../migration/index
+../get-started/ce_first_agent_guide
+../get-started/copilot-setup
 ```
 
 Entry-point tier: Tier 1.

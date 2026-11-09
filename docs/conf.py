@@ -74,6 +74,7 @@ extensions = [
     "numpydoc",
     "nbsphinx",
     "myst_parser",
+    "sphinx_design",
     "sphinxcontrib.mermaid",
 ]
 

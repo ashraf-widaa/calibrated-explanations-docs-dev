@@ -30,12 +30,9 @@ explanation workflow without introducing mandatory dependencies.
 use_plugins
 modality-plugins
 normalization-guide
-../../foundations/how-to/configure_telemetry
-../../foundations/how-to/tune_runtime_performance
 reject-policy
 parallel_execution_playbook
 explanation_retrieval
-../../foundations/how-to/plot_with_plotspec
 ../../foundations/concepts/telemetry
 ../performance-tuning
 ```
