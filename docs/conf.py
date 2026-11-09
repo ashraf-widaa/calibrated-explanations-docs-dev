@@ -207,6 +207,9 @@ if (
     or os.environ.get("CE_DOCS_BETA", "").lower() == "true"
 ):
     html_theme_options["announcement"] = (
+        # Furo keeps announcements on one fixed-height line; let this one wrap.
+        "<style>.announcement{height:auto;min-height:var(--header-height)}"
+        ".announcement-content{white-space:normal;overflow-wrap:anywhere}</style>"
         "<strong>Beta Documentation</strong> — This is an independent development "
         "version of Calibrated Explanations documentation. Content is under review "
         "and may change. For official documentation, visit "
