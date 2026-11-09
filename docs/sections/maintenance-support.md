@@ -1,6 +1,6 @@
-# API & Technical Reference
+# Maintenance & Support
 
-Look up the public API and supporting technical references.
+Resolve problems and move between releases.
 
 For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -8,9 +8,7 @@ For guarantees, assumptions and non-guarantees, see
 ```{toctree}
 :maxdepth: 1
 
-../api/index
-../foundations/reference/index
-../maintenance/legacy-plotting-reference
+Troubleshooting & Upgrades <../get-started/troubleshooting>
 ```
 
 Entry-point tier: Tier 3.

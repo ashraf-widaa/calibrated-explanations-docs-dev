@@ -168,14 +168,16 @@ Comparison material; not necessarily benchmarks.
 Understand how the CE library is built, installed, integrated, extended and
 maintained.
 
+### Software Foundations
+
 ::::{grid} 1 2 3 3
 :gutter: 3
 
 :::{grid-item-card} Software Overview & Versions
-:link: tasks/capabilities
+:link: sections/software-overview-versions
 :link-type: doc
 
-Capabilities overview; version references need reconciliation.
+Capabilities and release references; version references need reconciliation.
 :::
 
 :::{grid-item-card} Installation & Configuration
@@ -193,6 +195,12 @@ Canonical installation and setup.
 
 Implementation components and boundaries, distinct from the stable public API.
 :::
+::::
+
+### Development & Integration
+
+::::{grid} 1 2 3 3
+:gutter: 3
 
 :::{grid-item-card} API & Technical Reference
 :link: api/index
@@ -214,6 +222,12 @@ Integrate CE with an existing model or pipeline.
 
 Plugins and extension points.
 :::
+::::
+
+### Maintenance & Support
+
+::::{grid} 1 2 3 3
+:gutter: 3
 
 :::{grid-item-card} Troubleshooting & Upgrades
 :link: get-started/troubleshooting
@@ -335,9 +349,9 @@ foundations/how-to/index
 :maxdepth: 1
 :caption: "CE Software & Integration"
 
-sections/getting-started-configuration
-sections/architecture-integration
-sections/api-technical-reference
+sections/software-foundations
+sections/development-integration
+sections/maintenance-support
 ```
 
 ```{toctree}
@@ -348,7 +362,6 @@ sections/api-technical-reference
 Research & Publications <researcher/index>
 citing
 Development & Roadmap <ROADMAP>
-appendices/changelog_links
 Community & Contributions <contributor/index>
 foundations/governance/index
 appendices/rtd_tier_map

@@ -1,6 +1,6 @@
-# Architecture & Integration
+# Software Foundations
 
-See how CE is built and how to connect or extend it.
+Understand what the CE library provides, how to install it and how it is built.
 
 For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -8,9 +8,9 @@ For guarantees, assumptions and non-guarantees, see
 ```{toctree}
 :maxdepth: 1
 
+Software Overview & Versions <software-overview-versions>
+Installation & Configuration <../get-started/installation>
 Internal Software Architecture <../foundations/concepts/architecture>
-Model & Pipeline Integration <../foundations/how-to/integrate_with_pipelines>
-Extensions & Customization <../plugins>
 ```
 
 Entry-point tier: Tier 3.

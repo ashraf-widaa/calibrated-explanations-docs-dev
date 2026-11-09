@@ -10,4 +10,5 @@ cli
 plugins
 serialization
 visualization
+../foundations/reference/index
 ```

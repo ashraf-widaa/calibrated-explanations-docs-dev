@@ -29,7 +29,7 @@ the five approved sections and keeps direct audience routes:
 - [x] **CE: What & Why** holds orientation pages
 - [x] **How CE Works: The Theory Behind It** holds shared foundations and core theory pages
 - [x] **CE in Practice: Explore & Apply** holds Get started, Tasks and capabilities, the Practitioner hub, and How-to guides
-- [x] **CE Software & Integration** groups setup and upgrades, architecture and integration, and API and technical reference
+- [x] **CE Software & Integration** is organized as Software Foundations, Development & Integration, and Maintenance & Support
 - [x] **CE Project, Vision & Evolution** holds the Researcher hub, Contributor hub, roadmap, citation, changelog, and governance pages
 - [x] Each page has one sidebar parent, and page paths are unchanged
 - [ ] Re-run the gating commands in :doc:`release_checklist` after updating cross-references
