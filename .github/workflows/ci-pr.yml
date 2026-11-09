@@ -68,7 +68,7 @@ jobs:
             --report reports/quality/no_local_paths_report.json
       - name: Upload lint artifacts
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: lint-reports
           path: |
@@ -192,7 +192,7 @@ jobs:
           PY
       - name: Upload uv install timing
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: uv-install-timing
           path: reports/ci/uv_install_timing.txt
@@ -263,7 +263,7 @@ jobs:
             --report reports/quality/no_local_paths_report.json
       - name: Upload quality reports
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: test-quality-reports
           path: |

@@ -76,7 +76,7 @@ jobs:
           pytest examples -q 2>&1 | tee artifacts/examples_smoke.log
       - name: Upload examples logs
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: examples-smoke-logs
           path: |
@@ -116,7 +116,7 @@ jobs:
             --output reports/docs/notebook_execution_report.json
       - name: Upload notebook execution report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: notebook-exec-report
           path: |
