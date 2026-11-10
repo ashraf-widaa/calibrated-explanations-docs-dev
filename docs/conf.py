@@ -161,6 +161,7 @@ pygments_style = "sphinx"
 # Enable extended MyST features for directive fences (e.g. mermaid diagrams)
 myst_enable_extensions = [
     "colon_fence",
+    "attrs_inline",
     # Linkify caused spurious detection of code/path fragments as external
     # links (e.g. `DESIGN.md` -> http://DESIGN.md). Disable it and rely
     # on explicit links in the docs instead.
@@ -216,6 +217,10 @@ if (
         '<a href="https://calibrated-explanations.readthedocs.io/">'
         "https://calibrated-explanations.readthedocs.io/</a>."
     )
+
+# Homepage styles
+html_static_path = ["_static"]
+html_css_files = ["ce-home.css"]
 
 # HTML title
 html_title = f"{project} v{release}"

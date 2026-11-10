@@ -1,6 +1,7 @@
 # Software Overview & Versions
 
-This page links to existing software and release references.
+This page links to existing software and release references. Version references
+across the documentation still need reconciliation.
 
 - {doc}`../tasks/capabilities`
 - {doc}`../foundations/governance/release_notes`

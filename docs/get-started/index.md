@@ -1,4 +1,4 @@
-# Get started
+# Quick Start
 
 Pick one quickstart and run it end to end.
 

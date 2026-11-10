@@ -94,6 +94,11 @@ This page maps the public RTD pages to STD-004 tiers.
 | `researcher/replication/index.md` | Tier 2 |
 | `ROADMAP.md` | Tier 3 |
 | `schema_v1.md` | Tier 3 |
+| `sections/what-and-why.md` | Tier 3 |
+| `sections/how-ce-works.md` | Tier 3 |
+| `sections/in-practice.md` | Tier 3 |
+| `sections/software-integration.md` | Tier 3 |
+| `sections/project-evolution.md` | Tier 3 |
 | `sections/development-integration.md` | Tier 3 |
 | `sections/maintenance-support.md` | Tier 3 |
 | `sections/software-foundations.md` | Tier 3 |

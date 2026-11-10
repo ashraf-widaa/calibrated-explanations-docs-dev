@@ -30,9 +30,7 @@ alternatives
 error_handling
 explanation_structures
 guarded_explanations
-terminology
 terminology_thresholded_vs_probabilistic_regression
-parameter-reference
 ```
 
 Entry-point tier: Tier 3.
