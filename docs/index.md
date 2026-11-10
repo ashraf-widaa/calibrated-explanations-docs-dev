@@ -91,6 +91,15 @@ sections/maintenance-support
 ```{toctree}
 :hidden:
 :maxdepth: 1
+:caption: Resources
+
+Terminology <foundations/concepts/terminology>
+Parameter Reference <foundations/concepts/parameter-reference>
+```
+
+```{toctree}
+:hidden:
+:maxdepth: 1
 :caption: "CE Project, Vision & Evolution"
 
 Research & Publications <researcher/index>
@@ -99,15 +108,6 @@ Development & Roadmap <ROADMAP>
 Community & Contributions <contributor/index>
 foundations/governance/index
 appendices/rtd_tier_map
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: Resources
-
-Terminology <foundations/concepts/terminology>
-Parameter Reference <foundations/concepts/parameter-reference>
 ```
 
 :::{container} ce-note
