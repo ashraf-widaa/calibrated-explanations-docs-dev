@@ -1,6 +1,7 @@
 # Upgrade guides
 
-Checklists and safe-defaults guides for upgrading to new major versions.
+Checklists for upgrading to newer CE releases. For recommended production
+configuration, see the {doc}`safe-defaults guide <../foundations/how-to/safe-defaults>`.
 
 ```{toctree}
 :maxdepth: 2
