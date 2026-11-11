@@ -18,6 +18,9 @@ Need a held-out calibration split: `x_cal, y_cal`.
 - Probabilistic or thresholded regression: {doc}`get-started/quickstart_regression`
 - Guarded explanations: {doc}`get-started/quickstart_guarded`
 
+New to CE? The {doc}`practical walkthrough <get-started/quickstart_walkthrough>`
+works through one binary-classification example step by step, with outputs explained.
+
 Semantics are mode-specific. Use
 {doc}`foundations/concepts/calibrated_interval_semantics`.
 

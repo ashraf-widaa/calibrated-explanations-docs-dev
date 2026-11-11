@@ -68,6 +68,7 @@ alternatives = explainer.explore_alternatives(x_test[:2])
 ```
 
 Next steps:
+- {doc}`quickstart_walkthrough`
 - {doc}`../foundations/how-to/interpret_explanations`
 - {doc}`../foundations/concepts/alternatives`
 - {doc}`../citing`
