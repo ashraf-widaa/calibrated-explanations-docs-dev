@@ -16,6 +16,7 @@ Extras are opt-in so you only pull the dependencies you need:
 | ----- | ------- | --------------- |
 | `viz` | Matplotlib-based plotting and PlotSpec adapters. | `pip install "calibrated-explanations[viz]"` |
 | `narrative` | PyYAML for YAML narrative templates used by `to_narrative()`. | `pip install "calibrated-explanations[narrative]"` |
+| `perf` | `cachetools` backend for the opt-in calibrator cache; without it an in-package fallback is used (see {doc}`../foundations/how-to/tune_runtime_performance`). | `pip install "calibrated-explanations[perf]"` |
 | `notebooks` | Jupyter notebook tutorials with pinned dependencies. | `pip install "calibrated-explanations[notebooks]"` |
 | `dev` | Full development toolchain (linters, docs, tests). | `pip install "calibrated-explanations[dev]"` |
 | `external-plugins` | In-tree optional FAST explanation and interval dependencies. | `pip install "calibrated-explanations[external-plugins]"` |
