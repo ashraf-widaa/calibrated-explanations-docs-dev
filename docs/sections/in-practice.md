@@ -41,6 +41,20 @@ Interim route: local Python workflow, not browser upload.
 Quick Start guides leading to task and practitioner routes.
 :::
 
+:::{grid-item-card} Tasks and Capabilities
+:link: ../tasks/index
+:link-type: doc
+
+Classification, regression and probabilistic regression, with a capability map.
+:::
+
+:::{grid-item-card} Practitioner Hub
+:link: ../practitioner/index
+:link-type: doc
+
+Interpretation, API choice and deployment playbooks for practitioners.
+:::
+
 :::{grid-item-card} Evaluate & Compare
 :link: ../compare
 :link-type: doc
