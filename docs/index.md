@@ -54,7 +54,6 @@ Quick Start <get-started/index>
 
 Trustworthy AI <practitioner/playbooks/eu-ai-act-compliance>
 The Explainability Gap <compare>
-What Is CE & What Does It Add? <get-started/ce-tasks-and-modes>
 ```
 
 ```{toctree}

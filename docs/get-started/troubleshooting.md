@@ -23,10 +23,3 @@ python -c "from calibrated_explanations import __version__; print(__version__)"
 
 Attach the command outputs when filing an issue so maintainers can reproduce
 setup differences quickly.
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-
-../maintenance/legacy-plotting-reference
-```
