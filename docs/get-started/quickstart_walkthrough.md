@@ -358,10 +358,22 @@ mean concave points < 0.06             0.333   [0.200, 0.400]
 ```
 
 **Interpretation.** The rows are sorted by how far the alternative moves the
-probability away from the current value. Rows whose probability crosses 0.5
-would change the predicted label (none does here, so this prediction is not
-fragile with respect to any single feature). Rows with wide intervals are less
-certain, because few calibration cases received similar model scores.
+probability away from the current value. Keep two things apart:
+
+- **The current prediction.** For case 2, the calibrated probability of
+  *benign* is 0.286, with a range of 0.167 to 0.333 (from B4). The whole range
+  is below 0.5, the point where the predicted label changes, so the model
+  predicts *malignant*.
+- **Each alternative scenario.** In the first row, if `worst concave points`
+  were below 0.14, the probability would be 0.476, with a range of 0.333 to
+  0.600. The estimate is still below 0.5, so the predicted label would stay
+  *malignant*; but the range now spans 0.5, so in that scenario the
+  calibrated output would no longer clearly favour either class.
+
+An alternative describes what the model would do in a different scenario. It
+does not change how certain the current prediction is; that is still the
+0.167 to 0.333 range above. Alternatives can also move the probability in
+either direction: the second and third rows lower it.
 
 ## B7. Work with feature conditions
 
@@ -430,11 +442,27 @@ table contains no rules on the ignored features.
 
 ## B8. Interpret the outputs together
 
-The plot shows the same information as the tables. The top panel is the
-calibrated probability with its interval: `P(y=1)` is the probability of
-class `1` (*benign*) and `P(y!=1)` its complement. Each bar below is one rule,
-with its weight as the solid bar and a lighter band for the weight interval.
-The right-hand axis shows this case's actual feature values.
+The plot shows the factual explanation from B5 for the eight strongest rules.
+
+**Top panel: the prediction.** `P(y=1)` is the probability of class `1`
+(*benign*). The vertical line marks CE's single estimate (0.286). The dark bar
+runs from 0 to the lower probability (0.167) and the light bar from the lower
+to the upper probability (0.333). `P(y!=1)` shows the same for *malignant*:
+each value is 1 minus the corresponding *benign* value.
+
+**Lower panel: the rules.** Each row is one rule; red rules raise the
+probability of *benign* and blue rules lower it.
+
+- The whole bar, light and dark together, is the rule's **weight interval**.
+  For `worst concave points > 0.14` it runs from −0.314 to −0.048.
+- The dark part runs from zero to the end of the interval nearest zero.
+  Rules whose interval crosses zero have no dark part.
+- The point weight itself (−0.190 for that rule) is **not drawn**; read it
+  from the table in B5.
+- The grey vertical band is this case's own probability range from the top
+  panel, redrawn around zero on the weight scale: from 0.286 − 0.333 to
+  0.286 − 0.167.
+- The right-hand axis shows this case's actual feature values.
 
 ```python
 factual.plot(0, uncertainty=True, filter_top=8)
@@ -459,7 +487,7 @@ Output: factual explanation plot for test case 2.
 
 A practical reading order: check the interval width first, then the
 strongest rules, then whether their intervals exclude zero, and finally
-whether the alternatives reveal a fragile prediction.
+which alternative scenarios move the probability towards or across 0.5.
 
 ## B9. Assumptions, guarantees and limitations
 
