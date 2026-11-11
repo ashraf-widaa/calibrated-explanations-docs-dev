@@ -28,11 +28,15 @@ Calibrated Explanations wraps standard scikit-learn classifiers to produce uncer
 ### 1. Calibrated probabilities with uncertainty
 
 ```python
-# Predict probabilities for the positive class (binary) or all classes (multiclass)
+# Binary classification: probs has shape (n_samples, 2), one column per class.
+# low and high bound the positive-class (column 1) probability: shape (n_samples,).
 probs, (low, high) = explainer.predict_proba(x_test, uq_interval=True)
 
-print(f"Probability: {probs[0, 1]:.3f} (Interval: {low[0, 1]:.3f} – {high[0, 1]:.3f})")
+print(f"Probability: {probs[0, 1]:.3f} (Interval: {low[0]:.3f} – {high[0]:.3f})")
 ```
+
+For multiclass models, `low` and `high` have one column per class, shape
+`(n_samples, n_classes)`; see the multiclass section below.
 
 ### 2. Factual explanation
 
