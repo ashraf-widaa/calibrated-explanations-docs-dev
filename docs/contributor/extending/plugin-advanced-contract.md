@@ -500,4 +500,5 @@ Use the CLI to inspect the resulting state after registration:
 python -m calibrated_explanations.plugins.cli list all
 ```
 
-See {doc}`../plugin-contract` for additional registry and telemetry guidance.
+See {doc}`../plugin-contract` for additional registry and telemetry guidance,
+and {doc}`../../plugins` for an overview of all plugin pages.

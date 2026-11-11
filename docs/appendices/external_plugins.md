@@ -42,4 +42,6 @@ discoverability only; it does not imply ownership, endorsement, or maintenance
 by CE core. Submit listing requests through the
 [authoritative plugin-intake form](https://github.com/Moffran/calibrated_explanations/issues/new?template=plugin_publication_request.yml).
 
+For an overview of all plugin pages, see {doc}`../plugins`.
+
 Entry-point tier: Tier 3.

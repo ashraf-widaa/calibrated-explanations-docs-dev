@@ -181,6 +181,7 @@ python -m calibrated_explanations.plugins.cli list all
 
 ## Related links
 
+- Plugins overview: {doc}`../../plugins`
 - Plugin catalog: {doc}`../../appendices/external_plugins`
 - Developer contract (for authors): {doc}`../../contributor/plugin-contract`
 - Interpretation guide: {doc}`../../foundations/how-to/interpret_explanations`

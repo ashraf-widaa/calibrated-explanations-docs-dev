@@ -31,6 +31,9 @@ Registration is explicit and idempotent.
 - [Generated package index](https://github.com/kristinebergs/calibrated-explanations-plugins/blob/main/docs/package-index.md)
 - {doc}`Practitioner plugin-use guide <practitioner/advanced/use_plugins>`
 - {doc}`Contributor plugin contract <contributor/plugin-contract>`
+- {doc}`Advanced plugin wiring <contributor/extending/plugin-advanced-contract>`
+- {doc}`Modality plugins <practitioner/advanced/modality-plugins>`
+- {doc}`Plugin registry reference <api/plugins>`
 - [Plugin trust model](https://github.com/Moffran/calibrated_explanations/blob/main/development/adrs/ADR-006-plugin-registry-trust-model.md)
 - {doc}`Plugin catalog <appendices/external_plugins>`
 

@@ -892,3 +892,8 @@ to simulate trust boundaries before promoting a plugin.
 If your plugin emits telemetry, document the signals and link back to
 {doc}`../foundations/governance/optional_telemetry`. Keep emission disabled by
 default so calibrated explanations remain privacy-preserving out of the box.
+
+## Related pages
+
+- {doc}`../plugins` – plugins overview and related guides.
+- {doc}`../api/plugins` – plugin registry reference.

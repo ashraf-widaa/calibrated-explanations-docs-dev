@@ -30,3 +30,8 @@ metadata for auditability.
 - ADR-006 (trust model)
 - ADR-037 (visualization extension and rendering governance)
 - ADR-010 (core vs. evaluation split)
+
+## Related pages
+
+- {doc}`../plugins` – plugins overview and related guides.
+- {doc}`../contributor/plugin-contract` – contract for plugin authors.

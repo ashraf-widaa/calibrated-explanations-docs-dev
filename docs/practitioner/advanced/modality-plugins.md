@@ -93,6 +93,7 @@ Install companion packages when needed:
 
 ## Related references
 
+- {doc}`../../plugins`
 - {doc}`../../contributor/plugin-contract`
 - {doc}`../../contributor/extending/plugin-advanced-contract`
 - {doc}`use_plugins`
