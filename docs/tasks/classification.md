@@ -71,7 +71,7 @@ probs, (low, high) = explainer.predict_proba(x_test, uq_interval=True)
 factual = explainer.explain_factual(x_test)
 ```
 
-Set `multi_labels_enabled=True` to generate a **true multiclass explanation** that returns one explanation per class (all-classes view):
+Set `multi_labels_enabled=True` to generate **one explanation per class** for each instance (all-classes view):
 
 ```python
 multi_factual = explainer.explain_factual(x_test, multi_labels_enabled=True)

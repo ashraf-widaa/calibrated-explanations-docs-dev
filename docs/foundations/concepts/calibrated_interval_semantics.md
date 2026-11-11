@@ -85,6 +85,28 @@ Do not merge these into one guarantee statement.
 - Explanation-level intervals should not be promoted as formal per-feature coverage
   guarantees unless explicitly proven for that claim.
 
+## Further reading
+
+- Venn–Abers predictors: Vovk, V., and Petej, I. (2014). Venn-Abers predictors.
+  *Proceedings of the 30th Conference on Uncertainty in Artificial Intelligence (UAI 2014)*.
+  [arXiv:1211.0025](https://arxiv.org/abs/1211.0025).
+- Inductive Venn–Abers predictors: Vovk, V., Petej, I., and Fedorova, V. (2015).
+  Large-scale probabilistic predictors with and without guarantees of validity.
+  *Advances in Neural Information Processing Systems 28*.
+  [arXiv:1511.00213](https://arxiv.org/abs/1511.00213).
+- Conformal predictive systems: Vovk, V., Shen, J., Manokhin, V., and Xie, M. (2019).
+  Nonparametric predictive distributions based on conformal prediction.
+  *Machine Learning*, 108, 445–474.
+  [doi:10.1007/s10994-018-5755-8](https://doi.org/10.1007/s10994-018-5755-8).
+- Split conformal predictive systems: Vovk, V., Petej, I., Nouretdinov, I., Manokhin, V.,
+  and Gammerman, A. (2020). Computationally efficient versions of conformal predictive
+  distributions. *Neurocomputing*, 397, 292–308.
+  [doi:10.1016/j.neucom.2019.10.110](https://doi.org/10.1016/j.neucom.2019.10.110).
+- Conformal prediction framework: Vovk, V., Gammerman, A., and Shafer, G. (2022).
+  *Algorithmic Learning in a Random World* (2nd ed.). Springer.
+  [doi:10.1007/978-3-031-06649-8](https://doi.org/10.1007/978-3-031-06649-8).
+- Calibrated Explanations publications: {doc}`../../citing`.
+
 ## Related standards and ADRs
 
 - `development/standards/STD-004-documentation-audience-standard.md` (maintainer-only docs set)

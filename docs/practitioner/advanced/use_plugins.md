@@ -66,10 +66,13 @@ Do not pass `fast=True` into `explain_factual(...)` or
 
 FAST explanations are documented in:
 
-> Löfström, H., et al. (2024). Fast Calibrated Explanations: Efficient and
-> Uncertainty-Aware Explanations for Machine Learning Models.
-> In: xAI 2024. Lecture Notes in Computer Science.
-> [DOI: 10.1007/978-3-031-44064-9_18](https://link.springer.com/chapter/10.1007/978-3-032-08333-3_16)
+> Löfström, T., Yapicioglu, F. R., Stramiglio, A., Löfström, H., and Vitali, F. (2026).
+> Fast Calibrated Explanations: Efficient and Uncertainty-Aware Explanations for
+> Machine Learning Models. In *Explainable Artificial Intelligence. xAI 2025*,
+> Communications in Computer and Information Science, vol. 2580, pp. 340–363.
+> [DOI: 10.1007/978-3-032-08333-3_16](https://doi.org/10.1007/978-3-032-08333-3_16)
+
+All publications: {doc}`../../citing`.
 
 ## Install and register
 
