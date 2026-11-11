@@ -7,6 +7,9 @@ papers, benchmark references, and funding acknowledgements.
 
 ## Publication highlights
 
+This section lists highlights only. For the full publication list, with complete
+references and BibTeX entries, see {doc}`../../citing`.
+
 ### Peer-reviewed work
 - **Trustworthy explanations dissertation (2023):** Introduces the
   decision-support principles behind calibrated explanations and documents the
@@ -25,17 +28,19 @@ papers, benchmark references, and funding acknowledgements.
   and tutorial material. Proceedings and artefacts available through the
   [PMLR volume](https://proceedings.mlr.press/v230/lofstrom24a.html) and
   [paper/slides (MLResearch assets)](https://raw.githubusercontent.com/mlresearch/v230/main/assets/lofstrom24a/lofstrom24a.pdf).
-- **Annals of Mathematics and Artificial Intelligence (2023):** First study that
-  links calibration quality to explanation reliability. DOI:
+- **Annals of Mathematics and Artificial Intelligence (published online 2023;
+  vol. 94, 2026):** First study that links calibration quality to explanation
+  reliability. DOI:
   [`10.1007/s10472-023-09837-2`](https://doi.org/10.1007/s10472-023-09837-2).
+- **xAI 2025 proceedings (CCIS 2580, 2026):** Fast calibrated explanations:
+  plugin-oriented acceleration of rule generation while preserving uncertainty
+  guarantees. DOI:
+  [`10.1007/978-3-032-08333-3_16`](https://link.springer.com/chapter/10.1007/978-3-032-08333-3_16).
 
 ### Preprints and in-flight studies
 - **Ensured explanations (2024):** Investigates strategies that actively reduce
   epistemic uncertainty in the generated alternatives. Preprint:
   [`arXiv:2410.05479`](https://arxiv.org/abs/2410.05479).
-- **Fast calibrated explanations (2024):** Plugin-oriented acceleration of rule
-  generation while preserving uncertainty guarantees. DOI:
-  [`10.1007/978-3-032-08333-3_16`](https://link.springer.com/chapter/10.1007/978-3-032-08333-3_16).
 
 ## Benchmarks and evaluations
 
