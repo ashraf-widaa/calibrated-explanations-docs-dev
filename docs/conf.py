@@ -158,6 +158,9 @@ linkcheck_ignore = [
 # Pygments style for syntax highlighting
 pygments_style = "sphinx"
 
+# Size mermaid diagrams to their content instead of the extension's fixed 500px box
+mermaid_height = "auto"
+
 # Enable extended MyST features for directive fences (e.g. mermaid diagrams)
 myst_enable_extensions = [
     "colon_fence",

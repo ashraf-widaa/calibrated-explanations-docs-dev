@@ -2,6 +2,10 @@
 
 This page is the semantics source for user-facing documentation.
 
+New to these ideas? The Quick Start introduces each mode in plain language in
+{doc}`../../get-started/ce-tasks-and-modes` and shows them in use in the
+{doc}`../../get-started/quickstart_walkthrough`.
+
 ## Scope
 
 Calibrated Explanations has three distinct semantics modes:

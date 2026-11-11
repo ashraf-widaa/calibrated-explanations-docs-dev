@@ -49,7 +49,7 @@ Key attributes shared by both modes:
 | `rules` | Ordered list of feature-level rules, highest absolute weight first. |
 | `telemetry` | Dictionary describing the interval, probability, and plot sources that produced the explanation. |
 
-For regression with `threshold` values, the `predict` value expresses the probability that the outcome lies within the threshold bounds; the interval reflects percentile uncertainty around the calibrated estimate.
+For regression with a scalar `threshold` `t`, the `predict` value is the calibrated event probability `P(y <= t)`; with a `(low, high)` threshold it is the probability that the outcome lies within those bounds. The interval gives the lower and upper calibrated probability for that event. See {doc}`../concepts/calibrated_interval_semantics` (Mode 3).
 
 ## 2. Examine the rule tables in detail
 
@@ -115,10 +115,10 @@ for extra in alternative_metadata:
     )
 ```
 
-- `core["feature_rules"]` lists the recommended feature adjustments alongside the calibrated prediction estimate and uncertainty interval for each alternative scenario.
+- `core["feature_rules"]` lists the alternative feature conditions alongside the calibrated prediction estimate and uncertainty interval for each alternative scenario.
 - `metadata["feature_rules"]` retains the richer calibration context: the difference from the factual baseline (`weight_value`), the detailed uncertainty metadata, and the alternative value used to create the scenario.
 
-Use these payloads to answer “which change makes the most difference?”—the best candidate is the scenario with the highest calibrated probability swing and acceptable feature adjustments. If explanation envelopes remain wide, treat the recommendation with caution and look for additional calibration data.
+Use these payloads to answer “which change makes the most difference?”—the best candidate is the scenario with the highest calibrated probability swing and acceptable feature adjustments. If explanation envelopes remain wide, treat the scenario with caution and look for additional calibration data. Alternatives describe how the model's calibrated output responds to a different feature range; they are not causal counterfactuals, and changing a feature in the real world need not change the outcome.
 ## 3. Connect explanations to plots
 
 PlotSpec plots visualise the same rule rankings and uncertainty intervals:

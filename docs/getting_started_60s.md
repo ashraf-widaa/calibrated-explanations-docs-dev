@@ -4,7 +4,8 @@ Use this page to pick the correct first quickstart.
 
 ## 1. Model compatibility
 
-Need a scikit-learn compatible estimator with `fit` and prediction methods.
+Need a scikit-learn compatible estimator with `fit` and `predict`;
+classifiers also need `predict_proba`.
 
 ## 2. Calibration split
 

@@ -10,6 +10,9 @@ Use this checklist if the quickstarts fail or telemetry payloads look empty.
 | Empty telemetry dictionary | Old version or attribute stripped. | Upgrade to the latest version and access `explainer.runtime_telemetry`. |
 | Plotting ImportError | `viz` extra not installed. | `pip install "calibrated_explanations[viz]"` in the same environment. |
 | CLI cannot find plugins | PATH not configured or package not installed in active env. | Run `python -m calibrated_explanations.plugins.cli list all` to bypass PATH resolution. |
+| `ConfigurationError` (caused by `KeyError`) from `add_conjunctions()` | Known issue in 1.1.0-dev: an earlier `explain_factual(..., features_to_ignore=...)` call on the same explainer leaves state that breaks later conjunctions. | Add conjunctions before calling with `features_to_ignore`, or use a freshly calibrated explainer. |
+| `TypeError: 'numpy.float64' object is not iterable` from `filter_features(...)` | Known issue in 1.1.0-dev: filtering an explanation collection after the fact fails. | Pass `features_to_ignore=` to `explain_factual` or `explore_alternatives` instead. |
+| `SerializationError` mentioning PyYAML from `to_narrative()` | Narrative templates need PyYAML, which is not a core dependency. | `pip install pyyaml` in the same environment. |
 
 ## Collect diagnostics
 

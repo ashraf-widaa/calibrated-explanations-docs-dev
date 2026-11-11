@@ -56,12 +56,15 @@ This page maps the public RTD pages to STD-004 tiers.
 | `foundations/reference/index.md` | Tier 3 |
 | `get-started/ce_first_agent_guide.md` | Tier 3 |
 | `get-started/copilot-setup.md` | Tier 3 |
+| `get-started/ce-tasks-and-modes.md` | Tier 1 |
 | `get-started/index.md` | Tier 1 |
 | `get-started/installation.md` | Tier 3 |
+| `get-started/ml-foundations.md` | Tier 1 |
 | `get-started/quick_api.md` | Tier 2 |
 | `get-started/quickstart_classification.md` | Tier 2 |
 | `get-started/quickstart_guarded.md` | Tier 2 |
 | `get-started/quickstart_regression.md` | Tier 2 |
+| `get-started/quickstart_walkthrough.md` | Tier 1 |
 | `get-started/troubleshooting.md` | Tier 3 |
 | `getting_started_60s.md` | Tier 1 |
 | `index.md` | Tier 1 |
