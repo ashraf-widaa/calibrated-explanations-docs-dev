@@ -147,6 +147,10 @@ documented object type; it is not a statistical validation.
 | All-class explanations (`multi_labels_enabled`) | n/a | Experimental | n/a | n/a |
 | JSON export (`to_json`) | Runs | Runs | Runs | Runs |
 
+Go deeper: {doc}`../foundations/how-to/interpret_explanations`,
+{doc}`../foundations/concepts/alternatives` and
+{doc}`../foundations/concepts/guarded_explanations`.
+
 ### Limitations that affect how you read outputs
 
 1. **Multiclass bounds are rescaled by default and are then not

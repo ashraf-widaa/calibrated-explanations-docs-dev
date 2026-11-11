@@ -175,7 +175,7 @@ Calibrated Explanations addresses these points for supported supervised
 models. It calibrates the model's outputs on held-out data, reports
 uncertainty for predictions and for each feature's effect, and offers
 alternative explanations that show how the prediction would change. These
-guarantees hold under stated assumptions, and an explanation never proves
+guarantees hold under {doc}`stated assumptions <../foundations/concepts/calibrated_interval_semantics>`, and an explanation never proves
 cause and effect. The next page shows which tasks and outputs CE supports.
 
 **Next:** {doc}`ce-tasks-and-modes`
