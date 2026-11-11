@@ -28,7 +28,5 @@ setup differences quickly.
 :hidden:
 :maxdepth: 1
 
-../migration/index
-../upgrade/index
 ../maintenance/legacy-plotting-reference
 ```

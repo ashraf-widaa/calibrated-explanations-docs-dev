@@ -8,7 +8,9 @@ For guarantees, assumptions and non-guarantees, see
 ```{toctree}
 :maxdepth: 1
 
-Troubleshooting & Upgrades <../get-started/troubleshooting>
+Troubleshooting <../get-started/troubleshooting>
+Upgrade guides <../upgrade/index>
+Migration guides <../migration/index>
 ```
 
 Entry-point tier: Tier 3.
