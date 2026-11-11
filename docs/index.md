@@ -54,7 +54,7 @@ Quick Start <get-started/index>
 
 Trustworthy AI <practitioner/playbooks/eu-ai-act-compliance>
 The Explainability Gap <compare>
-What Is CE & What Does It Add? <tasks/capabilities>
+What Is CE & What Does It Add? <get-started/ce-tasks-and-modes>
 ```
 
 ```{toctree}
@@ -65,7 +65,7 @@ What Is CE & What Does It Add? <tasks/capabilities>
 Essential Foundations <foundations/index>
 Calibration & Uncertainty <foundations/concepts/calibrated_interval_semantics>
 Statistical Methods Behind CE <foundations/concepts/probabilistic_regression>
-How CE Explanations Work <foundations/how-to/interpret_explanations>
+How to Read CE Explanations <foundations/how-to/interpret_explanations>
 ```
 
 ```{toctree}

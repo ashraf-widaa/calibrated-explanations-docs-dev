@@ -34,11 +34,11 @@ Canonical semantics of calibrated uncertainty.
 Probabilistic and interval regression; no isotonic tutorial yet.
 :::
 
-:::{grid-item-card} How CE Explanations Work
+:::{grid-item-card} How to Read CE Explanations
 :link: ../foundations/how-to/interpret_explanations
 :link-type: doc
 
-Interpret factual and alternative explanations.
+Read factual and alternative explanations: rule tables, uncertainty intervals and plots.
 :::
 
 :::{grid-item-card} Assumptions & Guarantees

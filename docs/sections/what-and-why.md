@@ -14,8 +14,10 @@ For guarantees, assumptions and non-guarantees, see
 :gutter: 3
 
 :::{grid-item-card} Understanding AI Models
+:link: ../get-started/ml-foundations
+:link-type: doc
 
-{bdg-secondary}`Planned` Educational content not yet available.
+Machine-learning basics: models, learning, prediction tasks, data roles and why a prediction alone is not enough.
 :::
 
 :::{grid-item-card} Can We Trust AI Outputs?
@@ -40,10 +42,10 @@ Conventional explainability compared with CE's calibration-first approach.
 :::
 
 :::{grid-item-card} What Is CE & What Does It Add?
-:link: ../tasks/capabilities
+:link: ../get-started/ce-tasks-and-modes
 :link-type: doc
 
-Supported capabilities, bounded by mode-specific semantics.
+The tasks CE supports, what each output means and which capabilities apply to which task.
 :::
 ::::
 

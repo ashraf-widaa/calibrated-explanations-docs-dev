@@ -16,6 +16,7 @@ For guarantees, assumptions, and non-guarantees, use
 classification
 regression
 probabilistic_regression
+capabilities
 ```
 
 Entry-point tier: Tier 1.
