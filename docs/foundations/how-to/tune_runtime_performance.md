@@ -266,3 +266,7 @@ through the configured telemetry callback when you need before/after validation.
   reference table, pyproject.toml sections, and export diagnostics
 - [Configure telemetry](configure_telemetry.md) — telemetry diagnostic mode and
   governance logging
+- {doc}`../../practitioner/performance-tuning` — practitioner guide to
+  experimental FAST-based feature filtering
+- {doc}`../../contributor/performance_harness` — benchmarking and regression
+  scripts for contributors

@@ -113,3 +113,10 @@ This metadata shows which features were ignored for each instance due to filteri
 - Filtering is experimental and may change semantics in future versions.
 - Only applies to factual and alternative modes.
 - Falls back gracefully if FAST fails or configuration is invalid.
+
+## See also
+
+- {doc}`../foundations/how-to/tune_runtime_performance` — calibrator cache,
+  parallel backends and their configuration
+- {doc}`../contributor/performance_harness` — benchmarking and regression
+  scripts for contributors

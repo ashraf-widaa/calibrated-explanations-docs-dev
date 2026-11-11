@@ -98,3 +98,10 @@ change lands.
 | Before/after comparison for a PR | `collect_baseline.py` + `check_perf_regression.py` |
 | Reproducing pipeline speedup numbers | `compare_explain_performance.py` |
 | Streaming throughput check | `stream_benchmark.py` |
+
+## See also
+
+- {doc}`../foundations/how-to/tune_runtime_performance` — enabling the
+  calibrator cache and parallel backends
+- {doc}`../practitioner/performance-tuning` — practitioner guide to
+  experimental FAST-based feature filtering

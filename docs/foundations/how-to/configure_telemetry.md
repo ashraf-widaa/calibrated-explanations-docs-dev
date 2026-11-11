@@ -197,3 +197,5 @@ library.
   reference, pyproject.toml sections, and `export_effective()` diagnostics
 - [Tune runtime performance](tune_runtime_performance.md) — cache, parallel, and
   feature-filter settings
+- {doc}`../governance/optional_telemetry` — telemetry payload structure and
+  instrumentation reference

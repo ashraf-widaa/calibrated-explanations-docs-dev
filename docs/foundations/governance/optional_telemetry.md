@@ -148,3 +148,7 @@ to audit the resolved configuration described in the telemetry payload.
 Governance and contributor workflows centralise these checks under
 :doc:`index` so operators can surface optional instrumentation only when
 required.
+
+## See also
+
+- {doc}`../how-to/configure_telemetry` — how to enable and configure telemetry
