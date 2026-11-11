@@ -28,10 +28,10 @@ Canonical semantics of calibrated uncertainty.
 :::
 
 :::{grid-item-card} Statistical Methods Behind CE
-:link: ../foundations/concepts/probabilistic_regression
+:link: ../foundations/concepts/calibration_methods
 :link-type: doc
 
-Probabilistic and interval regression; no isotonic tutorial yet.
+How CE calibrates: Venn–Abers predictors and conformal predictive systems.
 :::
 
 :::{grid-item-card} How to Read CE Explanations

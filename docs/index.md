@@ -63,7 +63,7 @@ The Explainability Gap <compare>
 
 Essential Foundations <foundations/index>
 Calibration & Uncertainty <foundations/concepts/calibrated_interval_semantics>
-Statistical Methods Behind CE <foundations/concepts/probabilistic_regression>
+Statistical Methods Behind CE <foundations/concepts/calibration_methods>
 How to Read CE Explanations <foundations/how-to/interpret_explanations>
 ```
 

@@ -30,6 +30,7 @@ alternatives
 error_handling
 explanation_structures
 guarded_explanations
+probabilistic_regression
 terminology_thresholded_vs_probabilistic_regression
 ```
 

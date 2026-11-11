@@ -178,6 +178,9 @@ alternative explanations that show how the prediction would change. These
 guarantees hold under {doc}`stated assumptions <../foundations/concepts/calibrated_interval_semantics>`, and an explanation never proves
 cause and effect. The next page shows which tasks and outputs CE supports.
 
+Go deeper: {doc}`../foundations/concepts/calibration_methods` explains what
+calibration means and how CE calibrates.
+
 **Next:** {doc}`ce-tasks-and-modes`
 
 Entry-point tier: Tier 1.

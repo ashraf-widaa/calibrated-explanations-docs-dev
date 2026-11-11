@@ -78,6 +78,9 @@ before and after a change in practice may not.
 - **Probabilistic regression** combines both: a conformal predictive
   distribution gives the event probability, and Venn–Abers calibrates it.
 
+Go deeper: {doc}`../foundations/concepts/calibration_methods` shows how
+Venn–Abers and conformal predictive systems work, with worked examples.
+
 ### What explanations mean in every mode
 
 Explanations sit on top of the calibrated output:
