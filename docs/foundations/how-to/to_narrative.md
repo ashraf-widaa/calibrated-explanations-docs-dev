@@ -3,6 +3,14 @@
 Use `explanations.to_narrative()` to turn calibrated explanations into narrative
 text, HTML, or data structures without changing your modeling flow.
 
+```{note}
+YAML templates, including the default `explain_template.yaml`, need PyYAML,
+which is not a core dependency. Install it with
+`pip install "calibrated-explanations[narrative]"`. Without PyYAML,
+`to_narrative()` raises `SerializationError` for YAML templates; a `.json`
+`template_path` works without it.
+```
+
 ## Basic usage
 
 ```python
