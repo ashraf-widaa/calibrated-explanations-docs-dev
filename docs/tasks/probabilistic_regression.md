@@ -8,6 +8,11 @@ This is technically implemented as **Thresholded Regression**: you supply a `thr
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
 - **Mode-specific guarantees**: threshold queries use CPS with Venn-Abers calibrated event probabilities.
+- **Calibration split**: threshold queries randomly split the calibration set into two
+  halves (seeded). One half fits the CPS that scores the threshold event; the other half
+  calibrates those scores with Venn-Abers. Each step therefore uses about half of the
+  calibration cases, and with Mondrian `bins` each group's cases are divided at random
+  between the two halves. Interval regression uses the full calibration set.
 - **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
 - **Explicit non-guarantees**: no guarantee under drift or causal actionability from threshold probabilities.
 - **Explanation-envelope limits**: feature-level probability shifts summarize model behavior under perturbation.

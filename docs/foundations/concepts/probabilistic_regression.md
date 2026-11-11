@@ -31,6 +31,12 @@ p, (plo, phi) = explainer.predict_proba(
 Interval mode and probabilistic mode can be used on the same calibrated
 explainer. The `threshold` argument selects probabilistic mode.
 
+The two modes use the calibration set differently. Interval mode fits the CPS on
+the full calibration set. Probabilistic mode randomly splits it into two halves:
+one half fits a CPS that scores the threshold event, and the other half
+calibrates those scores with Venn-Abers, so each step uses about half of the
+calibration cases. See {doc}`../../tasks/probabilistic_regression`.
+
 ## Related pages
 
 - {doc}`../../get-started/quickstart_regression`

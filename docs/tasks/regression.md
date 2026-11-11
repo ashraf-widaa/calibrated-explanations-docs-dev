@@ -18,10 +18,12 @@ Regression in Calibrated Explanations is **conformal interval regression** imple
 
 | Method | Description |
 | :--- | :--- |
-| `predict(x)` | Point regression estimate |
+| `predict(x)` | Calibrated point estimate: the CPS median (50th percentile), which can differ from the model's own prediction |
 | `predict(x, uq_interval=True, ...)` | Point estimate + CPS parameterised interval |
 | `explain_factual(x, ...)` | Factual explanation with CPS intervals |
 | `explore_alternatives(x, ...)` | Alternative explanations with CPS intervals |
+
+`predict(x, calibrated=False)` returns the underlying model's prediction instead.
 
 ## Controlling the interval: `low_high_percentiles`
 
@@ -29,6 +31,12 @@ The `low_high_percentiles` parameter (tuple `(low, high)`) governs the CPS inter
 
 * Default: `(5, 95)` → 90% central interval.
 * One-sided: `(-np.inf, 95)` or `(5, np.inf)`.
+
+For a one-sided interval, the open side is reported as the smallest (`-np.inf`)
+or largest (`np.inf`) target value in the calibration set. That value is a
+placeholder, not a calibrated bound: treat that side of the interval as open.
+Because the point prediction is the median, a one-sided interval whose finite
+percentile is below 50, such as `(-np.inf, 40)`, does not contain it.
 
 ## Examples
 
@@ -60,5 +68,12 @@ explanation = explainer.explain_factual(
 
 * **Prediction Interval:** The interval returned by `predict(..., uq_interval=True)` is the conformal interval derived from the CPS.
 * **Rule Intervals:** The explanation envelopes on feature weights in `explain_factual` rules are also derived from the underlying CPS calibration.
+
+## Adaptive and per-group intervals
+
+* Intervals whose width depends on how difficult each instance is to predict:
+  {doc}`../practitioner/advanced/normalization-guide`.
+* Separate calibration for each group (Mondrian `bins`):
+  {doc}`../foundations/how-to/conditional_calibration`.
 
 Entry-point tier: Tier 2.
