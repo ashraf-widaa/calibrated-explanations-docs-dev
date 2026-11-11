@@ -1,6 +1,8 @@
 # API reference
 
 Core modules are documented automatically via Sphinx autosummary.
+For the API overview pages (explainer classes, CLI, plugins, serialization and
+visualization), see {doc}`../../api/index`.
 
 ```{toctree}
 :maxdepth: 1
