@@ -32,8 +32,8 @@ def test_in_practice_cards_point_to_verified_destinations() -> None:
         "https://games.grejna.ai/",
         "../foundations/how-to/integrate_with_pipelines",
         "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
+        "../practitioner/evaluate_ce",
         "../tasks/index",
-        "../practitioner/playbooks/index",
         "../practitioner/index",
         "../compare",
     ]

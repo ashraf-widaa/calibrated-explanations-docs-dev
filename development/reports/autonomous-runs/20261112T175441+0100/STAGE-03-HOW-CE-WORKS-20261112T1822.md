@@ -1,6 +1,6 @@
 # Stage 03 — How CE Works
 
-**Started:** 19:06 · **Completed:** 19:45
+**Started:** 18:11 · **Completed:** 18:22 (commit time; corrected)
 **Starting commit:** `29df0d5c`
 
 ## Audit

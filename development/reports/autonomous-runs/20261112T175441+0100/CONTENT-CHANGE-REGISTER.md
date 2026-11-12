@@ -77,3 +77,13 @@ The learning-path descriptions now match the new content, and a new table maps t
 | Sources | `discretizers.py:229`; executed example; CE 2024 paper |
 | Validation | Executed example output equals the page |
 | Limitations | Filter definitions and conjunction reading under review (SR-09, SR-10, SR-14) |
+
+## CC-08 — `docs/practitioner/evaluate_ce.md` (new) — Stage 04
+
+| Field | Record |
+|---|---|
+| Purpose and audience | Level 2 practitioners: from a working example to a checked, reproducible application |
+| Sources | scikit-learn metrics; `wrap_explainer.py` `save_state`/`load_state`; semantics (pointer); executed code |
+| Examples | 3 executed blocks (set-up, classification checks, regression coverage) |
+| Validation | Outputs compared with the page by `test_concept_examples.py` |
+| Limitations | Empirical checks only; the coverage-guarantee wording is under review (SR-02) |

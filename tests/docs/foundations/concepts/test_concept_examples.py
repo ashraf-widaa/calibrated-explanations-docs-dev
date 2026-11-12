@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[4]
 PAGES = [
     "docs/foundations/concepts/probabilistic_regression.md",
     "docs/foundations/concepts/alternatives.md",
+    "docs/practitioner/evaluate_ce.md",
 ]
 FENCE = re.compile(r"```(python|text)\n(.*?)```", re.DOTALL)
 

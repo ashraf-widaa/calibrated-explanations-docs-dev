@@ -85,6 +85,7 @@ This page maps the public RTD pages to STD-004 tiers.
 | `practitioner/advanced/parallel_execution_playbook.md` | Tier 3 |
 | `practitioner/advanced/reject-policy.md` | Tier 3 |
 | `practitioner/advanced/use_plugins.md` | Tier 3 |
+| `practitioner/evaluate_ce.md` | Tier 3 |
 | `practitioner/index.md` | Tier 1 |
 | `practitioner/narrative_templates.md` | Tier 3 |
 | `practitioner/performance-tuning.md` | Tier 3 |

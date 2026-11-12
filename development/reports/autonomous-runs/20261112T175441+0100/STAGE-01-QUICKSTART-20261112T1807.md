@@ -1,6 +1,6 @@
 # Stage 01 — Quick Start redesign
 
-**Started:** 2026-11-12 18:00 · **Completed:** 18:40
+**Started:** 2026-11-12 17:58 · **Completed:** 18:07 (commit time; corrected, see the Stage 04 report)
 **Starting branch / commit:** `docs-dev/autonomous-20261112` / `22629495`
 
 ## Inspected

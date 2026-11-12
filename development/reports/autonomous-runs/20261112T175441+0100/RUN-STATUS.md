@@ -5,10 +5,10 @@
 | Stage | Status | Commit | Report |
 |---|---|---|---|
 | 00 Deployment | complete: run 1 live (`22629495`, build #35841238) | (records in the 01 commit) | STAGE-00-DEPLOYMENT-20261112T1800.md |
-| 01 Quick Start | complete | see `git log` (stage 01 commit) | STAGE-01-QUICKSTART-20261112T1840.md |
-| 02 What & Why | pending | | |
-| 03 How CE Works | pending | | |
-| 04 CE in Practice | pending | | |
+| 01 Quick Start | complete | `66174c30` (18:07) | STAGE-01-QUICKSTART-20261112T1807.md |
+| 02 What & Why | complete | `29df0d5c` (18:11) | STAGE-02-WHAT-WHY-20261112T1811.md |
+| 03 How CE Works | complete | `1372eb64` (18:22) | STAGE-03-HOW-CE-WORKS-20261112T1822.md |
+| 04 CE in Practice | complete | stage 04 commit | STAGE-04-PRACTICE-20261112T1828.md |
 | 05 Foundations | pending | | |
 | 06 Repository | pending | | |
 | 07 Journeys | pending | | |

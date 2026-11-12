@@ -45,6 +45,13 @@ Apply CE in Python to your own model and data, inside a scikit-learn pipeline.
 Executable demos on GitHub: binary and multiclass classification, regression, probabilistic regression and advanced topics.
 :::
 
+:::{grid-item-card} Evaluate CE on Your Data
+:link: ../practitioner/evaluate_ce
+:link-type: doc
+
+Reproducible set-up, checks of calibrated outputs on held-out data, common mistakes and when not to trust the outputs.
+:::
+
 :::{grid-item-card} Tasks and Capabilities
 :link: ../tasks/index
 :link-type: doc
@@ -52,18 +59,11 @@ Executable demos on GitHub: binary and multiclass classification, regression, pr
 Classification, regression and probabilistic regression, with a capability map.
 :::
 
-:::{grid-item-card} Practitioner Playbooks
-:link: ../practitioner/playbooks/index
-:link-type: doc
-
-Decision policies, ensured explanations, Mondrian calibration and regulatory context.
-:::
-
 :::{grid-item-card} Practitioner Hub
 :link: ../practitioner/index
 :link-type: doc
 
-Interpretation, API choice and deployment guidance for practitioners.
+Interpretation, API choice, evaluation and playbooks for decision policies, ensured explanations, Mondrian calibration and regulatory context.
 :::
 
 :::{grid-item-card} Compare with Other Methods
