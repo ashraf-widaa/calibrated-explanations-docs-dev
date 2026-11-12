@@ -13,6 +13,7 @@ Regression in Calibrated Explanations is **conformal interval regression** imple
 - **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
 - **Explanation-envelope limits**: feature-level interval effects summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **How CE computes these outputs**: {doc}`../foundations/concepts/calibration_methods`.
 
 ## Supported signatures
 

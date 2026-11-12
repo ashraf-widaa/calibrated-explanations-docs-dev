@@ -17,6 +17,7 @@ This is technically implemented as **Thresholded Regression**: you supply a `thr
 - **Explicit non-guarantees**: no guarantee under drift or causal actionability from threshold probabilities.
 - **Explanation-envelope limits**: feature-level probability shifts summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **How CE computes these outputs**: {doc}`../foundations/concepts/calibration_methods`.
 
 ## Supported signatures
 

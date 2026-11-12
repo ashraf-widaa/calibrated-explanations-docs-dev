@@ -137,7 +137,10 @@ except Exception:
 Interpret the chart as follows:
 
 1. **Bar length** corresponds to the absolute weight shown in the rule table.
-2. **Colour** indicates direction (green for positive impact, purple for negative by default).
+2. **Colour** indicates direction. With the default plot style, classification and
+   probabilistic-regression plots draw contributions that raise the prediction in red
+   and those that lower it in blue; plain regression plots swap the two (raise in blue,
+   lower in red). The colours come from the plot style configuration and can be changed.
 3. **Shaded band** around each bar is the rule-level uncertainty interval.
 4. **Vertical line** over the summary panel mirrors the calibrated prediction and its `(low, high)` bounds.
 

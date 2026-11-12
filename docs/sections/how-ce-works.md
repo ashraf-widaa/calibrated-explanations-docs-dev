@@ -44,10 +44,10 @@ Read factual and alternative explanations: rule tables, uncertainty intervals an
 :::
 
 :::{grid-item-card} Assumptions & Guarantees
-:link: ../foundations/concepts/calibrated_interval_semantics
-:link-type: doc
+:link: cross-mode-non-guarantees
+:link-type: ref
 
-Canonical assumptions, guarantees and non-guarantees.
+What holds in every mode, and what CE does not guarantee.
 :::
 ::::
 

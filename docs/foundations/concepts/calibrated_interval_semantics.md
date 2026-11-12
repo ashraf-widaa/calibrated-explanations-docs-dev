@@ -78,6 +78,8 @@ Do not merge these into one guarantee statement.
 - Feature-level probability shifts and envelopes describe model response patterns.
 - They are not guarantees of controlled intervention effects.
 
+(cross-mode-non-guarantees)=
+
 ## Cross-mode non-guarantees
 
 - Calibration guarantees are conditional on calibration assumptions.
@@ -87,6 +89,8 @@ Do not merge these into one guarantee statement.
 
 ## Further reading
 
+- {doc}`How CE Calibrates <calibration_methods>`: how CE computes the probabilities and
+  intervals described on this page (methods page; some wording is under author review).
 - Venn–Abers predictors: Vovk, V., and Petej, I. (2014). Venn-Abers predictors.
   *Proceedings of the 30th Conference on Uncertainty in Artificial Intelligence (UAI 2014)*.
   [arXiv:1211.0025](https://arxiv.org/abs/1211.0025).

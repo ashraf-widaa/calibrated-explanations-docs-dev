@@ -10,6 +10,7 @@ Calibrated Explanations wraps standard scikit-learn classifiers to produce uncer
 - **Explicit non-guarantees**: no guarantee under drift or regime shift.
 - **Explanation-envelope limits**: rule and feature-level intervals summarize model behavior, not causal effects.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **How CE computes these outputs**: {doc}`../foundations/concepts/calibration_methods`.
 
 ## Supported signatures
 
