@@ -4,6 +4,9 @@ Calibrated Explanations is published on PyPI and conda-forge. Install the base
 package first, then add extras that unlock plotting, notebook examples, or
 contributor tooling.
 
+Calibrated Explanations requires Python 3.10 or later and is tested on
+Python 3.10 to 3.13.
+
 ## PyPI
 
 ```bash

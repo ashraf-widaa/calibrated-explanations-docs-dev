@@ -38,13 +38,7 @@ x_test = x_cal[:1]
 explanations = explainer.explain_factual(x_test)
 ```
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.core.calibrated_explainer.CalibratedExplainer
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`CalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.CalibratedExplainer>`.
 
 ### WrapCalibratedExplainer
 
@@ -79,13 +73,7 @@ wrapper.calibrate(x_cal, y_cal)
 explanations = wrapper.explain_factual(x_test[:1])
 ```
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.core.wrap_explainer.WrapCalibratedExplainer
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`.
 
 ## Explanation Containers
 
@@ -116,13 +104,7 @@ When FAST-based feature filtering is enabled (experimental), the `CalibratedExpl
 
 - `feature_filter_per_instance_ignore`: On the returned collection, a best-effort list of per-instance feature-index masks produced by filtering. The `CalibratedExplainer` also exposes the transient mask from the most recent filtered batch under the same attribute name. This diagnostic metadata is not part of the stable API.
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.explanations.explanations.CalibratedExplanations
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`CalibratedExplanations API reference <../_autosummary/calibrated_explanations.explanations.CalibratedExplanations>`.
 
 ## Explanation Types
 
@@ -132,13 +114,7 @@ Individual explanations are represented by specific classes depending on the typ
 
 This is the abstract base class for a single explanation. It contains the instance data, the prediction, and the feature weights (rules) that explain the prediction. It provides methods for plotting the explanation.
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.explanations.explanation.CalibratedExplanation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`CalibratedExplanation API reference <../_autosummary/calibrated_explanations.explanations.CalibratedExplanation>`.
 
 ### FactualExplanation
 
@@ -154,13 +130,7 @@ factual_explanation.plot()
 factual_explanation.add_conjunctions()
 ```
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.explanations.explanation.FactualExplanation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`FactualExplanation API reference <../_autosummary/calibrated_explanations.explanations.FactualExplanation>`.
 
 ### AlternativeExplanation
 
@@ -173,13 +143,7 @@ An `AlternativeExplanation` (often called a counterfactual explanation) explores
 alternative_explanation.plot()
 ```
 
-`{eval-rst}
-.. autoclass:: calibrated_explanations.explanations.explanation.AlternativeExplanation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-`
+Full signatures, methods and parameters: {doc}`AlternativeExplanation API reference <../_autosummary/calibrated_explanations.explanations.AlternativeExplanation>`.
 
 Entry-point tier: Tier 3.
 

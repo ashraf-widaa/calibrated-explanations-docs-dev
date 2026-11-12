@@ -21,7 +21,7 @@ For short definitions of library terms, see the {doc}`Software & Technical Gloss
 :link: ../sections/software-overview-versions
 :link-type: doc
 
-Capabilities and release references; version references need reconciliation.
+Current release, supported Python versions, release notes and changelog.
 :::
 
 :::{grid-item-card} Installation & Configuration
@@ -68,6 +68,40 @@ Plugins and extension points.
 :::
 ::::
 
+## Configuration & Operations
+
+::::{grid} 1 2 3 3
+:gutter: 3
+
+:::{grid-item-card} Runtime Configuration
+:link: ../foundations/how-to/configure_runtime
+:link-type: doc
+
+Configure runtime behaviour through the configuration manager.
+:::
+
+:::{grid-item-card} Safe Defaults for Production
+:link: ../foundations/how-to/safe-defaults
+:link-type: doc
+
+Recommended settings for production deployments.
+:::
+
+:::{grid-item-card} Performance Tuning
+:link: ../foundations/how-to/tune_runtime_performance
+:link-type: doc
+
+Opt-in caching and parallel execution.
+:::
+
+:::{grid-item-card} Telemetry
+:link: ../foundations/how-to/configure_telemetry
+:link-type: doc
+
+Optional telemetry and provenance records.
+:::
+::::
+
 ## Maintenance & Support
 
 ::::{grid} 1 2 3 3
@@ -77,7 +111,14 @@ Plugins and extension points.
 :link: ../get-started/troubleshooting
 :link-type: doc
 
-Common problems, with migration and upgrade routes.
+Common installation and runtime problems.
+:::
+
+:::{grid-item-card} Upgrades & Migration
+:link: ../upgrade/index
+:link-type: doc
+
+Checklists for upgrading between CE versions.
 :::
 ::::
 

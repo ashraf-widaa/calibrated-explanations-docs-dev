@@ -1,7 +1,8 @@
 # Release notes
 
-Highlights for recent releases are summarised here. For the complete list of
-changes see the project changelog on GitHub.
+Highlights for earlier releases are summarised here; they stop at v0.10.2. For
+v0.11 and the 1.x releases, and for the complete list of changes, see the
+[changelog](https://github.com/Moffran/calibrated_explanations/blob/main/CHANGELOG.md) and [GitHub releases](https://github.com/Moffran/calibrated_explanations/releases).
 
 
 ## v0.10.2 (reject integration)

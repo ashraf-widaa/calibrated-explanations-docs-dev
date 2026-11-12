@@ -17,7 +17,13 @@ AUDIT_WORDING = ("unverified", "Interim", "need reconciliation", "not necessaril
 
 
 # Widened stage by stage in the autonomous run; stage 10 switches to every page.
-CLEANED = ["how-ce-works.md", "in-practice.md", "what-and-why.md"]
+CLEANED = [
+    "how-ce-works.md",
+    "in-practice.md",
+    "software-integration.md",
+    "software-overview-versions.md",
+    "what-and-why.md",
+]
 
 
 @pytest.mark.parametrize("page", CLEANED)
@@ -43,3 +49,25 @@ def test_in_practice_cards_point_to_verified_destinations() -> None:
     ]
     assert "Decision Labs" not in text
     assert "not real-world guarantees" in text
+
+
+def test_api_overview_links_rendered_signatures_instead_of_broken_autodoc() -> None:
+    """Run stage 09: the six inline autodoc blocks never rendered (single-backtick fence).
+
+    Each class section now links its generated ``_autosummary`` page instead.
+    """
+    api = (ROOT / "docs" / "api" / "calibrated_explainer.md").read_text(encoding="utf-8")
+    assert "`{eval-rst}\n.. autoclass" not in api
+    assert ".. autoclass::" not in api
+    targets = re.findall(r"API reference <\.\./_autosummary/([^>]+)>", api)
+    assert len(targets) == 6
+    for target in targets:
+        assert (ROOT / "docs" / "_autosummary" / f"{target}.rst").is_file(), target
+
+
+def test_software_versions_page_states_release_and_python() -> None:
+    text = (SECTIONS / "software-overview-versions.md").read_text(encoding="utf-8")
+    assert "**Latest release:** 1.0.2" in text
+    assert "**Python:** 3.10 or later" in text
+    pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert 'requires-python = ">=3.10"' in pyproject
