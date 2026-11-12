@@ -67,6 +67,9 @@ This page maps the public RTD pages to STD-004 tiers.
 | `get-started/quickstart_walkthrough.md` | Tier 1 |
 | `get-started/troubleshooting.md` | Tier 3 |
 | `getting_started_60s.md` | Tier 1 |
+| `glossary/index.md` | Tier 3 |
+| `glossary/science.md` | Tier 3 |
+| `glossary/software.md` | Tier 3 |
 | `index.md` | Tier 1 |
 | `maintenance/legacy-plotting-reference.md` | Tier 3 |
 | `migration/adr033_v0_11_0.md` | Tier 3 |

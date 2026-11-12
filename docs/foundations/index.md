@@ -8,7 +8,7 @@ advanced material.
 
 - {doc}`../get-started/ml-foundations` – machine-learning basics used throughout CE.
 - {doc}`../get-started/ce-tasks-and-modes` – the tasks CE supports and what each output means.
-- {doc}`concepts/terminology` – terminology used across the documentation.
+- {doc}`../glossary/index` – short definitions of the terms used across the documentation.
 
 ## Practical understanding and interpretation
 
