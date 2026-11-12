@@ -65,6 +65,7 @@ Quick Start <get-started/index>
 :caption: "CE: What & Why"
 
 Overview <sections/what-and-why>
+What CE Is <what-is-ce>
 Trustworthy AI <practitioner/playbooks/eu-ai-act-compliance>
 The Explainability Gap <compare>
 ```

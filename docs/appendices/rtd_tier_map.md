@@ -76,6 +76,7 @@ This page maps the public RTD pages to STD-004 tiers.
 | `migration/deprecations.md` | Tier 3 |
 | `migration/index.md` | Tier 3 |
 | `multiclass_all_classes_gap_analysis.md` | Tier 3 |
+| `what-is-ce.md` | Tier 3 |
 | `plugins.md` | Tier 1 |
 | `practitioner/advanced/explanation_retrieval.md` | Tier 3 |
 | `practitioner/advanced/index.md` | Tier 3 |

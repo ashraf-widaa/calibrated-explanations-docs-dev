@@ -40,10 +40,10 @@ A short comparison of CE with SHAP, LIME and conformal prediction packages.
 :::
 
 :::{grid-item-card} What Is CE & What Does It Add?
-:link: ../get-started/ce-tasks-and-modes
+:link: ../what-is-ce
 :link-type: doc
 
-The tasks CE supports, what each output means and which capabilities apply to which task.
+The problem CE addresses, what it adds, what it guarantees and does not, and when it fits.
 :::
 ::::
 

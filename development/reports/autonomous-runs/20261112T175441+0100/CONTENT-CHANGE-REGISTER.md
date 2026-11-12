@@ -30,3 +30,15 @@ One entry per substantially changed or new page.
 ## CC-03 — `docs/get-started/index.md` — Stage 01 (moderate)
 
 The learning-path descriptions now match the new content, and a new table maps the ten core ideas to the sections that teach them.
+
+## CC-04 — `docs/what-is-ce.md` (new page) — Stage 02
+
+| Field | Record |
+|---|---|
+| Original purpose | (none; the topic was spread across ML basics A6, `compare.md` and Quick Start step 2) |
+| New purpose and audience | Level 1–2 entry for newcomers and decision-makers: what CE is, the problem, the contribution, what is and is not guaranteed, fit, and comparison by design |
+| Scientific sources | README (original problem statement); `calibrated_interval_semantics` (guarantees); `citing.md` papers; Vovk & Petej 2014; Vovk et al. 2019 |
+| Examples | None (conceptual); links to the Quick Start walkthrough for the worked case |
+| Deep references | Semantics, How CE Calibrates, interpretation guide, glossary, citing |
+| Validation | Build, links, `tests/docs/test_what_is_ce.py` |
+| Limitations | "Distribution-matched" assumption wording under review (SR-01); comparisons are by design only (SR-05, SR-06 block claims about performance) |
