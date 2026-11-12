@@ -116,9 +116,27 @@ calibrated probability of the predicted class: with typical values from the
 other side of the condition, the probability would be about that much lower.
 The bracket is the weight's range. The two petal rules have the largest
 weights, but their ranges reach below 0, so the calibration data support their
-direction less firmly than that of the two sepal rules. Call `factual.plot()` to see the same
-explanation as a chart; {doc}`../foundations/how-to/interpret_explanations`
-explains how to read it.
+direction less firmly than that of the two sepal rules.
+
+The same explanation as a chart:
+
+```python
+factual.plot(1, uncertainty=True)
+```
+
+```{figure} quickstart_assets/classification-factual-case1.png
+:alt: Factual explanation plot for case 1: calibrated probability of versicolor 0.91 with a range from about 0.90 to 0.99 (default multiclass bounds); sepal length above 5.55 and sepal width at most 2.95 raise it with ranges above 0; the two petal rules have ranges from below 0 to about 0.91.
+
+Factual explanation of case 1, as drawn by `factual.plot(1, uncertainty=True)`.
+```
+
+**Reading the plot.** The top panel shows the calibrated probability (vertical
+line) with its range (dark bar up to the lower value, light bar up to the upper
+value). Below it, each rule has one bar covering its weight's range: red for
+rules that raise the probability, blue for rules that lower it. A rule whose
+range crosses 0 has no dark part. The walkthrough explains the plot
+{doc}`in detail <quickstart_walkthrough>` (section 7).
+For more, see {doc}`../foundations/how-to/interpret_explanations`.
 
 For multiclass all-class explanations:
 

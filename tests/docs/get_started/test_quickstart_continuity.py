@@ -89,3 +89,30 @@ def test_retired_sixty_second_page_redirects_to_path_c() -> None:
     text = (ROOT / "docs" / "getting_started_60s.md").read_text(encoding="utf-8")
     assert "orphan: true" in text
     assert "get-started/ce-tasks-and-modes.html#choosing-your-workflow" in text
+
+WORKFLOW_FIGURE_PAGES = {
+    "get-started/index.md": "../_static/figures/",
+    "get-started/why-ce.md": "../_static/figures/",
+    "foundations/concepts/ce_workflow.md": "../../_static/figures/",
+}
+
+
+def test_workflow_figure_has_desktop_and_phone_versions() -> None:
+    for page, prefix in WORKFLOW_FIGURE_PAGES.items():
+        text = (ROOT / "docs" / page).read_text(encoding="utf-8")
+        assert f'srcset="{prefix}ce-in-ml-workflow-narrow.svg"' in text, page
+        assert f'src="{prefix}ce-in-ml-workflow.svg"' in text, page
+        assert 'alt="In blue, a conventional workflow' in text, page
+    for name in ("ce-in-ml-workflow.svg", "ce-in-ml-workflow-narrow.svg", "ce-reading-an-output.svg"):
+        svg = (ROOT / "docs" / "_static" / "figures" / name).read_text(encoding="utf-8")
+        assert "<title" in svg and "<desc" in svg, name
+        assert 'fill="#ffffff"' not in svg.split("<defs>")[-1][:400], name
+
+
+def test_quickstart_plots_exist_for_every_figure_reference() -> None:
+    for page in ("quickstart_classification.md", "quickstart_guarded.md", "apply-to-your-data.md"):
+        text = (ROOT / "docs" / "get-started" / page).read_text(encoding="utf-8")
+        refs = re.findall(r"\{figure\} (quickstart_assets/[\w.-]+\.png)", text)
+        assert refs, page
+        for ref in refs:
+            assert (ROOT / "docs" / "get-started" / ref).is_file(), ref

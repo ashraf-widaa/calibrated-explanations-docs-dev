@@ -99,6 +99,24 @@ removed by the guard ..."). That is a signal to look at the case, not an
 error. Guarded and standard explanations are not computed identically, so
 do not compare their rule counts or weights one to one.
 
+The guarded explanation of case 0 as a chart, with its six strongest rules:
+
+```python
+guarded_factual.plot(0, uncertainty=True, filter_top=6)
+```
+
+```{figure} quickstart_assets/guarded-factual-case0.png
+:alt: Guarded factual explanation plot for case 0: calibrated probability of benign about 0.08; six rules, each a range of feature values such as 0.06233 < mean concave points <= 0.08508, all with weights below 0 and most with ranges that cross 0.
+
+Guarded explanation of case 0, as drawn by `guarded_factual.plot(0, uncertainty=True, filter_top=6)`.
+```
+
+The plot reads like a standard factual plot (see the
+{doc}`walkthrough, section 7 <quickstart_walkthrough>`). Guarded rules are often
+bounded on both sides, such as `0.06233 < mean concave points <= 0.08508`,
+because the guard works on ranges of feature values that it has checked
+against the calibration data.
+
 ## 4. Audit guarded filtering
 
 ```python

@@ -1,71 +1,105 @@
 # Tasks, modes and capabilities
 
 **Path C, step 1.** Start here if you have a model or a prediction problem
-and want to know whether and how CE applies. The page answers:
-
-1. Which prediction tasks does CE support?
-2. What does each kind of output mean, and which method produces it?
-3. Which workflow and quickstart should you follow?
-4. Which capabilities work for which task? (a reference table at the end)
+and want to know whether and how CE applies. In three steps: check that CE
+fits, pick the mode, and learn what its outputs mean. A reference of
+capabilities and limitations follows at the end.
 
 If terms such as *classification* or *calibration set* are new, start with
 Path A: {doc}`ml-foundations` and {doc}`why-ce`.
 
-## Four terms that are easy to mix up
+## Choosing your workflow
 
-| Term | Means | Examples | How you choose it |
-|---|---|---|---|
-| **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
-| **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
-| **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
-| **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
+### Step 1: check that CE fits
 
-Guarded explanations, for example, are an explanation configuration available
-in every mode; they are not a third kind of prediction task.
+1. **Is it a supported task?** CE explains **supervised** models that predict
+   a class or a number for one case at a time, from a fixed set of features.
+   It is not designed for generative models, unsupervised learning or
+   reinforcement learning.
+2. **Is the model compatible?** A scikit-learn-style model with `predict`;
+   classifiers must also provide `predict_proba` (without it, calibration
+   fails with a `ConfigurationError`). The model may already be trained: CE
+   detects a fitted model, and you can calibrate it directly.
+3. **Do you have calibration data?** Labelled cases with the same features,
+   held out from training.
 
-## Supported tasks
+### Step 2: pick the mode
 
-CE explains **supervised** models that predict for one case at a time. It
-supports two task families, and regression can be queried in two ways.
+The **mode** follows from what your model predicts and what you want to know
+about it.
 
-### Classification
+::::{grid} 1 1 3 3
+:gutter: 3
 
-The model predicts a **class label**, such as *malignant* or *benign*, and a
-**probability** for each class.
+:::{grid-item-card} Your model predicts a **class**
+:link: quickstart_classification
+:link-type: doc
+
+**Classification** (binary or multiclass)
+
+*How probable is each class?*
+
+`predict_proba(x, uq_interval=True)`
+
+Calibrated with **Venn-Abers** predictors.
++++
+Classification quickstart →
+:::
+
+:::{grid-item-card} Your model predicts a **number**, and you want a range
+:link: quickstart_regression
+:link-type: doc
+
+**Interval regression**
+
+*Where is the value likely to fall?*
+
+`predict(x, uq_interval=True)`
+
+Calibrated with a **conformal predictive system** (CPS).
++++
+Regression quickstart →
+:::
+
+:::{grid-item-card} Your model predicts a **number**, and you ask about a threshold
+:link: quickstart_regression
+:link-type: doc
+
+**Probabilistic regression**
+
+*How likely is the value to be at or below `t`?*
+
+`predict_proba(x, threshold=t, uq_interval=True)`
+
+**CPS**, then **Venn-Abers**.
++++
+Regression quickstart →
+:::
+::::
+
+In every mode you then explain predictions with `explain_factual` and
+`explore_alternatives`; adding `guarded_options` (see
+{doc}`quickstart_guarded`) restricts explanations to typical feature values.
+Probabilistic regression is not a separate kind of model: the model is the
+same regression model, and only the question asked of its predictions changes
+when you pass a `threshold`.
+
+## What the outputs mean
+
+| Mode | Output | Read it as |
+|---|---|---|
+| Classification | Calibrated class probability with lower and upper probability | "Of the cases that get a model score like this one, about this share belong to the class" |
+| Interval regression | Point prediction with a prediction interval (default 5th–95th percentile) | "The outcome is likely to fall in this range" |
+| Probabilistic regression | Calibrated probability of `y ≤ t` with lower and upper probability | "The chance the outcome is at or below `t`" |
 
 - **Binary classification** has two classes. CE reports the calibrated
   probability of the positive class, which is class `1` in the label encoding.
 - **Multiclass classification** has three or more classes. CE explains the
-  predicted class by default. Explaining all classes at once
-  (`multi_labels_enabled=True`) is an explicitly **experimental** option.
+  predicted class by default; its bounds need care (limitation 1 below).
 
-### Regression
-
-The model predicts a **number**, such as a disease-progression score. CE can
-answer two different questions about that number:
-
-- **Interval regression:** *what range is the outcome likely to fall in?* CE
-  returns the point prediction with a calibrated prediction interval.
-- **Probabilistic (thresholded) regression:** *how likely is the outcome to be
-  at or below a threshold?* CE returns a calibrated probability for that
-  event, `P(y ≤ t)`.
-
-Probabilistic regression is not a separate learning paradigm. The model is the
-same regression model; only the question asked of its predictions changes.
-You select it by passing a `threshold`.
-
-## Semantic modes: what the outputs mean
-
-CE's documentation distinguishes three **semantic modes**. A semantic mode is
-a documentation term for *how to interpret an output*. It is not an API
-argument: you select the mode through the model type and whether you pass a
-`threshold`.
-
-| Semantic mode | Underlying task | You call | Output | Read it as |
-|---|---|---|---|---|
-| Classification | Classification | `predict_proba(x, uq_interval=True)` | Calibrated class probability with lower and upper probability | "Of the cases that get a model score like this one, about this share belong to the class" |
-| Interval regression | Regression | `predict(x, uq_interval=True)` | Point prediction with a prediction interval (default 5th–95th percentile) | "The outcome is likely to fall in this range" |
-| Probabilistic regression | Regression | `predict_proba(x, threshold=t, uq_interval=True)` | Calibrated probability of `y ≤ t` with lower and upper probability | "The chance the outcome is at or below `t`" |
+These three are the **semantic modes** of CE's documentation: a semantic mode
+is *how to interpret an output*. It is not an API argument; you select it
+through the model type and whether you pass a `threshold`.
 
 ### How the uncertainty differs between modes
 
@@ -111,65 +145,24 @@ the world, and acting on an alternative does not guarantee a different real
 outcome. The canonical statement of guarantees and non-guarantees for each
 mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
-## At a glance
+## Four terms that are easy to mix up
 
-| Mode | Calibration method | Model needs | Prediction output | Explanations | Key limitation | Quickstart |
-|---|---|---|---|---|---|---|
-| Classification (binary, multiclass) | Venn-Abers | `predict` and `predict_proba` | Calibrated class probability with lower and upper value | Factual, alternative; guarded optional | Multiclass bounds are rescaled by default (limitation 1) | {doc}`quickstart_classification` |
-| Interval regression | Conformal predictive system | `predict` | Prediction with an interval for requested percentiles | Factual, alternative; guarded optional | Coverage is on average over cases, not per case | {doc}`quickstart_regression` |
-| Probabilistic regression | CPS, then Venn-Abers | `predict` | Calibrated probability of `y ≤ t` (or `low < y ≤ high`) with lower and upper value | Factual, alternative; guarded optional | The calibration set is split in two (limitation 3) | {doc}`quickstart_regression` |
+| Term | Means | Examples | How you choose it |
+|---|---|---|---|
+| **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
+| **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
+| **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
+| **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
 
-All modes need a labelled calibration set the model was not trained on, and
-rely on the exchangeability assumption described above.
+Guarded explanations, for example, are an explanation configuration available
+in every mode; they are not a third kind of prediction task.
 
-## Choosing your workflow
-
-Check three things first:
-
-1. **Is it a supported task?** CE explains supervised models that predict a
-   class or a number for one case at a time, from a fixed set of features.
-   It is not designed for generative models, unsupervised learning or
-   reinforcement learning.
-2. **Is the model compatible?** A scikit-learn-style model with `predict`;
-   classifiers must also provide `predict_proba` (without it, calibration
-   fails with a `ConfigurationError`). The model may already be trained: CE
-   detects a fitted model, and you can calibrate it directly.
-3. **Do you have calibration data?** Labelled cases with the same features,
-   held out from training.
-
-Then pick the mode:
-
-```{mermaid}
-flowchart TD
-    Q{"What does your model predict?"} -->|"A category"| C["Classification mode<br/>predict_proba(x, uq_interval=True)"]
-    Q -->|"A number"| R{"What do you want to know?"}
-    R -->|"A likely range"| IR["Interval regression<br/>predict(x, uq_interval=True)"]
-    R -->|"The chance of crossing a threshold"| PR["Probabilistic regression<br/>predict_proba(x, threshold=t, uq_interval=True)"]
-    C --> E["Then explain:<br/>explain_factual, explore_alternatives"]
-    IR --> E
-    PR --> E
-```
-
-Every workflow follows the same steps:
-
-1. **Choose the task** that matches your target.
-2. **Pick the output interpretation**, the semantic mode.
-3. **Check the capabilities** you need in the reference table below.
-4. **Prepare data and model**: split into proper training, calibration and
-   test sets, then fit the model.
-5. **Calibrate** CE on the calibration set.
-6. **Explain** the cases you care about.
-7. **Interpret** the outputs with their uncertainty.
-8. **Judge** whether exchangeability is plausible for how your data were
-   collected and how the model will be used. It cannot be proved from the
-   data alone.
-
-**Next:** follow the quickstart for your mode,
+**Next:** run the quickstart for your mode,
 {doc}`classification <quickstart_classification>` or
 {doc}`regression <quickstart_regression>`; add
-{doc}`guarded explanations <quickstart_guarded>` if you need to filter out
-unusual substituted values. Then {doc}`apply-to-your-data` walks through
-your own data. For a slower, fully explained example, see Path B, the
+{doc}`guarded explanations <quickstart_guarded>` if you need them. Then
+{doc}`apply-to-your-data` takes you through your own data. For a slower,
+fully explained example, see Path B, the
 {doc}`guided walkthrough <quickstart_walkthrough>`.
 
 ## Capability reference

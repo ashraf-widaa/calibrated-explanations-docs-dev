@@ -125,10 +125,28 @@ holds for this case. A positive weight means the condition pushes the
 calibrated probability of *benign* up: with typical values from the other side
 of the condition instead, the probability would be about that much lower. The
 bracket is the weight's range; a range that includes 0 would mean the direction
-of the effect is not firmly supported. Here all three ranges are above 0. Call
-`factual.plot()` for a chart, and `explainer.explore_alternatives(...)` for
-what-if alternatives; {doc}`../foundations/how-to/interpret_explanations`
-explains how to read both.
+of the effect is not firmly supported. Here all three ranges are above 0.
+
+The same explanation as a chart, with the six strongest rules:
+
+```python
+factual.plot(0, uncertainty=True, filter_top=6)
+```
+
+```{figure} quickstart_assets/apply-factual-case3.png
+:alt: Factual explanation plot for test case 3: calibrated probability of benign 0.72 with a range from 0.67 to 0.88; worst concave points at most 0.14, worst symmetry at most 0.32, radius error at most 0.38 and worst concavity at most 0.20 raise it; two rules have ranges that cross 0.
+
+Factual explanation of test case 3, as drawn by `factual.plot(0, uncertainty=True, filter_top=6)`.
+```
+
+**Reading the plot.** The top panel shows the calibrated probability (vertical
+line) with its range (dark bar up to the lower value, light bar up to the upper
+value). Below it, each rule has one bar covering its weight's range: red for
+rules that raise the probability, blue for rules that lower it. A rule whose
+range crosses 0 has no dark part. The walkthrough explains the plot
+{doc}`in detail <quickstart_walkthrough>` (section 7).
+Use `explainer.explore_alternatives(...)` for what-if alternatives;
+{doc}`../foundations/how-to/interpret_explanations` explains how to read both.
 
 ## 6. Check the results on your test set
 
