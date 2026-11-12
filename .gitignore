@@ -93,6 +93,10 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+# Local preview and validation builds at the repository root (Beta docs work)
+/_build/
+# Browser-automation session artifacts
+/.playwright-mcp/
 
 # PyBuilder
 .pybuilder/

@@ -24,6 +24,8 @@ requirement catalogs, and curated closure evidence summaries.
 | Engineering Standards | `development/standards/` |
 | ADR-030 quality method tooling | `development/standards/test-quality-method/` |
 | CI/tooling JSON schemas (non-runtime) | `development/schemas/` |
+| Beta documentation-redesign run records (plans, stage reports, scientific-review register; not published) | `development/reports/autonomous-runs/` |
+| Beta documentation-redesign learning and audit reports (not published) | `learning-reports/` |
 | Capability claims | `development/capabilities/claims/` |
 | Requirements derived from capability claims | `development/capabilities/requirements/` |
 | TIF verification interfaces | `development/capabilities/verification/tif/` |
