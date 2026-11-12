@@ -68,6 +68,7 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 ### B
 
 - {term}`bins` · **T**
+- {term}`Brier score` · **S**
 
 (glossary-az-c)=
 
@@ -120,6 +121,8 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 
 - {term}`Factual explanation` · **S**
 - {term}`FactualExplanation` · **T**
+- {term}`Feature attribution` · **S**
+- Feature importance · see {term}`Feature attribution`
 - {term}`Feature weight` · **S**
 - {term}`feature_names` · **T**
 - {term}`fit` · **T**
@@ -128,6 +131,7 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 
 ### G
 
+- Global explanation · see {term}`Local explanation`
 - {term}`Guarded explanation` · **S**
 - {term}`GuardedOptions` · **T**
 
@@ -141,6 +145,7 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 
 ### L
 
+- {term}`Local explanation` · **S**
 - {term}`low_high_percentiles` · **T**
 
 (glossary-az-m)=
@@ -176,6 +181,8 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 - {term}`reject_confidence` · **T**
 - RejectPolicy · see {term}`Reject policy`
 - {term}`RejectResult` · **T**
+- {term}`Reliability diagram` · **S**
+- Reliability table · see {term}`Reliability diagram`
 - {term}`Rule` · **S**
 - {term}`Rules payload` · **T**
 

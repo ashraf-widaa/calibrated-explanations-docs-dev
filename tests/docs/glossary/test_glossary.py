@@ -61,6 +61,8 @@ SCIENCE_TARGETS = {
     "practitioner/playbooks/ensured-explanations",
     "practitioner/advanced/normalization-guide",
     "practitioner/advanced/reject-policy",
+    # Run 2 stage 05: evaluation guide owns the Brier score entry.
+    "practitioner/evaluate_ce",
 }
 SOFTWARE_TARGET_PREFIXES = (
     "get-started/installation",

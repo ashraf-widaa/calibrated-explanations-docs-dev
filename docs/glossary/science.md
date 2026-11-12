@@ -38,6 +38,22 @@ Proper training split
 ```{glossary}
 :sorted:
 
+Feature attribution
+Feature importance
+  A number per feature that describes how much that feature moved a
+  prediction. LIME and SHAP are widely used attribution methods. CE reports
+  rules with weights, and an uncertainty range for each weight.
+
+  **Learn more:** {doc}`../get-started/ml-foundations` (section A7)
+
+Local explanation
+Global explanation
+  A local explanation describes one prediction; a global explanation
+  describes the model as a whole. CE's factual and alternative explanations
+  are local.
+
+  **Learn more:** {doc}`../get-started/ml-foundations` (section A7)
+
 Alternative explanation
   An explanation that proposes changes to feature values that would give a
   different calibrated outcome. Each rule pairs the changed condition with the
@@ -108,6 +124,22 @@ Rule
 
 ```{glossary}
 :sorted:
+
+Brier score
+  The mean squared difference between predicted probabilities and observed
+  outcomes (1 or 0). Lower is better and 0 is perfect. It scores the
+  probabilities themselves, not only the predicted labels.
+
+  **Learn more:** {doc}`../practitioner/evaluate_ce` (section 2)
+
+Reliability diagram
+Reliability table
+  A bin-by-bin comparison of the average predicted probability with the
+  observed share of positive outcomes on held-out data. For calibrated
+  probabilities the two are close; with few cases per bin they vary by
+  chance.
+
+  **Learn more:** {doc}`../foundations/concepts/calibration_methods` (section 1)
 
 Calibration
   In CE, the step that adjusts a trained model's outputs on held-out
