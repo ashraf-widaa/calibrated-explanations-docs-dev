@@ -13,6 +13,7 @@
 | 12:15 | 09 Software | `40f6a7bf` | no | — | — |
 | 12:30 | 10 Project | `34ebe0ed` | no | — | — |
 | 12:45 | 11 Integration | `6625df25` | no | — | — |
+| 13:10 | 12 Final | `b0b2cdc6` | **yes (PO, 2026-11-12 ≈14:08 UTC)** | #35840928 **Cancelled** before Sphinx ran (no error; cause not exposed by the public API) | **Not live:** the site still serves `e964a79c` (glossary 404; no Commercial Services; no Overview entries). See RTD-DEPLOYMENT-INVESTIGATION-20261112T1519.md |
 
 **Blocker B-01:** the agent's environment denies `git push` (`.claude/settings.json`). Nothing from this run is published. One fast-forward push of `docs-dev/autonomous-20261112` to Beta `main` publishes all stages, including the glossary (G-P1/G-P2).
 
@@ -21,3 +22,5 @@
 2. `/glossary/index.html` returns 200;
 3. the homepage shows Commercial Services and "CE Beta Documentation";
 4. the sidebar shows the five "Overview" entries.
+
+**Next action (PO):** Rebuild `latest` in the Read the Docs dashboard, or push the investigation commit; then run the verification checklist above.

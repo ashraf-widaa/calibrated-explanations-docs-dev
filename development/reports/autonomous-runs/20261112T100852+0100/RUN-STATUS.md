@@ -20,6 +20,8 @@
 | 11 Integration | complete | `6625df25` | no (B-01) | STAGE-11-INTEGRATION-20261112T1245.md |
 | 12 Final validation | complete | (final records commit) | no (B-01) | STAGE-12-FINAL-VALIDATION-*.md, FINAL-REPORT.md |
 
+**Deployment (15:19):** `b0b2cdc6` pushed by the PO; Read the Docs build #35840928 cancelled before Sphinx; site still at `e964a79c`. Canonical project: `calibrated-explanations-beta`; `calibrated-explanations-docs-dev` is redundant. Report: RTD-DEPLOYMENT-INVESTIGATION-20261112T1519.md.
+
 **Blockers:** B-01 — push and publication are denied to the agent (`.claude/settings.json`).
 
 **To publish:** `git push docs-dev docs-dev/autonomous-20261112:main`, then check Read the Docs project `calibrated-explanations-beta`.
