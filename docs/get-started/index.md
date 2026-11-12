@@ -65,6 +65,14 @@ For interpretation, use {doc}`../foundations/how-to/interpret_explanations`.
 Semantics are mode-specific. The canonical reference is
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+## After the Quick Start
+
+- {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`: the methods behind the calibrated
+  outputs you just produced.
+- {doc}`CE Software & Integration <../sections/software-integration>`: installation, the Python API and
+  integration with your own models and pipelines.
+- {doc}`Practitioner hub <../practitioner/index>`: playbooks for applying CE to real tasks.
+
 ## Setup and help
 
 - {doc}`installation`

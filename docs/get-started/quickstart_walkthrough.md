@@ -640,6 +640,9 @@ for what it does and does not establish.
 | Go deeper on threshold regression | [Probabilistic regression](../foundations/concepts/probabilistic_regression.md) |
 | Use guarded explanations | [Guarded explanations quickstart](quickstart_guarded.md) |
 | Look up method signatures | [Quick API](quick_api.md) |
+| See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
+| Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
+| Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |
 
 Entry-point tier: Tier 1.
