@@ -11,6 +11,13 @@ For short definitions of terms, see the {doc}`Scientific & Theoretical Glossary 
 ::::{grid} 1 2 3 3
 :gutter: 3
 
+:::{grid-item-card} The CE Workflow
+:link: ../foundations/concepts/ce_workflow
+:link-type: doc
+
+The whole picture in plain words, and a learning path from intuition to mathematics and code.
+:::
+
 :::{grid-item-card} Essential Foundations
 :link: ../foundations/index
 :link-type: doc

@@ -42,3 +42,38 @@ The learning-path descriptions now match the new content, and a new table maps t
 | Deep references | Semantics, How CE Calibrates, interpretation guide, glossary, citing |
 | Validation | Build, links, `tests/docs/test_what_is_ce.py` |
 | Limitations | "Distribution-matched" assumption wording under review (SR-01); comparisons are by design only (SR-05, SR-06 block claims about performance) |
+
+## CC-05 — `docs/foundations/concepts/ce_workflow.md` (new) — Stage 03
+
+| Field | Record |
+|---|---|
+| Purpose and audience | Level 1 overview of the whole workflow for all readers, plus a Level 1/2/3 learning path per concept |
+| Sources | Semantics page; ADD-1; walkthrough (executed); CE papers; source files on `upstream/main` |
+| Examples | Mermaid workflow; method-per-task table |
+| Deep references | ADD-1 sections 1–5; Vovk & Petej 2014; Vovk et al. 2019; `venn_abers.py`, `interval_regressor.py`, `explanation.py`, `discretizers.py`; calibration tests |
+| Limitations | Conceptual; the guarantees section points to semantics |
+
+## CC-06 — `docs/foundations/concepts/probabilistic_regression.md` — Stage 03
+
+| Field | Record |
+|---|---|
+| Original purpose | Routing between the two regression modes (46 lines) |
+| Problems | No event forms, no reading guidance, no executed outputs, no mistakes |
+| New purpose | Level 2 guide to both regression questions |
+| Rewrite | Substantial; original routing table and calibration-split paragraph kept |
+| Sources | Docstrings and `interval_regressor.py` (verified); executed example |
+| Examples | 4 executed blocks (interval, threshold, interval event, threshold explanation) |
+| Validation | `test_concept_examples.py` (outputs must match) |
+| Limitations | Validity of the two-step construction under review (SR-15) |
+
+## CC-07 — `docs/foundations/concepts/alternatives.md` — Stage 03
+
+| Field | Record |
+|---|---|
+| Original purpose | List of alternative methods and filters (44 lines) |
+| Problems | Did not teach what an alternative is or how to read it |
+| New purpose | Level 2 explanation and reading guide |
+| Rewrite | Substantial; filter list and code kept |
+| Sources | `discretizers.py:229`; executed example; CE 2024 paper |
+| Validation | Executed example output equals the page |
+| Limitations | Filter definitions and conjunction reading under review (SR-09, SR-10, SR-14) |

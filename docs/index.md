@@ -76,6 +76,7 @@ The Explainability Gap <compare>
 :caption: "How CE Works: The Theory Behind It"
 
 Overview <sections/how-ce-works>
+The CE Workflow <foundations/concepts/ce_workflow>
 Essential Foundations <foundations/index>
 Calibration & Uncertainty <foundations/concepts/calibrated_interval_semantics>
 Statistical Methods Behind CE <foundations/concepts/calibration_methods>

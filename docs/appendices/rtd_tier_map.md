@@ -26,6 +26,7 @@ This page maps the public RTD pages to STD-004 tiers.
 | `foundations/concepts/alternatives.md` | Tier 3 |
 | `foundations/concepts/architecture.md` | Tier 3 |
 | `foundations/concepts/calibrated_interval_semantics.md` | Tier 3 |
+| `foundations/concepts/ce_workflow.md` | Tier 3 |
 | `foundations/concepts/error_handling.md` | Tier 3 |
 | `foundations/concepts/explanation_structures.md` | Tier 3 |
 | `foundations/concepts/guarded_explanations.md` | Tier 3 |

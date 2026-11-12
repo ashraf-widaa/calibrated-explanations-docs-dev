@@ -13,6 +13,7 @@ Short definitions of the terms used in these guides are in the {doc}`Scientific 
 
 | Concept | Why it matters |
 | --- | --- |
+| [The CE workflow](ce_workflow.md) | The whole picture in plain words, with a Level 1 to Level 3 learning path per concept. |
 | [Interpret explanations](../how-to/interpret_explanations.md) | Reuses notebook screenshots and walks through dual uncertainty plus the triangular plot. |
 | [Probabilistic & interval regression](probabilistic_regression.md) | Shows how calibrated probabilities and interval regression stay in lockstep across quickstarts and notebooks. |
 | [Alternatives & triangular plots](alternatives.md) | Explains how the triangular view pairs with rule tables for calibrated alternatives. |
