@@ -220,6 +220,9 @@ if (
         '<a href="https://calibrated-explanations.readthedocs.io/">'
         "https://calibrated-explanations.readthedocs.io/</a>."
     )
+    # Lets pages show Beta-only content (for example the homepage footer marker)
+    # through the ``only`` directive; official builds never set this tag.
+    tags.add("ce_beta")  # noqa: F821 - ``tags`` is injected by Sphinx
 
 # Homepage styles
 html_static_path = ["_static"]

@@ -331,11 +331,11 @@ body:has(#calibrated-explanations-ce) .announcement-content a:hover {
   margin: 4px 0 22px 58px;
 }
 
-/* Five section cards. */
+/* Four section cards: 1, 2 or 4 columns, never an unbalanced row. */
 #documentation .ce-sections {
   display: grid;
   gap: 18px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ce-section-card {
@@ -673,7 +673,7 @@ body:has(#calibrated-explanations-ce) .announcement-content a:focus-visible {
 
 @media (min-width: 77.5em) {
   #documentation .ce-sections {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -838,11 +838,11 @@ body:has(#calibrated-explanations-ce) .announcement-content {
 }
 
 @container (min-width: 760px) {
-  #documentation .ce-sections { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #documentation .ce-sections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @container (min-width: 1100px) {
-  #documentation .ce-sections { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  #documentation .ce-sections { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 .ce-section-card {
@@ -960,5 +960,137 @@ body:has(#calibrated-explanations-ce) .announcement-content {
     right: -20px;
     top: -95px;
     width: min(46%, 560px);
+  }
+}
+
+/* L07 Phase 1: sections below the four cards.
+   Hierarchy: Documentation (primary) > Project & Resources (secondary)
+   > Commercial Services (separate, tertiary) > page metadata. */
+
+#calibrated-explanations-ce .ce-hero-hint p {
+  color: var(--ce-muted);
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+#project-resources,
+#commercial-services {
+  margin-top: 40px;
+}
+
+#project-resources > h2,
+#commercial-services > h2 {
+  align-items: center;
+  color: var(--ce-text);
+  display: flex;
+  font-size: 1.25rem;
+  gap: 10px;
+  margin: 0;
+  padding-left: 0;
+}
+
+#project-resources > h2::before,
+#commercial-services > h2::before {
+  background: var(--ce-accent);
+  content: "";
+  flex: none;
+  height: 24px;
+  -webkit-mask: var(--ce-h2-icon) center / contain no-repeat;
+  mask: var(--ce-h2-icon) center / contain no-repeat;
+  width: 24px;
+}
+
+#project-resources > h2 {
+  --ce-h2-icon: var(--ce-i-leaf);
+}
+
+#commercial-services > h2 {
+  --ce-h2-icon: var(--ce-i-mail);
+  color: var(--ce-muted);
+  font-size: 1.05rem;
+}
+
+#commercial-services > h2::before {
+  background: var(--ce-subtle);
+  height: 20px;
+  width: 20px;
+}
+
+#project-resources > p {
+  color: var(--ce-muted);
+  font-size: 15px;
+  margin: 2px 0 14px 34px;
+}
+
+/* Project & Resources: four compact links; 1, 2 or 4 columns. */
+#project-resources .ce-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 14px;
+}
+
+@media (min-width: 52em) {
+  #project-resources .ce-foot {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 18px;
+  }
+
+  #project-resources .ce-foot-item:nth-child(odd) {
+    border-left: 0;
+    padding-left: 4px;
+  }
+}
+
+@media (min-width: 77.5em) {
+  #project-resources .ce-foot {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #project-resources .ce-foot-item:nth-child(3) {
+    border-left: 1px solid var(--ce-border);
+    padding-left: 18px;
+  }
+}
+
+/* The external-link arrow marks external destinations only. */
+body:has(#calibrated-explanations-ce) .ce-foot-item:not([href^="http"]) .ce-foot-sub::after {
+  content: none;
+}
+
+/* Commercial Services: one bordered entry, visually separate and quiet. */
+#commercial-services .ce-commercial {
+  border: 1px solid var(--ce-border);
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin-top: 12px;
+  max-width: 640px;
+  padding: 12px 16px;
+}
+
+#commercial-services .ce-commercial .ce-foot-item {
+  border: 0;
+  padding: 0;
+}
+
+/* Page metadata: Beta marker and STD-004 tier label. */
+body:has(#calibrated-explanations-ce) .ce-meta {
+  border-top: 1px solid var(--ce-border);
+  color: var(--ce-subtle);
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin-top: 40px;
+  padding-top: 12px;
+}
+
+body:has(#calibrated-explanations-ce) .ce-meta p {
+  margin: 0 0 2px;
+}
+
+/* L07: single-column resource list keeps every entry aligned (the earlier
+   first-child and compact padding rules otherwise disagree below 52em). */
+@media (max-width: 52em) {
+  #project-resources .ce-foot-item {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

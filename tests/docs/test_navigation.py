@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from tests.helpers.doc_utils import resolve_doc
@@ -42,11 +43,18 @@ def test_safe_defaults_doc_exists() -> None:
 
 
 def test_upgrade_index_in_toctree() -> None:
-    # upgrade/index must be in the THIRD toctree group ("Extensions and project docs"),
-    # not in "Start here". test_top_level_toctree_targets_exist checks only "Start here"
-    # and must NOT be modified.
-    text = (DOCS / "index.md").read_text(encoding="utf-8")
-    assert "upgrade/index" in text
+    # The upgrade and migration guides must stay discoverable from the sidebar:
+    # the homepage toctree lists the "Maintenance & Support" hub, whose own toctree
+    # lists both guides. (The L07 homepage no longer repeats them in its body text.)
+    # test_top_level_toctree_targets_exist checks only "Start here" and must NOT be
+    # modified.
+    index = (DOCS / "index.md").read_text(encoding="utf-8")
+    hub = (DOCS / "sections" / "maintenance-support.md").read_text(encoding="utf-8")
+    index_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", index, re.DOTALL))
+    hub_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", hub, re.DOTALL))
+    assert "sections/maintenance-support" in index_toctrees
+    assert "../upgrade/index>" in hub_toctrees
+    assert "../migration/index>" in hub_toctrees
 
 
 def test_reject_policy_doc_contract_sections_exist() -> None:
