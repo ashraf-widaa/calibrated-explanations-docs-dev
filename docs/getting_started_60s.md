@@ -1,38 +1,17 @@
-# 60-second decision tree
+---
+orphan: true
+---
 
-Use this page to pick the correct first quickstart.
+# 60-second decision tree (moved)
 
-## 1. Model compatibility
-
-Need a scikit-learn compatible estimator with `fit` and `predict`;
-classifiers also need `predict_proba`.
-
-## 2. Calibration split
-
-Need a held-out calibration split: `x_cal, y_cal`.
-
-## 3. Choose mode
-
-- Classification: {doc}`get-started/quickstart_classification`
-- Percentile or interval regression: {doc}`get-started/quickstart_regression`
-- Probabilistic or thresholded regression: {doc}`get-started/quickstart_regression`
-- Guarded explanations: {doc}`get-started/quickstart_guarded`
-
-New to CE? The {doc}`practical walkthrough <get-started/quickstart_walkthrough>`
-works through one binary-classification example step by step, with outputs explained.
-
-Semantics are mode-specific. Use
-{doc}`foundations/concepts/calibrated_interval_semantics`.
-
-## 4. Minimal flow
-
-```python
-from calibrated_explanations import WrapCalibratedExplainer
-
-explainer = WrapCalibratedExplainer(model)
-explainer.fit(x_proper, y_proper)
-explainer.calibrate(x_cal, y_cal, feature_names=feature_names)
-explanations = explainer.explain_factual(X_query)
+```{raw} html
+<meta http-equiv="refresh" content="0; url=get-started/ce-tasks-and-modes.html#choosing-your-workflow">
 ```
+
+This page has moved. Its checks (model compatibility, calibration split) and
+its choice of quickstart are now part of
+{doc}`get-started/ce-tasks-and-modes`, in the section
+[Choosing your workflow](get-started/ce-tasks-and-modes.md#choosing-your-workflow).
+New to CE? Start at the {doc}`Quick Start <get-started/index>`.
 
 Entry-point tier: Tier 1.

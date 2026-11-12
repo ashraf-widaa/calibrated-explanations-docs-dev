@@ -316,7 +316,7 @@ treat `uv.lock` as an authoritative dependency lockfile.
 
 - [Interactive web demo - no installation required](https://calibrated-explanations-demo.ju.se/)
 - [Full documentation](https://calibrated-explanations.readthedocs.io)
-- [Getting started in 60 seconds](docs/getting_started_60s.md)
+- [Quick Start: understand, explore and apply CE](docs/get-started/index.md)
 - [Release notes](https://github.com/Moffran/calibrated_explanations/blob/main/CHANGELOG.md)
 - [Report an issue](https://github.com/Moffran/calibrated_explanations/issues)
 - [Source repository](https://github.com/Moffran/calibrated_explanations)

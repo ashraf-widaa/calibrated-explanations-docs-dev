@@ -1,14 +1,27 @@
-# CE tasks and outputs
+# Tasks, modes and capabilities
 
-Read this page before running CE code. It answers four questions:
+**Path C, step 1.** Start here if you have a model or a prediction problem
+and want to know whether and how CE applies. The page answers:
 
 1. Which prediction tasks does CE support?
-2. What does each kind of output mean?
-3. Which workflow should you follow?
+2. What does each kind of output mean, and which method produces it?
+3. Which workflow and quickstart should you follow?
 4. Which capabilities work for which task? (a reference table at the end)
 
 If terms such as *classification* or *calibration set* are new, start with
-{doc}`ml-foundations`.
+Path A: {doc}`ml-foundations` and {doc}`why-ce`.
+
+## Four terms that are easy to mix up
+
+| Term | Means | Examples | How you choose it |
+|---|---|---|---|
+| **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
+| **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
+| **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
+| **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
+
+Guarded explanations, for example, are an explanation configuration available
+in every mode; they are not a third kind of prediction task.
 
 ## Supported tasks
 
@@ -74,7 +87,7 @@ before and after a change in practice may not.
   errors on the calibration set into intervals (CE uses conformal predictive
   systems). Under exchangeability, intervals contain the true value at the
   requested rate *on average over cases* (marginal coverage), not for every
-  individual case.
+  individual case. *Wording under review by the CE authors.*
 - **Probabilistic regression** combines both: a conformal predictive
   distribution gives the event probability, and Venn–Abers calibrates it.
 
@@ -98,7 +111,33 @@ the world, and acting on an alternative does not guarantee a different real
 outcome. The canonical statement of guarantees and non-guarantees for each
 mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+## At a glance
+
+| Mode | Calibration method | Model needs | Prediction output | Explanations | Key limitation | Quickstart |
+|---|---|---|---|---|---|---|
+| Classification (binary, multiclass) | Venn-Abers | `predict` and `predict_proba` | Calibrated class probability with lower and upper value | Factual, alternative; guarded optional | Multiclass bounds are rescaled by default (limitation 1) | {doc}`quickstart_classification` |
+| Interval regression | Conformal predictive system | `predict` | Prediction with an interval for requested percentiles | Factual, alternative; guarded optional | Coverage is on average over cases, not per case | {doc}`quickstart_regression` |
+| Probabilistic regression | CPS, then Venn-Abers | `predict` | Calibrated probability of `y ≤ t` (or `low < y ≤ high`) with lower and upper value | Factual, alternative; guarded optional | The calibration set is split in two (limitation 3) | {doc}`quickstart_regression` |
+
+All modes need a labelled calibration set the model was not trained on, and
+rely on the exchangeability assumption described above.
+
 ## Choosing your workflow
+
+Check three things first:
+
+1. **Is it a supported task?** CE explains supervised models that predict a
+   class or a number for one case at a time, from a fixed set of features.
+   It is not designed for generative models, unsupervised learning or
+   reinforcement learning.
+2. **Is the model compatible?** A scikit-learn-style model with `predict`;
+   classifiers must also provide `predict_proba` (without it, calibration
+   fails with a `ConfigurationError`). The model may already be trained: CE
+   detects a fitted model, and you can calibrate it directly.
+3. **Do you have calibration data?** Labelled cases with the same features,
+   held out from training.
+
+Then pick the mode:
 
 ```{mermaid}
 flowchart TD
@@ -125,10 +164,13 @@ Every workflow follows the same steps:
    collected and how the model will be used. It cannot be proved from the
    data alone.
 
-**Next:** the {doc}`practical walkthrough <quickstart_walkthrough>` runs
-this workflow step by step for **binary classification**. It starts there
-because a single probability for one of two classes is the easiest output to
-read and check, and every later mode reuses the same steps.
+**Next:** follow the quickstart for your mode,
+{doc}`classification <quickstart_classification>` or
+{doc}`regression <quickstart_regression>`; add
+{doc}`guarded explanations <quickstart_guarded>` if you need to filter out
+unusual substituted values. Then {doc}`apply-to-your-data` walks through
+your own data. For a slower, fully explained example, see Path B, the
+{doc}`guided walkthrough <quickstart_walkthrough>`.
 
 ## Capability reference
 

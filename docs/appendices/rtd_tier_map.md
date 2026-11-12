@@ -57,6 +57,7 @@ This page maps the public RTD pages to STD-004 tiers.
 | `foundations/reference/index.md` | Tier 3 |
 | `get-started/ce_first_agent_guide.md` | Tier 3 |
 | `get-started/copilot-setup.md` | Tier 3 |
+| `get-started/apply-to-your-data.md` | Tier 3 |
 | `get-started/ce-tasks-and-modes.md` | Tier 1 |
 | `get-started/index.md` | Tier 1 |
 | `get-started/installation.md` | Tier 3 |
@@ -67,7 +68,8 @@ This page maps the public RTD pages to STD-004 tiers.
 | `get-started/quickstart_regression.md` | Tier 2 |
 | `get-started/quickstart_walkthrough.md` | Tier 1 |
 | `get-started/troubleshooting.md` | Tier 3 |
-| `getting_started_60s.md` | Tier 1 |
+| `get-started/why-ce.md` | Tier 3 |
+| `getting_started_60s.md` (redirect stub) | Tier 1 |
 | `glossary/index.md` | Tier 3 |
 | `glossary/science.md` | Tier 3 |
 | `glossary/software.md` | Tier 3 |

@@ -1,8 +1,8 @@
-# Machine learning basics
+# Machine learning essentials
 
 This page gives you just enough machine learning to follow the rest of the
-Quick Start. If you already train and evaluate scikit-learn models, skip to
-{doc}`ce-tasks-and-modes`.
+Quick Start (Path A, step 1). If you already train and evaluate scikit-learn
+models, skip to {doc}`why-ce`.
 
 Each section answers what a concept is, why it matters for calibrated
 explanations, and how it shows up in practice. The running example is the
@@ -221,6 +221,6 @@ Löfström, Löfström, Johansson and Sönströd (2024),
   model predictions. *Advances in Neural Information Processing Systems 30*.
   [arXiv:1705.07874](https://arxiv.org/abs/1705.07874).
 
-**Next:** {doc}`ce-tasks-and-modes`
+**Next:** {doc}`why-ce` (Path A, step 2).
 
 Entry-point tier: Tier 1.
