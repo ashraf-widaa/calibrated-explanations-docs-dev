@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # CE Software & Integration
 
 Understand how the CE library is built, installed, integrated, extended and

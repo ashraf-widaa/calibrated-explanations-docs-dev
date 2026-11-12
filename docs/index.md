@@ -64,6 +64,7 @@ Quick Start <get-started/index>
 :maxdepth: 1
 :caption: "CE: What & Why"
 
+Overview <sections/what-and-why>
 Trustworthy AI <practitioner/playbooks/eu-ai-act-compliance>
 The Explainability Gap <compare>
 ```
@@ -73,6 +74,7 @@ The Explainability Gap <compare>
 :maxdepth: 1
 :caption: "How CE Works: The Theory Behind It"
 
+Overview <sections/how-ce-works>
 Essential Foundations <foundations/index>
 Calibration & Uncertainty <foundations/concepts/calibrated_interval_semantics>
 Statistical Methods Behind CE <foundations/concepts/calibration_methods>
@@ -84,6 +86,7 @@ How to Read CE Explanations <foundations/how-to/interpret_explanations>
 :maxdepth: 1
 :caption: "CE in Practice: Explore & Apply"
 
+Overview <sections/in-practice>
 tasks/index
 practitioner/index
 foundations/how-to/index
@@ -94,6 +97,7 @@ foundations/how-to/index
 :maxdepth: 1
 :caption: "CE Software & Integration"
 
+Overview <sections/software-integration>
 sections/software-foundations
 sections/development-integration
 sections/maintenance-support
@@ -113,6 +117,7 @@ Parameter Reference <foundations/concepts/parameter-reference>
 :maxdepth: 1
 :caption: "CE Project, Vision & Evolution"
 
+Overview <sections/project-evolution>
 Research & Publications <researcher/index>
 citing
 Development & Roadmap <ROADMAP>

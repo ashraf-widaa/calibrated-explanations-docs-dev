@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # CE Project, Vision & Evolution
 
 Learn about CE's purpose, research, development, community and ecosystem.

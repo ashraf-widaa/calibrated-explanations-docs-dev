@@ -69,3 +69,15 @@ def test_project_landing_routes_to_readme_and_feedback() -> None:
     assert ":link: https://github.com/Moffran/calibrated_explanations#readme" in text
     assert ":link: https://github.com/Moffran/calibrated_explanations/issues" in text
     assert "https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues" in text
+
+
+LANDING = ["what-and-why", "how-ce-works", "in-practice", "software-integration", "project-evolution"]
+
+
+@pytest.mark.parametrize("name", LANDING)
+def test_landing_pages_are_sidebar_overviews_not_orphans(name: str) -> None:
+    """Run stage 11: each homepage card's landing page is the first entry of its sidebar group."""
+    index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
+    assert re.search(rf':caption: "[^"]+"\n\nOverview <sections/{name}>\n', index), name
+    page = (SECTIONS / f"{name}.md").read_text(encoding="utf-8")
+    assert not page.startswith("---\norphan: true")

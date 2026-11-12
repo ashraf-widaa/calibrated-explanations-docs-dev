@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # CE: What & Why
 
 Understand how AI models work, why trusting their outputs is challenging and

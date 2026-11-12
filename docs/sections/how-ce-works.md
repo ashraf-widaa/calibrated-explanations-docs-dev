@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # How CE Works: The Theory Behind It
 
 Explore the scientific foundations, statistical mechanisms and assumptions

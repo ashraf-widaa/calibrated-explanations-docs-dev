@@ -1,7 +1,3 @@
----
-orphan: true
----
-
 # CE in Practice: Explore & Apply
 
 Try CE interactively, follow task guides and playbooks, and apply CE to your
