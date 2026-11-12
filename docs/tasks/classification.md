@@ -102,4 +102,11 @@ multi_alternative = explainer.explore_alternatives(x_test, multi_labels_enabled=
   [](../foundations/how-to/conditional_calibration.md).
 * **`uq_interval`**: Set to `True` to receive uncertainty intervals (tuples of lower/upper bounds).
 
+## Go further
+
+- Executable demo: [demo_binary_classification.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_binary_classification.ipynb)
+- Executable demo: [demo_multiclass_glass.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_multiclass_glass.ipynb)
+- Full signatures: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
+- Check CE on your own data: {doc}`../practitioner/evaluate_ce`
+
 Entry-point tier: Tier 2.

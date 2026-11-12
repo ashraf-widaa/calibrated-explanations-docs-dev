@@ -80,4 +80,10 @@ explanation = explainer.explain_factual(
   - Tuple `(low, high)`: treated as an interval containment query.
 - **`uq_interval`**: Returns the uncertainty bound on the **probability estimate** itself (aleatoric + epistemic uncertainty on the score).
 
+## Go further
+
+- Executable demo: [demo_probabilistic_regression.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_probabilistic_regression.ipynb)
+- Full signatures: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
+- Check CE on your own data: {doc}`../practitioner/evaluate_ce`
+
 Entry-point tier: Tier 2.

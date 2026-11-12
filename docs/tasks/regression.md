@@ -77,4 +77,10 @@ explanation = explainer.explain_factual(
 * Separate calibration for each group (Mondrian `bins`):
   {doc}`../foundations/how-to/conditional_calibration`.
 
+## Go further
+
+- Executable demo: [demo_regression.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_regression.ipynb)
+- Full signatures: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
+- Check CE on your own data: {doc}`../practitioner/evaluate_ce`
+
 Entry-point tier: Tier 2.

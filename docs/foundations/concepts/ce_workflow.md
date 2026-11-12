@@ -7,7 +7,7 @@ source code. Start here if you want to understand CE rather than just use it.
 ## The workflow in one picture
 
 ```{mermaid}
-flowchart LR
+flowchart TD
     D["Labelled data"] --> T["Proper training set"]
     D --> C["Calibration set"]
     T --> F["fit: train the model"]

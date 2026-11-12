@@ -670,6 +670,7 @@ not with single rules. *How to read them is under review by the CE authors.*
 | Use guarded explanations | [Guarded explanations quickstart](quickstart_guarded.md) |
 | Look up method signatures | [Quick API](quick_api.md) |
 | See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
+| See the whole workflow and a learning path | [The CE workflow](../foundations/concepts/ce_workflow.md) |
 | Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
 | Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |

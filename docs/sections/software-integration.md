@@ -116,6 +116,13 @@ Common installation and runtime problems.
 
 Checklists for upgrading between CE versions.
 :::
+
+:::{grid-item-card} Source Code and Tests
+:link: https://github.com/Moffran/calibrated_explanations/tree/main
+:link-type: url
+
+The library source (`src/calibrated_explanations`) and its test suite (`tests/`) on GitHub.
+:::
 ::::
 
 Entry-point tier: Tier 3.
