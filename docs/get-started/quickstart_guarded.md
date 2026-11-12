@@ -1,12 +1,22 @@
 # Guarded explanations quickstart
 
-Run in-distribution guarded explanations for classification.
+**Path C, step 4.** Guarded explanations are an **explanation
+configuration**, not a separate prediction task: you add
+`guarded_options=GuardedOptions()` to an explanation call in any mode
+(classification, interval or probabilistic regression). CE then drops
+candidate rules whose substituted feature values look unusual compared with
+the calibration data, so explanations stay closer to the data the model was
+calibrated on. Predictions and their ranges are unchanged. The example below
+uses binary classification.
 
 ## Prerequisites
 
 ```bash
 pip install calibrated-explanations scikit-learn
 ```
+
+You need a calibrated explainer, as in {doc}`quickstart_classification` or
+{doc}`quickstart_regression`.
 
 ## Classification guarded semantics note
 
@@ -70,19 +80,68 @@ explainer.calibrate(x_cal, y_cal, feature_names=dataset.feature_names)
 from calibrated_explanations.explanations.guarded_options import GuardedOptions
 guarded_factual = explainer.explain_factual(x_test[:5], guarded_options=GuardedOptions(confidence=0.9))
 guarded_alts = explainer.explore_alternatives(x_test[:2], guarded_options=GuardedOptions(confidence=0.9))
+for i in range(5):
+    print(f"case {i}: {len(guarded_factual[i].get_rules()['rule'])} guarded rules")
 ```
+
+```text
+case 0: 25 guarded rules
+case 1: 0 guarded rules
+case 2: 28 guarded rules
+case 3: 24 guarded rules
+case 4: 24 guarded rules
+```
+
+`confidence=0.9` is the default; higher values are more inclusive and remove
+fewer candidates. Case 1 has no rules: the guard removed every candidate
+interval, and CE says so in a `UserWarning` ("All interval candidates were
+removed by the guard ..."). That is a signal to look at the case, not an
+error. Guarded and standard explanations are not computed identically, so
+do not compare their rule counts or weights one to one.
 
 ## 4. Audit guarded filtering
 
 ```python
 audit = guarded_factual.get_guarded_audit()
+for key, value in audit["summary"].items():
+    print(f"{key}: {value}")
 ```
+
+```text
+n_instances: 5
+intervals_tested: 945
+intervals_conforming: 743
+intervals_removed_guard: 202
+intervals_emitted: 101
+instances_with_any_removed_guard: 5
+instances_all_intervals_removed_guard: 1
+instances_with_zero_emitted: 1
+```
+
+Across the five cases, the guard tested 945 candidate intervals, accepted
+743 and removed 202; 101 rules were emitted in the explanations. Every case
+lost at least one candidate, and for one case (case 1) all were removed.
+`audit["instances"]` gives the same figures per case, down to each tested
+interval.
 
 Key audit fields:
 - `intervals_conforming`: candidate intervals accepted by the shipped guard rule.
 - `intervals_removed_guard`: candidate intervals rejected by the shipped guard rule.
 
+## Common mistakes
+
+- Treating guarded explanations as a different task or a different model:
+  only the explanation call changes.
+- Reading a guarded explanation as a certificate that every value in a rule's
+  interval is typical; the guard checks representative values, not the whole
+  interval.
+- Expecting the guard to detect that the case itself is unusual; it checks
+  the substituted values (see the limitations in
+  {doc}`../foundations/concepts/guarded_explanations`).
+- Using a fast explainer, which guarded mode does not support.
+
 Next steps:
+- {doc}`apply-to-your-data`, to use your own data and model.
 - {doc}`../foundations/concepts/guarded_explanations`
 - {doc}`../foundations/concepts/alternatives`
 - {doc}`../foundations/how-to/interpret_explanations`
