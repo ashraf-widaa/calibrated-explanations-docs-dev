@@ -6,15 +6,13 @@ source code. Start here if you want to understand CE rather than just use it.
 
 ## The workflow in one picture
 
-```{mermaid}
-flowchart TD
-    D["Labelled data"] --> T["Proper training set"]
-    D --> C["Calibration set"]
-    T --> F["fit: train the model"]
-    F --> K["calibrate: learn how the model's<br/>outputs relate to real outcomes"]
-    C --> K
-    K --> P["predict: calibrated prediction<br/>with a range"]
-    K --> E["explain: factual and alternative<br/>explanations with ranges"]
+```{figure} ../../_static/figures/ce-in-ml-workflow.svg
+:alt: Labelled data is split into training, calibration and test sets. The model is trained (or an existing one is used). CE takes the trained model and the calibration set, calibrates with Venn-Abers (classification) or conformal predictive systems (regression), explains with factual and alternative explanations, and produces calibrated predictions with a lower and upper value and explanations with ranges, which are interpreted and evaluated on the test set.
+:width: 560px
+:align: center
+:target: ../../_static/figures/ce-in-ml-workflow.svg
+
+Where CE fits in a machine-learning workflow: grey steps are conventional; purple parts are added by CE.
 ```
 
 1. **Split the data.** The model trains on one part (the *proper training
