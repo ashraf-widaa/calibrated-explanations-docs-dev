@@ -24,6 +24,7 @@ For regression, the `prediction_interval` is a **conformal interval** produced b
   factual explanation and a prediction + condition pair inside each alternative
   explanation. Metadata retains the complementary quantities for ranking and
   provenance.
+- More terms: {doc}`Glossary <../../glossary/index>`.
 ```
 
 ## 1. Start with the explanation collections

@@ -4,7 +4,7 @@ Canonical definitions for the five user-facing parameters where naming confusion
 is most likely. Read this page before filing a bug about unexpected behaviour
 involving thresholds, confidence values, or significance levels.
 
-Cross-references: [terminology.md](terminology.md),
+Cross-references: [Glossary](../../glossary/software.md), [terminology.md](terminology.md),
 [probabilistic_regression.md](probabilistic_regression.md),
 [ADR-038: Call-time Configuration Taxonomy](https://github.com/Moffran/calibrated_explanations/blob/main/development/adrs/ADR-038-call-time-configuration-taxonomy.md).
 

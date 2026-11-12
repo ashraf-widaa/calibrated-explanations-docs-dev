@@ -9,6 +9,8 @@ For proofs, benchmarks, and citations that underpin these concepts,
 visit the {doc}`../../researcher/index` hub before diving into individual
 guides.
 
+Short definitions of the terms used in these guides are in the {doc}`Scientific & Theoretical Glossary <../../glossary/science>`.
+
 | Concept | Why it matters |
 | --- | --- |
 | [Interpret explanations](../how-to/interpret_explanations.md) | Reuses notebook screenshots and walks through dual uncertainty plus the triangular plot. |

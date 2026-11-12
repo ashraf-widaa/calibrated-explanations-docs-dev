@@ -69,6 +69,7 @@ Semantics are mode-specific. The canonical reference is
 
 - {doc}`installation`
 - {doc}`troubleshooting`
+- {doc}`Glossary <../glossary/index>`: short definitions of CE terms.
 
 ```{toctree}
 :maxdepth: 1

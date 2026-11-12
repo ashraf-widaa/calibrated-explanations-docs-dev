@@ -133,6 +133,7 @@ def test_probabilistic_regression():
 ## Further Reading
 
 - [Concept Guide: Probabilistic Regression](probabilistic_regression.md)
+- [Glossary](../../glossary/index.md) – current short definitions of CE terms
 - [ADR-021: Calibrated Interval Semantics (GitHub)](https://github.com/Moffran/calibrated_explanations/blob/main/development/adrs/ADR-021-calibrated-interval-semantics.md)
 
 ---

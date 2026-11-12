@@ -10,6 +10,8 @@ behind calibrated explanations.
 For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+For short definitions of terms, see the {doc}`Scientific & Theoretical Glossary <../glossary/science>`.
+
 ::::{grid} 1 2 3 3
 :gutter: 3
 

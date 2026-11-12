@@ -21,7 +21,7 @@ AlternativeExplanations
   The collection returned by {term}`explore_alternatives`, holding one
   {term}`AlternativeExplanation` per explained instance.
 
-  **API:** {doc}`../foundations/reference/api`
+  **API:** {doc}`AlternativeExplanations <../_autosummary/calibrated_explanations.explanations.AlternativeExplanations>`
 
 CalibratedExplainer
   The core CE class. It takes an already fitted model and calibration data,
@@ -87,33 +87,33 @@ add_conjunctions
   Arguments such as `n_top_features` and `max_rule_size` limit which features
   are combined and how many.
 
-  **API:** {doc}`../api/calibrated_explainer` (section FactualExplanation)
+  **API:** {doc}`FactualExplanation <../_autosummary/calibrated_explanations.explanations.FactualExplanation>`
 
 calibrate
   The `WrapCalibratedExplainer` method that calibrates CE on held-out
   calibration data. Call it after `fit` and before any prediction or
   explanation. See {term}`Calibration set`.
 
-  **Learn more:** {doc}`../foundations/how-to/integrate_with_pipelines`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 explain_factual
   Returns {term}`factual explanations <Factual explanation>` for the given
   instances as a {term}`CalibratedExplanations` collection.
 
-  **API:** {doc}`../api/calibrated_explainer`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 explore_alternatives
   Returns {term}`alternative explanations <Alternative explanation>` for the
   given instances as an {term}`AlternativeExplanations` collection.
 
-  **API:** {doc}`../api/calibrated_explainer`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 fit
   The `WrapCalibratedExplainer` method that trains the wrapped model on the
   {term}`proper training set <Proper training set>`. Call it before
   {term}`calibrate`.
 
-  **Learn more:** {doc}`../foundations/how-to/integrate_with_pipelines`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 plot
   The `.plot()` method of an explanation or collection. It draws the rules,
@@ -127,14 +127,14 @@ predict
   values for regression. With {term}`uq_interval` set to `True` it also returns
   the {term}`uncertainty interval <Uncertainty interval>`.
 
-  **API:** {doc}`../api/calibrated_explainer`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 predict_proba
   Returns calibrated probabilities: class probabilities for classification,
   or event probabilities for regression when a {term}`threshold` is passed.
   With {term}`uq_interval` set to `True` it also returns their intervals.
 
-  **API:** {doc}`../api/calibrated_explainer`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 
 to_json
   Exports an explanation collection as a payload aligned with
@@ -164,7 +164,7 @@ bins
 categorical_features
   The indices of the features CE should treat as categorical.
 
-  **API:** {doc}`../api/calibrated_explainer` (section CalibratedExplainer)
+  **API:** {doc}`CalibratedExplainer <../_autosummary/calibrated_explanations.core.CalibratedExplainer>`
 
 confidence
   Removed reject parameter; use `reject_confidence`.
@@ -186,7 +186,7 @@ feature_names
   Human-readable feature names used in rules and plots. They can be passed to
   `calibrate`.
 
-  **API:** {doc}`../api/calibrated_explainer` (section CalibratedExplainer)
+  **API:** {doc}`CalibratedExplainer <../_autosummary/calibrated_explanations.core.CalibratedExplainer>`
 
 low_high_percentiles
   Regression parameter that sets the percentile interval width.
@@ -204,7 +204,7 @@ mode
   The `CalibratedExplainer` setting, `"classification"` or `"regression"`,
   that selects which calibrators and plugins are used.
 
-  **API:** {doc}`../api/calibrated_explainer` (section CalibratedExplainer)
+  **API:** {doc}`CalibratedExplainer <../_autosummary/calibrated_explanations.core.CalibratedExplainer>`
 
 reject_confidence
   Reject-policy coverage target for accepting a prediction.
@@ -225,7 +225,7 @@ uq_interval
   Flag that makes {term}`predict` and {term}`predict_proba` also return the
   uncertainty interval.
 
-  **API:** {doc}`../api/calibrated_explainer`
+  **API:** {doc}`WrapCalibratedExplainer <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 ```
 
 ## Explanation outputs and post-processing

@@ -139,6 +139,7 @@ Control: keep this mapping in Tier 3 reference pages and keep Tier 1 and Tier 2 
 ## Section 6: Related references
 
 - {doc}`calibrated_interval_semantics`
+- {term}`Probabilistic regression` (glossary entry)
 - `development/adrs/ADR-021-calibrated-interval-semantics.md`
 - `development/adrs/ADR-013-interval-calibrator-plugin-strategy.md`
 - {doc}`probabilistic_regression`

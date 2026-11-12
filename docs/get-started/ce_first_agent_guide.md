@@ -378,7 +378,7 @@ class MyPlotPlugin:
 The ReadTheDocs suite is comprehensive but may not yet be agent-optimized. Recommended additions:
 - A CE-first “agent” checklist page.
 - Agent-specific examples in quickstarts using the direct public CE API.
-- A glossary of CE terms mapped to the public `WrapCalibratedExplainer` API.
+- A glossary of CE terms mapped to the public API: see {doc}`../glossary/software`.
 
 ---
 

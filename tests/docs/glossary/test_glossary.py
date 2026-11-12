@@ -78,6 +78,8 @@ SOFTWARE_TARGET_PREFIXES = (
     "foundations/concepts/guarded_explanations",
     "practitioner/advanced/normalization-guide",
     "practitioner/advanced/reject-policy",
+    # Run stage 04 (R2): generated API pages that render the actual signatures.
+    "_autosummary/",
 )
 
 
@@ -172,7 +174,9 @@ def test_entry_has_one_allowed_onward_link(entry: Entry) -> None:
     links = [m for m in map(LINK_LINE.match, entry.body) if m]
     assert len(links) == 1, f"{entry.headword}: expected one onward link, got {len(links)}"
     target = _resolve(links[0].group(2))
-    assert (DOCS / f"{target}.md").is_file(), f"{entry.headword}: missing page {target}"
+    assert any((DOCS / f"{target}{ext}").is_file() for ext in (".md", ".rst")), (
+        f"{entry.headword}: missing page {target}"
+    )
     if entry.category == "S":
         assert target in SCIENCE_TARGETS, f"{entry.headword}: {target} not a theory page"
     else:
@@ -274,3 +278,48 @@ def test_terminology_change_note_moved_to_migration() -> None:
 @pytest.mark.parametrize("page", [HUB, *CATEGORY_PAGES.values()], ids=lambda p: p.name)
 def test_glossary_pages_carry_tier_footer(page: Path) -> None:
     assert page.read_text(encoding="utf-8").rstrip().endswith("Entry-point tier: Tier 3.")
+
+
+# G-P3 (run stage 04): contextual cross-links into the glossary, one per landing page.
+CROSSLINK_PAGES = [
+    "foundations/concepts/index.md",
+    "sections/how-ce-works.md",
+    "api/index.md",
+    "sections/software-integration.md",
+    "sections/development-integration.md",
+    "foundations/concepts/parameter-reference.md",
+    "foundations/how-to/interpret_explanations.md",
+    "get-started/index.md",
+    "foundations/concepts/terminology.md",
+    "foundations/concepts/terminology_thresholded_vs_probabilistic_regression.md",
+    "get-started/ce_first_agent_guide.md",
+]
+GLOSSARY_LINK = re.compile(r"glossary/(index|science|software)(\.md)?[>)`]|\{term\}`")
+
+
+@pytest.mark.parametrize("page", CROSSLINK_PAGES)
+def test_landing_pages_link_to_the_glossary_once(page: str) -> None:
+    text = (DOCS / page).read_text(encoding="utf-8")
+    assert len(GLOSSARY_LINK.findall(text)) == 1, page
+
+
+def test_canonical_semantics_page_has_no_glossary_link() -> None:
+    text = (DOCS / "foundations/concepts/calibrated_interval_semantics.md").read_text(
+        encoding="utf-8"
+    )
+    assert not GLOSSARY_LINK.search(text)
+
+
+def test_no_term_link_loops_back_to_its_own_page() -> None:
+    """A page must not link a glossary entry whose onward link targets that same page."""
+    owner = {}
+    for entry in all_entries():
+        link = next(m for m in map(LINK_LINE.match, entry.body) if m)
+        for name in entry.names:
+            owner[name.casefold()] = _resolve(link.group(2))
+    for path in DOCS.rglob("*.md"):
+        rel = path.relative_to(DOCS).with_suffix("").as_posix()
+        if rel.startswith(("glossary/", "_build")):
+            continue
+        for term in re.findall(r"\{term\}`(?:[^`<]*<)?([^`>]+)>?`", path.read_text(encoding="utf-8")):
+            assert owner.get(term.strip().casefold()) != rel, f"{rel} links {term!r} back to itself"

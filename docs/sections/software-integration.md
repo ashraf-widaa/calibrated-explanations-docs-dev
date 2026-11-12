@@ -10,6 +10,8 @@ maintained.
 For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+For short definitions of library terms, see the {doc}`Software & Technical Glossary <../glossary/software>`.
+
 ## Software Foundations
 
 ::::{grid} 1 2 3 3
