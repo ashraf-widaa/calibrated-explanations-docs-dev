@@ -7,7 +7,10 @@ Use this hub for replication and method-focused analysis.
 1. Follow {doc}`replication/index`.
 2. Use {doc}`../foundations/concepts/calibrated_interval_semantics` for formal
    semantics and non-guarantees.
-3. Use {doc}`advanced/theory_and_literature` for papers and benchmark context.
+3. Use {doc}`../foundations/concepts/calibration_methods` for how CE calibrates, with
+   derivations and references (some wording is under author review).
+4. Use {doc}`advanced/theory_and_literature` for papers and benchmark context.
+5. Cite CE with {doc}`../citing`.
 
 ## Open questions
 

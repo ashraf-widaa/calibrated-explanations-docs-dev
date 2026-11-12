@@ -16,17 +16,7 @@ SECTIONS = ROOT / "docs" / "sections"
 AUDIT_WORDING = ("unverified", "Interim", "need reconciliation", "not necessarily benchmarks")
 
 
-# Widened stage by stage in the autonomous run; stage 10 switches to every page.
-CLEANED = [
-    "how-ce-works.md",
-    "in-practice.md",
-    "software-integration.md",
-    "software-overview-versions.md",
-    "what-and-why.md",
-]
-
-
-@pytest.mark.parametrize("page", CLEANED)
+@pytest.mark.parametrize("page", sorted(p.name for p in SECTIONS.glob("*.md")))
 def test_landing_pages_have_no_audit_wording(page: str) -> None:
     text = (SECTIONS / page).read_text(encoding="utf-8")
     for phrase in AUDIT_WORDING:
@@ -71,3 +61,11 @@ def test_software_versions_page_states_release_and_python() -> None:
     assert "**Python:** 3.10 or later" in text
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert 'requires-python = ">=3.10"' in pyproject
+
+
+def test_project_landing_routes_to_readme_and_feedback() -> None:
+    text = (SECTIONS / "project-evolution.md").read_text(encoding="utf-8")
+    assert "No dedicated page yet" not in text
+    assert ":link: https://github.com/Moffran/calibrated_explanations#readme" in text
+    assert ":link: https://github.com/Moffran/calibrated_explanations/issues" in text
+    assert "https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues" in text
