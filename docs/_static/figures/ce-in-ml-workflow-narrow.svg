@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 730" role="img" aria-labelledby="ce-wfn-title ce-wfn-desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <title id="ce-wfn-title">A conventional machine-learning workflow and what Calibrated Explanations adds to it</title>
+  <desc id="ce-wfn-desc">In blue, the conventional workflow: labelled data is split into a training set and a test set, a model is trained (or an existing trained model is used), it predicts a label or a raw score, and the results are evaluated on the test set. In orange, what Calibrated Explanations adds: a calibration set held out from training, a Calibrate step using Venn-Abers predictors or conformal predictive systems, and an Explain step producing factual and alternative explanations. CE outputs a calibrated prediction with a lower and an upper value, and an explanation made of rules and weights, each with a range. Both are evaluated and interpreted on the test set.</desc>
+  <defs>
+    <marker id="wfn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c8796"/>
+    </marker>
+    <marker id="wfn-arrow-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <!-- labelled data -->
+  <rect x="152" y="6" width="150" height="46" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="227" y="35" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">Labelled data</text>
+
+  <!-- data sets -->
+  <rect x="8" y="88" width="138" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="77" y="114" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Training set</text>
+  <text x="77" y="136" text-anchor="middle" font-size="14" fill="#1e40af">fits the model</text>
+
+  <rect x="158" y="88" width="138" height="62" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="227" y="114" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">Calibration set</text>
+  <text x="227" y="136" text-anchor="middle" font-size="14" fill="#9a3412">not for training</text>
+
+  <rect x="308" y="88" width="138" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="377" y="114" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Test set</text>
+  <text x="377" y="136" text-anchor="middle" font-size="14" fill="#1e40af">final check</text>
+
+  <path d="M227,52 V68 H77 V86" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+  <path d="M227,52 V86" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+  <path d="M227,68 H377 V86" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+
+  <!-- conventional row -->
+  <rect x="8" y="184" width="204" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="110" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Train the model</text>
+  <text x="110" y="232" text-anchor="middle" font-size="14" fill="#1e40af">or use a trained one</text>
+
+  <rect x="236" y="184" width="210" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="341" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Predict</text>
+  <text x="341" y="232" text-anchor="middle" font-size="14" fill="#1e40af">a label or a raw score</text>
+
+  <path d="M77,150 V182" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+  <path d="M212,215 H234" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+
+  <!-- CE region -->
+  <rect x="8" y="270" width="438" height="292" rx="14" fill="#f97316" fill-opacity="0.07" stroke="#ea580c" stroke-width="2.5" stroke-dasharray="9 6"/>
+  <rect x="278" y="279" width="158" height="26" rx="13" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="357" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#7c2d12">Added by CE</text>
+
+  <rect x="20" y="318" width="200" height="94" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="120" y="344" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Calibrate</text>
+  <text x="120" y="367" text-anchor="middle" font-size="14" fill="#9a3412">Venn-Abers or</text>
+  <text x="120" y="388" text-anchor="middle" font-size="14" fill="#9a3412">conformal predictive</text>
+  <text x="120" y="406" text-anchor="middle" font-size="14" fill="#9a3412">systems</text>
+
+  <rect x="244" y="318" width="190" height="94" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="339" y="344" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Explain</text>
+  <text x="339" y="367" text-anchor="middle" font-size="14" fill="#9a3412">factual and</text>
+  <text x="339" y="388" text-anchor="middle" font-size="14" fill="#9a3412">alternative explanations</text>
+
+  <rect x="20" y="446" width="200" height="94" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="120" y="474" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Calibrated prediction</text>
+  <text x="120" y="497" text-anchor="middle" font-size="14" fill="#9a3412">with a lower and</text>
+  <text x="120" y="518" text-anchor="middle" font-size="14" fill="#9a3412">upper value</text>
+
+  <rect x="244" y="446" width="190" height="94" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="339" y="474" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Explanation</text>
+  <text x="339" y="497" text-anchor="middle" font-size="14" fill="#9a3412">rules and weights,</text>
+  <text x="339" y="518" text-anchor="middle" font-size="14" fill="#9a3412">each with a range</text>
+
+  <path d="M60,246 V316" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+  <path d="M227,150 V168 H224 V300 H170 V316" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+  <path d="M220,365 H242" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+  <path d="M120,412 V444" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+  <path d="M339,412 V444" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+
+  <!-- evaluate -->
+  <rect x="8" y="598" width="468" height="62" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="227" y="624" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Evaluate and interpret</text>
+  <text x="227" y="646" text-anchor="middle" font-size="14" fill="#1e40af">on the test set</text>
+  <path d="M120,540 V596" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+  <path d="M339,540 V596" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#wfn-arrow-o)"/>
+  <path d="M446,215 H458 V596" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+  <path d="M446,119 H470 V596" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#wfn-arrow)"/>
+
+  <!-- legend -->
+  <rect x="8" y="676" width="226" height="26" rx="13" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="121" y="694" text-anchor="middle" font-size="14" fill="#1e3a8a">blue: conventional ML step</text>
+  <rect x="244" y="676" width="170" height="26" rx="13" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="329" y="694" text-anchor="middle" font-size="14" fill="#7c2d12">orange: added by CE</text>
+</svg>

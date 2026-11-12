@@ -6,13 +6,16 @@ source code. Start here if you want to understand CE rather than just use it.
 
 ## The workflow in one picture
 
-```{figure} ../../_static/figures/ce-in-ml-workflow.svg
-:alt: Labelled data is split into training, calibration and test sets. The model is trained (or an existing one is used). CE takes the trained model and the calibration set, calibrates with Venn-Abers (classification) or conformal predictive systems (regression), explains with factual and alternative explanations, and produces calibrated predictions with a lower and upper value and explanations with ranges, which are interpreted and evaluated on the test set.
-:width: 560px
-:align: center
-:target: ../../_static/figures/ce-in-ml-workflow.svg
-
-Where CE fits in a machine-learning workflow: grey steps are conventional; purple parts are added by CE.
+```{raw} html
+<figure class="ce-figure">
+  <a href="../../_static/figures/ce-in-ml-workflow.svg" title="Open the figure at full size">
+    <picture>
+      <source media="(max-width: 600px)" srcset="../../_static/figures/ce-in-ml-workflow-narrow.svg">
+      <img src="../../_static/figures/ce-in-ml-workflow.svg" width="1000" height="540" alt="In blue, a conventional workflow: labelled data is split into training and test sets, a model is trained (or an existing one is used), it predicts a label or a raw score, and it is evaluated on the test set. In orange, what CE adds: a calibration set held out from training, a Calibrate step (Venn-Abers predictors or conformal predictive systems) and an Explain step (factual and alternative explanations). CE returns a calibrated prediction with a lower and upper value and an explanation whose rules and weights each have a range; both are evaluated and interpreted on the test set.">
+    </picture>
+  </a>
+  <figcaption>Where CE fits in a machine-learning workflow: conventional steps in blue, CE's additions in orange.</figcaption>
+</figure>
 ```
 
 1. **Split the data.** The model trains on one part (the *proper training

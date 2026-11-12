@@ -226,7 +226,7 @@ if (
 
 # Homepage styles
 html_static_path = ["_static"]
-html_css_files = ["ce-home.css"]
+html_css_files = ["ce-home.css", "ce-docs.css"]
 
 # HTML title
 html_title = f"{project} v{release}"

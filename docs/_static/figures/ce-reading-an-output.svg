@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 572" role="img" aria-labelledby="ce-ro-title ce-ro-desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <title id="ce-ro-title">How to read the three parts of a CE output, for case 2 of the walkthrough</title>
+  <desc id="ce-ro-desc">Panel 1, calibrated prediction: on a probability scale from 0 to 1, the calibrated probability of benign is 0.29, with a range from 0.17 to 0.33; all of it lies below 0.5, so the predicted label is malignant. Panel 2, factual rule worst concave points greater than 0.14: on a weight scale from minus 0.4 to plus 0.4, the weight is minus 0.19, with a range from minus 0.31 to minus 0.05; the whole range is below 0, so this condition lowers the probability of benign. Panel 3, alternative worst concave points below 0.14: the calibrated probability of benign would be 0.48, with a range from 0.33 to 0.60, compared with 0.29 now. This describes the model's behaviour, not a recommended action.</desc>
+
+  <!-- panel 1: calibrated prediction -->
+  <g>
+    <rect x="1" y="1" width="478" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="16" y="28" font-size="16" font-weight="700" fill="#1f2937">1 · Calibrated prediction</text>
+    <text x="16" y="50" font-size="14" fill="#475569">probability of <tspan font-style="italic">benign</tspan>, with its range</text>
+    <line x1="30" y1="112" x2="450" y2="112" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="240" y1="70" x2="240" y2="120" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="100" y="104" width="70" height="16" rx="4" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+    <circle cx="150" cy="112" r="6.5" fill="#ea580c" stroke="#f8fafc" stroke-width="2"/>
+    <text x="150" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">0.29</text>
+    <text x="30" y="138" text-anchor="middle" font-size="13" fill="#475569">0</text>
+    <text x="100" y="138" text-anchor="middle" font-size="13" fill="#9a3412">0.17</text>
+    <text x="170" y="138" text-anchor="middle" font-size="13" fill="#9a3412">0.33</text>
+    <text x="240" y="138" text-anchor="middle" font-size="13" fill="#475569">0.5</text>
+    <text x="450" y="138" text-anchor="middle" font-size="13" fill="#475569">1</text>
+    <text x="250" y="80" font-size="13" fill="#475569">above 0.5: predicted benign</text>
+    <text x="16" y="168" font-size="13" fill="#334155">The whole range is below 0.5, so the label is <tspan font-style="italic">malignant</tspan>.</text>
+  </g>
+
+  <!-- panel 2: factual rule -->
+  <g transform="translate(0,195)">
+    <rect x="1" y="1" width="478" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="16" y="28" font-size="16" font-weight="700" fill="#1f2937">2 · Factual rule and its weight</text>
+    <text x="16" y="50" font-size="14" fill="#475569"><tspan font-family="ui-monospace, Consolas, monospace" fill="#1f2937">worst concave points &gt; 0.14</tspan> holds for this case</text>
+    <line x1="72" y1="116" x2="408" y2="116" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="240" y1="70" x2="240" y2="124" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="160" y="106" width="80" height="20" rx="3" fill="#ea580c" fill-opacity="0.85"/>
+    <line x1="108" y1="86" x2="220" y2="86" stroke="#7c2d12" stroke-width="2"/>
+    <line x1="108" y1="80" x2="108" y2="92" stroke="#7c2d12" stroke-width="2"/>
+    <line x1="220" y1="80" x2="220" y2="92" stroke="#7c2d12" stroke-width="2"/>
+    <text x="256" y="90" font-size="15" font-weight="700" fill="#7c2d12">weight −0.19</text>
+    <text x="256" y="108" font-size="13" fill="#9a3412">range −0.31 to −0.05</text>
+    <text x="72" y="142" text-anchor="middle" font-size="13" fill="#475569">−0.4</text>
+    <text x="240" y="142" text-anchor="middle" font-size="13" fill="#475569">0</text>
+    <text x="408" y="142" text-anchor="middle" font-size="13" fill="#475569">+0.4</text>
+    <text x="16" y="168" font-size="13" fill="#334155">The whole range is below 0: this condition lowers P(<tspan font-style="italic">benign</tspan>).</text>
+  </g>
+
+  <!-- panel 3: alternative -->
+  <g transform="translate(0,390)">
+    <rect x="1" y="1" width="478" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="16" y="28" font-size="16" font-weight="700" fill="#1f2937">3 · Alternative</text>
+    <text x="16" y="50" font-size="14" fill="#475569">if <tspan font-family="ui-monospace, Consolas, monospace" fill="#1f2937">worst concave points &lt; 0.14</tspan> instead</text>
+    <line x1="30" y1="116" x2="450" y2="116" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="240" y1="72" x2="240" y2="124" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="100" y="110" width="70" height="12" rx="3" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1.2"/>
+    <circle cx="150" cy="116" r="5.5" fill="#64748b" stroke="#f8fafc" stroke-width="2"/>
+    <rect x="170" y="108" width="112" height="16" rx="4" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+    <circle cx="230" cy="116" r="6.5" fill="#ea580c" stroke="#f8fafc" stroke-width="2"/>
+    <path d="M150,100 C170,84 206,84 224,96" stroke="#7c2d12" stroke-width="1.8" fill="none"/>
+    <path d="M217,90 L227,99 L216,101 z" fill="#7c2d12"/>
+    <text x="140" y="92" text-anchor="end" font-size="14" fill="#475569">now 0.29</text>
+    <text x="300" y="90" font-size="15" font-weight="700" fill="#7c2d12">would be 0.48</text>
+    <text x="300" y="108" font-size="13" fill="#9a3412">range 0.33 to 0.60</text>
+    <text x="30" y="142" text-anchor="middle" font-size="13" fill="#475569">0</text>
+    <text x="240" y="142" text-anchor="middle" font-size="13" fill="#475569">0.5</text>
+    <text x="450" y="142" text-anchor="middle" font-size="13" fill="#475569">1</text>
+    <text x="16" y="168" font-size="13" fill="#334155">How the model would respond; not a recommended action.</text>
+  </g>
+</svg>
