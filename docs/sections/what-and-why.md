@@ -7,7 +7,9 @@ orphan: true
 Understand how AI models work, why trusting their outputs is challenging and
 what Calibrated Explanations contributes.
 
-For guarantees, assumptions and non-guarantees, see
+CE explains a model's calibrated behaviour with uncertainty. It does not
+establish cause and effect, and its guarantees hold only under stated
+assumptions. For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 ::::{grid} 1 2 3 3
@@ -21,10 +23,10 @@ Machine-learning basics: models, learning, prediction tasks, data roles and why 
 :::
 
 :::{grid-item-card} Can We Trust AI Outputs?
-:link: ../foundations/concepts/calibrated_interval_semantics
-:link-type: doc
+:link: why-predictions-are-not-enough
+:link-type: ref
 
-Mode-specific semantics, assumptions and non-guarantees.
+Why accuracy is not enough: miscalibrated probabilities, hidden uncertainty and explanations without a measure of their reliability.
 :::
 
 :::{grid-item-card} Trustworthy AI
@@ -38,7 +40,7 @@ Responsible-practice context; not evidence of EU AI Act compliance.
 :link: ../compare
 :link-type: doc
 
-Conventional explainability compared with CE's calibration-first approach.
+A short comparison of CE with SHAP, LIME and conformal prediction packages.
 :::
 
 :::{grid-item-card} What Is CE & What Does It Add?

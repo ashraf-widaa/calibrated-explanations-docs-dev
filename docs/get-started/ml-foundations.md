@@ -153,6 +153,8 @@ every fitting step on the training portion only.
 accuracy is the share of correct labels; for regression, error measures such
 as mean absolute error describe how far predictions are from the truth.
 
+(why-predictions-are-not-enough)=
+
 ## A6. Why predictions are not enough
 
 A model with high accuracy can still mislead you about individual cases.
