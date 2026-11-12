@@ -31,12 +31,15 @@ DOC_ROLE = re.compile(r"\{doc\}`(?:[^`<]*<)?([^`>]+)>?`")
 AZ_TERM = re.compile(r"^- \{term\}`([^`]+)` · \*\*([ST])\*\*$")
 AZ_ALIAS = re.compile(r"^- (.+?) · see \{term\}`([^`]+)`$")
 
+# Parameters whose canonical definition lives in parameter-reference.md: its five
+# headed parameters plus ``reject_confidence`` from its disambiguation table.
 PARAMETER_REFERENCE_NAMES = {
     "threshold",
     "low_high_percentiles",
     "confidence_level",
     "confidence",
     "significance",
+    "reject_confidence",
 }
 POINTER_MAX_WORDS = 10
 DEFINITION_MAX_WORDS = 60
@@ -54,6 +57,10 @@ SCIENCE_TARGETS = {
     "foundations/concepts/probabilistic_regression",
     "foundations/how-to/conditional_calibration",
     "compare",
+    # G-P2: original CE pages that own a theory topic outside the How CE Works section.
+    "practitioner/playbooks/ensured-explanations",
+    "practitioner/advanced/normalization-guide",
+    "practitioner/advanced/reject-policy",
 }
 SOFTWARE_TARGET_PREFIXES = (
     "get-started/installation",
@@ -67,6 +74,10 @@ SOFTWARE_TARGET_PREFIXES = (
     "plugins",
     "api/",
     "schema_v1",
+    # G-P2: original CE pages that own a software topic outside the default set.
+    "foundations/concepts/guarded_explanations",
+    "practitioner/advanced/normalization-guide",
+    "practitioner/advanced/reject-policy",
 )
 
 
@@ -190,6 +201,39 @@ def test_parameter_reference_parameters_are_pointers_only() -> None:
             links = [m for m in map(LINK_LINE.match, entry.body) if m]
             assert links and links[0].group(1) == "Defined in"
             assert _resolve(links[0].group(2)) == "foundations/concepts/parameter-reference"
+
+
+# G-P2 (PO decisions G-6/G-7): entries whose wording or name awaits a CE-author ruling
+# keep a visible marker, and disputed terms stay undefined until the authors decide.
+UNDER_REVIEW_MARKERS = {
+    "Exchangeability": "*Wording under review.*",
+    "Ensured explanation": "*Wording under review.*",
+    "Interval regression": "*Name under review.*",
+}
+DEFERRED_TERMS = {
+    "counterfactual",
+    "counterfactual explanation",
+    "epistemic uncertainty",
+    "aleatoric uncertainty",
+    "coverage",
+    "marginal coverage",
+    "conditional coverage",
+    "super-explanation",
+    "semi-explanation",
+    "counter-explanation",
+    "pareto explanation",
+}
+
+
+@pytest.mark.parametrize("headword", sorted(UNDER_REVIEW_MARKERS))
+def test_disputed_entries_keep_their_review_marker(headword: str) -> None:
+    entry = next(e for e in all_entries() if e.headword == headword)
+    assert UNDER_REVIEW_MARKERS[headword] in " ".join(entry.body)
+
+
+def test_deferred_terms_are_not_defined() -> None:
+    defined = {name.casefold() for entry in all_entries() for name in entry.names}
+    assert not defined & DEFERRED_TERMS
 
 
 def test_category_pages_link_to_each_other_and_the_hub() -> None:
