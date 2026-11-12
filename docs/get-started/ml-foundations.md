@@ -183,6 +183,44 @@ cause and effect. The next page shows which tasks and outputs CE supports.
 Go deeper: {doc}`../foundations/concepts/calibration_methods` explains what
 calibration means and how CE calibrates.
 
+## A7. What a model explanation is
+
+An **explanation** of a prediction tells you which inputs the prediction
+depends on, so a person can check it against what they know.
+
+- **Local or global.** A *local* explanation describes one prediction ("for
+  this tumour sample, the measurement `worst concave points` mattered most").
+  A *global* explanation describes the model as a whole ("across all samples,
+  these features matter most"). CE explains individual predictions: its
+  explanations are local.
+- **Two common forms.** Some methods give each feature a number, a
+  *feature attribution*, that shows how much it pushed the prediction up or
+  down; LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee,
+  2017) are widely used examples. Other methods give *rules*: conditions
+  such as `worst concave points > 0.14` that hold for the case. CE combines
+  the two: each rule comes with a weight, and each weight comes with an
+  uncertainty range.
+- **What an explanation shows.** It describes how the **model** responds to
+  its inputs. It does not show that a feature causes the outcome in the
+  real world, and it can only be as reliable as the model and the data
+  behind it.
+
+The {doc}`walkthrough <quickstart_walkthrough>` shows how CE builds and reads
+one explanation step by step. CE's explanation method is described in
+Löfström, Löfström, Johansson and Sönströd (2024),
+[*Calibrated explanations: with uncertainty information and counterfactuals*](https://doi.org/10.1016/j.eswa.2024.123154),
+*Expert Systems with Applications*, 246, 123154.
+
+**References for this section**
+
+- Ribeiro, M. T., Singh, S., and Guestrin, C. (2016). "Why should I trust
+  you?" Explaining the predictions of any classifier. *Proceedings of the
+  22nd ACM SIGKDD International Conference on Knowledge Discovery and Data
+  Mining*, 1135–1144. [doi:10.1145/2939672.2939778](https://doi.org/10.1145/2939672.2939778).
+- Lundberg, S. M., and Lee, S.-I. (2017). A unified approach to interpreting
+  model predictions. *Advances in Neural Information Processing Systems 30*.
+  [arXiv:1705.07874](https://arxiv.org/abs/1705.07874).
+
 **Next:** {doc}`ce-tasks-and-modes`
 
 Entry-point tier: Tier 1.

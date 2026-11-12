@@ -1,29 +1,31 @@
 # Practical walkthrough: from a trained model to calibrated explanations
 
-This page works like a notebook. Each step has a short explanation, the code,
-the output that code produced when this page was built, and what the output
-means. You can run the same cells yourself: [download this walkthrough as a Jupyter notebook](path:../_static/notebooks/quickstart_walkthrough.ipynb), or copy the cells
-into a Python session.
+This page works like a notebook. Each section has a short explanation, the
+code, the output that code produced when this page was built, and what the
+output means. You can run the same cells yourself: [download this walkthrough as a Jupyter notebook](path:../_static/notebooks/quickstart_walkthrough.ipynb), or copy the
+cells into a Python session.
 
-**Before you start.** This walkthrough assumes you know what a feature, a
-label and a train/test split are. If not, read
-[Step 1: Machine learning basics](ml-foundations.md) first. It also
-assumes you know which CE mode you are using; the
-[Step 2: CE tasks and outputs](ce-tasks-and-modes.md) page
-explains that choice. Here we use **binary classification**.
+**Before you start.** You should know what a feature, a label and a
+train/test split are; if not, read
+[Step 1: Machine learning basics](ml-foundations.md) first. The
+[Step 2: CE tasks and outputs](ce-tasks-and-modes.md) page explains which CE
+mode to use; here we use **binary classification**. No statistics beyond
+"probability" and "average" is needed.
 
-**What you will do**
+**What you will learn**
 
-1. Choose the task and model (B1).
-2. Split the data into training, calibration and test sets (B2).
-3. Train and evaluate an ordinary classifier (B3).
-4. Calibrate CE on held-out data (B4).
-5. Generate and read a factual explanation (B5).
-6. Explore alternative explanations (B6).
-7. Work with feature conditions (B7).
-8. Interpret everything together, including a plot (B8).
-9. Check assumptions and limitations (B9).
-10. See how regression and guarded explanations differ (B10).
+1. The questions CE answers about one prediction (section 1).
+2. Why a model needs three separate data sets (section 2).
+3. Why accuracy alone says nothing about probabilities (section 3).
+4. Why probabilities need a calibration check (section 4).
+5. What CE's calibrated probability and its range are, and what they
+   guarantee (section 5).
+6. How CE builds an explanation (section 6), and how to read one (section 7).
+7. How alternative scenarios relate to the explanation (section 8).
+8. What you can and cannot conclude (section 9).
+
+Sections 1–10 form the core path. Regression, guarded explanations and
+options for shaping explanations follow as optional sections.
 
 Install the packages once:
 
@@ -31,26 +33,31 @@ Install the packages once:
 pip install calibrated-explanations scikit-learn matplotlib
 ```
 
-## B1. Select the task and model
+## 1. The prediction problem and the case we follow
 
-**What.** We will predict whether a breast tumour sample is *malignant* or
-*benign* from 30 numeric measurements of cell nuclei. The target is one of two
-labels, so this is **binary classification**.
+A clinic uses a model to flag tumour samples as *malignant* or *benign*. For
+one sample the model says *malignant*. Before anyone acts on that, three
+questions matter:
 
-**Why this example.** The dataset ships with scikit-learn, needs no
-downloads, has only numeric features and trains in seconds. Classification is
-also the easiest place to see what calibration adds: a probability you can
-read as "out of comparable cases, about this share were benign".
+1. **How sure is the model?** Not just which label, but how probable it is,
+   and how certain that probability is.
+2. **Which measurements drive the prediction?**
+3. **What would change it?**
 
-**Model.** We use a random forest. CE works with scikit-learn style models
-that provide `fit` and `predict` (and `predict_proba` for classification), so
-the model family is your choice. The random forest here is an example, not a
-recommendation.
+CE answers these questions about the **model's behaviour**: calibrated
+probabilities with uncertainty, explanations with uncertainty, and
+alternative scenarios. It does not diagnose, and it does not tell you what
+causes a tumour to be malignant.
 
-**How regression differs.** If the target were a number (for example a
-disease-progression score), the task would be regression. CE then reports
-prediction intervals or threshold probabilities instead of class
-probabilities. Section B10 shows both.
+We follow one test sample, **case 2**, from raw model output to a calibrated
+explanation. First, the data.
+
+## 2. Data and the three data roles
+
+We predict whether a breast tumour sample is *malignant* or *benign* from 30
+numeric measurements of cell nuclei. The target is one of two labels, so this
+is **binary classification**. The dataset ships with scikit-learn and needs no
+download.
 
 ```python
 import numpy as np
@@ -75,12 +82,10 @@ Class 1 = benign: 357 samples
 
 **Interpretation.** There are 569 samples and 30 features. Label `0` means
 *malignant* and label `1` means *benign*. Remember this mapping: for binary
-classification, CE reports the calibrated probability of class `1`, which
-here is *benign*.
+classification, CE reports the probability of class `1`, which here is
+*benign*.
 
-## B2. Prepare the data: three separate sets
-
-**What.** We split the data into three parts, each with one job:
+Now we split the data into three parts, each with one job:
 
 | Set | Used for | Seen by the model during training? |
 |---|---|---|
@@ -88,15 +93,10 @@ here is *benign*.
 | Calibration set | Calibrating CE's probabilities and explanations | No |
 | Test set | Checking performance and explaining new cases | No |
 
-**Why.** Calibration measures how the trained model behaves on data it has
-not seen. If calibration used training data, the model would look more
-reliable than it is. Keeping the test set separate gives an honest final check.
-Reusing any of these rows in a different role is a form of **data leakage**.
-
-**How.** Two calls to `train_test_split`: first hold out a test set, then split
-the remainder into proper training and calibration sets. `stratify` keeps the
-class balance similar in each part, and `random_state` makes the split
-reproducible.
+Calibration measures how the trained model behaves on data it has **not**
+seen. If calibration used training data, the model would look more reliable
+than it is. Using any of these rows in two roles is a form of **data
+leakage**.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -122,17 +122,19 @@ Test:            114 samples
 ```
 
 **Interpretation.** About 60% of the data trains the model, 20% calibrates it
-and 20% is kept for testing. A larger calibration set gives tighter, more
-stable uncertainty estimates; very small calibration sets give wide intervals.
+and 20% is kept for testing. `stratify` keeps the class balance similar in
+each part, and `random_state` makes the split reproducible. One way to
+picture the calibration set: it is the evidence CE uses to judge the model,
+so the uncertainty ranges later on reflect how much evidence there is; 114
+cases is a small evidence base.
 
-## B3. Train and evaluate the model
+## 3. Train the model and evaluate it
 
-**What.** `WrapCalibratedExplainer` wraps an ordinary model. Training happens
-with `fit`, exactly as in scikit-learn; nothing CE-specific has happened yet.
-
-**Why wrap the model now?** The wrapper keeps the model, the calibration and
-the explanation methods together, so later steps cannot accidentally mix up
-models or data sets.
+`WrapCalibratedExplainer` wraps an ordinary scikit-learn model. Training
+happens with `fit`, exactly as in scikit-learn; nothing CE-specific has
+happened yet. We use a random forest as an example, not a recommendation: CE
+works with models that provide `fit` and `predict` (and `predict_proba` for
+classification).
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -144,115 +146,202 @@ explainer = WrapCalibratedExplainer(
 )
 explainer.fit(X_proper, y_proper)
 
-print("Fitted:", explainer.fitted, "| Calibrated:", explainer.calibrated)
+y_pred_raw = explainer.predict(X_test, calibrated=False)
+print(f"Test accuracy: {accuracy_score(y_test, y_pred_raw):.3f}")
 ```
 
 ```{code-block} text
 :caption: Output
 
-Fitted: True | Calibrated: False
+Test accuracy: 0.947
 ```
 
-**Interpretation.** The model is trained but not yet calibrated. Before
-calibration, predictions come straight from the random forest. Its
-`predict_proba` values average the class proportions in the trees' leaves.
-They are often over- or under-confident: treat them as **scores**, not yet as
-reliable probabilities.
+**Interpretation.** About 95% of the predicted labels are correct. Accuracy
+counts correct labels; it cannot tell us whether a score of 0.16 means a 16%
+chance, or how sure the model is about one particular case. For that we look
+at the probabilities themselves.
 
-## B4. Calibrate CE
+## 4. Why calibration matters
 
-**What.** `calibrate` shows CE the held-out calibration set. CE records how
-the trained model's outputs relate to the true labels on data the model has
-not seen.
-
-**Why.** Training teaches the model to separate classes. Calibration answers a
-different question: *when the model says 70%, how often is it right?* For
-classification, CE uses **Venn–Abers** calibration, which turns the model's
-score into a calibrated probability together with a lower and an upper bound.
-
-**Training versus calibration**
-
-| | Training (`fit`) | Calibration (`calibrate`) |
-|---|---|---|
-| Data | Proper training set | Calibration set |
-| Changes the model? | Yes, learns its parameters | No, the model is fixed |
-| Result | A predictive model | Calibrated probabilities, intervals and explanations |
+First we **calibrate**: `calibrate` shows CE the held-out calibration set.
+The model itself is not changed. Section 5 explains what calibration does;
+here we only use it to keep the model's raw scores and CE's calibrated
+probabilities side by side.
 
 ```python
 explainer.calibrate(X_cal, y_cal, feature_names=feature_names)
 
-y_pred = explainer.predict(X_test)
-print("Calibrated:", explainer.calibrated)
-print(f"Test accuracy: {accuracy_score(y_test, y_pred):.3f}")
+raw = explainer.predict_proba(X_test, calibrated=False)[:, 1]
+print("Raw P(benign), cases 0-4:", raw[:5].round(2))
+extreme = (raw == 0) | (raw == 1)
+print("Cases with raw probability exactly 0 or 1:", int(extreme.sum()), "of", len(raw))
+print("Of those, correctly labelled:", int(((raw[extreme] > 0.5) == y_test[extreme]).sum()))
 ```
 
 ```{code-block} text
 :caption: Output
 
-Calibrated: True
-Test accuracy: 0.947
-```
-
-**Interpretation.** Accuracy measures how often the predicted label is
-correct. It says nothing about whether the probabilities are trustworthy or
-why a particular prediction was made. The next cells look at both.
-
-Now look at the probabilities for a few test cases, with their uncertainty:
-
-```python
-proba, (low, high) = explainer.predict_proba(X_test[:5], uq_interval=True)
-
-print("case  predicted   P(benign)  interval        true label")
-for i in range(5):
-    print(
-        f"{i:>4}  {data.target_names[y_pred[i]]:<10}  {proba[i, 1]:.3f}      "
-        f"[{low[i]:.3f}, {high[i]:.3f}]  {data.target_names[y_test[i]]}"
-    )
-```
-
-```{code-block} text
-:caption: Output
-
-case  predicted   P(benign)  interval        true label
-   0  malignant   0.029      [0.000, 0.029]  malignant
-   1  benign      0.973      [0.972, 1.000]  benign
-   2  malignant   0.286      [0.167, 0.333]  malignant
-   3  malignant   0.324      [0.167, 0.400]  benign
-   4  malignant   0.029      [0.000, 0.029]  malignant
+Raw P(benign), cases 0-4: [0.   1.   0.16 0.21 0.  ]
+Cases with raw probability exactly 0 or 1: 41 of 114
+Of those, correctly labelled: 41
 ```
 
 **Interpretation.**
 
-- `low` and `high` are the Venn–Abers lower and upper probabilities of
-  *benign*. Venn–Abers calibrates the model's score twice, once assuming the
-  new case is benign and once assuming it is malignant; the two results are
-  `low` and `high`.
-- `proba[:, 1]` is CE's single best estimate of the probability of *benign*,
-  a combination of `low` and `high`. It always lies between them.
-- The **width** of the interval shows how much the calibration depends on
-  this one case. It is wide when few calibration cases received a model score
-  similar to this case's score, and narrow when many did.
-- These bounds are *not* conventional confidence intervals around an unknown
-  "true" probability. The
-  [semantics reference](../foundations/concepts/calibrated_interval_semantics.md)
-  states exactly what is and is not guaranteed.
+- A random forest's `predict_proba` averages the class proportions in the
+  leaves its trees reach. When every tree agrees, the output is exactly 0
+  or 1.
+- A probability of exactly 0 or 1 claims certainty. A model trained on 341
+  cases rarely has grounds for certainty, so outputs like these are a common
+  **reason to check** calibration.
+- They are **not evidence** that the scores are wrong: on this test set, every
+  extreme prediction was correct. Whether probabilities are calibrated can
+  only be judged against observed outcomes on held-out data.
 
-Case `2` is the most interesting: the model predicts *malignant*, but less
-confidently than for cases `0` and `4`. We explain that case next.
+A probability is **calibrated** if, among all cases given about 70%, about
+70% turn out positive. Calibration does not judge or retrain the model. It
+learns, from cases the model never saw, how the model's scores relate to
+observed outcomes, and it attaches an uncertainty range.
 
-## B5. Generate a factual explanation
+## 5. How Venn–Abers calibration works, and what its output means
 
-**What.** A **factual explanation** answers: *which of this case's actual
-feature values pushed the prediction up or down, and how certain is each
-effect?* Each line is a **rule**: a feature condition that is true for this
-case (for example `worst concave points > 0.14`) together with a **weight**.
+For classification, CE calibrates with **Venn–Abers** predictors. For each
+new case:
 
-**Why.** Knowing the probability is not enough to trust or challenge it.
-The factual explanation shows what the prediction depends on, with calibrated
-uncertainty for each feature's effect.
+1. Sort the calibration cases by the model's score.
+2. Fit the best *increasing* curve from score to observed outcome (isotonic
+   regression).
+3. Do this twice: once adding the new case as *benign*, once as *malignant*.
+4. Read both curves at the new case's score. This gives a lower and an upper
+   probability, `low` and `high`.
+5. Merge the two into one estimate, `high / (1 − low + high)`, which always
+   lies between them.
 
-**How.** Call `explain_factual` on the cases to explain. It returns a
-collection; index it to get one explanation.
+```{mermaid}
+flowchart LR
+    S["model score of the new case"] --> A["fit with the case labelled benign"]
+    S --> B["fit with the case labelled malignant"]
+    A --> H["upper probability (high)"]
+    B --> L["lower probability (low)"]
+    H --> M["merged estimate, between low and high"]
+    L --> M
+```
+
+```python
+proba, (low, high) = explainer.predict_proba(X_test[:5], uq_interval=True)
+y_pred = explainer.predict(X_test)
+
+print("case  raw    calibrated  range           predicted   true")
+for i in range(5):
+    print(
+        f"{i:>4}  {raw[i]:.2f}   {proba[i, 1]:.3f}       [{low[i]:.3f}, {high[i]:.3f}]  "
+        f"{data.target_names[y_pred[i]]:<10}  {data.target_names[y_test[i]]}"
+    )
+print(f"\nTest accuracy after calibration: {accuracy_score(y_test, y_pred):.3f}")
+```
+
+```{code-block} text
+:caption: Output
+
+case  raw    calibrated  range           predicted   true
+   0  0.00   0.029       [0.000, 0.029]  malignant   malignant
+   1  1.00   0.973       [0.972, 1.000]  benign      benign
+   2  0.16   0.286       [0.167, 0.333]  malignant   malignant
+   3  0.21   0.324       [0.167, 0.400]  malignant   benign
+   4  0.00   0.029       [0.000, 0.029]  malignant   malignant
+
+Test accuracy after calibration: 0.947
+```
+
+**Interpretation: what the numbers are.**
+
+- **A pair, not one number.** Venn–Abers produces two probabilities for each
+  case, `low` and `high`, from the two fits in step 3.
+- **The guarantee belongs to the pair.** Vovk, Petej and Fedorova (2015)
+  show that the member of the pair selected by the *true* label (`high` if the
+  case is truly benign, `low` if it is truly malignant) is perfectly
+  calibrated. Three limits apply: the result assumes the calibration and test
+  cases are exchangeable (roughly: drawn from the same stable process); it is
+  a property of the predictor over many cases, not a statement about one case;
+  and it cannot be used to pick the calibrated member, because the true label
+  is unknown when we predict. *Wording under review by the CE authors.*
+- **The merged estimate has no exact guarantee.** CE's single number is a
+  practical summary between `low` and `high`; merging gives up the exact
+  calibration property.
+- **What the range is not.** `[low, high]` is not a confidence interval for an
+  unknown "true probability" of the case, and it guarantees nothing about one
+  individual case.
+- **Width.** The width shows how much the calibration curve depends on the
+  unknown label of the new case. One way to picture it: it tends to be wider
+  where few calibration cases had similar scores.
+
+Case `3` is misclassified (truly benign) and has the widest range of the
+five. That is a useful observation, but one case supports no general claim.
+
+Does calibration make the probabilities score better? We can check one common
+score on the test set:
+
+```python
+from sklearn.metrics import brier_score_loss
+
+cal = explainer.predict_proba(X_test)[:, 1]
+print(f"Brier score, raw:        {brier_score_loss(y_test, raw):.4f}")
+print(f"Brier score, calibrated: {brier_score_loss(y_test, cal):.4f}")
+```
+
+```{code-block} text
+:caption: Output
+
+Brier score, raw:        0.0366
+Brier score, calibrated: 0.0445
+```
+
+**Interpretation.** The **Brier score** is the mean squared difference between
+the predicted probability of *benign* and the outcome (1 if benign, 0 if
+not); **lower is better** and 0 is perfect (Brier, 1950). On these 114 test
+cases the calibrated probabilities scored *worse* than the raw ones.
+
+- Calibration does not necessarily improve scores such as the Brier score on
+  every dataset or test set.
+- This comparison does not test the guarantee above: the Brier score is
+  computed on CE's merged estimate, which does not carry the exact guarantee,
+  and on one small test set.
+- Do not read a cause into the difference (for example "the forest was
+  already well calibrated"): this page does not test that.
+
+What CE adds is the validity property of the probability pair and an
+uncertainty range for every case. The
+[semantics reference](../foundations/concepts/calibrated_interval_semantics.md)
+and [How CE Calibrates](../foundations/concepts/calibration_methods.md) give
+the full statements and the mathematics.
+
+## 6. How CE builds an explanation
+
+Case 2 is predicted *malignant*. Before reading its explanation, it helps to
+know where the numbers come from.
+
+**Scope.** The steps below describe how CE computes a factual explanation in
+the version and settings used on this page (binary classification, default
+explanation options). They are implementation details, not part of the
+definition of a calibrated explanation; other settings or later versions can
+differ.
+
+| Step | What CE does here | Depends on (default here) |
+|---|---|---|
+| 1. Split each feature into two ranges | For each feature, CE finds one split point in the calibration data with a one-split decision tree, trained on the model's *predicted* labels for the calibration cases | discretizer `binaryEntropy`; `condition_source="prediction"` |
+| 2. Read off the condition | The case falls on one side of the split, which gives the rule's condition, for example `worst concave points > 0.14` | — |
+| 3. Try typical values from the other side | CE takes three typical calibration values from the *other* range (its 25th, 50th and 75th percentiles) and puts each into the case in place of its real value | `sample_percentiles=[25, 50, 75]` |
+| 4. Ask the calibrated model again | For each modified case CE gets a calibrated probability, lower bound and upper bound, and averages the three probabilities, the three lower bounds and the three upper bounds separately | — |
+| 5. Compute the weight | Weight = the case's calibrated probability − that average. The weight interval runs from the case's probability − the averaged upper bound to the case's probability − the averaged lower bound | — |
+
+**In words:** a weight answers "how different would the calibrated probability
+be if this feature took typical values from the other side of the split, with
+all other features unchanged?" It compares the model's responses; it is not a
+cause.
+
+## 7. The factual explanation of our case
+
+`explain_factual` returns a collection; index it to get one explanation.
 
 ```python
 case = 2
@@ -261,13 +350,13 @@ explanation = factual[0]
 
 pred = explanation.prediction
 print(f"Calibrated P(benign) = {pred['predict']:.3f}  "
-      f"interval [{pred['low']:.3f}, {pred['high']:.3f}]")
+      f"range [{pred['low']:.3f}, {pred['high']:.3f}]")
 ```
 
 ```{code-block} text
 :caption: Output
 
-Calibrated P(benign) = 0.286  interval [0.167, 0.333]
+Calibrated P(benign) = 0.286  range [0.167, 0.333]
 ```
 
 ```python
@@ -280,6 +369,8 @@ def rule_table(expl, top=6):
               f"[{rules['weight_low'][i]:+.3f}, {rules['weight_high'][i]:+.3f}]")
 
 rule_table(explanation)
+weights = np.asarray(explanation.get_rules()["weight"], dtype=float)
+print(f"\nSum of all {len(weights)} weights: {weights.sum():+.3f}")
 ```
 
 ```{code-block} text
@@ -292,177 +383,26 @@ worst concavity <= 0.35              +0.135   [+0.108, +0.286]
 mean concavity > 0.07                -0.048   [-0.114, +0.086]
 mean concave points > 0.04           -0.048   [-0.114, +0.086]
 worst texture > 23.91                -0.042   [-0.114, +0.108]
+
+Sum of all 17 weights: -0.069
 ```
 
 **Interpretation.** Read each line as: *"For this case, `<condition>` holds.
-Compared with what the model predicts when this feature takes values outside
-that range, the calibrated probability of benign is higher (positive weight)
-or lower (negative weight) by about `<weight>`."* CE computes each weight one
-feature at a time, so the weights are not designed to add up to the
-prediction.
+With typical values from the other side of the split instead, the calibrated
+probability of benign would be lower (positive weight) or higher (negative
+weight) by about `<weight>`."*
 
-- **Sign.** A negative weight pulls the probability of *benign* down (towards
-  *malignant*); a positive weight pushes it up.
+- **Sign.** A negative weight means the case's condition pulls the probability
+  of *benign* down (towards *malignant*); a positive weight pushes it up.
 - **Size.** Larger absolute weights matter more for this prediction.
-- **Weight interval.** The uncertainty of the effect, derived from the
-  calibrated lower and upper predictions. If the interval includes zero, even
-  the direction of the effect is uncertain for this prediction. These intervals
-  describe the model's response; they are not formal coverage guarantees for
-  individual features.
+- **Weight interval.** It comes from the averaged lower and upper bounds in
+  step 5. Where an interval spans zero, the averaged bounds do not settle the
+  direction of the effect. These intervals are differences of averaged
+  Venn–Abers bounds; no guarantee is claimed for them.
+- **Weights do not add up to the prediction.** Each weight is computed one
+  feature at a time; their sum (printed above) differs from the prediction of 0.286.
 
-A weight is an *estimated contribution to this model's prediction*. It is not
-a causal effect of the feature in the real world.
-
-## B6. Explore alternative explanations
-
-**What.** An **alternative explanation** asks: *if this feature had a value in
-a different range, what would the calibrated prediction be?* Each rule shows a
-different condition for one feature and the calibrated probability, with its
-interval, that the model would give under that condition.
-
-**Why.** Alternatives show how sensitive the prediction is and which features
-could change it. That is useful for checking a decision, spotting fragile
-predictions or exploring "what if" questions.
-
-**Important.** Alternatives describe the *model's* behaviour, not the world.
-"If `worst area` were lower, the model would predict benign" does **not** mean
-that changing the tumour would change the diagnosis. They are not causal
-counterfactuals.
-
-```python
-alternatives = explainer.explore_alternatives(X_test[case:case + 1])
-alt = alternatives[0]
-rules = alt.get_rules()
-
-base = explanation.prediction["predict"]
-print(f"Current calibrated P(benign): {base:.3f}\n")
-print(f"{'alternative condition':<34} {'P(benign)':>9}   interval")
-order = np.argsort(-np.abs(np.asarray(rules["predict"], dtype=float) - base))[:6]
-for i in order:
-    print(f"{rules['rule'][i]:<34} {rules['predict'][i]:9.3f}   "
-          f"[{rules['predict_low'][i]:.3f}, {rules['predict_high'][i]:.3f}]")
-```
-
-```{code-block} text
-:caption: Output
-
-Current calibrated P(benign): 0.286
-
-alternative condition              P(benign)   interval
-worst concave points < 0.14            0.476   [0.333, 0.600]
-worst area > 853.50                    0.143   [0.000, 0.167]
-worst concavity > 0.35                 0.151   [0.000, 0.178]
-mean concavity < 0.13                  0.333   [0.200, 0.400]
-worst area < 745.15                    0.333   [0.200, 0.400]
-mean concave points < 0.06             0.333   [0.200, 0.400]
-```
-
-**Interpretation.** The rows are sorted by how far the alternative moves the
-probability away from the current value. Keep two things apart:
-
-- **The current prediction.** For case 2, the calibrated probability of
-  *benign* is 0.286, with a range of 0.167 to 0.333 (from B4). The whole range
-  is below 0.5, the point where the predicted label changes, so the model
-  predicts *malignant*.
-- **Each alternative scenario.** In the first row, if `worst concave points`
-  were below 0.14, the probability would be 0.476, with a range of 0.333 to
-  0.600. The estimate is still below 0.5, so the predicted label would stay
-  *malignant*; but the range now spans 0.5, so in that scenario the
-  calibrated output would no longer clearly favour either class.
-
-An alternative describes what the model would do in a different scenario. It
-does not change how certain the current prediction is; that is still the
-0.167 to 0.333 range above. Alternatives can also move the probability in
-either direction: the second and third rows lower it.
-
-## B7. Work with feature conditions
-
-**What.** Every rule is built from a **feature condition**, such as
-`worst concave points > 0.14`. CE derives the thresholds from the calibration data.
-You can shape which conditions appear in two verified ways:
-
-1. **Combine conditions** into conjunctions, such as two conditions joined
-   with `&`, with `add_conjunctions`.
-2. **Exclude features** you cannot or should not use as explanations, with
-   `features_to_ignore` (feature indices).
-
-**Why.** Some features are not meaningful to the person reading the
-explanation, or are fixed by design. Conjunctions show when two conditions
-together matter more than either one alone.
-
-```python
-conjunctive = explainer.explain_factual(X_test[case:case + 1])
-conjunctive.add_conjunctions()  # defaults: top 5 features, pairs of conditions
-
-rules = conjunctive[0].get_rules()
-pairs = [i for i, joint in enumerate(rules["is_conjunctive"]) if joint]
-pairs = sorted(pairs, key=lambda i: -abs(rules["weight"][i]))[:4]
-print(f"{sum(rules['is_conjunctive'])} conjunctive rules added; strongest:")
-for i in pairs:
-    condition = " ".join(rules["rule"][i].split())
-    print(f"  {condition:<52} weight {rules['weight'][i]:+.3f}")
-```
-
-```{code-block} text
-:caption: Output
-
-70 conjunctive rules added; strongest:
-  worst radius <= 16.62 & worst area <= 853.50         weight +0.048
-  worst perimeter <= 110.00 & worst area <= 853.50     weight +0.048
-  worst area <= 853.50 & worst concavity <= 0.35       weight +0.048
-  worst smoothness > 0.15 & worst area <= 853.50       weight +0.048
-```
-
-```python
-ignore = [feature_names.index("mean radius"), feature_names.index("mean perimeter")]
-constrained = explainer.explain_factual(X_test[case:case + 1], features_to_ignore=ignore)
-
-shown = constrained[0].get_rules()["rule"]
-print("Any rule on ignored features?",
-      any(r.startswith(("mean radius ", "mean perimeter ")) for r in shown))
-rule_table(constrained[0], top=4)
-```
-
-```{code-block} text
-:caption: Output
-
-Any rule on ignored features? False
-feature condition                    weight   weight interval
-worst concave points > 0.14          -0.190   [-0.314, -0.048]
-worst area <= 853.50                 +0.143   [+0.119, +0.286]
-worst concavity <= 0.35              +0.135   [+0.108, +0.286]
-mean concavity > 0.07                -0.048   [-0.114, +0.086]
-```
-
-**Interpretation.** In the first output, rules joined with `&` are conjunctions: both conditions hold for
-this case, and the weight is their joint estimated effect. By default CE
-combines conditions among the five most important features, two at a time;
-larger settings multiply the number of rules and the run time. The second
-table contains no rules on the ignored features.
-
-## B8. Interpret the outputs together
-
-The plot shows the factual explanation from B5 for the eight strongest rules.
-
-**Top panel: the prediction.** `P(y=1)` is the probability of class `1`
-(*benign*). The vertical line marks CE's single estimate (0.286). The dark bar
-runs from 0 to the lower probability (0.167) and the light bar from the lower
-to the upper probability (0.333). `P(y!=1)` shows the same for *malignant*:
-each value is 1 minus the corresponding *benign* value.
-
-**Lower panel: the rules.** Each row is one rule; red rules raise the
-probability of *benign* and blue rules lower it.
-
-- The whole bar, light and dark together, is the rule's **weight interval**.
-  For `worst concave points > 0.14` it runs from −0.314 to −0.048.
-- The dark part runs from zero to the end of the interval nearest zero.
-  Rules whose interval crosses zero have no dark part.
-- The point weight itself (−0.190 for that rule) is **not drawn**; read it
-  from the table in B5.
-- The grey vertical band is this case's own probability range from the top
-  panel, redrawn around zero on the weight scale: from 0.286 − 0.333 to
-  0.286 − 0.167.
-- The right-hand axis shows this case's actual feature values.
+The plot shows the same explanation for the eight strongest rules:
 
 ```python
 factual.plot(0, uncertainty=True, filter_top=8)
@@ -474,63 +414,115 @@ factual.plot(0, uncertainty=True, filter_top=8)
 Output: factual explanation plot for test case 2.
 ```
 
-**How to read everything together**
+**Reading the plot.**
 
-| Output | What it means for this case |
-|---|---|
-| Predicted label | The class the model chooses. |
-| Calibrated probability | CE's best single estimate of the probability of *benign*, combining the two Venn–Abers values. |
-| Probability interval | The Venn–Abers lower and upper probability; wide when few calibration cases had similar model scores. |
-| Rule weight | How much this condition moves the calibrated probability compared with other values of the same feature. |
-| Weight interval | Uncertainty about that contribution; if it spans zero, even the direction of the effect is uncertain. |
-| Alternative rule | What the model would predict if one feature were in a different range; not causal. |
+- **Top panel.** `P(y=1)` is the probability of *benign*. The vertical line
+  marks CE's single estimate; the dark bar runs from 0 to the lower
+  probability and the light bar from the lower to the upper probability.
+  `P(y!=1)` shows the same for *malignant*.
+- **Lower panel.** One row per rule. With the default plot style, rules that
+  raise the probability of *benign* are drawn in red and rules that lower it
+  in blue.
+- The whole bar, light and dark together, is the rule's weight interval. The
+  dark part runs from zero to the end of the interval nearest zero; rules
+  whose interval crosses zero have no dark part. The point weight itself is
+  not drawn: read it from the table above.
+- The grey vertical band is this case's own probability range redrawn around
+  zero on the weight scale (from 0.286 − 0.333 to 0.286 − 0.167).
+- The right-hand axis shows the case's actual feature values.
 
-A practical reading order: check the interval width first, then the
-strongest rules, then whether their intervals exclude zero, and finally
-which alternative scenarios move the probability towards or across 0.5.
+## 8. Alternative explanations of our case
 
-## B9. Assumptions, guarantees and limitations
+An **alternative explanation** asks: *if one feature had a value in a
+different range, what would the calibrated prediction be?* Alternatives use
+finer ranges than factual rules (up to eight per feature, in either direction).
 
-**What CE's calibration relies on.** The calibration set and the new cases
-should be **exchangeable**: roughly, they come from the same process and their
-order does not matter. Independent draws from one stable population satisfy
-this; data collected before and after a change in practice may not.
+```python
+alternatives = explainer.explore_alternatives(X_test[case:case + 1])
+alt_rules = alternatives[0].get_rules()
 
-You cannot prove exchangeability from the data alone; it is a judgement
-about how the data were collected and how the model will be used.
+base = pred["predict"]
+print(f"Current calibrated P(benign): {base:.3f}\n")
+print(f"{'alternative condition':<34} {'P(benign)':>9}   range")
+order = np.argsort(-np.abs(np.asarray(alt_rules["predict"], dtype=float) - base))[:6]
+for i in order:
+    print(f"{alt_rules['rule'][i]:<34} {alt_rules['predict'][i]:9.3f}   "
+          f"[{alt_rules['predict_low'][i]:.3f}, {alt_rules['predict_high'][i]:.3f}]")
+```
 
-**What you can rely on, under that assumption.**
+```{code-block} text
+:caption: Output
 
-- *Classification.* Venn–Abers theory guarantees that, of the two values,
-  the one that matches the case's true outcome (`high` if the case is in fact
-  benign, `low` if it is not) is calibrated in the long run. When you make a
-  prediction the true outcome is unknown, so CE reports both values. The
-  single probability CE reports merges the pair into one number that always
-  lies between them. The merge is designed to stay close to calibrated, but
-  it does not keep the exact guarantee.
-- *Interval regression.* CE uses **conformal prediction**, which turns the
-  model's errors on the calibration set into intervals. These intervals cover
-  the true value at the requested rate *on average over cases* (marginal
-  coverage).
+Current calibrated P(benign): 0.286
 
-**What is not guaranteed**
+alternative condition              P(benign)   range
+worst concave points < 0.14            0.476   [0.333, 0.600]
+worst area > 853.50                    0.143   [0.000, 0.167]
+worst concavity > 0.35                 0.151   [0.000, 0.178]
+mean concavity < 0.13                  0.333   [0.200, 0.400]
+worst area < 745.15                    0.333   [0.200, 0.400]
+mean concave points < 0.06             0.333   [0.200, 0.400]
+```
 
-- Calibration under distribution shift, drift or a different population.
-- Coverage for every individual case or subgroup (conditional coverage);
-  [Mondrian (conditional) calibration](../foundations/how-to/conditional_calibration.md)
-  is the tool for subgroup-aware calibration.
-- That an explanation is the "true" reason for a prediction, or that a
-  feature has a causal effect.
-- That acting on an alternative explanation will change a real outcome.
-- Treating Venn–Abers probability bounds as conventional confidence
-  intervals.
+**Interpretation.**
 
-The [semantics reference](../foundations/concepts/calibrated_interval_semantics.md)
-is the canonical statement of these guarantees and non-guarantees.
+- **The link to the weights.** The first row's probability, 0.476, is the
+  average from step 4 behind the strongest factual rule:
+  0.286 − 0.476 = −0.190, the weight of `worst concave points > 0.14`.
+- **The current prediction.** The calibrated probability of *benign* is 0.286
+  with range 0.167 to 0.333. Above 0.5 the predicted label would be *benign*;
+  the whole range lies below 0.5, so the model predicts *malignant*.
+- **One scenario.** If `worst concave points` were below 0.14, the estimate
+  would be 0.476 with range 0.333 to 0.600. The estimate stays below 0.5, but
+  the range spans 0.5: in that scenario the calibrated output would no longer
+  clearly favour either class. The ranges shown for scenarios are averages of
+  Venn–Abers bounds; they do not carry the guarantee from section 5.
+- **Direction.** Scenarios can move the probability either way: some rows
+  lower it.
 
-## B10. Continue with other CE tasks and capabilities
+Alternatives describe what the **model** would do in a different scenario.
+They do not say that changing the tumour would change the diagnosis, and they
+do not change how certain the current prediction is.
 
-The same three steps (`fit`, `calibrate`, `explain`) work for regression. Only
+## 9. What we can and cannot conclude about case 2
+
+**We can say.** The model predicts *malignant*. CE's calibrated probability of
+*benign* is 0.29, with a range of 0.17 to 0.33. The prediction depends most
+on `worst concave points` being above 0.14: with typical lower values, the
+calibrated probability would be about 0.48, and that scenario's range reaches
+above 0.5.
+
+**We cannot say:**
+
+- that 0.29 holds for this individual case, or that its "true" probability
+  lies between 0.17 and 0.33;
+- that the calibrated probabilities score better than the raw ones: on this
+  test set they did not (section 5);
+- that the measurements cause the outcome;
+- that the numbers hold for data from a different population, scanner or
+  period: the guarantees assume exchangeability;
+- that the weight intervals are formal guarantees;
+- anything about other cases, from this one case.
+
+## 10. Recap and next steps
+
+- CE answers three questions about one prediction: how sure, which features,
+  what would change it.
+- Calibration needs its own held-out data; accuracy says nothing about
+  probabilities.
+- Venn–Abers gives a pair of probabilities whose guarantee holds for the
+  pair, under exchangeability; the single number and the range summarise it.
+- A factual weight compares the case's calibrated probability with typical
+  values from the other side of a split; it is not a cause.
+- Alternatives show model behaviour in other scenarios, with their own
+  ranges.
+
+The optional sections below show regression, guarded explanations and ways to
+shape explanations. The table at the end lists where to go next.
+
+## Optional A. The same workflow for regression
+
+The same three steps (`fit`, `calibrate`, `explain`) work for regression; only
 the meaning of the output changes.
 
 ### Interval regression
@@ -568,9 +560,10 @@ prediction  248.2   90% interval [ 161.2,  384.0]
 prediction  172.1   90% interval [  85.2,  308.0]
 ```
 
-**Interpretation.** Under exchangeability, intervals built this way contain the
-true value for about 90% of cases on average. They do not promise 90% for
-each individual case.
+**Interpretation.** CE builds these intervals with a conformal predictive
+system. Under exchangeability, intervals built this way contain the true value
+for about 90% of cases *on average*; they do not promise 90% for each
+individual case. *Wording under review by the CE authors.*
 
 ### Probabilistic (thresholded) regression
 
@@ -581,28 +574,28 @@ numeric target. CE returns **P(y ≤ threshold)** in the second column.
 threshold = 150
 p_event, (p_lo, p_hi) = regressor.predict_proba(Xr_test[:3], threshold=threshold, uq_interval=True)
 for p, l, h in zip(p_event[:, 1], p_lo, p_hi):
-    print(f"P(y <= {threshold}) = {p:.3f}   interval [{l:.3f}, {h:.3f}]")
+    print(f"P(y <= {threshold}) = {p:.3f}   range [{l:.3f}, {h:.3f}]")
 ```
 
 ```{code-block} text
 :caption: Output
 
-P(y <= 150) = 0.077   interval [0.000, 0.083]
-P(y <= 150) = 0.083   interval [0.000, 0.091]
-P(y <= 150) = 0.417   interval [0.364, 0.455]
+P(y <= 150) = 0.077   range [0.000, 0.083]
+P(y <= 150) = 0.083   range [0.000, 0.091]
+P(y <= 150) = 0.417   range [0.364, 0.455]
 ```
 
-**Interpretation.** The first two cases have point predictions far above
-150 (273 and 248), so the calibrated probability of an outcome at or below 150
-is low. The third, predicted at 172, sits much closer to the threshold, and its
-probability is correspondingly higher. The task is still regression; only the
-question asked of it changes.
+**Interpretation.** The first two cases have point predictions far above 150,
+so the calibrated probability of an outcome at or below 150 is low. The third
+sits closer to the threshold, and its probability is correspondingly higher.
+The task is still regression; only the question asked of it changes.
 
-### Guarded explanations
+## Optional B. Guarded explanations
 
-Guarded explanations filter rule candidates through an in-distribution check,
-so explanations avoid feature values that are unusual relative to the
-calibration data. They use the same calls with `guarded_options`:
+Guarded explanations filter candidate feature ranges through an
+in-distribution check, so explanations avoid substituted values that are
+unusual relative to the calibration data. They use the same calls with
+`guarded_options` (experimental):
 
 ```python
 from calibrated_explanations.explanations.guarded_options import GuardedOptions
@@ -624,11 +617,47 @@ Passed the guard:             183
 Removed by the guard:         6
 ```
 
-**Interpretation.** The audit shows how many candidate feature intervals the
-guard tested and how many it removed as out of distribution. Removed
-candidates never appear in the explanation. The guard is a filter, not a
-certificate: see the [guarded explanations concept page](../foundations/concepts/guarded_explanations.md)
-for what it does and does not establish.
+**Interpretation.** The audit shows how many candidate feature ranges the
+guard tested and how many it removed. Removed candidates never appear in the
+explanation. The guard is a filter, not a certificate: it checks whether each
+substituted value is plausible, not whether the case itself is out of
+distribution. See the [guarded explanations concept page](../foundations/concepts/guarded_explanations.md).
+
+## Optional C. Shaping explanations
+
+You can exclude features that are not meaningful to the reader, with
+`features_to_ignore` (feature indices). Here we exclude the strongest
+feature from section 7 and look at the re-ranked rules:
+
+```python
+ignore = [feature_names.index("worst concave points")]
+constrained = explainer.explain_factual(X_test[case:case + 1], features_to_ignore=ignore)
+
+shown = constrained[0].get_rules()["rule"]
+print("Any rule on the ignored feature?",
+      any(r.startswith("worst concave points ") for r in shown))
+rule_table(constrained[0], top=4)
+```
+
+```{code-block} text
+:caption: Output
+
+Any rule on the ignored feature? False
+feature condition                    weight   weight interval
+worst area <= 853.50                 +0.143   [+0.119, +0.286]
+worst concavity <= 0.35              +0.135   [+0.108, +0.286]
+mean concavity > 0.07                -0.048   [-0.114, +0.086]
+mean concave points > 0.04           -0.048   [-0.114, +0.086]
+```
+
+**Interpretation.** The ignored feature no longer appears, and the remaining
+rules keep their own weights. Excluding a feature changes what is shown, not
+the model or its prediction.
+
+You can also add **conjunctions** (rules that combine two conditions, joined
+with `&`) with `add_conjunctions()`. Conjunctive weights are computed
+differently from single-rule weights: compare conjunctions with each other,
+not with single rules. *How to read them is under review by the CE authors.*
 
 ### Where to go next
 

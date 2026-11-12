@@ -38,9 +38,24 @@ flowchart LR
 
 | Step | Page | You will learn | Time |
 |---|---|---|---|
-| 1 | {doc}`ml-foundations` | Features and targets, prediction tasks, model families, training versus calibration, and why predictions alone are not enough | 10 min read |
+| 1 | {doc}`ml-foundations` | Features and targets, prediction tasks, model families, training versus calibration, why predictions alone are not enough, and what a model explanation is | 15 min read |
 | 2 | {doc}`ce-tasks-and-modes` | Which tasks CE supports, what it can do for each, and how to read its outputs | 10 min read |
-| 3 | {doc}`quickstart_walkthrough` | A notebook-style, step-by-step classification example with real outputs and interpretation | 20 min hands-on |
+| 3 | {doc}`quickstart_walkthrough` | One classification case followed from raw model output to a calibrated explanation: why calibration matters, how Venn–Abers works, how CE builds and reads an explanation, and what you can and cannot conclude | 30 min hands-on |
+
+**Where each idea is taught**
+
+| Idea | Taught in |
+|---|---|
+| Why CE is needed | Step 1, section A6; walkthrough section 1 |
+| Essential machine-learning concepts | Step 1, sections A1–A5 |
+| Predictions and probabilities | Step 1, section A3; walkthrough sections 3–4 |
+| Classification and regression | Step 1, section A3; Step 2, "Supported tasks" |
+| Model explanations | Step 1, section A7; walkthrough section 6 |
+| Calibration and uncertainty | Walkthrough sections 4–5; Step 2, "How the uncertainty differs between modes" |
+| CE tasks and modes | Step 2 |
+| A first CE example | Walkthrough sections 2–7 |
+| Interpreting CE outputs | Walkthrough sections 7–9 |
+| Limitations and deeper reading | Walkthrough sections 9–10; "After the Quick Start" below |
 
 Already know machine learning? Start at step 2. Already know CE's modes? Go
 straight to the walkthrough, or use the {doc}`60-second decision tree
