@@ -9,8 +9,8 @@
 | 02 What & Why | complete | `29df0d5c` (18:11) | STAGE-02-WHAT-WHY-20261112T1811.md |
 | 03 How CE Works | complete | `1372eb64` (18:22) | STAGE-03-HOW-CE-WORKS-20261112T1822.md |
 | 04 CE in Practice | complete | `34d61ebd` (18:28) | STAGE-04-PRACTICE-20261112T1828.md |
-| 05 Foundations | complete | stage 05 commit | STAGE-05-FOUNDATIONS-20261112T1831.md |
-| 06 Repository | pending | | |
+| 05 Foundations | complete | `5a48de93` (18:31) | STAGE-05-FOUNDATIONS-20261112T1831.md |
+| 06 Repository | complete | stage 06 commit | STAGE-06-REPOSITORY-20261112T1832.md |
 | 07 Journeys | pending | | |
 | 08 Final | pending | | |
 
