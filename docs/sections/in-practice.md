@@ -4,41 +4,49 @@ orphan: true
 
 # CE in Practice: Explore & Apply
 
-Discover applications, experience CE interactively, experiment with predictive
-models and evaluate the results.
+Try CE interactively, follow task guides and playbooks, and apply CE to your
+own models.
 
+Demos and games illustrate how CE works; they do not validate CE for your data.
 For guarantees, assumptions and non-guarantees, see
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 ::::{grid} 1 2 3 3
 :gutter: 3
 
-:::{grid-item-card} CE Examples for New Users
+:::{grid-item-card} Interactive CE App
 :link: https://calibrated-explanations-demo.ju.se/
 :link-type: url
 
-Illustrative external browser demo; runtime and data upload unverified.
+A browser companion to the Python package, with a guided workflow and an expert interface. Under active development.
 :::
 
-:::{grid-item-card} Explore Use-Case Examples
+:::{grid-item-card} Expert Hub
+:link: https://calibrated-explanations-demo.ju.se/expert
+:link-type: url
+
+Step through project setup, calibration, explanation and prediction in the browser, with built-in or your own data.
+:::
+
+:::{grid-item-card} Decision Lab Games
 :link: https://games.grejna.ai/
 :link-type: url
 
-External Decision Labs simulations; CE integration unverified.
+Teaching games from Grejna about decisions under uncertainty. Educational; their outputs are not real-world guarantees.
 :::
 
-:::{grid-item-card} Test CE with Your Own Data
+:::{grid-item-card} Use CE on Your Own Data
 :link: ../foundations/how-to/integrate_with_pipelines
 :link-type: doc
 
-Interim route: local Python workflow, not browser upload.
+Apply CE in Python to your own model and data, inside a scikit-learn pipeline.
 :::
 
-:::{grid-item-card} Practical Workflows
-:link: ../get-started/index
-:link-type: doc
+:::{grid-item-card} Example Notebooks
+:link: https://github.com/Moffran/calibrated_explanations/tree/main/notebooks
+:link-type: url
 
-Quick Start guides leading to task and practitioner routes.
+Executable demos on GitHub: binary and multiclass classification, regression, probabilistic regression and advanced topics.
 :::
 
 :::{grid-item-card} Tasks and Capabilities
@@ -48,18 +56,25 @@ Quick Start guides leading to task and practitioner routes.
 Classification, regression and probabilistic regression, with a capability map.
 :::
 
+:::{grid-item-card} Practitioner Playbooks
+:link: ../practitioner/playbooks/index
+:link-type: doc
+
+Decision policies, ensured explanations, Mondrian calibration and regulatory context.
+:::
+
 :::{grid-item-card} Practitioner Hub
 :link: ../practitioner/index
 :link-type: doc
 
-Interpretation, API choice and deployment playbooks for practitioners.
+Interpretation, API choice and deployment guidance for practitioners.
 :::
 
-:::{grid-item-card} Evaluate & Compare
+:::{grid-item-card} Compare with Other Methods
 :link: ../compare
 :link-type: doc
 
-Comparison material; not necessarily benchmarks.
+A short comparison of CE with SHAP, LIME and conformal prediction packages.
 :::
 ::::
 

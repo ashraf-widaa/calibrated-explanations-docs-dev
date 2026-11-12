@@ -170,7 +170,7 @@ Interpretation tips:
 
 After you absorb the tables and plots:
 
-1. Run the demo notebooks (`demo_under_the_hood.ipynb`, classification/regression demos) and compare their telemetry dumps to your production environment.
+1. Run the [demo notebooks](https://github.com/Moffran/calibrated_explanations/tree/main/notebooks) (`demo_under_the_hood.ipynb`, classification/regression demos) and compare their telemetry dumps to your production environment.
 2. Embed the interpretation checks into dashboards—surface calibrated prediction vs. interval charts and highlight scenarios with wide rule uncertainty.
 3. Share this guide with auditors and stakeholders so everyone relies on the same vocabulary when discussing factual or alternative explanations.
 
