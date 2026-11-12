@@ -5,11 +5,14 @@ code, the output that code produced when this page was built, and what the
 output means. You can run the same cells yourself: [download this walkthrough as a Jupyter notebook](path:../_static/notebooks/quickstart_walkthrough.ipynb), or copy the
 cells into a Python session.
 
+**Path B of the Quick Start.** Each section follows the same pattern: a
+**question**, the code that answers it, the real output, the concept behind
+it, and what you can conclude.
+
 **Before you start.** You should know what a feature, a label and a
-train/test split are; if not, read
-[Step 1: Machine learning basics](ml-foundations.md) first. The
-[Step 2: CE tasks and outputs](ce-tasks-and-modes.md) page explains which CE
-mode to use; here we use **binary classification**. No statistics beyond
+train/test split are, and why CE adds a calibration step; if not, read
+[Path A: Why CE](why-ce.md) first. We use **binary classification**; other
+tasks are covered in [Path C](ce-tasks-and-modes.md). No statistics beyond
 "probability" and "average" is needed.
 
 **What you will learn**
@@ -44,6 +47,9 @@ questions matter:
 2. **Which measurements drive the prediction?**
 3. **What would change it?**
 
+This is an educational example on a public dataset, not clinical decision
+support.
+
 CE answers these questions about the **model's behaviour**: calibrated
 probabilities with uncertainty, explanations with uncertainty, and
 alternative scenarios. It does not diagnose, and it does not tell you what
@@ -53,6 +59,8 @@ We follow one test sample, **case 2**, from raw model output to a calibrated
 explanation. First, the data.
 
 ## 2. Data and the three data roles
+
+**Question.** What data do we have, and which part may each step use?
 
 We predict whether a breast tumour sample is *malignant* or *benign* from 30
 numeric measurements of cell nuclei. The target is one of two labels, so this
@@ -130,6 +138,8 @@ cases is a small evidence base.
 
 ## 3. Train the model and evaluate it
 
+**Question.** How good is an ordinary model, before CE is involved?
+
 `WrapCalibratedExplainer` wraps an ordinary scikit-learn model. Training
 happens with `fit`, exactly as in scikit-learn; nothing CE-specific has
 happened yet. We use a random forest as an example, not a recommendation: CE
@@ -162,6 +172,8 @@ chance, or how sure the model is about one particular case. For that we look
 at the probabilities themselves.
 
 ## 4. Why calibration matters
+
+**Question.** Can we take the model's probabilities at face value?
 
 First we **calibrate**: `calibrate` shows CE the held-out calibration set.
 The model itself is not changed. Section 5 explains what calibration does;
@@ -204,6 +216,8 @@ learns, from cases the model never saw, how the model's scores relate to
 observed outcomes, and it attaches an uncertainty range.
 
 ## 5. How Venn–Abers calibration works, and what its output means
+
+**Question.** What does CE's calibrated probability mean, and what is guaranteed?
 
 For classification, CE calibrates with **Venn–Abers** predictors. For each
 new case:
@@ -317,6 +331,8 @@ the full statements and the mathematics.
 
 ## 6. How CE builds an explanation
 
+**Question.** Where do the numbers in an explanation come from?
+
 Case 2 is predicted *malignant*. Before reading its explanation, it helps to
 know where the numbers come from.
 
@@ -340,6 +356,8 @@ all other features unchanged?" It compares the model's responses; it is not a
 cause.
 
 ## 7. The factual explanation of our case
+
+**Question.** Which of case 2's values drive its prediction, and how firmly?
 
 `explain_factual` returns a collection; index it to get one explanation.
 
@@ -433,6 +451,8 @@ Output: factual explanation plot for test case 2.
 
 ## 8. Alternative explanations of our case
 
+**Question.** What would the model predict if one feature were different?
+
 An **alternative explanation** asks: *if one feature had a value in a
 different range, what would the calibrated prediction be?* Alternatives use
 finer ranges than factual rules (up to eight per feature, in either direction).
@@ -517,8 +537,17 @@ above 0.5.
 - Alternatives show model behaviour in other scenarios, with their own
   ranges.
 
-The optional sections below show regression, guarded explanations and ways to
-shape explanations. The table at the end lists where to go next.
+**Common mistakes to avoid**
+
+- Calibrating on the training data, or evaluating on the calibration data.
+- Reading `[low, high]` as a confidence interval for one case.
+- Reading a weight as a cause, or an alternative as a feasible intervention.
+- Concluding that calibration improved the model from one small test set.
+
+[Evaluate CE on your own data](../practitioner/evaluate_ce.md) covers these
+in more depth. The optional sections below show regression, guarded
+explanations and ways to shape explanations. The table at the end lists
+where to go next.
 
 ## Optional A. The same workflow for regression
 
@@ -672,6 +701,8 @@ not with single rules. *How to read them is under review by the CE authors.*
 | See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
 | See the whole workflow and a learning path | [The CE workflow](../foundations/concepts/ce_workflow.md) |
 | Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
+| Choose a task and mode for your problem (Path C) | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
+| Apply CE to your own data | [Apply CE to your own data](apply-to-your-data.md) |
 | Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |
 
