@@ -86,11 +86,13 @@ when you pass a `threshold`.
 
 ## What the outputs mean
 
+:::{div} ce-table-compact
 | Mode | Output | Read it as |
 |---|---|---|
 | Classification | Calibrated class probability with lower and upper probability | "Of the cases that get a model score like this one, about this share belong to the class" |
 | Interval regression | Point prediction with a prediction interval (default 5th–95th percentile) | "The outcome is likely to fall in this range" |
 | Probabilistic regression | Calibrated probability of `y ≤ t` with lower and upper probability | "The chance the outcome is at or below `t`" |
+:::
 
 - **Binary classification** has two classes. CE reports the calibrated
   probability of the positive class, which is class `1` in the label encoding.
@@ -102,6 +104,9 @@ is *how to interpret an output*. It is not an API argument; you select it
 through the model type and whether you pass a `threshold`.
 
 ### How the uncertainty differs between modes
+
+The {ref}`three output types, side by side <ce-output-types>`, on the guarantees page show
+one real example of each.
 
 All three modes rely on one assumption, **exchangeability**: the calibration
 data and the new cases come from the same process, and their order does not
@@ -147,12 +152,14 @@ mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 ## Four terms that are easy to mix up
 
+:::{div} ce-table-compact
 | Term | Means | Examples | How you choose it |
 |---|---|---|---|
 | **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
 | **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
 | **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
 | **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
+:::
 
 Guarded explanations, for example, are an explanation configuration available
 in every mode; they are not a third kind of prediction task.
@@ -178,7 +185,11 @@ what was checked for CE 1.1.0-dev by running the call on a fresh explainer
 with public datasets. "Runs" means the call completes and returns the
 documented object type; it is not a statistical validation.
 
-| Capability | Binary classification | Multiclass classification | Interval regression | Probabilistic regression |
+Columns: binary and multiclass classification; interval and probabilistic
+regression.
+
+:::{div} ce-table-compact
+| Capability | Binary | Multi­class | Interval | Proba­bilistic |
 |---|---|---|---|---|
 | Calibrated prediction with interval | Runs | Runs, see limitation 1 | Runs | Runs |
 | Factual explanations | Runs | Runs (predicted class) | Runs | Runs |
@@ -189,6 +200,7 @@ documented object type; it is not a statistical validation.
 | Guarded explanations (`guarded_options`) | Runs | Runs | Runs | Runs |
 | All-class explanations (`multi_labels_enabled`) | n/a | Experimental | n/a | n/a |
 | JSON export (`to_json`) | Runs | Runs | Runs | Runs |
+:::
 
 Go deeper: {doc}`../foundations/how-to/interpret_explanations`,
 {doc}`../foundations/concepts/alternatives` and

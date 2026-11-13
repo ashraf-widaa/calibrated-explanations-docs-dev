@@ -28,3 +28,21 @@
   line-height: 1.45;
   color: var(--color-foreground-secondary);
 }
+
+/* Phone layout for wide reference tables (WP-18): smaller text, tighter cells, wrapping headers. */
+@media (max-width: 600px) {
+  .ce-table-compact table {
+    font-size: 0.8em;
+  }
+  .ce-table-compact th,
+  .ce-table-compact td {
+    padding: 0.3em 0.35em;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .ce-table-compact code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
