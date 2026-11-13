@@ -1,5 +1,7 @@
 # 03 — Content migration matrix
 
+**Revision 2:** Quick Start is the five-stage roadmap (Option B); there is no `learning-journey.md`. Work packages are those of `12-prioritised-improvement-plan.md`.
+
 Scope: every page the plan touches, plus each page group's status. Pages not
 listed keep their place and content (action **Keep**). No URL changes are
 proposed; new pages get new URLs; no page is deleted.
@@ -13,7 +15,7 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 |---|---|---|---|---|---|---|---|---|
 | `get-started/ml-foundations.md` | ML essentials A1–A7 (Quick Start A1) | Beginners | same | **Revise / Split** | Add AI systems vs models and rule-based vs ML (missing); move A6–A7 to the XAI page (A6 duplicates why-ce §1; A6 ends with a stale "next page" pointer) | P1 | 1b, D-3 | builds, links, S1–S3 |
 | — | — | Beginners | `explainable-ai.md` **(new)** | **New (Merge from A6–A7)** | Black boxes, transparency, XAI and its limits have no owner | P1 | 2a | S3, S4, S8, wording test |
-| `sections/what-and-why.md` | Section landing | All | same | **Revise** | Add card for the XAI page; stage line | P2 | 1a, 2a | landing tests |
+| `sections/what-and-why.md` | Section landing | All | same | **Reorder / Revise** | Cards as a progression; card for the XAI page; optional stage line | P2 | WP-2, WP-5 | landing tests |
 | `glossary/science.md` | Definitions with "Taught in" links | All | same | **Cross-reference** | Retarget links that point at A6/A7 | P2 | 2a | glossary tests |
 
 ## Stage 2 — CE concepts
@@ -23,7 +25,7 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 | `get-started/why-ce.md` | Conventional vs CE workflow, reading an output (Quick Start A2) | Beginners | same | **Keep / Cross-reference** | Owner of workflow difference; add one link to calibration intuition; guarantees → pointer | P2 | 2b, 2c | builds |
 | — | — | Beginners, decision-makers | `foundations/concepts/calibration_intuition.md` **(new)** | **New** | No L1 page explains scores vs probabilities, reliability and uncertainty; the sidebar "Calibration & Uncertainty" opens the formal semantics page | P1 | 2b, D-4 | S5–S7, generator test, 07 §4 |
 | `what-is-ce.md` | Problem, what CE adds, guarantees, fit, comparison | Decision-makers | same | **Revise (dedupe)** | "The problem" restates why-ce/A6 | P2 | 2c | `test_what_is_ce.py` |
-| `foundations/concepts/ce_workflow.md` | Whole picture + learning path | Learners | same | **Keep** | Already owner of the overview and levels | — | 4a (links) | journeys test |
+| `foundations/concepts/ce_workflow.md` | Whole picture + learning path | Learners | same | **Revise (figure)** | Reuses the conventional-vs-CE figure; needs its own internal-mechanism figure | P2 | WP-4, D-15 | journeys test, 07 §4 |
 | `foundations/how-to/interpret_explanations.md` | Reading explanations and plots | Users | same | **Keep / Cross-reference** | Owner of plot reading; quickstarts link it | P3 | 4a | plot-colour test |
 | `sections/how-ce-works.md` | Section landing | All | same | **Revise** | Card for calibration intuition; stage line | P2 | 1a, 2b | landing tests |
 
@@ -31,7 +33,7 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 
 | Existing path | Current purpose | Audience | Destination | Action | Reason | Pri | Depends on | Val. |
 |---|---|---|---|---|---|---|---|---|
-| `get-started/index.md` | Quick Start landing (v3) | All | same | **Revise (one line)** | Link the journey page | P2 | 1a | continuity tests |
+| `get-started/index.md` | Quick Start landing (v3, paths A/B/C) | All | same | **Revise** | Becomes the five-stage roadmap with direct routes; workflow figure moves to why-ce only; toctree relabelled by stage | P1 | WP-1, D-11, D-12 | continuity tests (rewritten) |
 | `get-started/quickstart_walkthrough.md` | Generated walkthrough (Path B) | Learners | same | **Keep** | Verified; edit only via generator | — | — | generator, PROSE guard |
 | `get-started/ce-tasks-and-modes.md` | Mode choice, outputs, capabilities (C1) | Practitioners | same | **Keep** | Owner of mode choice | — | — | continuity tests |
 | `get-started/quickstart_{classification,regression,guarded}.md`, `apply-to-your-data.md` | Executed quickstarts (C2–C5) | Practitioners | same | **Keep** | Verified outputs and plots | — | — | execution tests |
@@ -74,4 +76,4 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 | 16 pages with "thresholded regression" (C-31) | **Revise (wording)** | Terminology policy | P3 | 6b, D-8 |
 | `foundations/governance/release_notes.md` (latest v0.10.2) (C-03) | **Revise → pointer** | Stale | P2 | 6b |
 | `getting_started_60s.md`, `multiclass_all_classes_gap_analysis.md` | **Keep (orphans)** | Redirect stub; internal analysis | — | — |
-| `learning-journey.md` **(new)** | **New** | Five-stage route | P1 | 1a, D-1, D-2 |
+| ~~`learning-journey.md`~~ | **Not created** (Option B) | The Quick Start landing is the roadmap | — | — |

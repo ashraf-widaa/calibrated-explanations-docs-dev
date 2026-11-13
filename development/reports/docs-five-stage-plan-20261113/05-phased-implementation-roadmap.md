@@ -1,5 +1,11 @@
 # 05 — Phased implementation roadmap
 
+> **Revision 2 (2026-11-13).** The authoritative work-package list is now
+> `12-prioritised-improvement-plan.md` (WP-1…WP-12). Phase 1 below is
+> replaced by WP-1 (Quick Start as the five-stage roadmap, Option B; no
+> `learning-journey.md`). Phases 2–6 keep their framing; their work packages
+> map to WP-2…WP-12 as listed in `06` (prompt index).
+
 Each phase is split into **work packages** (WP), one reviewable change and one
 copy-ready prompt each (06). Work packages within a phase run in the listed
 order; a phase starts only after the PO approves the previous one. Complexity:
@@ -25,26 +31,15 @@ Gates and rules referenced as §n are in `07-quality-and-acceptance-criteria.md`
 
 ---
 
-## Phase 1 — Quick Start and journey architecture
+## Phase 1 — Quick Start as the five-stage roadmap (= WP-1)
 
-**Objective.** Make the five-stage route visible without restructuring the
-homepage; fix Quick Start transitions found in the audit.
+**Objective.** Make the Quick Start landing the concise five-stage roadmap
+(Stages 1–3 core, 4–5 optional) with direct routes; relabel Quick Start-owned
+pages by stage; move the conventional-vs-CE figure to `why-ce` only; fix the
+stale pointer in ml-foundations A6. No `learning-journey.md`.
 
-| WP | Change | Files | Complexity |
-|---|---|---|---|
-| 1a | Journey page and stage pointers | **new** `docs/learning-journey.md`; `docs/index.md` (hero hint link only, if D-2 approves); `docs/get-started/index.md` (one line); `docs/sections/{what-and-why,how-ce-works,in-practice,software-integration,project-evolution}.md` (one "Stage N" line each); `docs/appendices/rtd_tier_map.md` | M |
-| 1b | Quick Start transitions and duplication | `docs/get-started/ml-foundations.md` (fix stale "next page" pointer in A6; A6/A7 stay until Phase 2a moves them); `docs/get-started/why-ce.md` (link to calibration intuition placeholder only after 2b exists — otherwise none) | S |
-
-- **Dependencies:** D-1 (journey model), D-2 (homepage link).
-- **Deliverables:** journey page (Tier 1, semantics pointer), stage lines, tests.
-- **Acceptance:** each stage lists only existing pages (or clearly marked
-  "coming in Phase N" — recommended: list only existing pages and extend later);
-  homepage card structure unchanged; §1 gates.
-- **Tests:** new `tests/docs/test_learning_journey.py`: five stages in order;
-  every linked page exists; each section landing names its stage; homepage
-  test still passes.
-- **Risks:** a sidebar entry changes the navigation tests
-  (`tests/docs/test_navigation.py`) — update them in the same commit.
+Details, acceptance, risks: `12-prioritised-improvement-plan.md` WP-1.
+Prompt: `06` Prompt 1.
 
 ---
 

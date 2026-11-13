@@ -5,153 +5,173 @@ Paste one prompt at a time; each ends with a stop condition. Every prompt is
 self-contained; the **standard block** below is repeated inside each prompt,
 so nothing has to be pasted separately.
 
+**Prompt index (revision 2).** WP-1 → Prompt 1 · WP-2 → Prompt 2a · WP-3 → Prompt 2b (add the two contrast tables from 12 WP-3) · WP-4 → Prompt WP-4 (+ 2c) · WP-5 → Prompt 4b (+ reorder the What & Why cards) · WP-6 → Prompts 3a, 3b, 3c · WP-7 → Prompt 3d · WP-8 → Prompt WP-8 (+ 3e) · WP-9 → Prompts 4a, 4c · WP-10 → Prompt 5 · WP-11 → Prompts 6a, 6b · WP-12 → Prompt 6c. Prompts 1a and 1b of revision 1 (learning-journey page) are withdrawn.
+
 Paths were discovered at baseline `a55c7e9d`. If a path no longer exists when
 you run a prompt, the agent must stop and report it, not guess.
 
 ---
 
-## Prompt 1a — Learning-journey page and stage pointers
+## Prompt 1 — Quick Start as the five-stage roadmap (WP-1)
 
 ```text
 ROLE AND OBJECTIVE
-You are a senior technical documentation architect and technical writer for the
-Calibrated Explanations (CE) Beta documentation. Objective: add one page that
-presents the approved five-stage learning journey over the EXISTING sections,
-and add a one-line stage pointer to each section landing page. Do not restructure
-the homepage.
+You are a senior documentation architect and technical educator for the Calibrated Explanations (CE) Beta
+documentation. Objective: turn the Quick Start landing into the concise five-stage roadmap (Option B) over
+existing canonical pages, relabel Quick Start-owned pages by stage, and fix stale transitions. Do not create
+docs/learning-journey.md. Do not change the homepage.
 
 REPOSITORY AND SAFETY (standard block)
 - Work only in the local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations
   (GitHub ashraf-widaa/calibrated-explanations-docs-dev, remote "docs-dev").
 - Moffran/calibrated_explanations and https://calibrated-explanations.readthedocs.io are read-only references.
-- Do not push. Do not change src/. Do not use git reset --hard, git clean, force-push or file deletion.
-- Preserve LEARNING_JOURNAL.md, learning-reports/, HANDOVER_REPORT.md, session-checkpoint-*.md and all
-  other unrelated modified or untracked files; never stage them.
-- Before editing: run `git status`, `git branch --show-current`, `git rev-parse --short HEAD`, `date`;
-  record them in the phase report. Create branch docs-dev/phase-1a-journey from the current Beta main
-  (fetch docs-dev first; fast-forward only).
-- Write files with the editor tools, not shell heredocs (Git Bash collapses backslashes and double-encodes
-  non-ASCII). *.svg and *.png are git-ignored: commit figures with `git add -f`.
-- Read development/reports/docs-five-stage-plan-20261113/02-target-information-architecture.md and
-  07-quality-and-acceptance-criteria.md before starting.
+- Do not push. Do not change src/. No git reset --hard, git clean, force-push or file deletion.
+- Preserve LEARNING_JOURNAL.md, learning-reports/, HANDOVER_REPORT.md, session-checkpoint-*.md and all other
+  unrelated modified or untracked files; never stage them.
+- Before editing: `git status`, `git branch --show-current`, `git rev-parse --short HEAD`, `date`; record them.
+  Create branch docs-dev/wp-1-quickstart-roadmap from the latest Beta main (fast-forward only).
+- Edit with the editor tools, not shell heredocs. *.svg/*.png are git-ignored (use git add -f for figures).
+- Read development/reports/docs-five-stage-plan-20261113/02-target-information-architecture.md (rev. 2 §2.1),
+  10-concept-curriculum-matrix.md, 12-prioritised-improvement-plan.md (WP-1) and 07 first.
 
 SCOPE AND TARGET FILES
-- New: docs/learning-journey.md (Tier 1).
-- Edit (one line each, near the top): docs/sections/what-and-why.md, docs/sections/how-ce-works.md,
-  docs/sections/in-practice.md, docs/sections/software-integration.md, docs/sections/project-evolution.md.
-- Edit: docs/get-started/index.md ("Before you start": one bullet linking the journey).
-- Edit: docs/index.md — ONLY if the PO approved decision D-2: add the journey page to the hidden
-  toctree directly after Quick Start, and one link in the hero hint line. Do not change cards, groups,
-  Project & Resources or Commercial Services.
-- Edit: docs/appendices/rtd_tier_map.md (add the new page).
-- New test: tests/docs/test_learning_journey.py. Update tests/docs/test_navigation.py only if the
-  sidebar change requires it.
+- docs/get-started/index.md (landing and its toctree).
+- In-page path labels ("Path A, step 1", "Path C, step 3", "Path B of the Quick Start", …) in:
+  docs/get-started/{ml-foundations,why-ce,ce-tasks-and-modes,quickstart_classification,quickstart_regression,
+  quickstart_guarded,apply-to-your-data,quick_api}.md → "Stage n" wording.
+- scripts/docs/build_quickstart_walkthrough.py (its "Path B" wording and links), then regenerate with
+  `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py`; never edit
+  docs/get-started/quickstart_walkthrough.md or the notebook by hand.
+- docs/get-started/ml-foundations.md: fix the stale A6 sentence "The next page shows which tasks and outputs CE
+  supports" (the next page is why-ce).
+- tests/docs/get_started/test_quickstart_continuity.py: the landing tests assert cards A/B/C and the workflow
+  figure on the landing; rewrite them for five stages (see ACCEPTANCE). Keep the generator/page/notebook sync
+  tests and the figure-wiring test for why-ce and ce_workflow (remove only the landing entry from it).
 
-REQUIRED CONTENT
-- Title "Your learning journey". One paragraph: five stages, each stands alone, sections stay as they are.
-- Five sections in order: 1 Foundations, 2 CE concepts, 3 Using CE, 4 Going deeper, 5 Contributing.
-  Each: the reader question, audience, prerequisites, "You will be able to…" (2-3 bullets), and the
-  ordered list of EXISTING pages from 02 §2 (link with {doc}). List only pages that exist now; do not
-  link planned pages. Use a sphinx-design grid of five cards at the top linking to the stage anchors.
-- A semantics pointer to foundations/concepts/calibrated_interval_semantics (STD-004 Tier 1 MUST) and the
-  footer "Entry-point tier: Tier 1.".
-- Section landing lines: "Learning journey: this section serves Stage N (<name>)." with a link.
+REQUIRED CONTENT (landing)
+- Title may stay. One short paragraph defining CE (keep current wording).
+- Five stage cards (sphinx-design grid), in order; Stages 1–3 marked "core", 4–5 "optional". Each card: one-line
+  goal, prerequisites, and an ordered list of links to EXISTING pages only, per 02 rev. 2 §2.1 (omit proposed
+  pages explainable-ai/calibration_intuition/development_setup until they exist).
+- "Direct routes" list: know ML → Stage 2; code now → walkthrough or C2/C3; have a model → C1 then C5;
+  need the maths → Stage 4; contribute → Stage 5.
+- "Before you start" line: install, Quick API, glossary (exactly one glossary link — glossary test), API reference,
+  semantics pointer (STD-004 Tier 1 MUST), web demo.
+- Remove the workflow figure from the landing (it stays on why-ce and ce_workflow).
+- Toctree: only Quick Start-owned pages, labelled "1 · Machine learning essentials", "2 · Why CE",
+  "2 · Tasks, modes and capabilities", "3 · Guided Python walkthrough", "3 · Classification quickstart",
+  "3 · Regression quickstart", "3 · Guarded explanations", "3 · Apply CE to your own data", "3 · Quick API".
+  Note the reorder: ce-tasks-and-modes moves before the walkthrough (Stage 2). Update every page's "Next"
+  line to follow the new order.
+- Footer "Entry-point tier: Tier 1."
 
 SCIENTIFIC AND EDITORIAL REQUIREMENTS
-- Simple academic English; define "stage" once; no claims about CE beyond linking owner pages.
-- Do not describe demos or games as validated CE outputs.
-
-REUSE
-- Reuse page titles and owner assignments from 02 §5. Do not copy content from linked pages.
+- Navigation and labels only; no new claims. Keep the PO-reviewed wording in ce-tasks-and-modes.md untouched.
+- Landing prose ≤ ~350 words (cards excluded).
 
 EXCLUSIONS
-- No new concept content, no figure, no changes to Quick Start child pages, no homepage card changes.
+- No new concept pages, no figures, no homepage or section-landing changes, no changes to pages owned by other
+  sections.
 
 VERIFICATION
-- CE_DOCS_BETA=true /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/p1a  (0 warnings)
-- /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/p1a-std  (0 warnings)
+- CE_DOCS_BETA=true /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1  (0 warnings)
+- /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1-std  (0 warnings)
 - PYTHONPATH=src /c/Python313/python.exe -m pytest tests/docs -q -p no:cacheprovider
-- /c/Python313/python.exe scripts/docs/check_internal_links.py _build/p1a
-- Headless Edge (Python Playwright from C:\Python313, no -I): journey page at 390 and 1440 px, light and
-  dark: no horizontal overflow; cards stack on phones.
+- /c/Python313/python.exe scripts/docs/check_internal_links.py _build/wp1
+- Walkthrough regenerated; PROSE_NUMBERS guard passes; diff is prose/link-only (no number changes).
+- Headless Edge (Python Playwright, C:\Python313, no -I): landing at 390 and 1440 px, light and dark — no
+  horizontal overflow; cards stack on phones.
 
 ACCEPTANCE CRITERIA
-- Five stages in order; every link resolves; each section landing names its stage; homepage structure
-  unchanged (tests/docs/index/test_homepage.py passes); all gates pass.
-- test_learning_journey.py asserts: five stage headings in order; each linked page exists; each section
-  landing contains its stage line; the semantics pointer and tier footer exist.
+- Tests assert: five stage cards in order with "core"/"optional" labels; every stage link resolves; direct-routes
+  section present; one glossary link; semantics pointer; no workflow figure on the landing; toctree labels and
+  order as specified; each Quick Start page's "Next" target equals the next toctree entry (or the next stage's
+  first page).
+- All gates pass; no "Path A/B/C" wording remains in docs/get-started or the generator.
 
 FINAL REPORT
-- Write development/reports/docs-five-stage-plan-20261113/phase-reports/<YYYY-MM-DD_HHMM>_phase-1a.md
-  (time from `date`): baseline, files changed, problems addressed, changes, duplication avoided,
-  evidence, tests and results, screenshots checked, limitations, open decisions.
+- development/reports/docs-five-stage-plan-20261113/phase-reports/<YYYY-MM-DD_HHMM>_wp-1.md (time from `date`):
+  baseline, files changed, problems, changes, duplication removed, evidence, tests and results, screenshots
+  checked, limitations, open decisions.
 
 COMMITS
-- Two commits: (1) page + landing lines + tier map + tests; (2) phase report. Messages
-  "docs(journey): …" and "chore(reports): …", ending with the attribution trailer the session provides.
-- Do not push. Print the PowerShell push command for the PO:
-  git push docs-dev docs-dev/phase-1a-journey:main   (only after PO approval)
+- (1) landing + labels + tests; (2) generator + regenerated walkthrough/notebook; (3) report. Attribution trailer
+  as the session provides. No push; print: git push docs-dev docs-dev/wp-1-quickstart-roadmap:main
+  (for the PO, after approval).
 
 STOP CONDITION
-- Stop after the report. Do not start WP 1b until the PO approves 1a.
+- Stop after the report. Do not start the next WP until the PO approves WP-1.
 ```
 
 ---
 
-## Prompt 1b — Quick Start transitions
+## Prompt WP-8 — Author-review sheet and non-blocked wording
 
 ```text
 ROLE AND OBJECTIVE
-Senior technical writer for the CE Beta docs. Objective: fix the Quick Start transitions found in the
-Phase 0 audit, without moving content between pages yet.
+Scientific documentation reviewer. Objective: produce one author-review sheet for every unresolved scientific
+or terminology item, and correct only the items that have no open author question.
 
 REPOSITORY AND SAFETY (standard block)
-- Local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations (remote "docs-dev").
-  Official CE repository and docs are read-only. Do not push; do not change src/; no reset --hard, clean,
-  force-push or deletions; preserve all unrelated modified/untracked files and never stage them.
-- Record git status, branch, HEAD and `date` first. Branch docs-dev/phase-1b-transitions from the latest
-  approved branch (1a).
-- Edit with the editor tools, not heredocs. Read 02 and 07 in
-  development/reports/docs-five-stage-plan-20261113/ first.
+- Local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations (remote "docs-dev");
+  official CE read-only; no push; no src/ changes; no destructive git; preserve unrelated files; record status,
+  branch, HEAD and `date`; branch docs-dev/wp-8-author-review; editor tools only.
 
-SCOPE AND TARGET FILES
-- docs/get-started/ml-foundations.md: A6 ends "The next page shows which tasks and outputs CE supports."
-  — stale since v3 (the next page is why-ce). Replace with a correct pointer to why-ce. Check every other
-  "next"/"previous" sentence on all Quick Start child pages (docs/get-started/{index,ml-foundations,why-ce,
-  ce-tasks-and-modes,quickstart_classification,quickstart_regression,quickstart_guarded,apply-to-your-data,
-  quick_api}.md) against the toctree order in docs/get-started/index.md and fix mismatches.
-- The walkthrough page is GENERATED: if it needs a change, edit scripts/docs/build_quickstart_walkthrough.py
-  and regenerate with `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py`;
-  never edit docs/get-started/quickstart_walkthrough.md directly.
-
-REQUIRED CONTENT
-- Each Quick Start child page ends with a "Next" line naming the next page in its path (A1→A2→B; B→C1;
-  C1→C2/C3; C2/C3→C4 or C5; C5→evaluate_ce) and starts with its path label (already present on most).
-
-SCIENTIFIC AND EDITORIAL REQUIREMENTS
-- Wording only; no new claims. Keep the PO-reviewed wording in ce-tasks-and-modes.md untouched.
+SCOPE
+- New: development/reports/docs-five-stage-plan-20261113/author-review-sheet.md. One row per item:
+  ID (SR-xx / C-xx / new N-xx), page:line, current text (quoted), issue, evidence (paper, code path, test, page),
+  options for the authors, recommended interim wording. Include at least: SR-01, SR-02, SR-03, SR-05, SR-06,
+  SR-07 (aleatoric/epistemic: tasks/classification.md:44, tasks/probabilistic_regression.md:81,
+  practitioner/playbooks/ensured-explanations.md table), SR-08 (counterfactual; ensured playbook line 3
+  "more reliable intervention recommendations"), SR-13, SR-14, SR-15, C-37, and the new items:
+  N-01 practitioner/playbooks/eu-ai-act-compliance.md:478 ("Empirical coverage vs. nominal confidence
+  (Venn-Abers guarantee) — Covered"); N-02 tasks/regression.md:58 ("arbitrary confidence levels" for
+  percentiles); N-03 CE's regression plot label "Prediction interval with 90.0% confidence" (library code —
+  report only); N-04 guarded `confidence` parameter naming. Re-read each source line before quoting it.
+- Edits (only items without an open SR id): tasks/regression.md:58 → coverage/percentile wording;
+  foundations/concepts/guarded_explanations.md → one sentence that `confidence` is the guard's conformity
+  threshold (= 1 − significance), not a confidence level for a prediction.
 
 EXCLUSIONS
-- Do not move A6/A7 (that is WP 2a). No new pages, no figures.
+- Do not resolve any SR item; do not edit the compliance playbooks (route N-01 to authors and the PO).
 
-VERIFICATION
-- Strict Beta and standard builds (0 warnings); pytest tests/docs; link checker; if the generator changed,
-  regenerate and confirm the PROSE_NUMBERS guard passes and the diff is prose-only.
-- Add tests/docs/get_started/test_quickstart_next_links.py: each child page's "Next" target equals the
-  next toctree entry of its path.
+VERIFICATION, ACCEPTANCE, REPORT, COMMITS, STOP
+- Gates (07 §1). Accept when every [S] item in 08 and 10 appears on the sheet. Report
+  phase-reports/<…>_wp-8.md. Commits: sheet; edits; report. No push. Stop.
+```
 
-ACCEPTANCE CRITERIA
-- No stale pointer remains; new test passes; all gates pass.
+---
 
-FINAL REPORT
-- phase-reports/<YYYY-MM-DD_HHMM>_phase-1b.md with the standard sections (baseline, files, problems,
-  changes, duplication, evidence, tests, limitations).
+## Prompt WP-4 — Internal CE workflow figure and Why CE / What CE Is ownership
 
-COMMITS
-- One docs commit, one report commit; attribution trailer; no push; print the PowerShell push command.
+```text
+ROLE AND OBJECTIVE
+Technical educator and figure designer. Objective: give foundations/concepts/ce_workflow.md its own figure of
+CE's internal mechanism (distinct from the conventional-vs-CE comparison on why-ce), then remove restated
+content between why-ce and what-is-ce (see Prompt 2c below for the dedupe rules).
 
-STOP CONDITION
-- Stop. Phase 2 starts only after the PO approves Phase 1 as a whole.
+REPOSITORY AND SAFETY (standard block)
+- As in Prompt 1; branch docs-dev/wp-4-internal-workflow from the latest approved WP branch.
+
+SCOPE
+- New SVG docs/_static/figures/ce-internal-workflow.svg (and a narrow variant if text would fall below ~11 px at
+  390 px; switch with <picture> as on why-ce). Content: calibration set + trained model → Calibrate
+  (Venn–Abers for classification; CPS for interval regression; CPS then Venn–Abers for probabilistic regression)
+  → calibrated prediction with lower/upper value; explanation: discretise each feature with calibration data →
+  rule for the case → substitute values from other bins → calibrated predictions → weight = difference, with
+  range. Verify every step against src/calibrated_explanations (read only) and walkthrough §6; label simplified
+  steps "simplified" where C-37 applies.
+- Style: blue/orange palette and rules of docs/_static/figures/ce-in-ml-workflow.svg (transparent background,
+  text inside filled shapes, <title>/<desc>, alt text), checked at 390/1440 light/dark.
+- docs/foundations/concepts/ce_workflow.md: replace the comparison figure with the new one; caption names it
+  "inside CE"; link why-ce for the comparison.
+- Then apply Prompt 2c (why-ce vs what-is-ce dedupe).
+
+VERIFICATION, ACCEPTANCE, REPORT, COMMITS, STOP
+- Gates; update tests/docs/get_started/test_quickstart_continuity.py figure-wiring test (ce_workflow now uses
+  ce-internal-workflow.svg). Accept when the two figures are distinct and each mechanism step has a code/test
+  reference in the report. Report phase-reports/<…>_wp-4.md. Commits: figure+page+test; dedupe; report.
+  No push. Stop.
 ```
 
 ---

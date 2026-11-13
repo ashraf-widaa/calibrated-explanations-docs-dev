@@ -1,109 +1,179 @@
-# 02 — Target information architecture
+# 02 — Target information architecture (Deliverable E, revision 2)
 
-Planning document. Nothing here is implemented. Baseline: `a55c7e9d`
-(= Beta `main`, live). Every path below exists at that commit unless marked
-**(new)**.
+**Revision 2 (2026-11-13).** Replaces revision 1. Changes, as agreed by the PO:
+Quick Start is the **five-stage roadmap (Option B)**; **no separate
+`learning-journey.md`**; the conventional-vs-CE comparison lives on its
+canonical conceptual page, distinct from an internal CE workflow diagram; three
+reading levels (L1/L2/L3) and four navigation directions (forward, deeper,
+across, backward). Evidence: `08-homepage-entry-point-audit.md`.
 
-## 1. Principle: a journey over the existing sections, not a new site
+Tags: **[V]** exists and verified · **[N]** proposed · **[S]** needs author
+review. URLs of existing pages are unchanged throughout.
 
-The homepage keeps its seven parts (Quick Start; CE: What & Why; How CE Works;
-CE in Practice; CE Software & Integration; Project & Resources; Commercial
-Services). The five stages are a **reading order across those sections**.
-They are not five new top-level sections. Each stage:
+## 1. Three functions, one set of canonical pages
 
-- has **one landing anchor** on a single new journey page;
-- lists the existing pages that own its topics, in reading order;
-- names its audience, prerequisites and exit point.
+| Function | Purpose | Where it lives | Rule |
+|---|---|---|---|
+| **Tutorial** | Prerequisite-aware learning sequence | Quick Start (navigator) + Quick Start-owned tutorial pages (ML essentials, Why CE, walkthrough, quickstarts, C5) | Teaches by linking canonical pages in order; owns only tutorial pages |
+| **Academic compendium** | Concepts, mathematics, statistics, science | How CE Works, CE: What & Why, Research & Publications | Owns definitions, mechanisms, guarantees, references |
+| **Technical reference manual** | Accurate task-oriented use, integration, extension, evaluation | CE in Practice, CE Software & Integration, Project (contributing) | Owns APIs, procedures, configuration, troubleshooting |
 
-Each section landing page states, in one line, which stage(s) it serves. This
-keeps every section independently usable while giving beginners an ordered
-path.
+A concept is **defined once** (compendium owner), **practised once** (tutorial
+or manual owner) and **referenced** everywhere else with a forward, deeper,
+across or backward link (`11-cross-entry-navigation-matrix.md`).
 
-## 2. The five-stage journey
+## 2. Seven entry-point trees (target)
 
-| Stage | Reader question | Audience | Owning section(s) | Pages, in reading order |
-|---|---|---|---|---|
-| **1 · Foundations** | What are AI, models and predictions, and why are they hard to trust? | Beginners, students | Quick Start (A1) + CE: What & Why | `get-started/ml-foundations` (revised: AI systems vs models, rule-based AI vs ML, training vs inference, learning approaches, tasks, families, data roles) → **(new)** `explainable-ai.md` (black boxes and transparency, what XAI is, its limits; absorbs ml-foundations A6–A7) |
-| **2 · CE concepts** | What does CE add, and how should I read it? | Beginners, decision-makers | Quick Start (A2) + What & Why + How CE Works | `get-started/why-ce` → **(new)** `foundations/concepts/calibration_intuition.md` (scores vs probabilities, reliability, calibration, uncertainty, with real figures) → `what-is-ce` (what CE adds, guarantees and non-guarantees, fit) → `foundations/concepts/ce_workflow` → `foundations/how-to/interpret_explanations` |
-| **3 · Using CE** | How do I install, run, read and integrate CE? | Practitioners, developers | Quick Start (B, C) + CE in Practice + Software & Integration | demo app / walkthrough (B) → `get-started/installation` → `get-started/ce-tasks-and-modes` → quickstarts C2–C4 → `get-started/apply-to-your-data` → `get-started/quick_api` (revised: main components) → `foundations/how-to/integrate_with_pipelines` → `practitioner/evaluate_ce` → `get-started/troubleshooting` (revised) → task guides and playbooks as needed |
-| **4 · Going deeper** | Why does it work, what exactly is guaranteed, and how is it evaluated? | Advanced users, researchers | How CE Works + Research & Publications | `foundations/concepts/calibration_methods` → `foundations/concepts/calibrated_interval_semantics` → explanation construction (`ce_workflow` §, `explanation_structures`, `alternatives`, `probabilistic_regression`) → `compare` (rewritten: design comparison, no unsupported claims) → `researcher/advanced/theory_and_literature` → `researcher/replication/index` → `researcher/future_work` |
-| **5 · Contributing** | How is CE built, tested and extended, and where can I contribute? | Contributors, researchers | Project & Resources + Software & Integration | `sections/project-evolution` → **(new)** `contributor/development_setup.md` (includes `CONTRIBUTING.md`) → `foundations/concepts/architecture` → `contributor/plugin-contract` and `contributor/extending/guides/index` → `foundations/governance/test_policy` and `pr_guide` → `researcher/future_work` (verified limitations vs proposed research) |
+### 2.1 Quick Start — five-stage roadmap (Option B)
 
-## 3. Quick Start child-page hierarchy (keep v3, small changes)
-
-The v3 Quick Start already implements A/B/C and is live. It stays the
-**condensed** entry; the journey page is the **full** route.
+Landing `get-started/index.md` [V → revised]: short definition of CE; **five
+stage cards**; "direct routes" for experienced readers; install/API/glossary
+line. **No workflow figure on the landing** (it moves to `why-ce` only).
 
 ```text
-Quick Start — Understand, Explore and Apply CE          get-started/index
-├── A1 · Machine learning essentials                       get-started/ml-foundations   (trimmed to ML essentials; A6–A7 move to Stage 1 XAI page)
-├── A2 · Why CE: from a conventional to a CE workflow      get-started/why-ce           (unchanged role; links calibration_intuition)
-├── B  · Guided Python walkthrough                         get-started/quickstart_walkthrough  (generated; unchanged role)
-├── C1 · Tasks, modes and capabilities                     get-started/ce-tasks-and-modes
-├── C2 · Classification quickstart                         get-started/quickstart_classification
-├── C3 · Regression quickstart                             get-started/quickstart_regression
-├── C4 · Guarded explanations                              get-started/quickstart_guarded
-├── C5 · Apply CE to your own data                         get-started/apply-to-your-data
-└── Quick API → "Main components and calls"                get-started/quick_api       (revised, same URL)
+Quick Start  get-started/index.md
+├── Stage 1 · Foundations  (core)
+│     get-started/ml-foundations ............ [V, revised: AI systems vs models, rule-based vs ML]
+│     explainable-ai ........................ [N] (CE: What & Why) black boxes, transparency, XAI and limits
+├── Stage 2 · CE concepts  (core)
+│     get-started/why-ce .................... [V] conventional vs CE workflow (canonical comparison figure)
+│     foundations/concepts/calibration_intuition [N] scores vs probabilities, calibration, uncertainty, interval meaning (L1)
+│     get-started/ce-tasks-and-modes ........ [V] task → mode → method → output
+│     foundations/concepts/ce_workflow ...... [V, revised: internal CE workflow diagram]
+│     foundations/how-to/interpret_explanations [V] factual and alternative explanations
+│     what-is-ce ............................ [V] guarantees vs non-guarantees, fit (summary; links semantics)
+├── Stage 3 · Using CE  (core)
+│     external demo app (no install) → get-started/quickstart_walkthrough [V] → get-started/installation [V]
+│     → quickstart_classification / quickstart_regression / quickstart_guarded [V] → apply-to-your-data [V]
+│     → practitioner/evaluate_ce [V] → get-started/troubleshooting [V, revised] → get-started/quick_api [V, revised]
+├── Stage 4 · Going deeper  (optional)
+│     foundations/concepts/calibration_methods [V] → calibrated_interval_semantics [V] → explanation construction
+│     (ce_workflow §, explanation_structures [S], alternatives, probabilistic_regression) → foundations/how-to/conditional_calibration
+│     → compare [V, rewrite] → researcher/index [V, revised] → researcher/future_work [V, revised]
+└── Stage 5 · Contributing  (optional)
+      sections/project-evolution → contributor/development_setup [N] → foundations/concepts/architecture
+      → contributor/plugin-contract → contributor/extending/guides/index → foundations/governance/test_policy, pr_guide
 ```
 
-The Quick Start landing gets one added line: "For the full five-stage route,
-see the learning journey." No other structural change.
+**Sidebar (toctree) of Quick Start.** Only Quick Start-owned pages, relabelled
+by stage; pages owned by other sections are linked from the stage cards but
+not duplicated in this toctree (avoids two sidebar homes and conflicting
+prev/next):
 
-## 4. Mapping to the homepage cards
+```text
+1 · Machine learning essentials       get-started/ml-foundations
+2 · Why CE                            get-started/why-ce
+2 · Tasks, modes and capabilities     get-started/ce-tasks-and-modes
+3 · Guided Python walkthrough         get-started/quickstart_walkthrough
+3 · Classification quickstart         get-started/quickstart_classification
+3 · Regression quickstart             get-started/quickstart_regression
+3 · Guarded explanations              get-started/quickstart_guarded
+3 · Apply CE to your own data         get-started/apply-to-your-data
+3 · Quick API                         get-started/quick_api
+```
 
-| Homepage part | Stage(s) | Change |
+Direct routes on the landing: "I know ML → Stage 2"; "I want code now →
+walkthrough or C2/C3"; "I have a model → C1 then C5"; "I need the maths →
+Stage 4"; "I want to contribute → Stage 5".
+
+Page path labels change from "Path A/B/C, step n" to "Stage n" (in-page labels
+and the walkthrough generator).
+
+### 2.2 CE: What & Why (compendium, L1)
+
+```text
+sections/what-and-why.md — cards reordered as a progression
+├── Understanding AI models ......... → get-started/ml-foundations (across; Quick Start owns it)
+├── Black boxes and explainable AI .. explainable-ai.md [N] (owner; absorbs ml-foundations A6–A7, keeps anchor why-predictions-are-not-enough)
+├── Can we trust AI outputs? ........ → foundations/concepts/calibration_intuition [N] (across)
+├── What CE is and adds ............. what-is-ce.md [V] (owner: contribution, fit, guarantee summary)
+├── The explainability gap .......... compare.md [V → rewrite as design comparison]
+└── Trustworthy AI (regulation) ..... practitioner/playbooks/eu-ai-act-compliance [V, S: line 478 claim]
+Sidebar: Overview · Black boxes and XAI [N] · What CE Is · The Explainability Gap · Trustworthy AI
+```
+
+### 2.3 How CE Works (compendium, L1→L3)
+
+```text
+sections/how-ce-works.md
+Sidebar (reordered; URLs unchanged):
+├── Overview
+├── Calibration & Uncertainty (intuition) ... foundations/concepts/calibration_intuition [N] (L1)
+├── The CE Workflow ......................... foundations/concepts/ce_workflow [V; new internal-mechanism figure] (L1–L2)
+├── Statistical Methods Behind CE ........... foundations/concepts/calibration_methods [V] (L2–L3)
+├── Guarantees by Mode ...................... foundations/concepts/calibrated_interval_semantics [V; label only] (L3)
+├── How Explanations Are Built .............. foundations/concepts/explanation_structures [V, S] + alternatives, probabilistic_regression (L2–L3)
+├── How to Read CE Explanations ............. foundations/how-to/interpret_explanations [V; telemetry section → link] (L2)
+└── Essential Foundations (hub) ............. foundations/index [V; governance pointer moved to Project]
+```
+
+### 2.4 CE in Practice (manual, L2)
+
+```text
+sections/in-practice.md — cards: app, Expert Hub, Decision Lab (external, labelled);
+  "Apply CE to your own data" → get-started/apply-to-your-data [V] (deeper: integrate_with_pipelines);
+  "Example notebooks" → only notebooks verified by the driver [N]; evaluate_ce; tasks
+Sidebar unchanged in shape; each cluster gets one owner page with role lines on the others:
+  performance → foundations/how-to/tune_runtime_performance · reject → practitioner/advanced/reject-policy
+  Mondrian → foundations/how-to/conditional_calibration · telemetry → foundations/how-to/configure_telemetry
+Task guides: wording revised where no author question is pending; SR-tied terms marked [S]
+```
+
+### 2.5 CE Software & Integration (manual, L2–L3)
+
+```text
+sections/software-integration.md — add group "Configuration & operations" (links only:
+  configure_runtime, safe-defaults, tune_runtime_performance, configure_telemetry)
+├── Software Foundations ......... versions · installation · architecture
+├── Development & Integration .... api/index [V; add "main components" overview linking quick_api and autosummary]
+│                                  · integrate_with_pipelines · plugins
+└── Maintenance & Support ........ troubleshooting [V → canonical error list] · upgrade · migration
+Sub-hub pages (16–18 lines) stay as sidebar parents but carry no repeated prose.
+```
+
+### 2.6 Project & Resources (compendium + manual for contributors)
+
+```text
+Resources: Glossary [V] · Parameter Reference [V]
+CE Project, Vision & Evolution:
+├── Overview
+├── Research & Publications ... researcher/index [V; + research history] → replication · advanced · future_work [V; items labelled]
+├── citing · ROADMAP
+├── Community & Contributions .. contributor/index [V; ordered path]
+│     → contributor/development_setup [N] (includes or summarises CONTRIBUTING.md)
+│     → architecture (across, Software) → plugin-contract [V; example fixed] → extending → test_policy, pr_guide
+└── Governance & support [V; visibility decision C-33]
+```
+
+### 2.7 Commercial Services — keep unchanged
+
+## 3. Navigation directions (applied on every stage and compendium page)
+
+- **Forward:** "Next:" to the next concept in the stage (or next stage).
+- **Deeper:** "Go deeper:" to the L3 owner.
+- **Across:** "See it in practice:" to the example or reference.
+- **Backward:** "Before this:" prerequisite or intuition owner.
+
+Detailed edges: `11-cross-entry-navigation-matrix.md`. Concept order and
+owners: `10-concept-curriculum-matrix.md`.
+
+## 4. Canonical owners (summary)
+
+| Topic | Owner | Function |
 |---|---|---|
-| Quick Start | 1 (A1), 2 (A2), 3 (B, C) | One link to the journey page |
-| CE: What & Why | 1, 2 | Add `explainable-ai` to the sidebar group; landing card "Understanding AI Models" keeps → ml-foundations; card "Can We Trust AI Outputs?" → `calibration_intuition` |
-| How CE Works | 2, 4 | Add `calibration_intuition` before the semantics page; relabel the semantics entry "Guarantees by mode" (URL unchanged) — **PO decision** |
-| CE in Practice | 3 | Unchanged structure; cards already list demos, notebooks, evaluation |
-| CE Software & Integration | 3, 5 | `quick_api` revision and troubleshooting are linked from the landing; no moves |
-| Project & Resources | 4, 5 | `contributor/development_setup` (new) in the Community group; research hub gains a "Research history" list (existing citations) |
-| Commercial Services | — | Unchanged |
-
-**Journey page placement — PO decision.** Recommended: `docs/learning-journey.md`
-**(new)**, linked from (1) the homepage hero hint line, (2) the Quick Start
-landing, (3) each section landing ("This section is Stage N of the learning
-journey"). It sits in the sidebar directly under Quick Start. Alternative: only
-section-landing links, no sidebar entry.
-
-## 5. Primary content ownership (one owner per topic)
-
-| Topic | Canonical owner | Others must link, not restate |
-|---|---|---|
-| AI, ML, learning approaches, tasks, model families, data roles | `get-started/ml-foundations` | why-ce, what-is-ce, glossary |
-| Black boxes, transparency, what XAI is and its limits | `explainable-ai` **(new)** | ml-foundations, what-is-ce, compare |
-| Conventional vs CE workflow; reading one CE output | `get-started/why-ce` | ce_workflow, landing |
-| Scores vs probabilities; calibration; uncertainty (intuition) | `foundations/concepts/calibration_intuition` **(new)** | ml-foundations A6 (removed), why-ce, ce-tasks-and-modes |
-| What CE adds, guarantees vs non-guarantees, when it fits | `what-is-ce` | why-ce (one-line pointers) |
-| Mode semantics (formal) | `foundations/concepts/calibrated_interval_semantics` | all quickstarts (semantics notes point here, per STD-004) |
-| How CE calibrates (methods, maths) | `foundations/concepts/calibration_methods` | ce_workflow, tasks pages |
-| How explanations are built | `foundations/concepts/ce_workflow` §"How an explanation is built" (overview) and walkthrough §6 (worked) | interpret_explanations |
-| Reading explanations and plots | `foundations/how-to/interpret_explanations` | quickstarts ("Reading the plot" stays short and links here) |
-| Task/mode choice | `get-started/ce-tasks-and-modes` | tasks/index (reference), quick_api, task_api_comparison |
-| Evaluating CE on your data | `practitioner/evaluate_ce` | C5, walkthrough |
-| Errors and fixes | `get-started/troubleshooting` | C5 "Common problems" (keeps a short table + link) |
-| Development setup and tests | `contributor/development_setup` **(new)**, including `CONTRIBUTING.md` | contributor hub |
-| Performance, reject, plugins, Mondrian, telemetry clusters | as in Report C (C-23…C-28) of `learning-reports/2026-11-12_0910_L06-FULL-DOCS-REVIEW-A-E.md` | — (Phase 6 housekeeping) |
-
-## 6. Cross-reference strategy
-
-- **Forward and back at page edges.** Each journey page ends with "Next" (the
-  next stage page) and starts with "You are in Stage N" plus its prerequisite.
-- **Concept on first use.** First use of a defined term links once to its owner
-  page or the glossary (`{term}` roles exist, per G-P3).
-- **Depth links, not depth text.** Beginner pages end sections with "Go deeper:"
-  to the Stage 4 owner; Stage 4 pages start with "Intuition first:" back to the
-  Stage 2 owner.
-- **No restated guarantees.** Any page that mentions a guarantee links the
-  semantics page instead of paraphrasing it (existing STD-004 rule).
-
-## 7. Research and contributor pathway
-
-Researchers: Stage 2 (intuition) → Stage 4 (methods → semantics → explanation
-construction → evaluation/comparison → literature → replication → open
-questions). Contributors: Stage 3 (use the API) → Stage 5 (setup → architecture
-→ extension contracts → tests and PR guide). The two meet at
-`researcher/future_work`, which must label each item **verified limitation**,
-**open question to authors** or **proposed extension**.
+| AI, ML, learning approaches, tasks, model families, data roles | `get-started/ml-foundations` | Tutorial (L1) |
+| Black boxes, transparency, XAI and its limits | `explainable-ai` [N] | Compendium (L1) |
+| Conventional vs CE workflow (comparison figure) | `get-started/why-ce` | Tutorial (L1) |
+| Internal CE workflow (mechanism figure), learning path | `foundations/concepts/ce_workflow` | Compendium (L1–L2) |
+| Scores vs probabilities; calibration; uncertainty; interval meaning (intuitive) | `foundations/concepts/calibration_intuition` [N] | Compendium (L1) |
+| Task → mode → method → output | `get-started/ce-tasks-and-modes` | Tutorial/manual (L1–L2) |
+| Methods (Venn–Abers, conformal, CPS) | `foundations/concepts/calibration_methods` | Compendium (L2–L3) |
+| Guarantees and non-guarantees by mode | `foundations/concepts/calibrated_interval_semantics` | Compendium (L3) |
+| Explanation construction | `ce_workflow` §(overview) + `explanation_structures` (L3) [S] | Compendium |
+| Reading explanations and plots | `foundations/how-to/interpret_explanations` | Manual (L2) |
+| Applying to own data / integration | `get-started/apply-to-your-data` / `foundations/how-to/integrate_with_pipelines` | Manual (L2) |
+| Evaluation | `practitioner/evaluate_ce` | Manual (L2) |
+| Errors | `get-started/troubleshooting` | Manual (L2) |
+| API components | `get-started/quick_api` (overview) + autosummary (signatures) | Manual (L2–L3) |
+| Development setup and contribution | `contributor/development_setup` [N] + `contributor/index` | Manual (L2) |
+| Open questions and limitations | `researcher/future_work` | Compendium (L3) |
