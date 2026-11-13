@@ -1,6 +1,6 @@
 # 03 — Content migration matrix
 
-**Revision 2:** Quick Start is the five-stage roadmap (Option B); there is no `learning-journey.md`. Work packages are those of `12-prioritised-improvement-plan.md`.
+**Revision 3:** Quick Start keeps Paths A/B/C (`13-architecture-reconciliation.md`); no `learning-journey.md`; the "Stage" headings below are curriculum bands used for planning only. Work packages are those of `12-prioritised-improvement-plan.md`.
 
 Scope: every page the plan touches, plus each page group's status. Pages not
 listed keep their place and content (action **Keep**). No URL changes are
@@ -13,9 +13,9 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 
 | Existing path | Current purpose | Audience | Destination | Action | Reason | Pri | Depends on | Val. |
 |---|---|---|---|---|---|---|---|---|
-| `get-started/ml-foundations.md` | ML essentials A1–A7 (Quick Start A1) | Beginners | same | **Revise / Split** | Add AI systems vs models and rule-based vs ML (missing); move A6–A7 to the XAI page (A6 duplicates why-ce §1; A6 ends with a stale "next page" pointer) | P1 | 1b, D-3 | builds, links, S1–S3 |
-| — | — | Beginners | `explainable-ai.md` **(new)** | **New (Merge from A6–A7)** | Black boxes, transparency, XAI and its limits have no owner | P1 | 2a | S3, S4, S8, wording test |
-| `sections/what-and-why.md` | Section landing | All | same | **Reorder / Revise** | Cards as a progression; card for the XAI page; optional stage line | P2 | WP-2, WP-5 | landing tests |
+| `get-started/ml-foundations.md` | ML essentials A1–A7 (Quick Start A1) | Beginners | same | **Revise** | Add AI systems vs models and rule-based vs ML (missing); keep A7 (short L1) with a deeper link to the XAI page; shorten A6 to a bridge to why-ce (keeps anchor; removes duplication and the stale pointer) | P1 | WP-1, WP-2, D-3 | builds, links, S1–S3 |
+| — | — | Beginners, decision-makers | `explainable-ai.md` **(new)** | **New** | Black boxes, transparency, XAI and its limits have no owner (A7's short intro stays in Path A) | P1 | WP-2 | S3, S4, S8, wording test |
+| `sections/what-and-why.md` | Section landing | All | same | **Reorder / Revise** | Cards as a progression; card for the XAI page; forward/deeper/across links | P2 | WP-2, WP-5 | landing tests |
 | `glossary/science.md` | Definitions with "Taught in" links | All | same | **Cross-reference** | Retarget links that point at A6/A7 | P2 | 2a | glossary tests |
 
 ## Stage 2 — CE concepts
@@ -33,8 +33,8 @@ Priority: **P1** blocks a stage's learning goal; **P2** quality or friction;
 
 | Existing path | Current purpose | Audience | Destination | Action | Reason | Pri | Depends on | Val. |
 |---|---|---|---|---|---|---|---|---|
-| `get-started/index.md` | Quick Start landing (v3, paths A/B/C) | All | same | **Revise** | Becomes the five-stage roadmap with direct routes; workflow figure moves to why-ce only; toctree relabelled by stage | P1 | WP-1, D-11, D-12 | continuity tests (rewritten) |
-| `get-started/quickstart_walkthrough.md` | Generated walkthrough (Path B) | Learners | same | **Keep** | Verified; edit only via generator | — | — | generator, PROSE guard |
+| `get-started/index.md` | Quick Start landing (v3, paths A/B/C) | All | same | **Revise** | Keep A/B/C; add "Where should I go next?" (six entry points); figure per D-16; toctree order and labels unchanged | P1 | WP-1, D-11, D-16 | continuity tests (extended) |
+| `get-started/quickstart_walkthrough.md` | Generated walkthrough (Path B) | Learners | same | **Revise (via generator)** | Rename "Optional A/B/C" → "Extra 1/2/3" (collides with Paths A/B/C); "Go deeper" after §5–6; next-steps rows for the six entry points | P2 | WP-1, D-17 | generator, PROSE guard |
 | `get-started/ce-tasks-and-modes.md` | Mode choice, outputs, capabilities (C1) | Practitioners | same | **Keep** | Owner of mode choice | — | — | continuity tests |
 | `get-started/quickstart_{classification,regression,guarded}.md`, `apply-to-your-data.md` | Executed quickstarts (C2–C5) | Practitioners | same | **Keep** | Verified outputs and plots | — | — | execution tests |
 | `get-started/quick_api.md` | Call list with semantics notes | Practitioners | same (retitled) | **Revise** | No component overview; Stage 3 "main components" missing | P1 | 3a | S9, execution test |

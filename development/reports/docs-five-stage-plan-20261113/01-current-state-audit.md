@@ -62,6 +62,11 @@ glossary.
 
 ## 3. Weaknesses by stage
 
+> **Revision 3 note.** "Stage 1–5" in this document names **curriculum bands**, a planning aid for
+> grouping concepts. They are not a navigation structure; Quick Start keeps Paths A/B/C
+> (`13-architecture-reconciliation.md`).
+
+
 ### Stage 1 — Foundations
 
 - **Missing:** AI systems vs AI models; rule-based AI vs machine learning (only

@@ -1,5 +1,7 @@
 # 12 — Prioritised improvement plan (Deliverable F)
 
+**Revision 3:** WP-1 and WP-2 revised, D-12 withdrawn, D-16 and D-17 added, per `13-architecture-reconciliation.md` (binding).
+
 Supersedes the phase/work-package split in `05` where they differ (05 keeps
 the phase framing; this file is the authoritative WP list). Effort: S / M / L
 relative (S ≈ one or two pages, no figure; M ≈ several pages or one figure or
@@ -10,47 +12,56 @@ items **[S]** are marked, never resolved.
 
 ---
 
-### WP-1 — Quick Start as the five-stage roadmap (Option B) · P1 · M
+### WP-1 — Quick Start A/B/C improvements and "Where should I go next?" · P1 · M
 
-- **Objective.** Turn the Quick Start landing into the concise five-stage
-  roadmap with direct routes; relabel its own pages by stage; keep URLs.
-- **Affected pages.** `docs/get-started/index.md`; in-page path labels in
-  `ml-foundations.md`, `why-ce.md`, `ce-tasks-and-modes.md`,
+- **Objective.** Keep Paths A/B/C (structure, order, labels); improve
+  orientation and navigation so every reader can leave the Quick Start at
+  their level and goal.
+- **Affected pages.** `docs/get-started/index.md`; end-of-page navigation
+  lines on `ml-foundations.md`, `why-ce.md`, `ce-tasks-and-modes.md`,
   `quickstart_{classification,regression,guarded}.md`, `apply-to-your-data.md`,
-  `quick_api.md`; walkthrough labels via `scripts/docs/build_quickstart_walkthrough.py`
-  (regenerate); `tests/docs/get_started/test_quickstart_continuity.py` (landing
-  tests currently assert cards A/B/C and the figure on the landing — rewrite
-  them for five stages); fix the stale A6 pointer in ml-foundations.
-- **Dependencies.** PO decisions D-11, D-12 (below). Stage cards may link only
-  pages that exist; WP-2/3 add their pages to the cards when created.
-- **Changes.** Five stage cards (Stages 1–3 "core", 4–5 "optional"), each:
-  goal, prerequisites, ordered links; direct-routes list; install/API/glossary
-  line; no workflow figure (it remains on `why-ce`); toctree labels "1 ·", "2 ·",
-  "3 ·" for Quick Start-owned pages only.
-- **Scientific verification.** None new (navigation only); keep the semantics
-  pointer (STD-004 Tier 1).
-- **Acceptance.** Landing readable in ≤ 3 minutes (≤ ~350 words of prose);
-  five stages in order; every link resolves; continuity, journeys, navigation
-  and glossary tests pass; 390/1440 light/dark layout check.
-- **Risks.** Readers and tests depend on "Path A/B/C" wording; regenerating the
-  walkthrough must stay number-identical (PROSE guard).
+  `quick_api.md`; walkthrough via `scripts/docs/build_quickstart_walkthrough.py`
+  (regenerate); `tests/docs/get_started/test_quickstart_continuity.py`
+  (extend; the A/B/C landing tests stay).
+- **Dependencies.** D-11, D-16, D-17.
+- **Changes.** (1) Landing: "Where should I go next?" with the six other
+  entry points (one line each, existing landing pages as targets); figure
+  per D-16 with a link to `why-ce`; cards stay A/B/C (no reading-level
+  labels). (2) Every Quick Start page: **Next** (path order), **Go deeper**
+  (L3 owner for the concepts on that page — `calibration_methods` section,
+  `calibrated_interval_semantics` mode, `explanation_structures`), **See
+  also** (across), **Before this** (prerequisite). (3) ml-foundations: fix
+  the stale A6 pointer. (4) Walkthrough: "Optional A/B/C" → "Extra 1/2/3";
+  "Go deeper" after §5 and §6; next-steps table rows for the six entry
+  points.
+- **Scientific verification.** Each "Go deeper" target must actually treat
+  the concept at L3 (check the section anchor exists and matches the
+  mode); no new claims.
+- **Acceptance.** A/B/C cards, order and labels unchanged; six entry-point
+  links resolve; every Quick Start page has Next and Go deeper (Before this
+  where a prerequisite exists); no "Optional A/B/C" wording remains;
+  continuity, journeys, navigation, homepage and glossary tests pass;
+  walkthrough numbers unchanged; 390/1440 light/dark check.
+- **Risks.** Link lines must stay short (orientation, not repetition);
+  regeneration must keep the PROSE guard green.
 
-### WP-2 — Stage 1: AI systems, black boxes, explainable AI · P1 · L
+### WP-2 — Foundations: AI systems, black boxes, explainable AI · P1 · L
 
 - **Objective.** Complete Stage 1 (concepts 1, 2, 8, 9 in `10`).
 - **Affected pages.** `get-started/ml-foundations.md` (§A0 AI systems vs
-  models; rule-based vs ML in A1; A6–A7 moved out); **new**
+  models; rule-based vs ML in A1; A7 kept short with a "Go deeper" link; A6
+  shortened to a bridge to `why-ce`, anchor kept — `13` R-8); **new**
   `docs/explainable-ai.md`; `docs/index.md` (What & Why toctree);
   `sections/what-and-why.md`; glossary "Taught in" links; tier map.
 - **Dependencies.** WP-1; D-3.
-- **Changes.** As 06 Prompt 2a; keep label `why-predictions-are-not-enough`.
+- **Changes.** As 06 Prompt 2a (rev. 3); keep label `why-predictions-are-not-enough`; no material removed from Path A beyond the duplicated A6 text.
 - **Scientific verification.** Definitions against standard sources; citations
   only with resolvable DOI/arXiv; S3/S4/S8 wording tests.
 - **Acceptance.** Concepts 1, 2, 8, 9 have L1 coverage; no broken anchors.
 - **Risks.** Inbound links to A6/A7; scope creep into a general AI textbook
   (cap the page at core needs for CE).
 
-### WP-3 — Stage 2: calibration and uncertainty intuition · P1 · L
+### WP-3 — Calibration and uncertainty intuition (L1 owner) · P1 · L
 
 - **Objective.** One L1 owner for concepts 11–14, 17, 29 (score vs probability,
   calibration, accuracy vs calibration vs confidence score vs uncertainty,
@@ -159,7 +170,7 @@ items **[S]** are marked, never resolved.
 - **Risks.** Compliance-playbook claims have legal reading; route to authors
   and the PO.
 
-### WP-9 — Stage 4 bridges and research pathway · P2 · M
+### WP-9 — L1↔L3 bridges and research pathway · P2 · M
 
 - **Objective.** Deeper/backward links (Stage 2 ↔ Stage 4); research history;
   labelled open questions; an L1 bridge for marginal vs conditional coverage
@@ -169,7 +180,7 @@ items **[S]** are marked, never resolved.
 - **Dependencies.** WP-3; author answers for SR-02 wording.
 - **Acceptance.** Journey edges in `tests/docs/test_reader_journeys.py`.
 
-### WP-10 — Stage 5 contributor path · P2 · S–M
+### WP-10 — Contributor path · P2 · S–M
 
 - **Objective.** Setup page, ordered hub, architecture reading guide.
 - **Affected pages.** 06 Prompt 5.
@@ -197,15 +208,17 @@ WP-1 → WP-8 (sheet, in parallel with WP-2) → WP-2 → WP-3 → WP-4 → WP-6
 → WP-5 → WP-9 → WP-10 → WP-11 → WP-12.
 
 Rationale: the roadmap (WP-1) frames everything; the author sheet (WP-8) goes
-out early because several later WPs wait on answers; Stage 1–3 (core) before
-Stage 4–5 (optional); housekeeping last.
+out early because several later WPs wait on answers; beginner-facing concepts before
+advanced and contributor material; housekeeping last.
 
 ## New decisions (in addition to D-1…D-10 in `00-README.md`)
 
 | ID | Decision | Recommendation |
 |---|---|---|
-| D-11 | Quick Start toctree holds only Quick Start-owned pages; pages owned elsewhere are linked from stage cards, not duplicated in the sidebar | Approve |
-| D-12 | Replace "Path A/B/C, step n" labels with "Stage n" in pages, toctree and walkthrough generator | Approve |
+| D-11 | Quick Start toctree holds only Quick Start-owned pages, in the current order and labels; pages owned elsewhere are linked, not duplicated in the sidebar | Approve |
+| D-12 | ~~Replace "Path A/B/C" labels with "Stage n"~~ **Withdrawn (rev. 3)** | — |
 | D-13 | Policy for the 32 non-runnable fragment pages: (a) leave as fragments with a one-line "assumes `explainer` from …" note, or (b) make each self-contained and tested | (a) now, (b) for pages on the Stage 1–3 path |
 | D-14 | Send the author-review sheet (WP-8) before WP-3 starts | Approve |
 | D-15 | `ce_workflow` gets a new internal-mechanism figure and stops reusing the comparison figure | Approve |
+| D-16 | Quick Start landing figure: keep smaller (≤ ~560 px) with a link to `why-ce`, or remove | Keep smaller |
+| D-17 | Rename the walkthrough's "Optional A/B/C" to "Extra 1/2/3" | Approve |

@@ -54,12 +54,14 @@ Homepage hero button "Quick Start"
 | Other sections? | No route to Stage 5 (contributing) [P!] |
 | Return path? | Sidebar and prev/next work [V] |
 
-**Gaps against Option B.** The landing is organised by three paths, not five
-stages; the comparison figure dominates the landing (it belongs to the
-conceptual owner, `why-ce`); Stages 4–5 have no entry; black boxes/XAI (Stage 1)
-and a calibration intuition page (Stage 2) do not exist.
+**Gaps (rev. 3).** No "Where should I go next?" route to the other six entry
+points; six of nine pages have no deeper link to the methods page; no route
+to contributing; the comparison figure is large on the landing (D-16); the
+walkthrough's "Optional A/B/C" collides with Paths A/B/C; black boxes/XAI
+and a calibration-intuition page do not exist (owned by other sections).
+Paths are goal-based, not level-based (`13` §2).
 
-### C. Proposed target tree — see 12 §2.1. Change classes: **Revise** (landing as five-stage roadmap), **Reorder** (toctree labels by stage), **Relocate content** (figure → `why-ce` only), **Create missing content** (Stage 1 XAI page, Stage 2 intuition page — owned elsewhere), **Add cross-link** (Stages 4–5).
+### C. Proposed target tree — see `13` §5 and `02` rev. 3 §2.1. Change classes: **Keep** (A/B/C structure, order, labels), **Revise** (landing: "Where should I go next?"; figure per D-16), **Add cross-link** (Next / Go deeper / See also / Before this on every page), **Revise** (walkthrough optional-section names via generator), **Create missing content** (XAI and calibration-intuition pages, owned by other sections).
 
 ---
 

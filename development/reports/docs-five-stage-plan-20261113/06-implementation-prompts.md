@@ -5,21 +5,27 @@ Paste one prompt at a time; each ends with a stop condition. Every prompt is
 self-contained; the **standard block** below is repeated inside each prompt,
 so nothing has to be pasted separately.
 
-**Prompt index (revision 2).** WP-1 → Prompt 1 · WP-2 → Prompt 2a · WP-3 → Prompt 2b (add the two contrast tables from 12 WP-3) · WP-4 → Prompt WP-4 (+ 2c) · WP-5 → Prompt 4b (+ reorder the What & Why cards) · WP-6 → Prompts 3a, 3b, 3c · WP-7 → Prompt 3d · WP-8 → Prompt WP-8 (+ 3e) · WP-9 → Prompts 4a, 4c · WP-10 → Prompt 5 · WP-11 → Prompts 6a, 6b · WP-12 → Prompt 6c. Prompts 1a and 1b of revision 1 (learning-journey page) are withdrawn.
+**Revision 3 — binding: `13-architecture-reconciliation.md`.** Quick Start keeps Paths A/B/C; no stage labels or stage navigation anywhere. **Prompt index:** WP-1 → Prompt 1 · WP-2 → Prompt 2a · WP-3 → Prompt 2b (add the two contrast tables from 12 WP-3) · WP-4 → Prompt WP-4 (+ 2c) · WP-5 → Prompt 4b (+ reorder the What & Why cards) · WP-6 → Prompts 3a, 3b, 3c · WP-7 → Prompt 3d · WP-8 → Prompt WP-8 (+ 3e) · WP-9 → Prompts 4a, 4c · WP-10 → Prompt 5 · WP-11 → Prompts 6a, 6b · WP-12 → Prompt 6c. Earlier prompts 1a/1b (learning-journey page) and the rev. 2 Prompt 1 (five-stage landing) are withdrawn. In every prompt, read "Phase n" as the corresponding WP, and "stage" only as a concept-ordering aid, never as a label.
 
 Paths were discovered at baseline `a55c7e9d`. If a path no longer exists when
 you run a prompt, the agent must stop and report it, not guess.
 
 ---
 
-## Prompt 1 — Quick Start as the five-stage roadmap (WP-1)
+## Prompt 1 — Quick Start A/B/C improvements and "Where should I go next?" (WP-1)
 
 ```text
 ROLE AND OBJECTIVE
 You are a senior documentation architect and technical educator for the Calibrated Explanations (CE) Beta
-documentation. Objective: turn the Quick Start landing into the concise five-stage roadmap (Option B) over
-existing canonical pages, relabel Quick Start-owned pages by stage, and fix stale transitions. Do not create
-docs/learning-journey.md. Do not change the homepage.
+documentation. Objective: keep the Quick Start Paths A/B/C (structure, order, labels) and improve orientation
+and navigation, so every reader can continue at their own level and goal. Do not introduce stages, stage
+labels or a learning-journey page. Do not change the homepage.
+
+BINDING ARCHITECTURE (read first)
+development/reports/docs-five-stage-plan-20261113/13-architecture-reconciliation.md — three reading levels
+(L1/L2/L3), prerequisite-aware progression, forward/deeper/across/backward navigation, tutorial + compendium +
+reference manual over canonical pages, canonical ownership, audience flexibility. A/B/C are reader goals, not
+reading levels: never label a path or card with L1/L2/L3.
 
 REPOSITORY AND SAFETY (standard block)
 - Work only in the local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations
@@ -29,75 +35,78 @@ REPOSITORY AND SAFETY (standard block)
 - Preserve LEARNING_JOURNAL.md, learning-reports/, HANDOVER_REPORT.md, session-checkpoint-*.md and all other
   unrelated modified or untracked files; never stage them.
 - Before editing: `git status`, `git branch --show-current`, `git rev-parse --short HEAD`, `date`; record them.
-  Create branch docs-dev/wp-1-quickstart-roadmap from the latest Beta main (fast-forward only).
-- Edit with the editor tools, not shell heredocs. *.svg/*.png are git-ignored (use git add -f for figures).
-- Read development/reports/docs-five-stage-plan-20261113/02-target-information-architecture.md (rev. 2 §2.1),
-  10-concept-curriculum-matrix.md, 12-prioritised-improvement-plan.md (WP-1) and 07 first.
+  Create branch docs-dev/wp-1-quickstart-navigation from the latest Beta main (fast-forward only).
+- Edit with the editor tools, not shell heredocs. *.svg/*.png are git-ignored (git add -f for figures).
+- Also read 02 (rev. 3 §2.1), 10, 11, 12 (WP-1) and 07 in the same folder.
 
 SCOPE AND TARGET FILES
-- docs/get-started/index.md (landing and its toctree).
-- In-page path labels ("Path A, step 1", "Path C, step 3", "Path B of the Quick Start", …) in:
-  docs/get-started/{ml-foundations,why-ce,ce-tasks-and-modes,quickstart_classification,quickstart_regression,
-  quickstart_guarded,apply-to-your-data,quick_api}.md → "Stage n" wording.
-- scripts/docs/build_quickstart_walkthrough.py (its "Path B" wording and links), then regenerate with
+- docs/get-started/index.md (landing). Keep: definition, "Where CE fits", "Choose your path" cards A/B/C,
+  recommended order, "Before you start", the toctree (order and labels unchanged).
+- End-of-page navigation lines on docs/get-started/{ml-foundations,why-ce,ce-tasks-and-modes,
+  quickstart_classification,quickstart_regression,quickstart_guarded,apply-to-your-data,quick_api}.md.
+- scripts/docs/build_quickstart_walkthrough.py, then regenerate with
   `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py`; never edit
-  docs/get-started/quickstart_walkthrough.md or the notebook by hand.
-- docs/get-started/ml-foundations.md: fix the stale A6 sentence "The next page shows which tasks and outputs CE
-  supports" (the next page is why-ce).
-- tests/docs/get_started/test_quickstart_continuity.py: the landing tests assert cards A/B/C and the workflow
-  figure on the landing; rewrite them for five stages (see ACCEPTANCE). Keep the generator/page/notebook sync
-  tests and the figure-wiring test for why-ce and ce_workflow (remove only the landing entry from it).
+  docs/get-started/quickstart_walkthrough.md or its notebook by hand.
+- tests/docs/get_started/test_quickstart_continuity.py (extend; keep the existing A/B/C landing tests).
 
-REQUIRED CONTENT (landing)
-- Title may stay. One short paragraph defining CE (keep current wording).
-- Five stage cards (sphinx-design grid), in order; Stages 1–3 marked "core", 4–5 "optional". Each card: one-line
-  goal, prerequisites, and an ordered list of links to EXISTING pages only, per 02 rev. 2 §2.1 (omit proposed
-  pages explainable-ai/calibration_intuition/development_setup until they exist).
-- "Direct routes" list: know ML → Stage 2; code now → walkthrough or C2/C3; have a model → C1 then C5;
-  need the maths → Stage 4; contribute → Stage 5.
-- "Before you start" line: install, Quick API, glossary (exactly one glossary link — glossary test), API reference,
-  semantics pointer (STD-004 Tier 1 MUST), web demo.
-- Remove the workflow figure from the landing (it stays on why-ce and ce_workflow).
-- Toctree: only Quick Start-owned pages, labelled "1 · Machine learning essentials", "2 · Why CE",
-  "2 · Tasks, modes and capabilities", "3 · Guided Python walkthrough", "3 · Classification quickstart",
-  "3 · Regression quickstart", "3 · Guarded explanations", "3 · Apply CE to your own data", "3 · Quick API".
-  Note the reorder: ce-tasks-and-modes moves before the walkthrough (Stage 2). Update every page's "Next"
-  line to follow the new order.
-- Footer "Entry-point tier: Tier 1."
+REQUIRED CHANGES
+1. Landing — add a section "Where should I go next?" after "Before you start": one line per homepage entry
+   point other than Quick Start, linking its existing landing page and saying who it is for:
+   CE: What & Why (sections/what-and-why), How CE Works (sections/how-ce-works), CE in Practice
+   (sections/in-practice), CE Software & Integration (sections/software-integration), Project & Resources
+   (sections/project-evolution and glossary/index — but keep exactly ONE glossary link on the page, as the
+   glossary test requires; reuse the existing one or move it here), Commercial Services
+   (https://grejna.ai/#kontakt, "separate from the open-source library and its licence", as on the homepage).
+2. Landing figure — apply PO decision D-16 (default: keep, at most 560 px wide, caption links to why-ce).
+3. Every Quick Start page ends with a short "Continue" block (only the lines that apply):
+   **Next:** the next page in its path (A1→A2→B→C1→C2/C3→C4→C5; Quick API last);
+   **Go deeper:** the L3 owner for the concepts on that page — verify the target section exists and treats that
+   concept for that mode (calibration_methods §2 Venn–Abers, §3 CPS, §4 modes; calibrated_interval_semantics
+   mode section; explanation_structures for rule construction);
+   **See also:** an across link (example, task guide, reference) owned by another section;
+   **Before this:** the prerequisite page.
+   Six pages currently have no deeper link to calibration_methods — fix all six.
+4. ml-foundations A6: replace the stale sentence "The next page shows which tasks and outputs CE supports"
+   with a correct pointer to why-ce.
+5. Walkthrough generator: rename the section headings "Optional A/B/C" → "Extra 1/2/3" (they collide with
+   Paths A/B/C) and every reference to them; add one "Go deeper" line after §5 (calibration_methods §2) and
+   after §6 (explanation construction); add rows to the "Where to go next" table for the six other entry
+   points (keep existing rows).
 
 SCIENTIFIC AND EDITORIAL REQUIREMENTS
-- Navigation and labels only; no new claims. Keep the PO-reviewed wording in ce-tasks-and-modes.md untouched.
-- Landing prose ≤ ~350 words (cards excluded).
+- Navigation and orientation text only; no new claims; keep the PO-reviewed wording in ce-tasks-and-modes.md.
+- Link lines are one sentence each; do not restate content of the target page.
+- Do not remove any existing content, including advanced material.
 
 EXCLUSIONS
-- No new concept pages, no figures, no homepage or section-landing changes, no changes to pages owned by other
-  sections.
+- No new concept pages, no new figures, no homepage or section-landing edits, no stage terminology.
 
 VERIFICATION
 - CE_DOCS_BETA=true /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1  (0 warnings)
 - /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1-std  (0 warnings)
 - PYTHONPATH=src /c/Python313/python.exe -m pytest tests/docs -q -p no:cacheprovider
 - /c/Python313/python.exe scripts/docs/check_internal_links.py _build/wp1
-- Walkthrough regenerated; PROSE_NUMBERS guard passes; diff is prose/link-only (no number changes).
-- Headless Edge (Python Playwright, C:\Python313, no -I): landing at 390 and 1440 px, light and dark — no
-  horizontal overflow; cards stack on phones.
+- Walkthrough regenerated; PROSE_NUMBERS guard passes; diff shows no changed numbers.
+- Headless Edge (Python Playwright, C:\Python313, no -I): landing and two child pages at 390 and 1440 px,
+  light and dark — no horizontal overflow.
 
-ACCEPTANCE CRITERIA
-- Tests assert: five stage cards in order with "core"/"optional" labels; every stage link resolves; direct-routes
-  section present; one glossary link; semantics pointer; no workflow figure on the landing; toctree labels and
-  order as specified; each Quick Start page's "Next" target equals the next toctree entry (or the next stage's
-  first page).
-- All gates pass; no "Path A/B/C" wording remains in docs/get-started or the generator.
+ACCEPTANCE CRITERIA (add tests for each)
+- Cards A/B/C, recommended order and toctree order/labels unchanged.
+- "Where should I go next?" links all six other entry points; exactly one glossary link on the landing.
+- Every Quick Start page has a Next line (except the last) and at least one Go deeper line; every Go deeper
+  target exists.
+- No "Optional A", "Optional B" or "Optional C" heading remains in the walkthrough or generator.
+- All gates pass.
 
 FINAL REPORT
 - development/reports/docs-five-stage-plan-20261113/phase-reports/<YYYY-MM-DD_HHMM>_wp-1.md (time from `date`):
-  baseline, files changed, problems, changes, duplication removed, evidence, tests and results, screenshots
-  checked, limitations, open decisions.
+  baseline, files changed, problems, changes, duplication avoided, evidence (why each Go deeper target is the
+  right L3 owner), tests and results, screenshots checked, limitations, open decisions.
 
 COMMITS
-- (1) landing + labels + tests; (2) generator + regenerated walkthrough/notebook; (3) report. Attribution trailer
-  as the session provides. No push; print: git push docs-dev docs-dev/wp-1-quickstart-roadmap:main
-  (for the PO, after approval).
+- (1) landing + page navigation lines + tests; (2) generator + regenerated walkthrough/notebook; (3) report.
+  Attribution trailer as the session provides. No push; print for the PO (after approval):
+  git push docs-dev docs-dev/wp-1-quickstart-navigation:main
 
 STOP CONDITION
 - Stop after the report. Do not start the next WP until the PO approves WP-1.
@@ -176,14 +185,14 @@ VERIFICATION, ACCEPTANCE, REPORT, COMMITS, STOP
 
 ---
 
-## Prompt 2a — Stage 1 completion: AI systems, black boxes and explainable AI
+## Prompt 2a — Foundations completion: AI systems, black boxes and explainable AI (WP-2)
 
 ```text
 ROLE AND OBJECTIVE
-AI/ML educator and scientific reviewer for the CE Beta docs. Objective: complete Stage 1 (Foundations)
+AI/ML educator and scientific reviewer for the CE Beta docs. Objective: complete the foundations concepts
 with accurate, beginner-level content: AI systems vs AI models, rule-based AI vs machine learning,
 black-box models and transparency, what explainable AI (XAI) is and its limits. Remove the duplication
-between ml-foundations A6/A7 and why-ce.
+between ml-foundations A6 and why-ce.
 
 REPOSITORY AND SAFETY (standard block)
 - Local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations (remote "docs-dev").
@@ -195,17 +204,18 @@ SCOPE AND TARGET FILES
 - docs/get-started/ml-foundations.md: add a short section before A1 "AI systems and AI models" (a system
   = model + data pipeline + interface + people/processes; a model = the learned function); extend A1 with
   rule-based AI vs machine learning (hand-written rules vs rules learned from data; both exist today).
-  Keep training vs inference (already in A1), A2-A5 unchanged. Move A6 and A7 out (below).
+  Keep training vs inference (already in A1), A2-A5 unchanged. Keep A7 as a short L1 section ending with
+  "Go deeper:" to the new page; shorten A6 to a two-sentence bridge to get-started/why-ce, keeping its
+  label. Do not remove other Path A content (13 R-8).
 - New: docs/explainable-ai.md "Black boxes, transparency and explainable AI" (Tier 3), in the
   "CE: What & Why" sidebar group of docs/index.md after "Overview". Content: (1) why some models are hard
   to inspect (size, non-linearity, interactions) and some are not (small linear models, short trees) —
   never "all AI models are black boxes"; (2) transparency vs explainability; (3) what an explanation is:
-  local vs global, attributions vs rules (moved from A7, keep its references Ribeiro et al. 2016 and
-  Lundberg & Lee 2017 and the CE 2024 ESWA paper); (4) limits of XAI: explanations describe the model,
+  local vs global, attributions vs rules (full treatment; A7 keeps a short version; reuse its references
+  Ribeiro et al. 2016, Lundberg & Lee 2017 and the CE 2024 ESWA paper); (4) limits of XAI: explanations describe the model,
   not causes; different methods can disagree; no single method fits every model, task and question;
-  explanations usually lack a reliability measure (moved from A6, last bullet); (5) bridge to Stage 2:
-  link get-started/why-ce.
-- Keep the MyST label (why-predictions-are-not-enough)= : move it with the A6 content so the
+  explanations usually lack a reliability measure (A6's last bullet, expanded); (5) next: link get-started/why-ce.
+- Keep the MyST label (why-predictions-are-not-enough)= on the shortened A6 bridge so the
   "Can We Trust AI Outputs?" card in docs/sections/what-and-why.md still resolves; update that card text
   if its description no longer fits.
 - docs/sections/what-and-why.md: add a card for the new page.
@@ -238,7 +248,8 @@ VERIFICATION
   explainable-ai.
 
 ACCEPTANCE CRITERIA
-- ml-foundations no longer contains A6/A7; explainable-ai owns them; no broken anchor; glossary tests pass;
+- ml-foundations keeps A7 (short) and an A6 bridge; explainable-ai owns black boxes, transparency and XAI
+  limits; no broken anchor; glossary tests pass;
   S1–S4/S8 hold; all gates pass.
 
 FINAL REPORT
@@ -257,7 +268,7 @@ STOP CONDITION
 
 ```text
 ROLE AND OBJECTIVE
-AI/ML educator and Python documentation engineer. Objective: one Stage 2 page that builds intuition for
+AI/ML educator and Python documentation engineer. Objective: one L1 concept page that builds intuition for
 scores vs probabilities, calibration, reliability and uncertainty, with figures generated from real data
 and CE output, before readers meet the formal semantics.
 
@@ -503,7 +514,7 @@ VERIFICATION, ACCEPTANCE, REPORT, COMMITS, STOP
 
 ```text
 ROLE AND OBJECTIVE
-Technical editor. Objective: connect Stage 4 pages to their Stage 2 intuitions and back, with no content
+Technical editor. Objective: connect the L3 pages to their L1 intuitions and back, with no content
 changes to the theory.
 
 REPOSITORY AND SAFETY (standard block)
@@ -512,8 +523,8 @@ REPOSITORY AND SAFETY (standard block)
 SCOPE
 - Add an "Intuition first:" line at the top and "Next:" at the bottom of:
   docs/foundations/concepts/{calibration_methods,calibrated_interval_semantics,ce_workflow,
-  explanation_structures,alternatives,probabilistic_regression}.md, pointing to the Stage 2 owners in 02 §5
-  and to the next Stage 4 page in 02 §2.
+  explanation_structures,alternatives,probabilistic_regression}.md, pointing to the L1 owners in 02 §5
+  and to the next page in the How CE Works order (02 §2.3).
 - Check that docs/foundations/concepts/calibration_intuition.md (2b) and get-started/why-ce.md link forward.
 
 VERIFICATION, ACCEPTANCE, REPORT, COMMITS, STOP
@@ -662,8 +673,9 @@ REPOSITORY AND SAFETY (standard block)
 
 SCOPE
 - Run all gates in 07 §1 (both builds, docs tests, link checker, full test suite once).
-- Walk the five stages in order in a local build: every "Next" link leads to the next stage page; every page
-  in the journey passes the 07 §4 layout check (390/1440, light/dark).
+- Walk each homepage entry point and Quick Start Paths A/B/C in a local build: every Next, Go deeper,
+  See also and Before this link resolves and leads to the stated level; every page on these routes passes
+  the 07 §4 layout check (390/1440, light/dark).
 - Terminology spot-check on journey pages: the four terms of ce-tasks-and-modes are used consistently.
 - Page inventory and final navigation tree.
 

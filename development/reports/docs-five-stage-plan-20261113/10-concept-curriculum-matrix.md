@@ -1,5 +1,7 @@
 # 10 — Concept dependency and learning-curriculum matrix (Deliverable C)
 
+**Revision 3:** the "Stage" column and the "Stage n" headings are **curriculum bands**, a planning aid for concept order and link design. They are not a navigation structure and do not appear on pages (`13` R-9). Quick Start keeps Paths A/B/C.
+
 Concepts are listed in **prerequisite order**. Coverage cells name the page
 (and section) that teaches the concept at that level today; **—** means
 missing; **[N]** proposed owner; **[S]** needs author review. Evidence: concept
@@ -21,7 +23,7 @@ probabilistic regression, all = every mode.
 | 6 | Model families and architectures | 5 | ml-foundations A4 | 1 | A4 [V] | — | — | all | 7 | Mermaid style inconsistent with Path A figures (minor) |
 | 7 | Data roles: training, calibration, test; leakage | 5 | ml-foundations A5 | 1 | A5 [V], why-ce | walkthrough §2, C5 step 1 | calibration_methods §1 (notation) | all | 8 | — |
 | 8 | Black-box models and transparency | 6 | `explainable-ai` [N] | 1 | — | — | — | — | 9 | **Missing** (one mention, compliance playbook). Must not claim all models are black boxes |
-| 9 | Explainable AI (local/global, attributions vs rules) and its limits | 8 | `explainable-ai` [N] (from A7) | 1 | A7 [V] (forms); limits partly A6 | — | theory_and_literature (papers) | all | 10 | Limits of XAI (disagreement, no reliability measure, not causal) scattered |
+| 9 | Explainable AI (local/global, attributions vs rules) and its limits | 8 | `explainable-ai` [N] (full treatment); A7 keeps a short L1 intro in Path A | 1 | A7 [V] (forms); limits partly A6 | — | theory_and_literature (papers) | all | 10 | Limits of XAI (disagreement, no reliability measure, not causal) scattered |
 
 ## Stage 2 — CE concepts
 

@@ -1,6 +1,11 @@
-# 02 — Target information architecture (Deliverable E, revision 2)
+# 02 — Target information architecture (Deliverable E, revision 3)
 
-**Revision 2 (2026-11-13).** Replaces revision 1. Changes, as agreed by the PO:
+**Revision 3 (2026-11-13) — binding.** Quick Start keeps Paths A/B/C (see
+`13-architecture-reconciliation.md`); the five stages are a planning aid for
+concept order only. §1, §3 and §4 below are unchanged in substance; §2.1 is
+replaced.
+
+**Revision 2 (2026-11-13, partly withdrawn).** Replaced revision 1. Changes, as agreed by the PO:
 Quick Start is the **five-stage roadmap (Option B)**; **no separate
 `learning-journey.md`**; the conventional-vs-CE comparison lives on its
 canonical conceptual page, distinct from an internal CE workflow diagram; three
@@ -24,67 +29,40 @@ across or backward link (`11-cross-entry-navigation-matrix.md`).
 
 ## 2. Seven entry-point trees (target)
 
-### 2.1 Quick Start — five-stage roadmap (Option B)
+### 2.1 Quick Start — Paths A/B/C (revision 3)
 
-Landing `get-started/index.md` [V → revised]: short definition of CE; **five
-stage cards**; "direct routes" for experienced readers; install/API/glossary
-line. **No workflow figure on the landing** (it moves to `why-ce` only).
+Landing `get-started/index.md` [V → improved]; structure and toctree order
+unchanged. Full target and path-level improvements: `13` §5. Summary:
 
 ```text
 Quick Start  get-started/index.md
-├── Stage 1 · Foundations  (core)
-│     get-started/ml-foundations ............ [V, revised: AI systems vs models, rule-based vs ML]
-│     explainable-ai ........................ [N] (CE: What & Why) black boxes, transparency, XAI and limits
-├── Stage 2 · CE concepts  (core)
-│     get-started/why-ce .................... [V] conventional vs CE workflow (canonical comparison figure)
-│     foundations/concepts/calibration_intuition [N] scores vs probabilities, calibration, uncertainty, interval meaning (L1)
-│     get-started/ce-tasks-and-modes ........ [V] task → mode → method → output
-│     foundations/concepts/ce_workflow ...... [V, revised: internal CE workflow diagram]
-│     foundations/how-to/interpret_explanations [V] factual and alternative explanations
-│     what-is-ce ............................ [V] guarantees vs non-guarantees, fit (summary; links semantics)
-├── Stage 3 · Using CE  (core)
-│     external demo app (no install) → get-started/quickstart_walkthrough [V] → get-started/installation [V]
-│     → quickstart_classification / quickstart_regression / quickstart_guarded [V] → apply-to-your-data [V]
-│     → practitioner/evaluate_ce [V] → get-started/troubleshooting [V, revised] → get-started/quick_api [V, revised]
-├── Stage 4 · Going deeper  (optional)
-│     foundations/concepts/calibration_methods [V] → calibrated_interval_semantics [V] → explanation construction
-│     (ce_workflow §, explanation_structures [S], alternatives, probabilistic_regression) → foundations/how-to/conditional_calibration
-│     → compare [V, rewrite] → researcher/index [V, revised] → researcher/future_work [V, revised]
-└── Stage 5 · Contributing  (optional)
-      sections/project-evolution → contributor/development_setup [N] → foundations/concepts/architecture
-      → contributor/plugin-contract → contributor/extending/guides/index → foundations/governance/test_policy, pr_guide
+├── definition · Where CE fits (figure per D-16, link to why-ce) · Choose your path (A, B, C cards)
+├── Recommended order A → B → C · Before you start
+├── Where should I go next? [N] — the six other homepage entry points, one line each
+└── toctree (unchanged): A1 · Machine learning essentials · A2 · Why CE · B · Guided Python walkthrough
+    · C1 · Tasks, modes and capabilities · C2 · Classification · C3 · Regression · C4 · Guarded explanations
+    · C5 · Apply CE to your own data · Quick API
 ```
 
-**Sidebar (toctree) of Quick Start.** Only Quick Start-owned pages, relabelled
-by stage; pages owned by other sections are linked from the stage cards but
-not duplicated in this toctree (avoids two sidebar homes and conflicting
-prev/next):
+Paths are reader goals (understand / see / apply), **not** reading levels
+(A is L1; B spans L1–L2; C spans L1–L2 — `13` §2). Each Quick Start page
+carries **Next / Go deeper / See also / Before this** links so readers can
+leave the path at their level. New canonical pages owned by other sections
+(`explainable-ai`, `calibration_intuition`, `contributor/development_setup`)
+are reached from Quick Start pages by deeper/across links, not added to the
+Quick Start toctree.
 
-```text
-1 · Machine learning essentials       get-started/ml-foundations
-2 · Why CE                            get-started/why-ce
-2 · Tasks, modes and capabilities     get-started/ce-tasks-and-modes
-3 · Guided Python walkthrough         get-started/quickstart_walkthrough
-3 · Classification quickstart         get-started/quickstart_classification
-3 · Regression quickstart             get-started/quickstart_regression
-3 · Guarded explanations              get-started/quickstart_guarded
-3 · Apply CE to your own data         get-started/apply-to-your-data
-3 · Quick API                         get-started/quick_api
-```
-
-Direct routes on the landing: "I know ML → Stage 2"; "I want code now →
-walkthrough or C2/C3"; "I have a model → C1 then C5"; "I need the maths →
-Stage 4"; "I want to contribute → Stage 5".
-
-Page path labels change from "Path A/B/C, step n" to "Stage n" (in-page labels
-and the walkthrough generator).
+**Curriculum bands (planning aid only).** The five bands — foundations, CE
+concepts, using CE, going deeper, contributing — order the concepts in
+`10-concept-curriculum-matrix.md` and guide which forward/backward links each
+page needs. They appear in no navigation, label or landing page.
 
 ### 2.2 CE: What & Why (compendium, L1)
 
 ```text
 sections/what-and-why.md — cards reordered as a progression
 ├── Understanding AI models ......... → get-started/ml-foundations (across; Quick Start owns it)
-├── Black boxes and explainable AI .. explainable-ai.md [N] (owner; absorbs ml-foundations A6–A7, keeps anchor why-predictions-are-not-enough)
+├── Black boxes and explainable AI .. explainable-ai.md [N] (owner of black boxes, transparency, XAI limits; ml-foundations keeps A7 short and links here)
 ├── Can we trust AI outputs? ........ → foundations/concepts/calibration_intuition [N] (across)
 ├── What CE is and adds ............. what-is-ce.md [V] (owner: contribution, fit, guarantee summary)
 ├── The explainability gap .......... compare.md [V → rewrite as design comparison]
@@ -161,7 +139,7 @@ owners: `10-concept-curriculum-matrix.md`.
 
 | Topic | Owner | Function |
 |---|---|---|
-| AI, ML, learning approaches, tasks, model families, data roles | `get-started/ml-foundations` | Tutorial (L1) |
+| AI, ML, learning approaches, tasks, model families, data roles, short intro to explanations (A7) | `get-started/ml-foundations` (Path A) | Tutorial (L1) |
 | Black boxes, transparency, XAI and its limits | `explainable-ai` [N] | Compendium (L1) |
 | Conventional vs CE workflow (comparison figure) | `get-started/why-ce` | Tutorial (L1) |
 | Internal CE workflow (mechanism figure), learning path | `foundations/concepts/ce_workflow` | Compendium (L1–L2) |

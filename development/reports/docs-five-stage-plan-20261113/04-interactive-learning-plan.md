@@ -20,6 +20,11 @@ test or generator re-runs.
 
 ## 2. Proposed placement
 
+> **Revision 3 note.** "Stage 1–5" in this document names **curriculum bands**, a planning aid for
+> grouping concepts. They are not a navigation structure; Quick Start keeps Paths A/B/C
+> (`13-architecture-reconciliation.md`).
+
+
 | Proposed resource | Decision | Stage | Placement | Notes |
 |---|---|---|---|---|
 | **Concept Explorer** (no-code: inputs → prediction → score) | **Do not build now.** Reuse the walkthrough's real numbers in static figures (`ce-reading-an-output.svg` style) on `explainable-ai` and `calibration_intuition`. Revisit after Phase 3 if readers need interactivity. | 1–2 | — | An interactive widget would need either live CE (out of scope for static RTD) or precomputed real outputs plus a generator and a test. Cost is high, benefit unproven. |

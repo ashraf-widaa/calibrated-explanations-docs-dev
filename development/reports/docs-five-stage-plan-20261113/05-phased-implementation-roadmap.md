@@ -1,6 +1,9 @@
 # 05 — Phased implementation roadmap
 
-> **Revision 2 (2026-11-13).** The authoritative work-package list is now
+> **Revision 3 (2026-11-13) — binding.** Quick Start keeps Paths A/B/C; see
+> `13-architecture-reconciliation.md`. Phase 1 below is revised accordingly.
+>
+> **Revision 2 (2026-11-13, partly withdrawn).** The authoritative work-package list is now
 > `12-prioritised-improvement-plan.md` (WP-1…WP-12). Phase 1 below is
 > replaced by WP-1 (Quick Start as the five-stage roadmap, Option B; no
 > `learning-journey.md`). Phases 2–6 keep their framing; their work packages
@@ -31,17 +34,22 @@ Gates and rules referenced as §n are in `07-quality-and-acceptance-criteria.md`
 
 ---
 
-## Phase 1 — Quick Start as the five-stage roadmap (= WP-1)
+## Phase 1 — Quick Start A/B/C improvements and "Where should I go next?" (= WP-1)
 
-**Objective.** Make the Quick Start landing the concise five-stage roadmap
-(Stages 1–3 core, 4–5 optional) with direct routes; relabel Quick Start-owned
-pages by stage; move the conventional-vs-CE figure to `why-ce` only; fix the
-stale pointer in ml-foundations A6. No `learning-journey.md`.
+**Objective.** Keep Paths A/B/C and their order; add the "Where should I go
+next?" section (six entry points); add Next / Go deeper / See also / Before
+this links to every Quick Start page; fix the stale A6 pointer; rename the
+walkthrough's "Optional A/B/C"; figure per D-16. No stage labels, no
+`learning-journey.md`.
 
-Details, acceptance, risks: `12-prioritised-improvement-plan.md` WP-1.
-Prompt: `06` Prompt 1.
+Details, acceptance, risks: `12-prioritised-improvement-plan.md` WP-1 and
+`13` §5. Prompt: `06` Prompt 1.
 
 ---
+
+> **Revision 3 note.** "Stage 1–5" in this document names **curriculum bands**, a planning aid for
+> grouping concepts. They are not a navigation structure; Quick Start keeps Paths A/B/C
+> (`13-architecture-reconciliation.md`).
 
 ## Phase 2 — Foundations and CE concepts
 
