@@ -26,18 +26,22 @@
 - `uncertainty_interval` (tuple|dict) — interval for the alternative prediction
 
 ### Usage examples
+Indexing a collection returned by `explain_factual` or `explore_alternatives`
+gives one explanation per case. The examples assume a calibrated
+`WrapCalibratedExplainer` named `explainer` and test cases `x_test`.
+
 - By index:
 
   ```python
-  expl = my_calibrated_explanations.explanations[0]  # instance-level explanation
-  factual = expl.factual  # a FactualExplanation
+  factual = explainer.explain_factual(x_test[:1])[0]  # a FactualExplanation
   rule = factual.get_rule_by_index(0)
   ```
 
 - By feature name:
 
   ```python
-  alternatives = expl.alternative.get_rules_by_feature("age")
+  alternative = explainer.explore_alternatives(x_test[:1])[0]  # an AlternativeExplanation
+  age_rules = alternative.get_rules_by_feature("age")  # KeyError if no rule mentions "age"
   ```
 
 ## Filtering rules by size (`filter_rule_sizes`)

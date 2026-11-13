@@ -46,7 +46,9 @@ init_process_config_manager(manager)
 ```
 
 A second call raises `CalibratedError` because double initialization would
-make snapshot ownership ambiguous.
+make snapshot ownership ambiguous. Calling `get_process_config_manager()`
+(the previous example) also creates the singleton, so run this example in a
+fresh process, before anything reads the configuration.
 
 ## Supported environment variables
 

@@ -4,6 +4,11 @@ Executable, step-by-step tutorials for the CE Python library. Every code block
 on these pages runs as shown, and every printed output is the real output,
 checked by the documentation tests.
 
+**Versions.** The outputs shown were verified with the current release,
+CE 1.0.2 (`pip install calibrated-explanations`), and with the 1.1.0
+development version that these pages are built from; both print the same
+numbers.
+
 **Before these tutorials.** For the ideas without code, start with the
 {doc}`Quick Start <../get-started/index>`: {doc}`../get-started/why-ce`,
 {doc}`CE by example <../get-started/ce-by-example>`,

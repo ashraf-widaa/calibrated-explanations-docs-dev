@@ -33,9 +33,18 @@ The `low_high_percentiles` parameter (tuple `(low, high)`) governs the CPS inter
 * Default: `(5, 95)` → 90% central interval.
 * One-sided: `(-np.inf, 95)` or `(5, np.inf)`.
 
-For a one-sided interval, the open side is reported as the smallest (`-np.inf`)
-or largest (`np.inf`) target value in the calibration set. That value is a
-placeholder, not a calibrated bound: treat that side of the interval as open.
+For a one-sided interval, the open side is not a calibrated bound: treat that
+side of the interval as open. How it is reported depends on the CE version:
+
+* **v1.0.2** (current release) reports the open side as the smallest
+  (`-np.inf`) or largest (`np.inf`) target value in the calibration set. That
+  value is a placeholder only.
+* **From v1.1.0** the open side is reported as `-inf` or `inf` itself, and JSON
+  exports encode it as the strings `"-inf"` and `"inf"`. Plots may still clip
+  it to the observed target range for display
+  ([CHANGELOG, issue #237](https://github.com/Moffran/calibrated_explanations/blob/main/CHANGELOG.md)).
+
+Code that consumes intervals should handle an unbounded side explicitly.
 Because the point prediction is the median, a one-sided interval whose finite
 percentile is below 50, such as `(-np.inf, 40)`, does not contain it.
 
@@ -55,7 +64,9 @@ print(f"Prediction: {prediction[0]} Interval: {low[0]} – {high[0]}")
 
 ### 2. Explanation with specific interval settings
 
-You can request explanations with arbitrary confidence levels by strictly passing the percentiles:
+You can request explanations with another interval by passing its percentiles. The
+percentiles set the interval's target coverage (here 50%), which holds on average
+over many cases, not for each case:
 
 ```python
 # Explain with a 50% central interval (25th - 75th percentiles)

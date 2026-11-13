@@ -327,8 +327,9 @@ the range from how wrong the model was on the calibration cases.
 `(low, high)`. CE uses a split conformal predictive system from the `crepes` package
 (`calibration/interval_regressor.py`). `predict(x)` returns the CPS median, which can
 differ from the model's own prediction. A one-sided request (`-np.inf` or `np.inf`)
-reports the open side as the smallest or largest calibration target; that value is a
-placeholder, not a bound (see {doc}`../../tasks/regression`).
+leaves one side open: v1.0.2 reports it as the smallest or largest calibration target
+(a placeholder), and from v1.1.0 it is reported as `-inf` or `inf`; in neither case is
+it a bound (see {doc}`../../tasks/regression`).
 :::
 
 ### Exchangeability
@@ -584,7 +585,7 @@ P(y <= 150) = 0.056, probability interval [0.000, 0.059]
 | Subgroups with different noise | Coverage holds on average, not per group | Mondrian `bins`; check coverage per group |
 | Calibration data also used for training | Errors look too small; intervals too narrow | Keep training, calibration and test data separate |
 | Small calibration set | Wide Venn–Abers intervals; extreme percentiles may be undefined; thresholded queries use half the set | Use a larger calibration set |
-| One-sided intervals | The open side is a placeholder | Treat that side as open |
+| One-sided intervals | The open side is not a calibrated bound (a placeholder in v1.0.2; `-inf`/`inf` from v1.1.0) | Treat that side as open |
 | Merged probability | No exact calibration guarantee | Use {math}`[p_0, p_1]` when validity matters |
 | Multiclass default normalisation | Bounds rescaled; an upper bound can exceed 1 | `normalization="simplex"` |
 

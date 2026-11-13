@@ -78,7 +78,7 @@ guarded interval candidates.
 
 | Parameter | Meaning |
 | --- | --- |
-| `confidence` | Coverage-style conformity threshold. Higher values are more inclusive (`significance = 1 - confidence`). |
+| `confidence` | Coverage-style conformity threshold. Higher values are more inclusive (`significance = 1 - confidence`). It sets how strict the guard's check of substituted feature values is; it is not a confidence level for a prediction or its interval. |
 | `merge_adjacent` | Merge adjacent conforming bins when enabled. |
 | `n_neighbors` | KNN neighbors for conformity scoring. |
 | `normalize` | Apply per-feature normalization before distance calculations. |

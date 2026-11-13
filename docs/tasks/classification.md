@@ -20,7 +20,7 @@ Calibrated Explanations wraps standard scikit-learn classifiers to produce uncer
 | `predict_proba(x)` | Calibrated probabilities (n_samples, n_classes) |
 | `predict_proba(x, uq_interval=True)` | Calibrated probabilities **plus** uncertainty intervals |
 | `explain_factual(x)` | Factual explanation (rules + uncertainty) |
-| `explore_alternatives(x)` | Alternative explanations (counterfactuals) |
+| `explore_alternatives(x)` | Alternative explanations: the calibrated prediction if one feature had a value in another range |
 
 > ℹ️ **Note:** `predict()` and `predict_proba()` match the scikit-learn API but return **calibrated** values.
 
@@ -41,7 +41,10 @@ For multiclass models, `low` and `high` have one column per class, shape
 
 ### 2. Factual explanation
 
-Returns the rules explaining *why* the model made this prediction, with epistemic and aleatoric explanation envelopes on the feature weights.
+Returns the conditions that hold for each case, with a weight per condition and a
+range for each weight. The ranges show how firmly the calibration data support each
+weight; no formal guarantee is claimed for them. *Whether these ranges should be
+described as epistemic or aleatoric uncertainty is under review by the CE authors.*
 
 ```python
 explanation = explainer.explain_factual(x_test)
@@ -49,7 +52,9 @@ explanation = explainer.explain_factual(x_test)
 
 ### 3. Explore alternatives
 
-Finds what feature changes would be necessary to flip the prediction or increase confidence.
+Shows what the calibrated prediction would be if one feature had a value in a
+different range, each scenario with its own range. Alternatives describe how the
+model responds; they are not recommendations and make no causal claim.
 
 ```python
 alternatives = explainer.explore_alternatives(x_test)

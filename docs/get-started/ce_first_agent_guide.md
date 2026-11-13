@@ -201,8 +201,9 @@ print(explanations[0].to_narrative(output_format="text", expertise_level="beginn
 explanations.add_conjunctions(n_top_features=3, max_rule_size=2)
 explanations[0].add_conjunctions(n_top_features=2, max_rule_size=3)
 
-# Alternative explanations ranking (ensured / ensured-ranking)
-alt = explainer.explore_alternatives(x_test[:3], ensure_coverage=True, ensure_order=True)
+# Alternative explanations, then keep only the ensured ones (lower uncertainty)
+alt = explainer.explore_alternatives(x_test[:3])
+ensured = alt.ensured_explanations()
 ```
 
 ---
@@ -227,8 +228,8 @@ except ImportError as exc:
 # 2. Construct wrapper using the public API
 explainer = WrapCalibratedExplainer(model)
 
-# 3. Fit
-explainer.fit(x_proper, y_proper)
+# 3. Fit on the proper training data
+explainer.fit(x_train, y_train)
 
 # 4. Calibrate on held-out calibration data
 explainer.calibrate(x_cal, y_cal)
@@ -240,6 +241,7 @@ if not explainer.fitted or not explainer.calibrated:
     )
 
 # 6. Call public prediction / explanation APIs
+X_query = x_test[:3]  # the cases you want to explain
 explanations = explainer.explain_factual(X_query)
 alternatives = explainer.explore_alternatives(X_query)
 probabilities, interval = explainer.predict_proba(X_query, uq_interval=True)
@@ -324,7 +326,7 @@ explanations = explainer.explain_factual(x_test[:3])
 ```python
 from crepes.extras import DifficultyEstimator
 
-difficulty = DifficultyEstimator()
+difficulty = DifficultyEstimator().fit(X=x_train, y=y_train)  # fit before use
 explainer.calibrate(x_cal, y_cal, difficulty_estimator=difficulty)
 # Remove / disable by calibrating without it
 explainer.calibrate(x_cal, y_cal)

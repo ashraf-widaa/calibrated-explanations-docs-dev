@@ -96,10 +96,7 @@ export CE_INTERVAL_PLUGIN_FALLBACKS="external.hello.interval,core.interval.legac
 ```python
 import os
 from dataclasses import dataclass
-from calibrated_explanations.plugins import (
-    register_explanation_plugin,
-    _EXPLANATION_PLUGINS,
-)
+from calibrated_explanations.plugins import register_explanation_plugin
 from calibrated_explanations.plugins.explanations import ExplanationPlugin
 
 
@@ -114,6 +111,7 @@ class TestExplanationPlugin(ExplanationPlugin):
         "modes": ("factual",),
         "tasks": ("classification",),
         "dependencies": (),
+        "data_modalities": ("tabular",),
         "trusted": False,
     }
 
@@ -133,7 +131,7 @@ os.environ["CE_EXPLANATION_PLUGIN_FACTUAL_FALLBACKS"] = (
 
 plugin = TestExplanationPlugin()
 register_explanation_plugin("test.explanation.fallback", plugin)
-_EXPLANATION_PLUGINS.pop("test.explanation.fallback", None)
+# The registration lasts for the current Python process.
 ```
 
 ### Example: Testing with alternative plot plugin
@@ -352,6 +350,7 @@ class HelloFactualPlugin(ExplanationPlugin):
     """Example explanation plugin with declared dependencies."""
 
     plugin_meta = {
+        "data_modalities": ("tabular",),
         "schema_version": 1,
         "name": "hello.explanation.factual",
         "version": "0.1.0",
@@ -404,11 +403,14 @@ explainer.calibrate(
 A plugin package can declare all its dependencies in metadata:
 
 ```python
+# Sketch of a plugin package (three files). Complete each plugin_meta with the
+# required keys shown in the sections above before registering.
 # my_plugin/explanation.py
 from calibrated_explanations.plugins.explanations import ExplanationPlugin
 
 class MyExplanationPlugin(ExplanationPlugin):
     plugin_meta = {
+        "data_modalities": ("tabular",),
         "name": "my.explanation.advanced",
         "plot_dependency": "my.plot.advanced",  # Use our custom plot plugin
         "interval_dependency": "my.interval.advanced",  # Use our calibrator

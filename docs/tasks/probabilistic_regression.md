@@ -76,9 +76,11 @@ explanation = explainer.explain_factual(
 ## Key parameters
 
 - **`threshold`**:
-  - Scalar `t`: treated as a binary classification boundary.
+  - Scalar `t`: the event *y ≤ t*; its calibrated probability is in column 1 of the result.
   - Tuple `(low, high)`: treated as an interval containment query.
-- **`uq_interval`**: Returns the uncertainty bound on the **probability estimate** itself (aleatoric + epistemic uncertainty on the score).
+- **`uq_interval`**: Also returns lower and upper bounds for the calibrated event
+  probability. *How to describe the source of this uncertainty (aleatoric or
+  epistemic) is under review by the CE authors.*
 
 ## Go further
 

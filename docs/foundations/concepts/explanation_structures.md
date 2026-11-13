@@ -167,7 +167,7 @@ For categorical features, alternatives explore all other possible categories. Fo
 
 All explanation types implement `build_rules_payload()` which returns a structured dictionary separating core content from metadata:
 
-```python
+```text
 {
     "core": {
         "kind": "factual" | "alternative" | "fast",
