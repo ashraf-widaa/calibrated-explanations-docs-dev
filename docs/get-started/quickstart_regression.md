@@ -1,6 +1,6 @@
-# Regression quickstart
+# Regression tutorial
 
-**Path C, step 3.** Calibrate a regression model once, then use it in two
+**One of the {doc}`Python tutorials <../tutorials/index>`.** Calibrate a regression model once, then use it in two
 modes: **interval regression** (a predicted number with an interval) and
 **probabilistic regression** (the calibrated probability that the target is at
 or below a threshold you choose). The example predicts a disease-progression
@@ -169,12 +169,16 @@ model's behaviour, not the effect of changing a patient's measurements.
 - Calibrating on training data, or on data from a different population.
 - Treating a weight as a cause, or an alternative as a recommended action.
 
-## Next
+## Continue
 
-- {doc}`../foundations/concepts/probabilistic_regression`
-- {doc}`quickstart_guarded`, to filter explanations to typical feature values.
-- {doc}`apply-to-your-data`, to use your own data and model.
-- {doc}`../foundations/how-to/interpret_explanations`
-- {doc}`../citing`
+- **Next:** {doc}`quickstart_guarded`, the next Python tutorial.
+- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
+  (sections 3–4, conformal predictive systems and the regression modes),
+  {doc}`../foundations/concepts/probabilistic_regression` and the regression
+  guarantees in {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **See also:** {doc}`apply-to-your-data` (your own data and model),
+  {doc}`../foundations/how-to/interpret_explanations` and {doc}`../citing`.
+- **Before this:** {doc}`ce-tasks-and-modes` (choosing the mode) and
+  {doc}`apply-overview` (the practical workflow without code).
 
 Entry-point tier: Tier 2.

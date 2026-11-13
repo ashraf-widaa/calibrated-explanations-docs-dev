@@ -1,6 +1,6 @@
-# Guarded explanations quickstart
+# Guarded explanations tutorial
 
-**Path C, step 4.** Guarded explanations are an **explanation
+**One of the {doc}`Python tutorials <../tutorials/index>`.** Guarded explanations are an **explanation
 configuration**, not a separate prediction task: you add
 `guarded_options=GuardedOptions()` to an explanation call in any mode
 (classification, interval or probabilistic regression). CE then drops
@@ -158,10 +158,16 @@ Key audit fields:
   {doc}`../foundations/concepts/guarded_explanations`).
 - Using a fast explainer, which guarded mode does not support.
 
-Next steps:
-- {doc}`apply-to-your-data`, to use your own data and model.
-- {doc}`../foundations/concepts/guarded_explanations`
-- {doc}`../foundations/concepts/alternatives`
-- {doc}`../foundations/how-to/interpret_explanations`
+## Continue
+
+- **Next:** {doc}`apply-to-your-data`, the next Python tutorial.
+- **Go deeper:** {doc}`../foundations/concepts/guarded_explanations` (how the
+  guard works and its limitations) and
+  {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **See also:** {doc}`../foundations/concepts/alternatives` and
+  {doc}`../foundations/how-to/interpret_explanations`.
+- **Before this:** {doc}`quickstart_classification` or
+  {doc}`quickstart_regression`, and {doc}`ce-tasks-and-modes` (guarded
+  explanations are an explanation configuration, not a task).
 
 Entry-point tier: Tier 2.

@@ -1,11 +1,16 @@
-"""Generate the Quick Start walkthrough page from executed notebook cells.
+"""Generate the Python walkthrough and its code-free companion from executed cells.
 
-Every output shown on ``docs/get-started/quickstart_walkthrough.md`` comes from
+Every output shown on ``docs/get-started/quickstart_walkthrough.md`` (the
+Python walkthrough, a CE in Practice tutorial) and every number on
+``docs/get-started/ce-by-example.md`` (Quick Start Path B, no code) comes from
 executing the cells defined below, so text, code and output cannot drift apart.
 
 Writes:
 - ``docs/get-started/quickstart_walkthrough.md``: the published page (MyST),
   with code, real outputs and figures.
+- ``docs/get-started/ce-by-example.md``: the same example without code; tables
+  are built from the executed outputs, and generation stops if they cannot be
+  parsed or if a generated statement does not hold for the numbers.
 - ``docs/get-started/walkthrough_assets/*.png``: figures produced by the cells.
 - ``docs/_static/notebooks/quickstart_walkthrough.ipynb``: the executed
   notebook offered as a download (``_static`` is not parsed by Sphinx).
@@ -46,22 +51,23 @@ def code(text):
 
 
 md(r"""
-# Practical walkthrough: from a trained model to calibrated explanations
+# Python walkthrough: from a trained model to calibrated explanations
 
 This page works like a notebook. Each section has a short explanation, the
 code, the output that code produced when this page was built, and what the
 output means. You can run the same cells yourself: DOWNLOAD_LINK, or copy the
 cells into a Python session.
 
-**Path B of the Quick Start.** Each section follows the same pattern: a
-**question**, the code that answers it, the real output, the concept behind
-it, and what you can conclude.
+**One of the [Python tutorials](../tutorials/index.md).** Each section follows
+the same pattern: a **question**, the code that answers it, the real output,
+the concept behind it, and what you can conclude. The same example without
+code is [CE by example](ce-by-example.md) in the Quick Start.
 
 **Before you start.** You should know what a feature, a label and a
 train/test split are, and why CE adds a calibration step; if not, read
-[Path A: Why CE](why-ce.md) first. We use **binary classification**; other
-tasks are covered in [Path C](ce-tasks-and-modes.md). No statistics beyond
-"probability" and "average" is needed.
+[Why CE](why-ce.md) first. We use **binary classification**; other tasks are
+introduced in [Tasks, modes and capabilities](ce-tasks-and-modes.md). No
+statistics beyond "probability" and "average" is needed.
 
 **What you will learn**
 
@@ -76,7 +82,7 @@ tasks are covered in [Path C](ce-tasks-and-modes.md). No statistics beyond
 8. What you can and cannot conclude (section 9).
 
 Sections 1–10 form the core path. Regression, guarded explanations and
-options for shaping explanations follow as optional sections.
+options for shaping explanations follow as extra sections.
 
 Install the packages once:
 
@@ -498,10 +504,7 @@ They do not say that changing the tumour would change the diagnosis, and they
 do not change how certain the current prediction is.
 """)
 
-md(r"""
-## 9. What we can and cannot conclude about case 2
-
-**We can say.** The model predicts *malignant*. CE's calibrated probability of
+CONCLUDE = r"""**We can say.** The model predicts *malignant*. CE's calibrated probability of
 *benign* is 0.29, with a range of 0.17 to 0.33. The prediction depends most
 on `worst concave points` being above 0.14: with typical lower values, the
 calibrated probability would be about 0.48, and that scenario's range reaches
@@ -512,13 +515,15 @@ above 0.5.
 - that 0.29 holds for this individual case, or that its "true" probability
   lies between 0.17 and 0.33;
 - that the calibrated probabilities score better than the raw ones: on this
-  test set they did not (section 5);
+  test set they did not (see the Brier scores above);
 - that the measurements cause the outcome;
 - that the numbers hold for data from a different population, scanner or
   period: the guarantees assume exchangeability;
 - that the weight intervals are formal guarantees;
 - anything about other cases, from this one case.
-""")
+"""
+
+md("## 9. What we can and cannot conclude about case 2\n\n" + CONCLUDE)
 
 md(r"""
 ## 10. Recap and next steps
@@ -542,13 +547,13 @@ md(r"""
 - Concluding that calibration improved the model from one small test set.
 
 [Evaluate CE on your own data](../practitioner/evaluate_ce.md) covers these
-in more depth. The optional sections below show regression, guarded
+in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
 """)
 
 md(r"""
-## Optional A. The same workflow for regression
+## Extra 1. The same workflow for regression
 
 The same three steps (`fit`, `calibrate`, `explain`) work for regression; only
 the meaning of the output changes.
@@ -608,7 +613,7 @@ The task is still regression; only the question asked of it changes.
 """)
 
 md(r"""
-## Optional B. Guarded explanations
+## Extra 2. Guarded explanations
 
 Guarded explanations filter candidate feature ranges through an
 in-distribution check, so explanations avoid substituted values that are
@@ -637,7 +642,7 @@ distribution. See the [guarded explanations concept page](../foundations/concept
 """)
 
 md(r"""
-## Optional C. Shaping explanations
+## Extra 3. Shaping explanations
 
 You can exclude features that are not meaningful to the reader, with
 `features_to_ignore` (feature indices). Here we exclude the strongest
@@ -674,12 +679,14 @@ md(r"""
 | Read explanations in more depth | [Interpret calibrated explanations](../foundations/how-to/interpret_explanations.md) |
 | Learn more about alternatives | [Alternative explanations](../foundations/concepts/alternatives.md) |
 | Go deeper on threshold regression | [Probabilistic regression](../foundations/concepts/probabilistic_regression.md) |
-| Use guarded explanations | [Guarded explanations quickstart](quickstart_guarded.md) |
+| Use guarded explanations | [Guarded explanations tutorial](quickstart_guarded.md) |
 | Look up method signatures | [Quick API](quick_api.md) |
 | See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
 | See the whole workflow and a learning path | [The CE workflow](../foundations/concepts/ce_workflow.md) |
 | Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
-| Choose a task and mode for your problem (Path C) | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
+| Read this example again without code | [CE by example](ce-by-example.md) |
+| Find the other Python tutorials | [Python tutorials](../tutorials/index.md) |
+| Choose a task and mode for your problem | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
 | Apply CE to your own data | [Apply CE to your own data](apply-to-your-data.md) |
 | Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |
@@ -787,3 +794,238 @@ for c in nb.cells:
 out.parent.mkdir(parents=True, exist_ok=True)
 nbf.write(nb, out)
 print("wrote", md_out.name, out.name, fig_no, "figure(s)")
+
+
+# --- 3. Code-free companion: Quick Start Path B --------------------------------
+def output_of(marker):
+    """Stdout text of the code cell whose source contains ``marker``."""
+    for c in nb.cells:
+        if c.cell_type == "code" and marker in c.source:
+            return "".join(o.get("text", "") for o in c.outputs if o.get("output_type") == "stream")
+    raise SystemExit(f"no code cell contains {marker!r}")
+
+
+def grab(pattern, text, what):
+    m = re.search(pattern, text, re.MULTILINE)
+    if not m:
+        raise SystemExit(f"ce-by-example: cannot parse {what}")
+    return m.groups()
+
+
+def check(condition, what):
+    if not condition:
+        raise SystemExit(f"ce-by-example: statement no longer holds: {what}")
+
+
+t_data = output_of('print("Samples, features:"')
+n_samples, n_features = grab(r"Samples, features: \((\d+), (\d+)\)", t_data, "data shape")
+n_mal, = grab(r"Class 0 = malignant: (\d+) samples", t_data, "malignant count")
+n_ben, = grab(r"Class 1 = benign: (\d+) samples", t_data, "benign count")
+
+t_split = output_of('print(f"Proper training:')
+n_proper, = grab(r"Proper training: (\d+) samples", t_split, "proper size")
+n_cal, = grab(r"Calibration:\s+(\d+) samples", t_split, "calibration size")
+n_test, = grab(r"Test:\s+(\d+) samples", t_split, "test size")
+
+acc, = grab(r"Test accuracy: ([\d.]+)", output_of('print(f"Test accuracy: {accuracy_score(y_test, y_pred_raw)'), "accuracy")
+t_raw = output_of('print("Cases with raw probability exactly 0 or 1:"')
+n_extreme, n_test2 = grab(r"exactly 0 or 1: (\d+) of (\d+)", t_raw, "extreme count")
+n_extreme_ok, = grab(r"correctly labelled: (\d+)", t_raw, "extreme correct")
+
+t_cases = output_of('print("case  raw    calibrated  range')
+rows5 = re.findall(r"^\s*(\d+)\s+([\d.]+)\s+([\d.]+)\s+\[([\d.]+), ([\d.]+)\]\s+(\w+)\s+(\w+)\s*$", t_cases, re.MULTILINE)
+check(len(rows5) == 5, "five cases parsed")
+widths = [float(r[4]) - float(r[3]) for r in rows5]
+widest = max(range(5), key=lambda i: widths[i])
+misclassified = [int(r[0]) for r in rows5 if r[5] != r[6]]
+
+brier_raw, = grab(r"Brier score, raw:\s+([\d.]+)", output_of("brier_score_loss"), "raw Brier")
+brier_cal, = grab(r"Brier score, calibrated:\s+([\d.]+)", output_of("brier_score_loss"), "calibrated Brier")
+
+t_case = output_of('print(f"Calibrated P(benign) = ')
+p2, lo2, hi2 = grab(r"Calibrated P\(benign\) = ([\d.]+)\s+range \[([\d.]+), ([\d.]+)\]", t_case, "case 2 prediction")
+check(float(hi2) < 0.5, "the whole range of case 2 lies below 0.5")
+
+t_rules = output_of("rule_table(explanation)")
+rules = re.findall(r"^(.+?)\s+([+-]\d\.\d{3})\s+\[([+-]\d\.\d{3}), ([+-]\d\.\d{3})\]\s*$", t_rules, re.MULTILINE)
+check(len(rules) >= 4, "factual rules parsed")
+weight_sum, = grab(r"Sum of all \d+ weights: ([+-][\d.]+)", t_rules, "weight sum")
+top_rule, top_w, top_lo, top_hi = rules[0]
+check(float(top_w) < 0 and float(top_hi) < 0, "strongest rule has a negative weight with its whole range below 0")
+crossing = next((r for r in rules if float(r[2]) < 0 < float(r[3])), None)
+check(crossing is not None, "at least one shown rule has a range that includes 0")
+
+t_alt = output_of("alt_rules = alternatives[0].get_rules()")
+alts = re.findall(r"^(.+?)\s+(\d\.\d{3})\s+\[(\d\.\d{3}), (\d\.\d{3})\]\s*$", t_alt, re.MULTILINE)
+alts = [a for a in alts if not a[0].startswith("Current")]
+check(len(alts) >= 3, "alternatives parsed")
+a_rule, a_p, a_lo, a_hi = alts[0]
+check(float(a_p) < 0.5 < float(a_hi), "top alternative stays below 0.5 but its range spans 0.5")
+
+
+def table(header, rows):
+    out = ["| " + " | ".join(header) + " |", "|" + "---|" * len(header)]
+    out += ["| " + " | ".join(r) + " |" for r in rows]
+    return "\n".join(out)
+
+
+def signed(x):
+    return x.replace("-", "−")
+
+
+better = "better (lower)" if float(brier_cal) < float(brier_raw) else "worse (higher)"
+widest_note = (
+    f"- **One observation.** Case {rows5[widest][0]} has the widest range of the five and is\n"
+    "  the one the model gets wrong. That is a useful observation, but one case\n"
+    "  supports no general claim.\n"
+    if int(rows5[widest][0]) in misclassified else ""
+)
+
+page = f"""# CE by example: one prediction, explained
+
+**Path B of the Quick Start.** This page follows one real prediction from a
+model's raw output to a calibrated explanation, **without code**. Every number,
+table and the plot below are CE outputs produced by the code of the
+[Python walkthrough](quickstart_walkthrough.md), which runs the same example
+step by step; this page is regenerated from that run. This is an educational
+example on a public dataset, not clinical decision support.
+
+**Before this:** [Why CE](why-ce.md) (Path A) explains why CE adds a calibration
+step and how to read its outputs.
+
+## 1. The question
+
+A model flags breast-tumour samples as *malignant* or *benign* from
+{n_features} measurements of cell nuclei. For one test sample, **case 2**, the
+model says *malignant*. Before anyone acts on it, three questions matter:
+
+1. **How sure is the model**, and how certain is that probability?
+2. **Which measurements drive the prediction?**
+3. **What would change it?**
+
+## 2. The data and its three roles
+
+The dataset has {n_samples} samples ({n_mal} *malignant*, {n_ben} *benign*). CE
+reports the probability of class 1, which here is *benign*.
+
+{table(["Set", "Cases", "Job", "Used to train the model?"], [
+    ["Proper training", n_proper, "Fit the model", "Yes"],
+    ["Calibration", n_cal, "Let CE measure how the model's outputs relate to real outcomes", "No"],
+    ["Test", n_test, "Check the results on cases nobody has used", "No"],
+])}
+
+## 3. The model alone
+
+A random forest predicts the correct label for about {float(acc) * 100:.0f}% of
+the test cases (accuracy {acc}). Accuracy counts correct labels; it does not say
+whether the model's probabilities can be taken at face value. On the test set,
+{n_extreme} of the {n_test2} raw probabilities are exactly 0 or 1, a claim of
+certainty that is a common reason to check calibration. ({n_extreme_ok} of
+those {n_extreme} were correct, so this is not evidence that they are wrong.)
+
+## 4. Calibrated probabilities, each with a range
+
+CE calibrates the model on the calibration set; for classification it uses
+**Venn–Abers predictors**. The model itself is not changed. For the first five
+test cases, the probability of *benign* from the model alone and from CE:
+
+{table(["Case", "Model alone", "CE", "CE range", "Predicted (true)"],
+       [[r[0], r[1], r[2], f"[{r[3]}, {r[4]}]", f"*{r[5]}* ({r[6]})"] for r in rows5])}
+
+How to read the CE columns:
+
+- **Two values behind every range.** CE calibrates twice, once as if the case
+  were *benign* and once as if it were *malignant*. In the long run, the value
+  that matches the true outcome is calibrated; because that outcome is unknown
+  when you predict, CE reports both as the lower and upper value. The single
+  calibrated probability lies between them and does not carry that exact
+  property. *Wording under review by the CE authors.*
+- **What the range is not.** It is not a confidence interval for a "true
+  probability" of the case, and it guarantees nothing about one individual
+  case. These statements hold over many cases, assuming the calibration data
+  and new cases come from the same stable process.
+{widest_note}- **Not a guaranteed score improvement.** On this test set the Brier score
+  (the mean squared difference between probability and outcome; lower is
+  better) is {brier_raw} for the model alone and {brier_cal} with CE, so CE's
+  probabilities scored {better} here. One small test set settles nothing either
+  way.
+
+## 5. Why case 2 is predicted *malignant*
+
+For case 2, CE's calibrated probability of *benign* is **{p2}**, with range
+**[{lo2}, {hi2}]**. The probability is below 0.5, so the predicted label is
+*malignant*; the whole range also lies below 0.5, so the calibration data
+support that label throughout the range.
+
+CE's **factual explanation** lists conditions that hold for this case. Each
+condition has a **weight**: how much the calibrated probability of *benign*
+would differ if that feature took typical values from the other side of the
+condition, with all other features unchanged. Each weight has its own range.
+The six strongest:
+
+{table(["Condition (holds for case 2)", "Weight", "Weight range"],
+       [[f"`{r[0]}`", signed(r[1]), f"[{signed(r[2])}, {signed(r[3])}]"] for r in rules])}
+
+- **Sign.** A negative weight means the condition lowers the probability of
+  *benign* (towards *malignant*); a positive weight raises it.
+- **The strongest reason** is `{top_rule}`: with typical values from the other
+  side instead, the calibrated probability of *benign* would be about
+  {abs(float(top_w)):.2f} higher. Its whole weight range lies below 0: the
+  averaged lower and upper bounds agree on the direction. (No formal guarantee
+  is claimed for weight ranges.)
+- **Uncertain direction.** For `{crossing[0]}` the weight range includes 0: the
+  averaged bounds do not settle whether it raises or lowers the probability.
+- **Not a sum.** Each weight is computed one feature at a time; the weights do
+  not add up to the prediction (their sum is {signed(weight_sum)}).
+- **Not a cause.** A weight compares the model's responses; it says nothing
+  about what causes a tumour to be malignant.
+
+```{{figure}} walkthrough_assets/walkthrough-figure-1.png
+:alt: Factual explanation plot for case 2. Top: calibrated probability of benign {p2} with its range from {lo2} to {hi2}. Below: one bar per condition showing its weight range; worst concave points above 0.14 has the largest range entirely below zero.
+
+CE output for case 2, drawn by CE's own plot function in the Python
+walkthrough. Each bar covers a weight's range; red bars raise the probability
+of *benign*, blue bars lower it.
+```
+
+The [guide to reading CE explanations](../foundations/how-to/interpret_explanations.md)
+explains every element of this plot.
+
+## 6. What would change it: alternative explanations
+
+An **alternative explanation** asks: *if one feature had a value in a
+different range, what would the calibrated probability be?*
+
+{table(["If, instead, …", "Calibrated P(benign)", "Range"],
+       [[f"`{a[0]}`", a[1], f"[{a[2]}, {a[3]}]"] for a in alts])}
+
+- If `{a_rule}` held, the calibrated
+  probability of *benign* would be **{a_p}**, with range [{a_lo}, {a_hi}]. The
+  estimate stays below 0.5, but the range reaches above it: in that scenario CE
+  would no longer clearly favour either class.
+- Alternatives describe how the **model** would respond. They are not
+  recommendations, and they do not say that changing a measurement would
+  change the real outcome.
+
+## 7. What we can and cannot conclude
+
+{CONCLUDE.strip()}
+
+## Continue
+
+- **Run it yourself:** the [Python walkthrough](quickstart_walkthrough.md)
+  shows the code and outputs behind this page, with a downloadable notebook.
+- **Next:** [Tasks, modes and capabilities](ce-tasks-and-modes.md) (Path C),
+  for regression and the other CE modes.
+- **Go deeper:** [How CE calibrates: Venn–Abers predictors](../foundations/concepts/calibration_methods.md)
+  (section 2), [The CE workflow](../foundations/concepts/ce_workflow.md) (how an
+  explanation is built) and the formal
+  [guarantees by mode](../foundations/concepts/calibrated_interval_semantics.md).
+- **See also:** [How to read CE explanations](../foundations/how-to/interpret_explanations.md).
+- **Before this:** [Why CE](why-ce.md).
+
+Entry-point tier: Tier 1.
+"""
+companion = page_dir / "ce-by-example.md"
+companion.write_text(page, encoding="utf-8")
+print("wrote", companion.name)

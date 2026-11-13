@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 276" role="img" aria-labelledby="ce-g-title ce-g-desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <title id="ce-g-title">Calibrated Explanations at a glance</title>
+  <desc id="ce-g-desc">Top row, in blue, a conventional workflow: labelled data, train a model, predict a label or a score. Bottom row, in orange, what CE adds: part of the labelled data is held out as a calibration set; CE uses it to calibrate the trained model's outputs (the model itself is unchanged), explains its predictions, and returns a calibrated prediction and an explanation, each with a range.</desc>
+  <defs>
+    <marker id="g-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c8796"/>
+    </marker>
+    <marker id="g-arrow-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <!-- conventional row -->
+  <rect x="10" y="20" width="170" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="95" y="58" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Labelled data</text>
+  <rect x="215" y="20" width="170" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="300" y="58" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Train a model</text>
+  <rect x="420" y="20" width="330" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="585" y="47" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">Predict</text>
+  <text x="585" y="70" text-anchor="middle" font-size="16" fill="#1e40af">a label or a score</text>
+  <path d="M180,52 H213" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#g-arrow)"/>
+  <path d="M385,52 H418" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#g-arrow)"/>
+
+  <!-- CE row -->
+  <rect x="10" y="140" width="170" height="72" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="95" y="171" text-anchor="middle" font-size="17" font-weight="700" fill="#7c2d12">Calibration set</text>
+  <text x="95" y="194" text-anchor="middle" font-size="15" fill="#9a3412">held out from training</text>
+  <rect x="215" y="140" width="150" height="72" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="290" y="171" text-anchor="middle" font-size="17" font-weight="700" fill="#7c2d12">Calibrate</text>
+  <text x="290" y="194" text-anchor="middle" font-size="15" fill="#9a3412">the model's outputs</text>
+  <rect x="395" y="140" width="130" height="72" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="460" y="171" text-anchor="middle" font-size="17" font-weight="700" fill="#7c2d12">Explain</text>
+  <text x="460" y="194" text-anchor="middle" font-size="15" fill="#9a3412">each prediction</text>
+  <rect x="555" y="136" width="195" height="86" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="652" y="162" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Prediction and</text>
+  <text x="652" y="184" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">explanation,</text>
+  <text x="652" y="208" text-anchor="middle" font-size="15" fill="#9a3412">each with a range</text>
+  <path d="M180,176 H213" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#g-arrow-o)"/>
+  <path d="M365,176 H393" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#g-arrow-o)"/>
+  <path d="M525,176 H553" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#g-arrow-o)"/>
+
+  <!-- links between rows -->
+  <path d="M95,84 V138" stroke="#7c8796" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#g-arrow)"/>
+  <path d="M290,84 V138" stroke="#7c8796" stroke-width="2" fill="none" marker-end="url(#g-arrow)"/>
+
+  <!-- legend -->
+  <rect x="10" y="242" width="226" height="26" rx="13" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="123" y="260" text-anchor="middle" font-size="14" fill="#1e3a8a">blue: conventional ML step</text>
+  <rect x="246" y="242" width="170" height="26" rx="13" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="331" y="260" text-anchor="middle" font-size="14" fill="#7c2d12">orange: added by CE</text>
+</svg>

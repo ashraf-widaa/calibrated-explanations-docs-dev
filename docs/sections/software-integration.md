@@ -42,6 +42,13 @@ Implementation components and boundaries, distinct from the stable public API.
 ::::{grid} 1 2 3 3
 :gutter: 3
 
+:::{grid-item-card} Quick API
+:link: ../get-started/quick_api
+:link-type: doc
+
+The main calls of `WrapCalibratedExplainer` at a glance, by mode.
+:::
+
 :::{grid-item-card} API & Technical Reference
 :link: ../api/index
 :link-type: doc

@@ -1,8 +1,9 @@
 # Apply CE to your own data
 
-**Path C, step 5.** This page takes you from your own data and model to
+**One of the {doc}`Python tutorials <../tutorials/index>`.** This page takes you from your own data and model to
 calibrated predictions and explanations you can check. It assumes you have
-chosen a mode in {doc}`ce-tasks-and-modes` and run the quickstart for it. The
+chosen a mode in {doc}`ce-tasks-and-modes` and run the tutorial for it. The
+same steps without code are in {doc}`apply-overview` (Quick Start). The
 example uses binary classification on a public dataset, standing in for your
 data; each step says what to change for your problem.
 
@@ -241,14 +242,17 @@ Please:
 10. Keep the code minimal and runnable, with comments.
 ```
 
-## Next
+## Continue
 
-- Evaluate before you rely on it: {doc}`../practitioner/evaluate_ce`.
-- Understand the guarantees for your mode:
-  {doc}`../foundations/concepts/calibrated_interval_semantics`.
-- Configure explanations (guarded explanations, conjunctions, ignored
-  features): {doc}`quickstart_guarded` and
-  {doc}`../foundations/how-to/interpret_explanations`.
-- Look up a call: {doc}`quick_api`.
+- **Next:** evaluate before you rely on it: {doc}`../practitioner/evaluate_ce`.
+- **Go deeper:** the guarantees for your mode in
+  {doc}`../foundations/concepts/calibrated_interval_semantics`, and
+  {doc}`../foundations/how-to/integrate_with_pipelines` for pipelines.
+- **See also:** configure explanations (guarded explanations, conjunctions,
+  ignored features) with {doc}`quickstart_guarded` and
+  {doc}`../foundations/how-to/interpret_explanations`; look up a call in
+  {doc}`quick_api`; known errors in {doc}`troubleshooting`.
+- **Before this:** {doc}`apply-overview` (the workflow without code) and
+  {doc}`ce-tasks-and-modes`.
 
 Entry-point tier: Tier 3.

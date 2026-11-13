@@ -178,7 +178,8 @@ models. It calibrates the model's outputs on held-out data, reports
 uncertainty for predictions and for each feature's effect, and offers
 alternative explanations that show how the prediction would change. These
 guarantees hold under {doc}`stated assumptions <../foundations/concepts/calibrated_interval_semantics>`, and an explanation never proves
-cause and effect. The next page shows which tasks and outputs CE supports.
+cause and effect. The next page, {doc}`why-ce`, shows how a CE workflow
+differs from a conventional one.
 
 Go deeper: {doc}`../foundations/concepts/calibration_methods` explains what
 calibration means and how CE calibrates.
@@ -221,6 +222,14 @@ Löfström, Löfström, Johansson and Sönströd (2024),
   model predictions. *Advances in Neural Information Processing Systems 30*.
   [arXiv:1705.07874](https://arxiv.org/abs/1705.07874).
 
-**Next:** {doc}`why-ce` (Path A, step 2).
+## Continue
+
+- **Next:** {doc}`why-ce` (Path A, step 2).
+- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
+  (section 1, what calibration means) and
+  {doc}`../foundations/concepts/calibrated_interval_semantics` (what is and is
+  not guaranteed).
+- **See also:** the {doc}`Glossary of scientific terms <../glossary/science>`
+  and {doc}`../what-is-ce`.
 
 Entry-point tier: Tier 1.

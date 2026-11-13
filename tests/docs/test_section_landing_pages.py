@@ -27,6 +27,7 @@ def test_in_practice_cards_point_to_verified_destinations() -> None:
     text = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
     links = re.findall(r"^:link: (\S+)$", text, flags=re.MULTILINE)
     assert links == [
+        "../tutorials/index",
         "https://calibrated-explanations-demo.ju.se/",
         "https://calibrated-explanations-demo.ju.se/expert",
         "https://games.grejna.ai/",

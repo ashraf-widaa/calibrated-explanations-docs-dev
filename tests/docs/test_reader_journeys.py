@@ -19,7 +19,8 @@ GITHUB = "https://github.com/Moffran/calibrated_explanations/"
 JOURNEYS = {
     "beginner": [
         ("index.md", "get-started/index"),
-        ("get-started/index.md", "quickstart_walkthrough"),
+        ("get-started/index.md", "ce-by-example"),
+        ("get-started/ce-by-example.md", "quickstart_walkthrough.md"),
         ("get-started/quickstart_walkthrough.md", "## 7. The factual explanation of our case"),
         ("get-started/quickstart_walkthrough.md", "../foundations/how-to/interpret_explanations.md"),
         ("get-started/quickstart_walkthrough.md", "../foundations/concepts/ce_workflow.md"),

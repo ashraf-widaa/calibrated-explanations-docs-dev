@@ -39,11 +39,11 @@ about it.
 
 *How probable is each class?*
 
-`predict_proba(x, uq_interval=True)`
+Call: `predict_proba` with `uq_interval`.
 
 Calibrated with **Venn-Abers** predictors.
 +++
-Classification quickstart →
+Classification tutorial →
 :::
 
 :::{grid-item-card} Your model predicts a **number**, and you want a range
@@ -54,11 +54,11 @@ Classification quickstart →
 
 *Where is the value likely to fall?*
 
-`predict(x, uq_interval=True)`
+Call: `predict` with `uq_interval`.
 
 Calibrated with a **conformal predictive system** (CPS).
 +++
-Regression quickstart →
+Regression tutorial →
 :::
 
 :::{grid-item-card} Your model predicts a **number**, and you ask about a threshold
@@ -69,11 +69,11 @@ Regression quickstart →
 
 *How likely is the value to be at or below `t`?*
 
-`predict_proba(x, threshold=t, uq_interval=True)`
+Call: `predict_proba` with `threshold` and `uq_interval`.
 
 **CPS**, then **Venn-Abers**.
 +++
-Regression quickstart →
+Regression tutorial →
 :::
 ::::
 
@@ -157,13 +157,18 @@ mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
 Guarded explanations, for example, are an explanation configuration available
 in every mode; they are not a third kind of prediction task.
 
-**Next:** run the quickstart for your mode,
-{doc}`classification <quickstart_classification>` or
-{doc}`regression <quickstart_regression>`; add
-{doc}`guarded explanations <quickstart_guarded>` if you need them. Then
-{doc}`apply-to-your-data` takes you through your own data. For a slower,
-fully explained example, see Path B, the
-{doc}`guided walkthrough <quickstart_walkthrough>`.
+**Continue**
+
+- **Next:** {doc}`apply-overview` (Path C, step 2): the practical workflow,
+  step by step, without code.
+- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
+  (section 4, the three modes) and the guarantees by mode in
+  {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **See also:** the executable {doc}`Python tutorials <../tutorials/index>`
+  for each mode, and the {doc}`Quick API <quick_api>` for the calls named on
+  this page.
+- **Before this:** {doc}`CE by example <ce-by-example>` (Path B) and
+  {doc}`why-ce` (Path A).
 
 ## Capability reference
 

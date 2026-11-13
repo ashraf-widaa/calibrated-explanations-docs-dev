@@ -1,6 +1,9 @@
 # Quick API
 
-This page is a compact method map for `WrapCalibratedExplainer`.
+This page is a compact method map for `WrapCalibratedExplainer`, part of
+{doc}`CE Software & Integration <../sections/software-integration>`. For what
+each call means, start with {doc}`ce-tasks-and-modes` (Quick Start); for
+worked, executed examples, see the {doc}`Python tutorials <../tutorials/index>`.
 
 ## Mode-specific semantics notes
 
@@ -77,5 +80,11 @@ pred, (low, high) = explainer.predict(
 p = explainer.predict_proba(X_sample, threshold=120.0)
 p, (plo, phi) = explainer.predict_proba(X_sample, uq_interval=True, threshold=120.0)
 ```
+
+## Continue
+
+- **Go deeper:** full signatures in the {doc}`API reference <../api/index>`.
+- **See also:** the {doc}`Python tutorials <../tutorials/index>`.
+- **Before this:** {doc}`ce-tasks-and-modes` and {doc}`apply-overview`.
 
 Entry-point tier: Tier 2.

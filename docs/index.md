@@ -89,6 +89,7 @@ How to Read CE Explanations <foundations/how-to/interpret_explanations>
 :caption: "CE in Practice: Explore & Apply"
 
 Overview <sections/in-practice>
+Python tutorials <tutorials/index>
 tasks/index
 practitioner/index
 foundations/how-to/index

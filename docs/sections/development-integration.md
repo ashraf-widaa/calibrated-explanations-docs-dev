@@ -10,6 +10,7 @@ For short definitions of library terms, see the {doc}`Software & Technical Gloss
 ```{toctree}
 :maxdepth: 1
 
+Quick API <../get-started/quick_api>
 API & Technical Reference <../api/index>
 Model & Pipeline Integration <../foundations/how-to/integrate_with_pipelines>
 Extensions & Customization <../plugins>

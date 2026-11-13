@@ -10,6 +10,13 @@ For guarantees, assumptions and non-guarantees, see
 ::::{grid} 1 2 3 3
 :gutter: 3
 
+:::{grid-item-card} Python Tutorials
+:link: ../tutorials/index
+:link-type: doc
+
+Executable step-by-step tutorials with real output: the Python walkthrough, classification, regression, guarded explanations and applying CE to your own data.
+:::
+
 :::{grid-item-card} Interactive CE App
 :link: https://calibrated-explanations-demo.ju.se/
 :link-type: url

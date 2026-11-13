@@ -1,19 +1,20 @@
-# Practical walkthrough: from a trained model to calibrated explanations
+# Python walkthrough: from a trained model to calibrated explanations
 
 This page works like a notebook. Each section has a short explanation, the
 code, the output that code produced when this page was built, and what the
 output means. You can run the same cells yourself: [download this walkthrough as a Jupyter notebook](path:../_static/notebooks/quickstart_walkthrough.ipynb), or copy the
 cells into a Python session.
 
-**Path B of the Quick Start.** Each section follows the same pattern: a
-**question**, the code that answers it, the real output, the concept behind
-it, and what you can conclude.
+**One of the [Python tutorials](../tutorials/index.md).** Each section follows
+the same pattern: a **question**, the code that answers it, the real output,
+the concept behind it, and what you can conclude. The same example without
+code is [CE by example](ce-by-example.md) in the Quick Start.
 
 **Before you start.** You should know what a feature, a label and a
 train/test split are, and why CE adds a calibration step; if not, read
-[Path A: Why CE](why-ce.md) first. We use **binary classification**; other
-tasks are covered in [Path C](ce-tasks-and-modes.md). No statistics beyond
-"probability" and "average" is needed.
+[Why CE](why-ce.md) first. We use **binary classification**; other tasks are
+introduced in [Tasks, modes and capabilities](ce-tasks-and-modes.md). No
+statistics beyond "probability" and "average" is needed.
 
 **What you will learn**
 
@@ -28,7 +29,7 @@ tasks are covered in [Path C](ce-tasks-and-modes.md). No statistics beyond
 8. What you can and cannot conclude (section 9).
 
 Sections 1–10 form the core path. Regression, guarded explanations and
-options for shaping explanations follow as optional sections.
+options for shaping explanations follow as extra sections.
 
 Install the packages once:
 
@@ -517,7 +518,7 @@ above 0.5.
 - that 0.29 holds for this individual case, or that its "true" probability
   lies between 0.17 and 0.33;
 - that the calibrated probabilities score better than the raw ones: on this
-  test set they did not (section 5);
+  test set they did not (see the Brier scores above);
 - that the measurements cause the outcome;
 - that the numbers hold for data from a different population, scanner or
   period: the guarantees assume exchangeability;
@@ -545,11 +546,11 @@ above 0.5.
 - Concluding that calibration improved the model from one small test set.
 
 [Evaluate CE on your own data](../practitioner/evaluate_ce.md) covers these
-in more depth. The optional sections below show regression, guarded
+in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
 
-## Optional A. The same workflow for regression
+## Extra 1. The same workflow for regression
 
 The same three steps (`fit`, `calibrate`, `explain`) work for regression; only
 the meaning of the output changes.
@@ -619,7 +620,7 @@ so the calibrated probability of an outcome at or below 150 is low. The third
 sits closer to the threshold, and its probability is correspondingly higher.
 The task is still regression; only the question asked of it changes.
 
-## Optional B. Guarded explanations
+## Extra 2. Guarded explanations
 
 Guarded explanations filter candidate feature ranges through an
 in-distribution check, so explanations avoid substituted values that are
@@ -652,7 +653,7 @@ explanation. The guard is a filter, not a certificate: it checks whether each
 substituted value is plausible, not whether the case itself is out of
 distribution. See the [guarded explanations concept page](../foundations/concepts/guarded_explanations.md).
 
-## Optional C. Shaping explanations
+## Extra 3. Shaping explanations
 
 You can exclude features that are not meaningful to the reader, with
 `features_to_ignore` (feature indices). Here we exclude the strongest
@@ -696,12 +697,14 @@ not with single rules. *How to read them is under review by the CE authors.*
 | Read explanations in more depth | [Interpret calibrated explanations](../foundations/how-to/interpret_explanations.md) |
 | Learn more about alternatives | [Alternative explanations](../foundations/concepts/alternatives.md) |
 | Go deeper on threshold regression | [Probabilistic regression](../foundations/concepts/probabilistic_regression.md) |
-| Use guarded explanations | [Guarded explanations quickstart](quickstart_guarded.md) |
+| Use guarded explanations | [Guarded explanations tutorial](quickstart_guarded.md) |
 | Look up method signatures | [Quick API](quick_api.md) |
 | See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
 | See the whole workflow and a learning path | [The CE workflow](../foundations/concepts/ce_workflow.md) |
 | Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
-| Choose a task and mode for your problem (Path C) | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
+| Read this example again without code | [CE by example](ce-by-example.md) |
+| Find the other Python tutorials | [Python tutorials](../tutorials/index.md) |
+| Choose a task and mode for your problem | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
 | Apply CE to your own data | [Apply CE to your own data](apply-to-your-data.md) |
 | Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |

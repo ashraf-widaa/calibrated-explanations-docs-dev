@@ -1,6 +1,6 @@
-# Classification quickstart
+# Classification tutorial
 
-**Path C, step 2.** Calibrate a classifier, read its calibrated probabilities
+**One of the {doc}`Python tutorials <../tutorials/index>`.** Calibrate a classifier, read its calibrated probabilities
 with their ranges, and explain a prediction. The example is multiclass (three
 iris species); the same code works for binary classification. If you have not
 yet chosen a mode, start with {doc}`ce-tasks-and-modes`.
@@ -181,13 +181,17 @@ would change the real outcome.
 - Reading the default multiclass bounds as probabilities (limitation 1).
 - Treating a weight as a cause, or an alternative as a recommended action.
 
-## Next
+## Continue
 
-- {doc}`quickstart_guarded`, to filter explanations to typical feature values.
-- {doc}`apply-to-your-data`, to use your own data and model.
-- {doc}`quickstart_walkthrough`, for a fully explained binary example.
-- {doc}`../foundations/how-to/interpret_explanations` and
-  {doc}`../foundations/concepts/alternatives`.
-- {doc}`../citing`
+- **Next:** {doc}`quickstart_regression`, the next Python tutorial.
+- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
+  (section 2, Venn–Abers predictors) and the classification guarantees in
+  {doc}`../foundations/concepts/calibrated_interval_semantics`.
+- **See also:** {doc}`quickstart_guarded` (filter explanations to typical
+  feature values), {doc}`apply-to-your-data` (your own data and model),
+  {doc}`../foundations/how-to/interpret_explanations`,
+  {doc}`../foundations/concepts/alternatives` and {doc}`../citing`.
+- **Before this:** {doc}`ce-tasks-and-modes` (choosing the mode) and
+  {doc}`apply-overview` (the practical workflow without code).
 
 Entry-point tier: Tier 2.

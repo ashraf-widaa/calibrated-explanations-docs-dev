@@ -55,8 +55,9 @@ What changes:
 A model flags breast-tumour samples as *malignant* or *benign* from 30
 measurements of cell nuclei. (This is an educational example on a public
 dataset, not clinical decision support.) For one sample, here is what the
-model alone gives, and what CE adds. You will produce these numbers yourself
-in Path B, the {doc}`guided walkthrough <quickstart_walkthrough>`.
+model alone gives, and what CE adds. Path B, {doc}`CE by example <ce-by-example>`,
+follows this case step by step without code; the
+{doc}`Python walkthrough <quickstart_walkthrough>` produces the same numbers with code.
 
 | Question | The model alone | With CE |
 |---|---|---|
@@ -127,12 +128,15 @@ split first, and fit every preprocessing step on the training data only
 - **Not a model fix.** CE calibrates and explains a model; it does not make a
   weak model accurate.
 
-## Next
+## Continue
 
-- **See it run:** Path B, the {doc}`guided walkthrough <quickstart_walkthrough>`.
-- **Apply it:** Path C, {doc}`ce-tasks-and-modes`.
-- **Read more:** {doc}`../what-is-ce` (what CE adds and how it compares) and
-  {doc}`../foundations/concepts/ce_workflow` (how CE works, with a learning
-  path).
+- **Next:** {doc}`CE by example <ce-by-example>` (Path B): one prediction,
+  explained step by step without code.
+- **Go deeper:** {doc}`../foundations/concepts/ce_workflow` (how CE works,
+  with a learning path), {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
+  (the methods and their mathematics).
+- **See also:** {doc}`../what-is-ce` (what CE adds and how it compares) and,
+  if you want to apply CE now, Path C: {doc}`ce-tasks-and-modes`.
+- **Before this:** {doc}`ml-foundations` (Path A, step 1).
 
 Entry-point tier: Tier 3.

@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-.ce-figure a {
+.ce-figure > a {
   display: block;
   border: 0;
 }
