@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 714" role="img" aria-labelledby="ce-ot-title ce-ot-desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <title id="ce-ot-title">Three CE output types, each with its own meaning</title>
+  <desc id="ce-ot-desc">Panel A, classification: for walkthrough case 2 the calibrated probability of benign is 0.286 with lower and upper probability 0.167 and 0.333, so the predicted class is malignant; these are bounds of a probability, not a confidence interval. Panel B, interval regression: for regression tutorial case 0 the prediction is 273.4 with a prediction interval from 186.5 to 409.2 for the 5th to 95th percentiles; the actual value 321 lies inside; about 90 percent of such intervals contain the true value on average over cases, not for every case. Panel C, probabilistic regression: for the same regression case the calibrated probability that the outcome is at most 150 is 0.077, with bounds 0.000 and 0.083; this is a probability for an event on the outcome, not an interval for the outcome.</desc>
+
+  <!-- Panel A: classification -->
+  <g>
+    <rect x="1" y="1" width="398" height="224" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="14" y="27" font-size="16" font-weight="700" fill="#1f2937">A · Classification</text>
+    <text x="14" y="47" font-size="13" fill="#475569">calibrated probability with bounds (Venn–Abers)</text>
+    <text x="14" y="65" font-size="13" fill="#475569">Walkthrough case 2 · P(<tspan font-style="italic">benign</tspan>) · predicted: <tspan font-style="italic">malignant</tspan></text>
+    <line x1="24" y1="126" x2="376" y2="126" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="200" y1="88" x2="200" y2="134" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="83" y="118" width="58" height="16" rx="4" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+    <circle cx="125" cy="126" r="6.5" fill="#ea580c" stroke="#f8fafc" stroke-width="2"/>
+    <text x="125" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">0.286</text>
+    <text x="24" y="152" text-anchor="middle" font-size="13" fill="#475569">0</text>
+    <text x="80" y="152" text-anchor="middle" font-size="13" fill="#9a3412">0.167</text>
+    <text x="146" y="152" text-anchor="middle" font-size="13" fill="#9a3412">0.333</text>
+    <text x="200" y="152" text-anchor="middle" font-size="13" fill="#475569">0.5</text>
+    <text x="376" y="152" text-anchor="middle" font-size="13" fill="#475569">1</text>
+    <text x="14" y="180" font-size="13" fill="#334155">Bounds of a calibrated probability, not a confidence</text>
+    <text x="14" y="198" font-size="13" fill="#334155">interval; their validity concerns many cases, not</text>
+    <text x="14" y="216" font-size="13" fill="#334155">this one case.</text>
+  </g>
+
+  <!-- Panel B: interval regression -->
+  <g transform="translate(0,238)">
+    <rect x="1" y="1" width="398" height="224" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="14" y="27" font-size="16" font-weight="700" fill="#1f2937">B · Interval regression</text>
+    <text x="14" y="47" font-size="13" fill="#475569">prediction with a prediction interval (CPS)</text>
+    <text x="14" y="65" font-size="13" fill="#475569">Regression tutorial case 0 · 5th–95th percentile</text>
+    <line x1="24" y1="126" x2="376" y2="126" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="170" y="118" width="174" height="16" rx="4" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="1.5"/>
+    <circle cx="238" cy="126" r="6.5" fill="#2563eb" stroke="#f8fafc" stroke-width="2"/>
+    <text x="238" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">273.4</text>
+    <path d="M269,118 L281,134 M281,118 L269,134" stroke="#1f2937" stroke-width="2.2"/>
+    <text x="288" y="108" font-size="13" fill="#1f2937">actual 321</text>
+    <text x="24" y="152" text-anchor="middle" font-size="13" fill="#475569">0</text>
+    <text x="102" y="152" text-anchor="middle" font-size="13" fill="#475569">100</text>
+    <text x="170" y="152" text-anchor="middle" font-size="13" fill="#1e40af">186.5</text>
+    <text x="344" y="152" text-anchor="middle" font-size="13" fill="#1e40af">409.2</text>
+    <text x="14" y="180" font-size="13" fill="#334155">An interval for the value itself. About 90% of such</text>
+    <text x="14" y="198" font-size="13" fill="#334155">intervals contain the true value on average over</text>
+    <text x="14" y="216" font-size="13" fill="#334155">cases, not for every single case.</text>
+  </g>
+
+  <!-- Panel C: probabilistic regression -->
+  <g transform="translate(0,476)">
+    <rect x="1" y="1" width="398" height="236" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="14" y="27" font-size="16" font-weight="700" fill="#1f2937">C · Probabilistic regression</text>
+    <text x="14" y="47" font-size="13" fill="#475569">P(y ≤ t) with bounds (CPS, then Venn–Abers)</text>
+    <text x="14" y="65" font-size="13" fill="#475569">Same regression case 0 · threshold t = 150</text>
+    <line x1="24" y1="126" x2="376" y2="126" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="200" y1="88" x2="200" y2="134" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="24" y="118" width="29" height="16" rx="4" fill="#ea580c" fill-opacity="0.25" stroke="#ea580c" stroke-width="1.5"/>
+    <circle cx="51" cy="126" r="6.5" fill="#ea580c" stroke="#f8fafc" stroke-width="2"/>
+    <text x="64" y="108" font-size="15" font-weight="700" fill="#7c2d12">P(y ≤ 150) = 0.077</text>
+    <text x="24" y="152" text-anchor="middle" font-size="13" fill="#9a3412">0.000</text>
+    <text x="58" y="152" font-size="13" fill="#9a3412">0.083</text>
+    <text x="200" y="152" text-anchor="middle" font-size="13" fill="#475569">0.5</text>
+    <text x="376" y="152" text-anchor="middle" font-size="13" fill="#475569">1</text>
+    <text x="14" y="180" font-size="13" fill="#334155">A probability for an event on the value, not an</text>
+    <text x="14" y="198" font-size="13" fill="#334155">interval for the value. The bounds use a split</text>
+    <text x="14" y="216" font-size="13" fill="#334155">calibration set; the validity of this construction</text>
+    <text x="14" y="232" font-size="13" fill="#334155">is under review by the CE authors.</text>
+  </g>
+</svg>

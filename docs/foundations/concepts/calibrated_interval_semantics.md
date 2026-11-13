@@ -16,6 +16,27 @@ Calibrated Explanations has three distinct semantics modes:
 
 Do not merge these into one guarantee statement.
 
+(ce-output-types)=
+
+### The three output types at a glance
+
+Each mode answers a different question, so its output has a different shape and
+a different meaning. The figure shows one real CE output of each type.
+
+```{raw} html
+<figure class="ce-figure ce-figure--compact">
+  <a href="../../_static/figures/ce-output-types.svg" title="Open the figure at full size">
+    <img src="../../_static/figures/ce-output-types.svg" width="400" height="714" alt="Three panels. A, classification: walkthrough case 2 has a calibrated probability of benign of 0.286 with lower and upper probability 0.167 and 0.333, so the predicted class is malignant; these are bounds of a probability, not a confidence interval. B, interval regression: regression tutorial case 0 has a prediction of 273.4 with a 5th to 95th percentile prediction interval from 186.5 to 409.2, and the actual value 321 lies inside; about 90 percent of such intervals contain the true value on average over cases, not for every case. C, probabilistic regression: for the same case, the calibrated probability that the outcome is at most 150 is 0.077 with bounds 0.000 and 0.083; this is a probability for an event, not an interval for the value.">
+  </a>
+  <figcaption>CE outputs from the Python walkthrough (A) and the regression tutorial (B, C). The bounds in A and C bound a probability; the interval in B bounds the value itself. Each mode's guarantee is stated below.</figcaption>
+</figure>
+```
+
+- **A, classification:** see the {doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`
+  (section 5) and, for the method, {doc}`calibration_methods` (section 2).
+- **B and C, regression:** see the {doc}`regression tutorial <../../get-started/quickstart_regression>`
+  and {doc}`calibration_methods` (sections 3–4).
+
 ## Mode 1: Classification (Venn-Abers)
 
 ### Calibration prerequisites

@@ -99,6 +99,7 @@ flowchart LR
 You do not need to remember the families below to use CE; skim the table and
 move on. Common model families for tabular data:
 
+:::{div} ce-table-compact
 | Model family | How it works, in one line | Strengths | Watch out for |
 |---|---|---|---|
 | Linear models | Weighted sum of features | Fast, transparent | Miss non-linear patterns |
@@ -106,6 +107,7 @@ move on. Common model families for tabular data:
 | Random forests and other ensembles | Many trees vote or average | Strong default for tables | Less transparent |
 | Neural networks | Layers of learned transformations | Very flexible | Need more data and tuning |
 | Transformers | Neural networks built around attention | State of the art for text and sequences | Large and data-hungry |
+:::
 
 Choose a model by the size and type of your data, the accuracy you need, how
 fast it must run, and how much transparency the setting requires. CE adds
