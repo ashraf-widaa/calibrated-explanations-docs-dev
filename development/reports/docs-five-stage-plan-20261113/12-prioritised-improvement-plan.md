@@ -227,3 +227,28 @@ advanced and contributor material; housekeeping last.
 | D-16 | Quick Start landing figure: keep smaller (≤ ~560 px) with a link to `why-ce`, or remove | Keep smaller |
 | D-17 | Rename the walkthrough's "Optional A/B/C" to "Extra 1/2/3" | Approve |
 | D-18 … D-21 | Quick Start no-code migration (Path C shape; inline identifiers; URLs kept; Path B as generated *CE by example*) | See `14` §6 |
+
+## Revision 5 (2026-11-13) — reconciliation with the official-vs-Beta audit
+
+Source: `development/reports/beta-versions-20261113/01-master-audit-official-vs-beta.md`.
+No parallel backlog is created; audit findings map onto the existing WPs.
+
+| Finding | WP | State after this run |
+|---|---|---|
+| A-01 one-sided endpoints (official #237) | **WP-19 (new): official-behaviour alignment** | Done on Beta V2 (`1e487429`) |
+| A-02 Beta `src/` one official commit behind | WP-19 | Proposed (D-23) |
+| A-03 verified-version statement | WP-6 | Done on V2 (tutorials hub) |
+| A-04, A-06, A-16, SR items | WP-8 | Author sheet done (`02-author-review-sheet.md`); answers pending |
+| A-05, A-07 task-page wording | WP-8 (non-blocked part) | Done on V2 |
+| A-08…A-13 outdated code | WP-7 | Done on V2 (fragment policy D-13 still open for 32 pages) |
+| A-14 comparison page | WP-5 | Pending (D-6, SR-05/SR-06) |
+| A-15 release notes | WP-11 | Pending |
+| A-17 three output types (V-6) | WP-3 (V-6 part) | Done on V3 (`f06061b9`) on the existing semantics page; the separate intuition page still needs new-page approval (D-25) |
+| A-18 phone tables | WP-18 | Quick Start tables done on V3; 11 tables elsewhere pending |
+| A-19 interpret page telemetry section | WP-14 | Pending |
+| A-20 thin hubs | WP-15, WP-16, WP-17 | Pending |
+| A-21 contributor setup page | WP-10 | Deferred (new page, D-25) |
+
+Next in order: WP-6 (troubleshooting, Quick API components), WP-13/WP-14
+landing introductions, WP-18 remaining tables, WP-11 housekeeping; new-page WPs
+(WP-2, WP-3 page, WP-10) after approval.
