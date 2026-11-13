@@ -3,7 +3,9 @@
 Planning deliverables, 2026-11-13, baseline `a55c7e9d` (= Beta `main`). No
 published page was changed.
 
-**Revision 3 (2026-11-13) — binding.** Quick Start **keeps Paths A/B/C**; the five stages are a planning aid only, never a navigation structure. The integrated architecture (three reading levels, prerequisite progression, forward/deeper/across/backward navigation, tutorial + compendium + manual, canonical ownership, audience flexibility) is preserved. Conflicts and their resolution: `13-architecture-reconciliation.md`, which wins over every older statement.
+**Revision 4 (2026-11-13) — binding.** Quick Start (landing and learning pages) contains **no code blocks or mathematical derivations**; executable pages move by toctree (URLs unchanged) to CE in Practice and Software & Integration (`14`). All seven entry points get improvement plans (`15`). WP-1 remains first; nothing else is implemented before separate approval.
+
+**Revision 3 (2026-11-13).** Quick Start **keeps Paths A/B/C**; the five stages are a planning aid only, never a navigation structure. The integrated architecture (three reading levels, prerequisite progression, forward/deeper/across/backward navigation, tutorial + compendium + manual, canonical ownership, audience flexibility) is preserved. Conflicts and their resolution: `13-architecture-reconciliation.md`, which wins over every older statement.
 
 **Revision 2 (2026-11-13, entry-point audit, partly withdrawn).** The PO agreed on an Integrated
 Learning and Reference Architecture with **Quick Start as the five-stage
@@ -24,6 +26,8 @@ match. Where an older statement conflicts, 02 rev. 2 and 12 win.
 | `09-entry-point-navigation-matrix.md` | **Deliverable B.** Reader goal, current vs proposed path, function, levels, gaps, change classes |
 | `10-concept-curriculum-matrix.md` | **Deliverable C.** 46 concepts in prerequisite order with owner, stage, L1/L2/L3 coverage, gaps |
 | `11-cross-entry-navigation-matrix.md` | **Deliverable D.** Canonical pages linked from several entry points, with direction and placement |
+| `14-quickstart-no-code-migration.md` | **Rev. 4.** Inventory of the 66 code blocks on six Quick Start pages; relocation by toctree (URLs unchanged); code-free Paths B and C; affected files; tests; migration risks; D-18…D-21 |
+| `15-entry-point-improvement-plan.md` | **Rev. 4.** Phone-width evidence; shared standards; visualisation programme V-1…V-11; recommendations for all seven entry points; WP-13…WP-18 |
 | `13-architecture-reconciliation.md` | **Rev. 3 decision record.** Binding architecture; verified purposes of Paths A/B/C; conflicts R-1…R-12 and resolutions; Quick Start target |
 | `12-prioritised-improvement-plan.md` | **Deliverable F.** WP-1…WP-12 with objectives, pages, dependencies, verification, acceptance, risks, effort; sequence; decisions D-11…D-15 |
 
@@ -49,3 +53,8 @@ prompt).
 | D-13 … D-15 | See `12` (fragment policy; author sheet first; internal workflow figure) | See 12 |
 | D-16 | Workflow figure on the Quick Start landing: keep a smaller version (≤ ~560 px) as orientation with a link to `why-ce`, or remove it from the landing | Keep smaller (13 R-7) |
 | D-17 | Rename the walkthrough's "Optional A/B/C" sections (collide with Paths A/B/C) to "Extra 1/2/3" | Approve |
+| D-18 | Path C after the no-code migration: C1 + C2 overview, or C1 + four short code-free pages | C1 + C2 overview |
+| D-19 | Quick Start inline code: single identifiers allowed; call expressions and snippets not | Approve |
+| D-20 | Moved executable pages keep their `get-started/…` URLs (recommended) or move with redirect stubs | Keep URLs |
+| D-21 | Path B = generated, code-free *CE by example*; the executable walkthrough becomes *Python walkthrough* under CE in Practice | Approve |
+| D-22 | Approve WP-13…WP-18 for later scheduling (no implementation before separate approval) | Approve for planning |

@@ -1,6 +1,12 @@
-# 02 — Target information architecture (Deliverable E, revision 3)
+# 02 — Target information architecture (Deliverable E, revision 4)
 
-**Revision 3 (2026-11-13) — binding.** Quick Start keeps Paths A/B/C (see
+**Revision 4 (2026-11-13) — binding.** Quick Start contains no code blocks or
+derivations; the six code-bearing pages move (by toctree, URLs unchanged) to CE
+in Practice → Python tutorials and Software & Integration. §2.1 below is
+updated; §2.4 and §2.5 gain the moved pages. Plans for all seven entry
+points: `15`. Migration detail: `14`.
+
+**Revision 3 (2026-11-13).** Quick Start keeps Paths A/B/C (see
 `13-architecture-reconciliation.md`); the five stages are a planning aid for
 concept order only. §1, §3 and §4 below are unchanged in substance; §2.1 is
 replaced.
@@ -29,33 +35,24 @@ across or backward link (`11-cross-entry-navigation-matrix.md`).
 
 ## 2. Seven entry-point trees (target)
 
-### 2.1 Quick Start — Paths A/B/C (revision 3)
-
-Landing `get-started/index.md` [V → improved]; structure and toctree order
-unchanged. Full target and path-level improvements: `13` §5. Summary:
+### 2.1 Quick Start — code-free orientation hub, Paths A/B/C (revision 4)
 
 ```text
-Quick Start  get-started/index.md
-├── definition · Where CE fits (figure per D-16, link to why-ce) · Choose your path (A, B, C cards)
-├── Recommended order A → B → C · Before you start
-├── Where should I go next? [N] — the six other homepage entry points, one line each
-└── toctree (unchanged): A1 · Machine learning essentials · A2 · Why CE · B · Guided Python walkthrough
-    · C1 · Tasks, modes and capabilities · C2 · Classification · C3 · Regression · C4 · Guarded explanations
-    · C5 · Apply CE to your own data · Quick API
+Quick Start  get-started/index.md  (no code, no derivations)
+├── definition · Where CE fits (figure per D-16) · Choose your path (A, B, C)
+├── Recommended order A → B → C · Before you start (links only)
+├── Where should I go next? [N] — the six other homepage entry points
+└── toctree: A1 · Machine learning essentials (ml-foundations)
+             A2 · Why CE (why-ce)
+             B  · CE by example (ce-by-example) [N, generated from the walkthrough run, code-free]
+             C1 · Tasks, modes and capabilities (ce-tasks-and-modes)
+             C2 · Apply CE: the practical workflow (apply-overview) [N, code-free]
 ```
 
-Paths are reader goals (understand / see / apply), **not** reading levels
-(A is L1; B spans L1–L2; C spans L1–L2 — `13` §2). Each Quick Start page
-carries **Next / Go deeper / See also / Before this** links so readers can
-leave the path at their level. New canonical pages owned by other sections
-(`explainable-ai`, `calibration_intuition`, `contributor/development_setup`)
-are reached from Quick Start pages by deeper/across links, not added to the
-Quick Start toctree.
-
-**Curriculum bands (planning aid only).** The five bands — foundations, CE
-concepts, using CE, going deeper, contributing — order the concepts in
-`10-concept-curriculum-matrix.md` and guide which forward/backward links each
-page needs. They appear in no navigation, label or landing page.
+Paths are reader goals, not reading levels (`13` §2). Real CE results
+appear as figures and tables; code, console output and maths are reached
+through **See also** (Python tutorials, Quick API) and **Go deeper**
+(methods, semantics) links. The five-stage bands remain a planning aid only.
 
 ### 2.2 CE: What & Why (compendium, L1)
 
@@ -88,7 +85,9 @@ Sidebar (reordered; URLs unchanged):
 ### 2.4 CE in Practice (manual, L2)
 
 ```text
-sections/in-practice.md — cards: app, Expert Hub, Decision Lab (external, labelled);
+sections/in-practice.md — cards: Python tutorials [N hub tutorials/index → get-started/quickstart_walkthrough,
+  quickstart_classification, quickstart_regression, quickstart_guarded, apply-to-your-data (URLs unchanged)];
+  app, Expert Hub, Decision Lab (external, labelled);
   "Apply CE to your own data" → get-started/apply-to-your-data [V] (deeper: integrate_with_pipelines);
   "Example notebooks" → only notebooks verified by the driver [N]; evaluate_ce; tasks
 Sidebar unchanged in shape; each cluster gets one owner page with role lines on the others:
@@ -103,7 +102,8 @@ Task guides: wording revised where no author question is pending; SR-tied terms 
 sections/software-integration.md — add group "Configuration & operations" (links only:
   configure_runtime, safe-defaults, tune_runtime_performance, configure_telemetry)
 ├── Software Foundations ......... versions · installation · architecture
-├── Development & Integration .... api/index [V; add "main components" overview linking quick_api and autosummary]
+├── Development & Integration .... get-started/quick_api [V, moved here from the Quick Start toctree; URL unchanged]
+│                                  · api/index [V; add "main components" overview linking quick_api and autosummary]
 │                                  · integrate_with_pipelines · plugins
 └── Maintenance & Support ........ troubleshooting [V → canonical error list] · upgrade · migration
 Sub-hub pages (16–18 lines) stay as sidebar parents but carry no repeated prose.

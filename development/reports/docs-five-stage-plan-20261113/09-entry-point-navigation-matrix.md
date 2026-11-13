@@ -1,5 +1,7 @@
 # 09 — Entry-point navigation matrix (Deliverable B)
 
+**Revision 4:** Quick Start row superseded by `14` (code-free hub: A1, A2, B *CE by example*, C1, C2 *Apply overview*; six executable pages relocated by toctree). Recommendations for every entry point: `15` §3.
+
 Evidence: `08-homepage-entry-point-audit.md`. Target trees: `02` rev. 3 §2; Quick Start: `13` §5.
 Functions: T = tutorial, C = compendium, M = reference manual.
 

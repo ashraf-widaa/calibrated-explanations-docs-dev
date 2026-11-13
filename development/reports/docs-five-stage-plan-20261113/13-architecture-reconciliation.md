@@ -1,4 +1,4 @@
-# 13 — Architecture reconciliation (revision 3)
+# 13 — Architecture reconciliation (revisions 3 and 4)
 
 **Date:** 2026-11-13. **Trigger:** PO instruction "Mandatory Architectural
 Requirements — Preserve Previous Decisions". **Rule applied:** every conflict
@@ -113,3 +113,36 @@ Path-level improvements (content and navigation, no structural change):
   mode) and "Before this" → C1; C1 links the new `calibration_intuition` for
   bounds vs intervals and confidence vs coverage; quick_api becomes the
   components overview (WP-6).
+
+## 6. Revision 4 (2026-11-13) — Quick Start without code; all seven entry points
+
+**New binding requirements.** (1) Quick Start — landing **and** learning
+pages — contains **no code blocks and no mathematical derivations**, yet gives
+a meaningful big picture (motivation, capabilities, task/mode distinctions,
+conceptual workflow, reading outputs). (2) L1/L2/L3 progression and the four
+navigation directions everywhere. (3) All seven entry points are improved
+(purpose, landing intro, hierarchy, depth, visuals, cross-links,
+accessibility, mobile). (4) Visuals explain relationships; each has a purpose,
+readable labels, alt text and accurate terms. (5) Claims verified; open
+questions to authors. (6) WP-1 first; other entry points planned only.
+
+| # | Earlier statement | Conflict | Resolution (rev. 4) |
+|---|---|---|---|
+| R-13 | Quick Start Path B = executable walkthrough; Path C = C1–C5 executable quickstarts (rev. 3 §5) | Code blocks on Quick Start pages | The six code-bearing pages leave the Quick Start **toctree** (files and URLs unchanged) and join CE in Practice → *Python tutorials* (five pages) and Software & Integration (Quick API). Path B becomes the generated, code-free *CE by example*; Path C becomes C1 + C2 *Apply CE: the practical workflow* (D-18, D-21). Detail: `14` |
+| R-14 | "Each Quick Start page ends with Next / Go deeper / See also / Before this" (rev. 3) | Compatible | Kept; "See also" on Quick Start pages now includes the matching Python tutorial |
+| R-15 | WP-1 = navigation-only change (rev. 3) | Too narrow | WP-1 = no-code migration + navigation (`12` WP-1 rev. 4) |
+| R-16 | "Inline call expressions" on C1 cards | Code on a Quick Start page | D-19: single identifiers allowed; call expressions replaced by method names linked to Quick API |
+| R-17 | Entry points other than Quick Start covered by WP-2…WP-12 only | Requirement (3) asks for landing, hierarchy, visual and mobile work per section | New WP-13…WP-18 (`15`) |
+| R-18 | Earlier rule "examples are executed and shown with real output" on Quick Start | No code on Quick Start | Real outputs stay — as figures and tables on code-free pages, generated from the same runs; executable code moves with its tests |
+
+Quick Start target (rev. 4) supersedes §5's tree:
+
+```text
+get-started/index.md — definition · Where CE fits (figure, D-16) · cards A/B/C · order · Before you start (links)
+                       · Where should I go next? (six entry points) — no code
+├── A1 · Machine learning essentials   get-started/ml-foundations
+├── A2 · Why CE                         get-started/why-ce
+├── B  · CE by example                  get-started/ce-by-example      [N, generated, code-free]
+├── C1 · Tasks, modes and capabilities  get-started/ce-tasks-and-modes
+└── C2 · Apply CE: the practical workflow get-started/apply-overview   [N, code-free]
+```

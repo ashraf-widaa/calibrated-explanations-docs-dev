@@ -5,6 +5,8 @@ Paste one prompt at a time; each ends with a stop condition. Every prompt is
 self-contained; the **standard block** below is repeated inside each prompt,
 so nothing has to be pasted separately.
 
+**Revision 4 — binding: `13` §6 and `14`.** Prompt 1 now implements the Quick Start no-code migration. Prompts for WP-13…WP-18 (`15`) will be written after the PO approves those packages.
+
 **Revision 3 — binding: `13-architecture-reconciliation.md`.** Quick Start keeps Paths A/B/C; no stage labels or stage navigation anywhere. **Prompt index:** WP-1 → Prompt 1 · WP-2 → Prompt 2a · WP-3 → Prompt 2b (add the two contrast tables from 12 WP-3) · WP-4 → Prompt WP-4 (+ 2c) · WP-5 → Prompt 4b (+ reorder the What & Why cards) · WP-6 → Prompts 3a, 3b, 3c · WP-7 → Prompt 3d · WP-8 → Prompt WP-8 (+ 3e) · WP-9 → Prompts 4a, 4c · WP-10 → Prompt 5 · WP-11 → Prompts 6a, 6b · WP-12 → Prompt 6c. Earlier prompts 1a/1b (learning-journey page) and the rev. 2 Prompt 1 (five-stage landing) are withdrawn. In every prompt, read "Phase n" as the corresponding WP, and "stage" only as a concept-ordering aid, never as a label.
 
 Paths were discovered at baseline `a55c7e9d`. If a path no longer exists when
@@ -12,104 +14,136 @@ you run a prompt, the agent must stop and report it, not guess.
 
 ---
 
-## Prompt 1 — Quick Start A/B/C improvements and "Where should I go next?" (WP-1)
+## Prompt 1 — Quick Start: code-free orientation hub with Paths A/B/C (WP-1, revision 4)
 
 ```text
 ROLE AND OBJECTIVE
-You are a senior documentation architect and technical educator for the Calibrated Explanations (CE) Beta
-documentation. Objective: keep the Quick Start Paths A/B/C (structure, order, labels) and improve orientation
-and navigation, so every reader can continue at their own level and goal. Do not introduce stages, stage
-labels or a learning-journey page. Do not change the homepage.
+You are a senior documentation architect, technical educator and Python documentation engineer for the
+Calibrated Explanations (CE) Beta documentation. Objective: make the Quick Start a code-free orientation and
+navigation hub (landing AND learning pages: no code blocks, no mathematical derivations) while keeping Paths
+A/B/C, adding "Where should I go next?", and preserving every executable example, test and URL by relocating
+the code-bearing pages to their canonical practical sections. Do not change the homepage.
 
-BINDING ARCHITECTURE (read first)
-development/reports/docs-five-stage-plan-20261113/13-architecture-reconciliation.md — three reading levels
-(L1/L2/L3), prerequisite-aware progression, forward/deeper/across/backward navigation, tutorial + compendium +
-reference manual over canonical pages, canonical ownership, audience flexibility. A/B/C are reader goals, not
-reading levels: never label a path or card with L1/L2/L3.
+BINDING DOCUMENTS (read first, in this order)
+development/reports/docs-five-stage-plan-20261113/13-architecture-reconciliation.md (§1, §2, §6),
+14-quickstart-no-code-migration.md (inventory, strategy, affected files, risks, D-18…D-21),
+02-target-information-architecture.md (rev. 4 §2.1, §2.4, §2.5), 07-quality-and-acceptance-criteria.md.
+Apply the PO's answers to D-16…D-21; if any is unanswered, stop and ask.
 
 REPOSITORY AND SAFETY (standard block)
 - Work only in the local Beta repository D:\Jönkoping\CE-Documentation-Redesign\calibrated_explanations
   (GitHub ashraf-widaa/calibrated-explanations-docs-dev, remote "docs-dev").
 - Moffran/calibrated_explanations and https://calibrated-explanations.readthedocs.io are read-only references.
-- Do not push. Do not change src/. No git reset --hard, git clean, force-push or file deletion.
+- Do not push. Do not change src/. No git reset --hard, git clean, force-push or file deletion; do not move
+  or rename any existing .md file (URLs must stay unchanged — D-20).
 - Preserve LEARNING_JOURNAL.md, learning-reports/, HANDOVER_REPORT.md, session-checkpoint-*.md and all other
   unrelated modified or untracked files; never stage them.
 - Before editing: `git status`, `git branch --show-current`, `git rev-parse --short HEAD`, `date`; record them.
-  Create branch docs-dev/wp-1-quickstart-navigation from the latest Beta main (fast-forward only).
+  Create branch docs-dev/wp-1-quickstart-hub from the latest Beta main (fast-forward only).
 - Edit with the editor tools, not shell heredocs. *.svg/*.png are git-ignored (git add -f for figures).
-- Also read 02 (rev. 3 §2.1), 10, 11, 12 (WP-1) and 07 in the same folder.
+- Re-verify the 14 §1 inventory first (count fenced blocks per Quick Start page); stop and report if it differs.
 
-SCOPE AND TARGET FILES
-- docs/get-started/index.md (landing). Keep: definition, "Where CE fits", "Choose your path" cards A/B/C,
-  recommended order, "Before you start", the toctree (order and labels unchanged).
-- End-of-page navigation lines on docs/get-started/{ml-foundations,why-ce,ce-tasks-and-modes,
-  quickstart_classification,quickstart_regression,quickstart_guarded,apply-to-your-data,quick_api}.md.
-- scripts/docs/build_quickstart_walkthrough.py, then regenerate with
-  `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py`; never edit
-  docs/get-started/quickstart_walkthrough.md or its notebook by hand.
-- tests/docs/get_started/test_quickstart_continuity.py (extend; keep the existing A/B/C landing tests).
+STEP 1 — RELOCATE BY TOCTREE (no file moves, no code changes)
+- Remove these entries from the toctree in docs/get-started/index.md: quickstart_walkthrough,
+  quickstart_classification, quickstart_regression, quickstart_guarded, apply-to-your-data, quick_api.
+- New docs/tutorials/index.md "Python tutorials" (Tier 1, semantics pointer, footer): purpose, who each tutorial
+  is for, prerequisites (link A1/A2/B/C1), what it produces; hidden toctree listing, in this order,
+  ../get-started/quickstart_walkthrough, ../get-started/quickstart_classification,
+  ../get-started/quickstart_regression, ../get-started/quickstart_guarded, ../get-started/apply-to-your-data.
+  Add tutorials/index to the "CE in Practice" toctree in docs/index.md directly after Overview, and one card on
+  docs/sections/in-practice.md ("Python tutorials", first card).
+- Add ../get-started/quick_api to the toctree of docs/sections/development-integration.md, before the API
+  reference entry, and one link on docs/sections/software-integration.md.
+- In the six moved pages: replace "Path B/C" wording with tutorial wording; retitle per 14 §2; add the navigation
+  block (Next within the tutorials order; Before this → the matching Quick Start page; Go deeper → methods /
+  semantics section for the mode). Do NOT change any code block or printed output (output-match tests).
+  The walkthrough page is generated: make its wording changes in scripts/docs/build_quickstart_walkthrough.py.
 
-REQUIRED CHANGES
-1. Landing — add a section "Where should I go next?" after "Before you start": one line per homepage entry
-   point other than Quick Start, linking its existing landing page and saying who it is for:
-   CE: What & Why (sections/what-and-why), How CE Works (sections/how-ce-works), CE in Practice
-   (sections/in-practice), CE Software & Integration (sections/software-integration), Project & Resources
-   (sections/project-evolution and glossary/index — but keep exactly ONE glossary link on the page, as the
-   glossary test requires; reuse the existing one or move it here), Commercial Services
-   (https://grejna.ai/#kontakt, "separate from the open-source library and its licence", as on the homepage).
-2. Landing figure — apply PO decision D-16 (default: keep, at most 560 px wide, caption links to why-ce).
-3. Every Quick Start page ends with a short "Continue" block (only the lines that apply):
-   **Next:** the next page in its path (A1→A2→B→C1→C2/C3→C4→C5; Quick API last);
-   **Go deeper:** the L3 owner for the concepts on that page — verify the target section exists and treats that
-   concept for that mode (calibration_methods §2 Venn–Abers, §3 CPS, §4 modes; calibrated_interval_semantics
-   mode section; explanation_structures for rule construction);
-   **See also:** an across link (example, task guide, reference) owned by another section;
-   **Before this:** the prerequisite page.
-   Six pages currently have no deeper link to calibration_methods — fix all six.
-4. ml-foundations A6: replace the stale sentence "The next page shows which tasks and outputs CE supports"
-   with a correct pointer to why-ce.
-5. Walkthrough generator: rename the section headings "Optional A/B/C" → "Extra 1/2/3" (they collide with
-   Paths A/B/C) and every reference to them; add one "Go deeper" line after §5 (calibration_methods §2) and
-   after §6 (explanation construction); add rows to the "Where to go next" table for the six other entry
-   points (keep existing rows).
+STEP 2 — CODE-FREE PATH B: GENERATED "CE BY EXAMPLE"
+- Extend scripts/docs/build_quickstart_walkthrough.py to also write docs/get-started/ce-by-example.md from the
+  same executed cells: no code, no console blocks; real results as Markdown tables and the existing generated
+  plot (or a copy) with alt text and a provenance caption ("CE output, generated by
+  scripts/docs/build_quickstart_walkthrough.py"). Sections: the case and question; data roles; model alone vs
+  calibrated (table); the calibrated probability and its range; the factual explanation (top rules table + plot);
+  alternatives (table); what we can and cannot conclude; "Run it yourself" → Python walkthrough + notebook.
+  Extend the PROSE_NUMBERS guard to cover this output. Rename "Optional A/B/C" → "Extra 1/2/3" (D-17).
+- Regenerate: `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py`; confirm the
+  walkthrough's numbers are unchanged and that every number on ce-by-example appears in the walkthrough output.
+
+STEP 3 — CODE-FREE PATH C: C2 OVERVIEW AND C1
+- New docs/get-started/apply-overview.md "Apply CE: the practical workflow" (Tier 1, semantics pointer): steps
+  (check that CE fits → split data → wrap and calibrate → predict with ranges → explain → evaluate → integrate),
+  what each step produces and how to check it, a checklist, common mistakes, a table "which tutorial for which
+  task" linking the five tutorials and Quick API. No code; single identifiers only (D-19). Restate no guarantee;
+  link calibrated_interval_semantics.
+- docs/get-started/ce-tasks-and-modes.md: replace call expressions in the mode cards with method/argument names
+  linked to Quick API (e.g. "predict_proba with uq_interval"); keep the PO-reviewed uncertainty wording verbatim;
+  keep the "## Choosing your workflow" anchor (60-second redirect).
+
+STEP 4 — LANDING AND NAVIGATION
+- docs/get-started/index.md: keep definition, "Where CE fits" (figure per D-16), cards A/B/C (B → ce-by-example,
+  C → ce-tasks-and-modes), recommended order; "Before you start" without commands (Installation, Quick API,
+  glossary — exactly ONE glossary link —, API reference, semantics pointer, web demo); add "Where should I go
+  next?" with one line per other entry point (sections/what-and-why, sections/how-ce-works, sections/in-practice
+  (mention Python tutorials), sections/software-integration, sections/project-evolution, Commercial Services
+  https://grejna.ai/#kontakt with the homepage's separation wording).
+- New toctree: A1 · Machine learning essentials <ml-foundations>, A2 · Why CE <why-ce>, B · CE by example
+  <ce-by-example>, C1 · Tasks, modes and capabilities <ce-tasks-and-modes>, C2 · Apply CE: the practical workflow
+  <apply-overview>.
+- Every Quick Start page ends with: Next · Go deeper (verified L3 target section) · See also (matching tutorial or
+  reference) · Before this. Fix the stale A6 sentence in ml-foundations.
+- docs/appendices/rtd_tier_map.md: add ce-by-example, apply-overview, tutorials/index.
+
+STEP 5 — TESTS
+- New tests/docs/get_started/test_quickstart_no_code.py: for the landing and every page in its toctree, assert no
+  fenced code block of any language (lines starting with ``` other than MyST directives {figure}, {raw},
+  {toctree}, {admonition}, {mermaid} — and decide/document whether mermaid stays), no code-block/code-cell
+  directives, no {math} and no $$.
+- Update tests/docs/get_started/test_quickstart_continuity.py (landing cards: B → ce-by-example; toctree; six
+  entry-point links; one glossary link; figure wiring), tests/docs/test_reader_journeys.py (beginner journey:
+  landing → ce-by-example → quickstart_walkthrough), tests/docs/test_navigation.py if needed.
+- New test: tutorials hub lists the five pages; Quick API is in the Development & Integration toctree; every
+  number on ce-by-example appears in the walkthrough.
+- Unchanged and must pass as before: test_quickstart_examples_execute.py, test_walkthrough_content.py,
+  tests/integration/test_doc_examples_smoke.py (quick_api: 4 blocks), test_guarded_explain_api.py wording tests.
 
 SCIENTIFIC AND EDITORIAL REQUIREMENTS
-- Navigation and orientation text only; no new claims; keep the PO-reviewed wording in ce-tasks-and-modes.md.
-- Link lines are one sentence each; do not restate content of the target page.
-- Do not remove any existing content, including advanced material.
+- No new claims; real numbers only from generator runs; task ≠ mode ≠ method ≠ output semantics; guarantees
+  only by link. Do not remove advanced material anywhere.
 
 EXCLUSIONS
-- No new concept pages, no new figures, no homepage or section-landing edits, no stage terminology.
+- No changes to other entry points beyond the toctree/card/link additions above (WP-13…WP-18 need approval).
+- No new conceptual pages (explainable-ai, calibration_intuition belong to WP-2/WP-3).
 
 VERIFICATION
 - CE_DOCS_BETA=true /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1  (0 warnings)
 - /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/wp1-std  (0 warnings)
-- PYTHONPATH=src /c/Python313/python.exe -m pytest tests/docs -q -p no:cacheprovider
-- /c/Python313/python.exe scripts/docs/check_internal_links.py _build/wp1
-- Walkthrough regenerated; PROSE_NUMBERS guard passes; diff shows no changed numbers.
-- Headless Edge (Python Playwright, C:\Python313, no -I): landing and two child pages at 390 and 1440 px,
-  light and dark — no horizontal overflow.
+- PYTHONPATH=src /c/Python313/python.exe -m pytest tests/docs tests/integration/test_doc_examples_smoke.py
+  tests/unit/core/explain/test_guarded_explain_api.py -q -p no:cacheprovider
+- /c/Python313/python.exe scripts/docs/check_internal_links.py _build/wp1  (all 12 inbound-link pages resolve)
+- Old URLs still served: open _build/wp1/get-started/{quickstart_walkthrough,quickstart_classification,
+  quickstart_regression,quickstart_guarded,apply-to-your-data,quick_api}.html.
+- Headless Edge (Python Playwright, C:\Python313, no -I): landing, ce-by-example, apply-overview, tutorials hub at
+  390 and 1440 px, light and dark — no horizontal overflow; figures readable.
 
-ACCEPTANCE CRITERIA (add tests for each)
-- Cards A/B/C, recommended order and toctree order/labels unchanged.
-- "Where should I go next?" links all six other entry points; exactly one glossary link on the landing.
-- Every Quick Start page has a Next line (except the last) and at least one Go deeper line; every Go deeper
-  target exists.
-- No "Optional A", "Optional B" or "Optional C" heading remains in the walkthrough or generator.
-- All gates pass.
+ACCEPTANCE CRITERIA
+- Zero code blocks and zero derivations on Quick Start pages (test); Paths A/B/C kept; "Where should I go next?"
+  links six entry points; all executable material preserved at unchanged URLs with unchanged tests passing;
+  ce-by-example numbers equal the walkthrough's; all gates pass.
 
 FINAL REPORT
 - development/reports/docs-five-stage-plan-20261113/phase-reports/<YYYY-MM-DD_HHMM>_wp-1.md (time from `date`):
-  baseline, files changed, problems, changes, duplication avoided, evidence (why each Go deeper target is the
-  right L3 owner), tests and results, screenshots checked, limitations, open decisions.
+  baseline; inventory re-check; every relocated page with old/new sidebar home and unchanged URL; new pages;
+  removed duplication; evidence; tests and results; screenshots; limitations; open decisions.
 
 COMMITS
-- (1) landing + page navigation lines + tests; (2) generator + regenerated walkthrough/notebook; (3) report.
+- (1) toctree relocation + tutorials hub + moved-page wording; (2) generator + ce-by-example + regenerated
+  walkthrough/notebook; (3) apply-overview + C1 + landing + navigation lines; (4) tests; (5) report.
   Attribution trailer as the session provides. No push; print for the PO (after approval):
-  git push docs-dev docs-dev/wp-1-quickstart-navigation:main
+  git push docs-dev docs-dev/wp-1-quickstart-hub:main
 
 STOP CONDITION
-- Stop after the report. Do not start the next WP until the PO approves WP-1.
+- Stop after the report. Do not start any other WP until the PO approves WP-1.
 ```
 
 ---

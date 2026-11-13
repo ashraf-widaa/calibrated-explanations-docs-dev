@@ -1,5 +1,7 @@
 # 03 — Content migration matrix
 
+**Revision 4:** Quick Start rows are superseded by `14-quickstart-no-code-migration.md` §2–§4 (six executable pages move by toctree to CE in Practice / Software & Integration, URLs unchanged; new code-free `ce-by-example` and `apply-overview`).
+
 **Revision 3:** Quick Start keeps Paths A/B/C (`13-architecture-reconciliation.md`); no `learning-journey.md`; the "Stage" headings below are curriculum bands used for planning only. Work packages are those of `12-prioritised-improvement-plan.md`.
 
 Scope: every page the plan touches, plus each page group's status. Pages not

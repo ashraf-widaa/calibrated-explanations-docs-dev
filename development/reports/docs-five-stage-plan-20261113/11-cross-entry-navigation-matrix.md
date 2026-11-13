@@ -1,5 +1,7 @@
 # 11 — Cross-entry navigation matrix (Deliverable D)
 
+**Revision 4:** Quick Start pages link the Python tutorials (CE in Practice) and Quick API (Software & Integration) as **See also**; the moved pages link back to their Quick Start orientation page as **Before this** (`14`).
+
 Canonical pages that should be reachable from more than one homepage entry
 point. Direction: **F** forward · **D** deeper · **A** across · **B** backward.
 "Link placement" names where the link goes (card, sidebar entry, or in-text

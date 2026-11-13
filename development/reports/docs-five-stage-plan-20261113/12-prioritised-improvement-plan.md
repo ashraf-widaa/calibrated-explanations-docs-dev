@@ -1,5 +1,7 @@
 # 12 — Prioritised improvement plan (Deliverable F)
 
+**Revision 4:** WP-1 now includes the Quick Start no-code migration (`14`); WP-13…WP-18 added for the other entry points and cross-cutting work (`15`); decisions D-18…D-21 added.
+
 **Revision 3:** WP-1 and WP-2 revised, D-12 withdrawn, D-16 and D-17 added, per `13-architecture-reconciliation.md` (binding).
 
 Supersedes the phase/work-package split in `05` where they differ (05 keeps
@@ -12,38 +14,32 @@ items **[S]** are marked, never resolved.
 
 ---
 
-### WP-1 — Quick Start A/B/C improvements and "Where should I go next?" · P1 · M
+### WP-1 — Quick Start: code-free orientation hub with Paths A/B/C · P1 · L
 
-- **Objective.** Keep Paths A/B/C (structure, order, labels); improve
-  orientation and navigation so every reader can leave the Quick Start at
-  their level and goal.
-- **Affected pages.** `docs/get-started/index.md`; end-of-page navigation
-  lines on `ml-foundations.md`, `why-ce.md`, `ce-tasks-and-modes.md`,
-  `quickstart_{classification,regression,guarded}.md`, `apply-to-your-data.md`,
-  `quick_api.md`; walkthrough via `scripts/docs/build_quickstart_walkthrough.py`
-  (regenerate); `tests/docs/get_started/test_quickstart_continuity.py`
-  (extend; the A/B/C landing tests stay).
-- **Dependencies.** D-11, D-16, D-17.
-- **Changes.** (1) Landing: "Where should I go next?" with the six other
-  entry points (one line each, existing landing pages as targets); figure
-  per D-16 with a link to `why-ce`; cards stay A/B/C (no reading-level
-  labels). (2) Every Quick Start page: **Next** (path order), **Go deeper**
-  (L3 owner for the concepts on that page — `calibration_methods` section,
-  `calibrated_interval_semantics` mode, `explanation_structures`), **See
-  also** (across), **Before this** (prerequisite). (3) ml-foundations: fix
-  the stale A6 pointer. (4) Walkthrough: "Optional A/B/C" → "Extra 1/2/3";
-  "Go deeper" after §5 and §6; next-steps table rows for the six entry
-  points.
-- **Scientific verification.** Each "Go deeper" target must actually treat
-  the concept at L3 (check the section anchor exists and matches the
-  mode); no new claims.
-- **Acceptance.** A/B/C cards, order and labels unchanged; six entry-point
-  links resolve; every Quick Start page has Next and Go deeper (Before this
-  where a prerequisite exists); no "Optional A/B/C" wording remains;
-  continuity, journeys, navigation, homepage and glossary tests pass;
-  walkthrough numbers unchanged; 390/1440 light/dark check.
-- **Risks.** Link lines must stay short (orientation, not repetition);
-  regeneration must keep the PROSE guard green.
+- **Objective.** Remove all code blocks from the Quick Start (landing and
+  learning pages) **without losing any executable material**: relocate the six
+  code-bearing pages by toctree (URLs unchanged) to CE in Practice → Python
+  tutorials and Software & Integration; give Paths B and C code-free pages
+  that still show verified CE results; add "Where should I go next?" and
+  the page navigation block.
+- **Affected pages and files.** `14` §4 (complete list).
+- **Dependencies.** D-16, D-18, D-19, D-20, D-21; D-11 and D-17 (kept).
+- **Changes.** `14` §2–§3: toctree relocation; new `ce-by-example.md`
+  (generated, code-free), `apply-overview.md` (code-free), `tutorials/index.md`;
+  C1 call expressions → method names; landing without code; navigation
+  block on all Quick Start pages; walkthrough "Optional A/B/C" → "Extra
+  1/2/3"; V-5 (three output shapes, real numbers) on C1 if time allows,
+  otherwise in WP-3.
+- **Scientific verification.** Every number on `ce-by-example` comes from
+  the generator run (PROSE guard); C2 overview restates no guarantees (links
+  the semantics page); figure labels checked against the tutorials' output.
+- **Acceptance.** New `test_quickstart_no_code.py` passes (no fenced code,
+  `code-block`, `code-cell`, `{math}` or `$$` on any Quick Start page);
+  all moved pages build, keep their URLs and still pass execution,
+  output-match, smoke and walkthrough tests unchanged; every inbound link
+  resolves (link checker); A/B/C cards and order kept; six entry-point links;
+  one glossary link on the landing; gates and 390/1440 light/dark checks.
+- **Risks.** `14` §5.
 
 ### WP-2 — Foundations: AI systems, black boxes, explainable AI · P1 · L
 
@@ -202,10 +198,18 @@ items **[S]** are marked, never resolved.
 - **Objective.** Walk all five stages and seven entry points; final gates and
   reports (06 Prompt 6c), including a regenerated `08`-style navigation tree.
 
+## New work packages (revision 4)
+
+WP-13 (What & Why), WP-14 (How CE Works), WP-15 (CE in Practice), WP-16
+(Software & Integration), WP-17 (Project & Resources) and WP-18 (cross-cutting:
+phone tables, page navigation block, mermaid → SVG, figure provenance) are
+specified in `15-entry-point-improvement-plan.md` §4. Commercial Services needs
+no work package. None of them may start before separate PO approval.
+
 ## Recommended sequence
 
 WP-1 → WP-8 (sheet, in parallel with WP-2) → WP-2 → WP-3 → WP-4 → WP-6 → WP-7
-→ WP-5 → WP-9 → WP-10 → WP-11 → WP-12.
+→ WP-5 + WP-13 → WP-14 → WP-15 → WP-16 → WP-9 + WP-10 + WP-17 → WP-18 → WP-11 → WP-12.
 
 Rationale: the roadmap (WP-1) frames everything; the author sheet (WP-8) goes
 out early because several later WPs wait on answers; beginner-facing concepts before
@@ -222,3 +226,4 @@ advanced and contributor material; housekeeping last.
 | D-15 | `ce_workflow` gets a new internal-mechanism figure and stops reusing the comparison figure | Approve |
 | D-16 | Quick Start landing figure: keep smaller (≤ ~560 px) with a link to `why-ce`, or remove | Keep smaller |
 | D-17 | Rename the walkthrough's "Optional A/B/C" to "Extra 1/2/3" | Approve |
+| D-18 … D-21 | Quick Start no-code migration (Path C shape; inline identifiers; URLs kept; Path B as generated *CE by example*) | See `14` §6 |
