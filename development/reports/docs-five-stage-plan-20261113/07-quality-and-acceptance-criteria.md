@@ -1,0 +1,71 @@
+# 07 — Quality and acceptance criteria
+
+These criteria apply to every phase. Each phase prompt (06) repeats the ones it
+needs.
+
+## 1. Build and test gates (every phase)
+
+Commands verified in this repository (Windows, Git Bash; `C:\Python313` has
+Sphinx 7.4.7 and the docs toolchain; `.venv` lacks Sphinx and pytest):
+
+| Gate | Command (from the repository root) | Pass |
+|---|---|---|
+| Strict Beta build | `CE_DOCS_BETA=true /c/Python313/python.exe -m sphinx -W --keep-going -E -b html docs _build/<name>` | exit 0, 0 warnings |
+| Strict standard build | same without `CE_DOCS_BETA` | exit 0, 0 warnings |
+| Docs tests | `PYTHONPATH=src /c/Python313/python.exe -m pytest tests/docs -q -p no:cacheprovider` | all pass |
+| Internal links | `/c/Python313/python.exe scripts/docs/check_internal_links.py _build/<name>` | 0 broken |
+| Walkthrough (if its generator changed) | `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_walkthrough.py` | runs; `PROSE_NUMBERS` guard passes; diff reviewed |
+| Quickstart plots (if a plotted page changed) | `PYTHONPATH=src /c/Python313/python.exe scripts/docs/build_quickstart_figures.py` | runs; PNGs committed with `git add -f` |
+| Full suite (if `src/`, `tests/` outside docs, or dependencies changed — not expected) | `PYTHONPATH=src /c/Python313/python.exe -m pytest -q` | only the 4 known environment failures (wheel build; separate-process imports) |
+
+Known side effects: the full suite rewrites
+`reports/config_manager_usage_report.json` (restore with `git checkout --`);
+`*.svg` and `*.png` are git-ignored (commit figures with `git add -f`); Git Bash
+heredocs collapse `\\` and double-encode non-ASCII text — write files with the
+editor tool, not heredocs.
+
+## 2. Scientific rules (checked by review; some by tests)
+
+| # | Rule | How checked |
+|---|---|---|
+| S1 | Define a term before using it; link the owner page on first use | Review; glossary tests |
+| S2 | Keep AI system, AI model, learning approach, architecture and task distinct | Review against `ml-foundations` definitions |
+| S3 | Do not say all AI models are black boxes; say which are hard to inspect and why | Review; add a wording test for "all models are black boxes" style phrases on Stage 1 pages |
+| S4 | XAI: no single method suits every model, task or question | Review |
+| S5 | Distinguish accuracy, calibration, confidence score and uncertainty | Review; `calibration_intuition` has one table that contrasts them |
+| S6 | Calibration does not guarantee that an individual prediction is correct | Wording test (extend `tests/docs/test_what_is_ce.py` pattern) |
+| S7 | Intervals differ by mode; link `calibrated_interval_semantics` rather than paraphrase | STD-004 tier labels and semantics pointers (existing tests); review |
+| S8 | Factual and alternative explanations are not causal claims | Review; add wording tests for causal phrasing ("necessary to flip", "causes") on new and revised pages, following the phrase-blocking pattern in `tests/docs/test_what_is_ce.py` |
+| S9 | Every API call shown exists and runs; outputs shown are real | Execution tests (`test_quickstart_examples_execute.py` pattern) for every new or revised page with code |
+| S10 | Theoretical guarantee vs empirical result vs open question are labelled | Review; `future_work` uses three labels |
+| S11 | Open author questions SR-01…SR-16 keep "under review" markers; never resolved by the agent | Grep for the marker on touched pages |
+| S12 | Evidence order: CE papers > code/tests > official docs > Beta pages > literature > editorial; Beta-written pages are never cited as definition sources | Review; record evidence per claim in the phase report |
+
+## 3. Editorial rules
+
+- Simple academic English; short sentences; active voice; British or
+  American spelling consistent with the page (the site currently uses
+  British forms such as *behaviour*).
+- One continuous beginner example: the breast-cancer case 2 from the
+  walkthrough (0.286 [0.167, 0.333]); other pages may use other datasets only
+  when the task needs it (iris for multiclass, diabetes for regression).
+- Code: explain purpose and interpretation, not only syntax; every printed
+  output is shown and matched by a test.
+- Figures: meaningful (show a mechanism or a real output), accessible
+  (`<title>`, `<desc>`, alt text), readable in light and dark themes, phone
+  layout checked at 390 px; blue = conventional, orange = CE (established
+  palette, validated).
+- No internal jargon on reader pages beyond the mandated STD-004 footer.
+
+## 4. Accessibility and layout (pages with figures, cards or wide tables)
+
+Headless Edge via Python Playwright (`C:\Python313`, no `-I`): 390 and 1440 px,
+light and dark; no horizontal page overflow; figure source switches as intended;
+alt text present.
+
+## 5. Phase acceptance (generic)
+
+A phase is accepted when: all gates in §1 pass; every new claim has an evidence
+entry; the phase report lists changed files, problems, changes, duplication
+removed, evidence, tests and limitations; commits are small and scoped; nothing
+is pushed; the PO has approved the result.
