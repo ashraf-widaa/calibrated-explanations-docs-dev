@@ -126,8 +126,8 @@ with audit_log.open("a", encoding="utf-8") as f:
             "ce_version": calibrated_explanations.__version__,
             "probability": float(probs[i, 1]),
             "probability_interval": {
-                "low": float(low[i, 1]),
-                "high": float(high[i, 1])
+                "low": float(low[i]),
+                "high": float(high[i])
             },
             "factual_explanation": exp.as_json(),
         }
@@ -281,7 +281,7 @@ features would undermine the legitimate interest claim and strengthen the object
 factual = explainer.explain_factual(X_query)
 probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
 
-interval_width = high[0, 1] - low[0, 1]
+interval_width = high[0] - low[0]
 if interval_width > 0.30:
     print("High uncertainty: legitimate interest claim may not override objection.")
 else:
@@ -324,7 +324,7 @@ addresses all three statutory safeguards:
 # 1. Human intervention gate -- route uncertain decisions
 probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
 boundary = 0.5
-straddles = (low[:, 1] < boundary) & (high[:, 1] > boundary)
+straddles = (low < boundary) & (high > boundary)
 if straddles.any():
     escalate_to_human_reviewer(X_query[straddles])
 
@@ -403,7 +403,7 @@ and mitigation sections.
 import numpy as np
 
 probs, (low, high) = explainer.predict_proba(x_val, uq_interval=True)
-widths = high[:, 1] - low[:, 1]
+widths = high - low
 
 print("=== DPIA Technical Annex: Prediction Uncertainty Summary ===")
 print(f"  n_instances              : {len(x_val)}")
@@ -574,7 +574,7 @@ explainer.calibrate(x_cal, y_cal, bins=group_labels_cal)
 probs, (low, high) = explainer.predict_proba(
     X_users, uq_interval=True, bins=group_labels
 )
-widths = high[:, 1] - low[:, 1]
+widths = high - low
 
 print("Systemic risk indicator: per-segment prediction interval widths")
 for group in np.unique(group_labels):
@@ -648,7 +648,7 @@ if len(groups) == 2:
               "indirect discrimination risk.")
 
 # Step 3: Per-group interval width as reliability disparity metric
-widths = high[:, 1] - low[:, 1]
+widths = high - low
 for group in np.unique(protected_labels):
     mask = protected_labels == group
     print(f"Group {group!r}: mean interval width = {widths[mask].mean():.3f}")

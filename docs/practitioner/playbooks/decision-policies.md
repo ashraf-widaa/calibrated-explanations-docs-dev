@@ -2,6 +2,18 @@
 
 This guide helps practitioners convert Calibrated Explanations uncertainty outputs into actionable decision policies.
 
+The fragments assume a fitted and calibrated binary classifier named
+`explainer` and a query matrix `x_test`, except where a regression model is
+specified. Use the {doc}`Quick API <../../get-started/quick_api>` for setup.
+For binary classification and threshold regression, `probs` has two columns,
+but `low` and `high` are one-dimensional bounds for the positive class or
+threshold event. Multiclass bounds require separate class selection.
+
+These are application-policy examples, not additional statistical guarantees.
+Choose and evaluate thresholds for your task. A probability bound is not a
+confidence level or an assurance of a safe action. See
+{doc}`../../foundations/concepts/calibrated_interval_semantics`.
+
 ## From Uncertainty to Decisions
 
 Calibrated Explanations provide uncertainty-aware outputs. This guide shows how to transform these into systematic decision policies for production systems.
@@ -17,7 +29,7 @@ probs, (low, high) = explainer.predict_proba(x_test, uq_interval=True)
 
 # Only act when lower bound exceeds threshold
 confidence_threshold = 0.7
-confident_mask = low[:, 1] > confidence_threshold
+confident_mask = low > confidence_threshold
 
 # Route confident predictions to automation
 automated = x_test[confident_mask]
@@ -53,7 +65,7 @@ probs, (low, high) = explainer.predict_proba(x_test, uq_interval=True)
 decision_boundary = 0.5
 
 # Reject if interval contains the boundary
-straddles = (low[:, 1] < decision_boundary) & (high[:, 1] > decision_boundary)
+straddles = (low < decision_boundary) & (high > decision_boundary)
 
 # These predictions could go either way
 ambiguous = x_test[straddles]
@@ -98,7 +110,7 @@ Available policies:
 | Conservative automation | Confidence threshold | Only act on high confidence |
 | Human-in-the-loop | `ONLY_REJECTED` | Route uncertain to experts |
 | Full automation | Confidence + width | Multiple checks before acting |
-| Regulatory compliance | Interval straddle | Never automate ambiguous cases |
+| Review workflow | Interval straddle | Flag selected cases for review; legal sufficiency requires separate assessment |
 
 ## Combining Policies
 
@@ -112,7 +124,7 @@ def make_decision(explainer, x, config):
     decisions = []
     for i in range(len(x)):
         prob = probs[i, 1]
-        interval_width = high[i, 1] - low[i, 1]
+        interval_width = high[i] - low[i]
 
         # Stage 1: Check interval width
         if interval_width > config['max_width']:
@@ -120,7 +132,7 @@ def make_decision(explainer, x, config):
             continue
 
         # Stage 2: Check if straddles boundary
-        if low[i, 1] < 0.5 < high[i, 1]:
+        if low[i] < 0.5 < high[i]:
             decisions.append(('DEFER', 'ambiguous'))
             continue
 
@@ -182,8 +194,8 @@ probs, (low, high) = explainer.predict_proba(
 accept_threshold = 0.8
 reject_threshold = 0.2
 
-accept = low[:, 1] > accept_threshold  # Confident y <= 150
-reject = high[:, 1] < reject_threshold  # Confident y > 150
+accept = low > accept_threshold  # Confident y <= 150
+reject = high < reject_threshold  # Confident y > 150
 defer = ~accept & ~reject  # Uncertain
 ```
 

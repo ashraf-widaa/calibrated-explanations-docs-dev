@@ -129,7 +129,7 @@ interval_width = high - low
 
 # Risk flag: interval wider than tolerance threshold
 RISK_THRESHOLD = 0.30
-high_risk_mask = interval_width[:, 1] > RISK_THRESHOLD
+high_risk_mask = interval_width > RISK_THRESHOLD
 ```
 
 **e) Audit documentation:** Log `interval_width` and `high_risk_mask` per case.
@@ -179,7 +179,7 @@ probs, (low, high) = explainer.predict_proba(
 # Inspect per-group interval widths as bias proxy
 for group in np.unique(group_labels_test):
     mask = group_labels_test == group
-    width = (high[:, 1] - low[:, 1])[mask].mean()
+    width = (high - low)[mask].mean()
     print(f"Group {group}: mean interval width = {width:.3f}")
 ```
 
@@ -356,11 +356,11 @@ probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
 decision_boundary = 0.5
 
 # Straddle check: probability interval crosses the decision boundary
-straddles = (low[:, 1] < decision_boundary) & (high[:, 1] > decision_boundary)
+straddles = (low < decision_boundary) & (high > decision_boundary)
 
 # Width check: absolute uncertainty too large
 MAX_WIDTH = 0.25
-too_uncertain = (high[:, 1] - low[:, 1]) > MAX_WIDTH
+too_uncertain = (high - low) > MAX_WIDTH
 
 # Combined human-oversight gate
 needs_human_review = straddles | too_uncertain
@@ -575,8 +575,8 @@ probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
 decision_boundary = 0.5
 MAX_INTERVAL_WIDTH = 0.25
 
-straddles = (low[:, 1] < decision_boundary) & (high[:, 1] > decision_boundary)
-too_uncertain = (high[:, 1] - low[:, 1]) > MAX_INTERVAL_WIDTH
+straddles = (low < decision_boundary) & (high > decision_boundary)
+too_uncertain = (high - low) > MAX_INTERVAL_WIDTH
 needs_review = straddles | too_uncertain
 
 if needs_review.any():

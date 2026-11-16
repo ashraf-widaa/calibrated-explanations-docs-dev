@@ -74,6 +74,40 @@ def test_should_execute_interpretation_fragments_with_public_payloads() -> None:
     assert "uncertainty" in factual.to_telemetry()
 
 
+def test_should_apply_documented_binary_policy_masks_to_each_query() -> None:
+    """ADR-021: binary bounds are per-query vectors, unlike class probabilities."""
+    context = _build_classification_context()
+    wrapper = context["explainer"]
+    wrapper.fit(context["x_proper"], context["y_proper"])
+    wrapper.calibrate(context["x_cal"], context["y_cal"])
+    assert wrapper.fitted and wrapper.calibrated
+    context["x_test"] = context["X_query"]
+    page = Path("docs/practitioner/playbooks/decision-policies.md")
+    blocks = _python_blocks(page)
+    for block in blocks:
+        if any(token in block for token in ("confident_mask =", "straddles =", "def make_decision")):
+            exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    low, high = context["low"], context["high"]
+    np.testing.assert_array_equal(context["confident_mask"], low > 0.7)
+    np.testing.assert_array_equal(context["straddles"], (low < 0.5) & (high > 0.5))
+    assert len(context["decisions"]) == len(context["x_test"])
+    assert {decision[0] for decision in context["decisions"]} <= {"ACCEPT", "REJECT", "DEFER"}
+
+
+def test_should_apply_documented_threshold_policy_to_event_bounds() -> None:
+    """ADR-021: threshold bounds describe the event, not two separate columns."""
+    context = _build_regression_context()
+    assert context["explainer"].fitted and context["explainer"].calibrated
+    context["x_test"] = context["X_sample"]
+    page = Path("docs/practitioner/playbooks/decision-policies.md")
+    block = next(block for block in _python_blocks(page) if "threshold=150" in block)
+    exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    np.testing.assert_array_equal(context["accept"], context["low"] > 0.8)
+    np.testing.assert_array_equal(context["reject"], context["high"] < 0.2)
+    assert context["defer"].shape == (len(context["x_test"]),)
+    assert np.all(context["accept"] | context["reject"] | context["defer"])
+
+
 def _python_blocks(path: Path) -> list[str]:
     return re.findall(r"```python\n(.*?)```", path.read_text(encoding="utf-8"), re.S)
 
