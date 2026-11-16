@@ -1,11 +1,10 @@
 # Why CE: from a conventional to a CE workflow
 
-**Path A, step 2.** This page answers one question: *why is CE needed, and
-how does a CE workflow differ from a conventional one?* Follow the changes
-to the workflow here; use {doc}`../what-is-ce` for the broader project overview
-and comparison. No code is needed. If
-terms such as *feature*, *label* or *test set* are new, read
-{doc}`ml-foundations` first.
+A conventional workflow trains and evaluates a predictive model. CE adds
+calibration and explanations of model responses to that workflow. The
+{doc}`project overview <../what-is-ce>` describes CE's scope and its
+relationship to other methods. Terms such as *feature*, *label* and *test set*
+are introduced in {doc}`ml-foundations`.
 
 ## What a conventional workflow leaves open
 
@@ -66,7 +65,7 @@ What changes:
 A model flags breast-tumour samples as *malignant* or *benign* from 30
 measurements of cell nuclei. (This is an educational example on a public
 dataset, not clinical decision support.) For one sample, here is what the
-model alone gives, and what CE adds. Path B, {doc}`CE by example <ce-by-example>`,
+model alone gives, and what CE adds. {doc}`CE by example <ce-by-example>`,
 follows this case step by step without code; the
 {doc}`Python walkthrough <quickstart_walkthrough>` produces the same numbers with code.
 
@@ -143,13 +142,13 @@ data leakage and how to avoid it.
 - **Not a model fix.** CE calibrates and explains a model; it does not make a
   weak model accurate.
 
-## Continue
+<span id="continue"></span>
 
-- **Next:** {doc}`CE by example <ce-by-example>` (Path B): one prediction,
-  explained step by step without code.
-- **Go deeper:** {doc}`../foundations/concepts/ce_workflow` (how CE works,
-  with a learning path), {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
-  (the methods and their mathematics).
-- **See also:** {doc}`../what-is-ce` (what CE adds and how it compares) and,
-  if you want to apply CE now, Path C: {doc}`ce-tasks-and-modes`.
-- **Before this:** {doc}`ml-foundations` (Path A, step 1).
+## CE outputs in a concrete case
+
+{doc}`CE by example <ce-by-example>` follows a prediction through calibration,
+a factual rule and an alternative. The
+{doc}`CE workflow <../foundations/concepts/ce_workflow>` connects those
+comparisons to feature substitutions, while
+{doc}`calibration_methods <../foundations/concepts/calibration_methods>`
+develops the calibration construction behind the reported outputs.

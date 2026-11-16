@@ -1,8 +1,11 @@
-# The CE workflow and how to study it
+(the-ce-workflow-and-how-to-study-it)=
 
-This page gives the whole picture of how Calibrated Explanations works, in
-plain words, and then a learning path from intuition to mathematics and
-source code. Start here if you want to understand CE rather than just use it.
+# The CE workflow
+
+Calibrated Explanations connects a predictive model with calibration data,
+task-specific prediction information and explanations of model responses.
+Following those connections distinguishes what is predicted from how an
+explanation is constructed.
 
 ## The workflow in one picture
 
@@ -72,6 +75,13 @@ the two fits give the lower and upper probability. **A conformal predictive
 system**, in one sentence: CE uses the model's errors on the calibration set
 to say how far the true value is likely to be from the prediction.
 
+For the classification construction, see Vovk and Petej (2014) and CE's
+[`calibration/venn_abers.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/calibration/venn_abers.py).
+For CPS, see Vovk et al. (2019) and
+[`calibration/interval_regressor.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/calibration/interval_regressor.py).
+The CE regression treatment is Löfström et al. (2025); full references are in
+{doc}`../../citing`.
+
 (ce-workflow-explanations)=
 
 ## How an explanation is built
@@ -112,6 +122,13 @@ shows the calculation and its output, while
 The general scientific interpretation of explanation ranges remains under
 author review (SR-14).
 
+The rule and substitution construction is described by Löfström et al.
+(2024), listed in {doc}`../../citing`. To inspect the implementation, compare
+[`explanations/explanation.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/explanations/explanation.py)
+with the feature partitions in
+[`utils/discretizers.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/utils/discretizers.py).
+{doc}`alternatives` discusses the alternative explanation output.
+
 (ce-workflow-guarantees)=
 
 ## What the guarantees rest on
@@ -133,29 +150,27 @@ different interpretations. The {doc}`semantics reference <calibrated_interval_se
 keeps the formal qualifications together; {doc}`../how-to/interpret_explanations`
 connects them to returned records.
 
+For subgroup-specific calibration, see the
+{doc}`conditional calibration guide <../how-to/conditional_calibration>`
+and Löfström and Löfström (2024), listed in {doc}`../../citing`.
+When checking how the documented protocol is implemented, use the
+[CE source](https://github.com/Moffran/calibrated_explanations/tree/main/src/calibrated_explanations)
+alongside its [calibration tests](https://github.com/Moffran/calibrated_explanations/tree/main/tests/unit/calibration).
+
 Whether CE's ranges should be described as aleatoric or epistemic uncertainty
 remains under author review. Do not infer either interpretation from width
 alone.
 
-## Learning path
+(learning-path)=
 
-Each row is one concept, from Level 1 (understand) to Level 3 (study in
-depth). You can enter at any level.
+## Calibration in a worked example
 
-:::{div} ce-table-compact
-| Concept | Level 1: understand | Level 2: apply and interpret | Level 3: study in depth |
-|---|---|---|---|
-| Why CE | {doc}`../../what-is-ce` | {doc}`../../get-started/ce-tasks-and-modes` | Löfström et al. (2024), see {doc}`../../citing` |
-| Data roles and calibration | {doc}`../../get-started/ml-foundations` (A5, A6) | {doc}`Walkthrough <../../get-started/quickstart_walkthrough>` (sections 2–5) | {doc}`calibration_methods` (section 1) |
-| Venn-Abers | This page | {doc}`Walkthrough <../../get-started/quickstart_walkthrough>` (section 5) | {doc}`calibration_methods` (section 2); Vovk and Petej (2014); [`calibration/venn_abers.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/calibration/venn_abers.py) |
-| Conformal prediction and CPS | This page; {doc}`Glossary <../../glossary/science>` | {doc}`probabilistic_regression` | {doc}`calibration_methods` (section 3); Vovk et al. (2019); [`calibration/interval_regressor.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/calibration/interval_regressor.py) |
-| Probabilistic regression | This page | {doc}`probabilistic_regression` | {doc}`calibration_methods` (section 4); Löfström et al. (2025) |
-| Factual explanations | {doc}`../../get-started/ml-foundations` (A7) | {doc}`../how-to/interpret_explanations`; walkthrough sections 6–7 | Löfström et al. (2024); [`explanations/explanation.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/explanations/explanation.py); [`utils/discretizers.py`](https://github.com/Moffran/calibrated_explanations/blob/main/src/calibrated_explanations/utils/discretizers.py) |
-| Alternative explanations | Walkthrough section 8 | {doc}`alternatives` | Löfström et al. (2024) |
-| Subgroup (Mondrian) calibration | {doc}`Glossary <../../glossary/science>` | {doc}`../how-to/conditional_calibration` | Löfström and Löfström (2024), see {doc}`../../citing` |
-| Guarantees and limits | {doc}`../../what-is-ce` | This page | {doc}`calibrated_interval_semantics`; {doc}`calibration_methods` (section 5) |
-| Implementation and tests | — | {doc}`architecture` | [Source code](https://github.com/Moffran/calibrated_explanations/tree/main/src/calibrated_explanations); [calibration tests](https://github.com/Moffran/calibrated_explanations/tree/main/tests/unit/calibration) |
-:::
+The {doc}`walkthrough <../../get-started/quickstart_walkthrough>` follows
+one case from calibration to explanation. Its data split makes the roles of
+training, calibration and evaluation concrete; the
+{doc}`machine-learning essentials <../../get-started/ml-foundations>`
+explain those roles. The derivations in {doc}`calibration_methods`
+then connect the returned quantities to their statistical construction.
 
 Open scientific questions that the CE authors are reviewing are marked
 *under review* on the pages above.

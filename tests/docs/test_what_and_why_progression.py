@@ -20,14 +20,6 @@ def _flat(path: Path) -> str:
     return " ".join(path.read_text(encoding="utf-8").split())
 
 
-def test_reading_order_covers_the_seven_questions_in_sequence() -> None:
-    text = LANDING.read_text(encoding="utf-8")
-    rows = re.findall(r"^\| (\d) \| ", text, flags=re.MULTILINE)
-    assert rows == ["1", "2", "3", "4", "5", "6", "7"]
-    for target in ("ml-a1", "wic-problem", "wic-calibration", "wic-adds", "wic-fit", "wic-guarantees"):
-        assert f"<{target}>`" in text, target
-
-
 def test_reading_order_targets_exist() -> None:
     what_is = WHAT_IS.read_text(encoding="utf-8")
     for label in ("wic-problem", "wic-calibration", "wic-adds", "wic-guarantees", "wic-fit", "wic-compare"):
@@ -35,15 +27,11 @@ def test_reading_order_targets_exist() -> None:
     assert "(ml-a1)=" in (ROOT / "docs/get-started/ml-foundations.md").read_text(encoding="utf-8")
 
 
-def test_cards_are_ordered_as_a_progression() -> None:
-    titles = re.findall(r"grid-item-card\} (.+)", LANDING.read_text(encoding="utf-8"))
-    assert titles == [
-        "Understanding AI Models",
-        "Can We Trust AI Outputs?",
-        "What Is CE & What Does It Add?",
-        "The Explainability Gap",
-        "Regulation Context (EU AI Act)",
-    ]
+def test_overview_connects_prediction_to_ce_without_a_navigation_inventory() -> None:
+    text = LANDING.read_text(encoding="utf-8")
+    assert text.index("## Predictions, calibration and explanations") < text.index("## What CE adds to the model output")
+    assert "grid-item-card" not in text
+    assert "| # | Question |" not in text
 
 
 def test_regulation_entry_is_relabelled_and_not_a_compliance_claim() -> None:

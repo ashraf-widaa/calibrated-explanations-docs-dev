@@ -1,12 +1,12 @@
 # Tasks, modes and capabilities
 
-**Path C, step 1.** Start here if you have a model or a prediction problem
-and want to know whether and how CE applies. In three steps: check that CE
-fits, pick the mode, and learn what its outputs mean. A reference of
-capabilities and limitations follows at the end.
+The prediction task and the question being asked determine which CE output
+is meaningful. Classification concerns classes; regression concerns numeric
+targets. CE can explain a target prediction or a probability for an event on
+that target, so choosing the task and choosing the output mode are distinct.
 
 If terms such as *classification* or *calibration set* are new, start with
-Path A: {doc}`ml-foundations` and {doc}`why-ce`.
+{doc}`ml-foundations` and {doc}`why-ce`.
 
 ## Choosing your workflow
 
@@ -134,18 +134,10 @@ the world, and acting on an alternative does not guarantee a different real
 outcome. The canonical statement of guarantees and non-guarantees for each
 mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
-**Continue**
-
-- **Next:** {doc}`apply-overview` (Path C, step 2): the practical workflow,
-  step by step, without code.
-- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
-  (section 4, the three modes) and the guarantees by mode in
-  {doc}`../foundations/concepts/calibrated_interval_semantics`.
-- **See also:** the executable {doc}`Python tutorials <../tutorials/index>`
-  for each mode, and the {doc}`Quick API <quick_api>` for the calls named on
-  this page.
-- **Before this:** {doc}`CE by example <ce-by-example>` (Path B) and
-  {doc}`why-ce` (Path A).
+The {doc}`practical workflow <apply-overview>` connects task selection to
+data preparation and calibration. The executable
+{doc}`Python tutorials <../tutorials/index>` show the calls and their outputs
+for each task.
 
 ## Capability reference
 

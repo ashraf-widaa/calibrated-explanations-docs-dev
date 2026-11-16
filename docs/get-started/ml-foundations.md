@@ -1,11 +1,7 @@
 # Machine learning essentials
 
-This page gives you just enough machine learning to follow the rest of the
-Quick Start (Path A, step 1). If you already train and evaluate scikit-learn
-models, skip to {doc}`why-ce`.
-
-Each section answers what a concept is, why it matters for calibrated
-explanations, and how it shows up in practice. The running example is the
+Calibrated explanations build on the roles of predictive models, data and
+evaluation. The running example is the
 one used later in the {doc}`walkthrough <quickstart_walkthrough>`: deciding
 whether a breast-tumour sample is malignant or benign from measurements of its
 cells.
@@ -175,12 +171,11 @@ Löfström, Löfström, Johansson and Sönströd (2024),
   model predictions. *Advances in Neural Information Processing Systems 30*.
   [arXiv:1705.07874](https://arxiv.org/abs/1705.07874).
 
-## Continue
+<span id="continue"></span>
 
-- **Next:** {doc}`why-ce` (Path A, step 2).
-- **Go deeper:** {doc}`How CE calibrates <../foundations/concepts/calibration_methods>`
-  (section 1, what calibration means) and
-  {doc}`../foundations/concepts/calibrated_interval_semantics` (what is and is
-  not guaranteed).
-- **See also:** the {doc}`Glossary of scientific terms <../glossary/science>`
-  and {doc}`../what-is-ce`.
+## From predictive models to CE
+
+The {doc}`CE workflow <why-ce>` adds calibration and explanation to these
+data and model roles. The {doc}`Python walkthrough <quickstart_walkthrough>`
+uses the same classification example to show the resulting predictions,
+rules and alternatives.

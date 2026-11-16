@@ -1,13 +1,13 @@
 # CE by example: one prediction, explained
 
-**Path B of the Quick Start.** This page follows one real prediction from a
+This page follows one real prediction from a
 model's raw output to a calibrated explanation, **without code**. Every number,
 table and the plot below are CE outputs produced by the code of the
 [Python walkthrough](quickstart_walkthrough.md), which runs the same example
 step by step; this page is regenerated from that run. This is an educational
 example on a public dataset, not clinical decision support.
 
-**Before this:** [Why CE](why-ce.md) (Path A) explains why CE adds a calibration
+[Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
 ## 1. The question
@@ -174,15 +174,13 @@ above 0.5.
 - that the weight intervals are formal guarantees;
 - anything about other cases, from this one case.
 
-## Continue
+<span id="continue"></span>
 
-- **Run it yourself:** the [Python walkthrough](quickstart_walkthrough.md)
-  shows the code and outputs behind this page, with a downloadable notebook.
-- **Next:** [Tasks, modes and capabilities](ce-tasks-and-modes.md) (Path C),
-  for regression and the other CE modes.
-- **Go deeper:** [How CE calibrates: Venn–Abers predictors](../foundations/concepts/calibration_methods.md)
-  (section 2), [The CE workflow](../foundations/concepts/ce_workflow.md) (how an
-  explanation is built) and the formal
-  [guarantees by mode](../foundations/concepts/calibrated_interval_semantics.md).
-- **See also:** [How to read CE explanations](../foundations/how-to/interpret_explanations.md).
-- **Before this:** [Why CE](why-ce.md).
+## Applying and interpreting this example
+
+The [Python walkthrough](quickstart_walkthrough.md) contains the code and
+outputs behind this case. The [CE workflow](../foundations/concepts/ce_workflow.md)
+connects the rule, substituted predictions and weight calculation; the
+[interpretation guide](../foundations/how-to/interpret_explanations.md)
+explains the returned records. Other tasks and output quantities are
+distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).

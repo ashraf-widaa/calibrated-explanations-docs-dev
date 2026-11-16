@@ -21,11 +21,10 @@ def _flat(path: Path) -> str:
     return " ".join(path.read_text(encoding="utf-8").split())
 
 
-def test_landing_states_the_chain_and_a_levelled_reading_order() -> None:
+def test_landing_states_the_chain_without_learning_level_labels() -> None:
     text = _flat(LANDING)
     assert "task → CE mode → statistical method → output and what its range means → assumptions and guarantees" in text
-    steps = re.findall(r"\d\. \{(?:doc|ref)\}`[^`]+` \((L[123](?:–L[123])?)\)", text)
-    assert steps == ["L1", "L1–L2", "L2", "L2–L3", "L3"]
+    assert not re.search(r"\bL[123]\b", text)
     for label in ("ce-workflow-methods", "ce-workflow-guarantees", "ce-workflow-explanations"):
         assert f"<{label}>`" in text
         assert f"({label})=" in WORKFLOW.read_text(encoding="utf-8")
@@ -82,4 +81,4 @@ def test_interpretation_guide_links_telemetry_instead_of_teaching_it() -> None:
 
 def test_wide_theory_tables_use_the_phone_layout() -> None:
     assert METHODS.read_text(encoding="utf-8").count(":::{div} ce-table-compact") == 4
-    assert WORKFLOW.read_text(encoding="utf-8").count(":::{div} ce-table-compact") == 2
+    assert WORKFLOW.read_text(encoding="utf-8").count(":::{div} ce-table-compact") == 1

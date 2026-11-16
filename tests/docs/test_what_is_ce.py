@@ -42,4 +42,4 @@ def test_page_is_reachable_from_sidebar_and_landing() -> None:
     index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
     landing = (ROOT / "docs" / "sections" / "what-and-why.md").read_text(encoding="utf-8")
     assert "What CE Is <what-is-ce>" in index
-    assert ":link: ../what-is-ce" in landing
+    assert "{doc}`What CE Is <../what-is-ce>`" in landing

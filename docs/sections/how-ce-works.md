@@ -20,73 +20,41 @@ for the three modes in one table, and
 {ref}`What the guarantees rest on <ce-workflow-guarantees>` separates the
 assumptions from what they do and do not give you.
 
-## Read in this order
+<span id="read-in-this-order"></span>
 
-Levels: **L1** understand (plain words), **L2** apply and interpret (real
-output, how to read it), **L3** investigate (definitions, derivations,
-assumptions and references).
+## From calibrated prediction to explanation
 
-1. {doc}`The CE workflow <../foundations/concepts/ce_workflow>` (L1): the
-   whole picture, the chain above, and a learning path.
-2. {ref}`How an explanation is built <ce-workflow-explanations>` (L1–L2): rules,
-   substituted values, factual weights and alternative predictions.
-3. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`
-   (L2): factual and alternative explanations, rule tables and plots.
-4. {doc}`Statistical methods behind CE <../foundations/concepts/calibration_methods>`
-   (L2–L3): Venn–Abers predictors and conformal predictive systems, with
-   worked examples and derivations.
-5. {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`
-   (L3): the canonical statement of what holds in each mode, under which
-   assumptions, and what does not.
+The {doc}`CE workflow <../foundations/concepts/ce_workflow>` traces how
+calibrated outputs become the inputs to an explanation.
 
-Missing a prerequisite? The {doc}`Essential Foundations <../foundations/index>`
-hub collects them; the {doc}`Quick Start <../get-started/index>` gives the
-big picture without mathematics.
+A factual explanation starts with the quantity being predicted, then compares
+it with outputs obtained after substituting feature values. In the existing
+binary example, the probability of benign is 0.286; a substituted scenario
+gives 0.476, so the factual weight is 0.286 − 0.476 = −0.190. The
+{ref}`worked construction <ce-workflow-explanations>` connects the rule,
+substitutions, weight and alternative prediction. These comparisons describe
+the model's responses, not causal effects.
 
-## Pages in this section
+The same distinction helps when
+{doc}`reading explanation records and plots <../foundations/how-to/interpret_explanations>`:
+a prediction and a feature weight are different quantities, even when both
+are accompanied by a range.
 
-::::{grid} 1 2 3 3
-:gutter: 3
+<span id="pages-in-this-section"></span>
 
-:::{grid-item-card} The CE Workflow
-:link: ../foundations/concepts/ce_workflow
-:link-type: doc
+## Calibration methods and their limits
 
-L1 · The whole picture in plain words, and a learning path from intuition to mathematics and code.
-:::
+Venn–Abers predictors supply classification probability information, while
+conformal predictive systems supply regression prediction information. The
+{doc}`methods explanation <../foundations/concepts/calibration_methods>`
+develops these constructions and their assumptions. The
+{ref}`workflow's task-to-method comparison <ce-workflow-methods>` identifies
+which output is being explained in each mode.
 
-:::{grid-item-card} Statistical Methods Behind CE
-:link: ../foundations/concepts/calibration_methods
-:link-type: doc
-
-L2–L3 · How CE calibrates: Venn–Abers predictors and conformal predictive systems.
-:::
-
-:::{grid-item-card} Guarantees by Mode
-:link: ../foundations/concepts/calibrated_interval_semantics
-:link-type: doc
-
-L3 · Canonical semantics of calibrated uncertainty, mode by mode.
-:::
-
-:::{grid-item-card} How to Read CE Explanations
-:link: ../foundations/how-to/interpret_explanations
-:link-type: doc
-
-L2 · Read factual and alternative explanations: rule tables, uncertainty intervals and plots.
-:::
-
-:::{grid-item-card} Assumptions & Guarantees
-:link: cross-mode-non-guarantees
-:link-type: ref
-
-L3 · What holds in every mode, and what CE does not guarantee.
-:::
-
-:::{grid-item-card} Essential Foundations
-:link: ../foundations/index
-:link-type: doc
-
-Prerequisites; general statistics are not fully covered.
-:::
-::::
+A range must be interpreted with its construction and assumptions. Prediction
+bounds, target prediction intervals and explanation-weight ranges do not
+share one guarantee. The
+{ref}`calibration prerequisites <ce-workflow-guarantees>` and
+{ref}`cross-mode non-guarantees <cross-mode-non-guarantees>` describe these
+limits. The {doc}`foundations <../foundations/index>` supply prerequisite
+concepts where needed.

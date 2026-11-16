@@ -1,6 +1,6 @@
 # Apply CE: the practical workflow
 
-**Path C, step 2.** This page shows, without code, what applying CE to your
+This page shows, without code, what applying CE to your
 own problem involves: the steps, what each step produces, how to check it, and
 which tutorial to run next. It assumes you have chosen a task and mode in
 {doc}`ce-tasks-and-modes` (step 1).
@@ -89,13 +89,11 @@ then separates empirical checks from claims about guarantees.
 All tutorials are listed in the {doc}`Python tutorials <../tutorials/index>`;
 the main calls are summarised in the {doc}`Quick API <quick_api>`.
 
-## Continue
+<span id="continue"></span>
 
-- **Next:** choose a tutorial from the table above.
-- **Go deeper:** {doc}`../foundations/concepts/calibrated_interval_semantics`
-  (what the ranges of each mode guarantee, and what they do not).
-- **See also:** {doc}`../practitioner/evaluate_ce` and
-  {doc}`../foundations/how-to/integrate_with_pipelines`.
-- **Before this:** {doc}`ce-tasks-and-modes` (Path C, step 1).
-- **Elsewhere in the documentation:** see
-  {ref}`Where should I go next? <quick-start-next>` on the Quick Start page.
+## Applying the workflow
+
+{doc}`apply-to-your-data` implements these steps with a model and held-out
+calibration data. Before relying on the outputs, use the checks in
+{doc}`../practitioner/evaluate_ce` to distinguish empirical results from
+statistical guarantees.

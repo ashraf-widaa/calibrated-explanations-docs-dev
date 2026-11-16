@@ -105,7 +105,8 @@ def test_walkthrough_extra_sections_do_not_collide_with_paths() -> None:
 
 
 @pytest.mark.parametrize("page", ["ml-foundations", "why-ce", "ce-by-example", "ce-tasks-and-modes", "apply-overview"])
-def test_quick_start_pages_offer_onward_and_deeper_links(page: str) -> None:
+def test_quick_start_pages_keep_contextual_links_without_route_instructions(page: str) -> None:
     text = _text(GET_STARTED / f"{page}.md")
-    assert "**Next:**" in text, page
-    assert "**Go deeper:**" in text, page
+    links = re.findall(r"\{(?:doc|ref)\}`[^`]+`|\[[^\]]+\]\([^)]+\)", text)
+    assert len(links) >= 2, page
+    assert "**Next:**" not in text and "**Go deeper:**" not in text, page

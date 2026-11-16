@@ -6,40 +6,40 @@ advanced material.
 
 ## Orientation and beginner foundations
 
-- {doc}`../get-started/ml-foundations` – machine-learning basics used throughout CE.
-- {doc}`../get-started/ce-tasks-and-modes` – the tasks CE supports and what each output means.
-- {doc}`../glossary/index` – short definitions of the terms used across the documentation.
+CE uses features to describe a case and a trained model to produce its
+prediction. Training, calibration and evaluation data have different roles;
+{doc}`machine-learning essentials <../get-started/ml-foundations>` introduces
+them. The {doc}`glossary <../glossary/index>` supplies short definitions.
 
 ## Practical understanding and interpretation
 
-- {doc}`how-to/interpret_explanations` – read factual and alternative explanations.
-- {doc}`concepts/alternatives` – alternative explanations and ensured filters.
-- {doc}`concepts/guarded_explanations` – in-distribution guarded explanations.
-- {doc}`how-to/index` – all how-to guides.
+A factual explanation compares model responses associated with a condition
+that holds for the case. An alternative reports a prediction under a
+different condition. The {doc}`interpretation guide <how-to/interpret_explanations>`
+connects these quantities to returned records and plots. Guarded explanations
+add filtering of candidate feature intervals; they do not turn model-response
+comparisons into causal evidence.
 
 ## Scientific and statistical foundations
 
-- {doc}`concepts/calibration_methods` – how CE uses Venn–Abers and CPS, from intuition to derivations.
-- {doc}`concepts/calibrated_interval_semantics` – semantics, assumptions and non-guarantees for each mode.
-- {doc}`concepts/probabilistic_regression` – probabilistic and interval regression.
-- {doc}`concepts/terminology_thresholded_vs_probabilistic_regression` – thresholded versus probabilistic regression.
-- {doc}`how-to/conditional_calibration` – conditional (Mondrian) calibration.
-- {doc}`../researcher/index` – research, literature and replication.
+The statistical meaning of an output depends on its calibration construction.
+{doc}`concepts/calibration_methods` develops Venn–Abers predictors and
+conformal predictive systems. Prediction bounds, target intervals and
+explanation-weight ranges must be distinguished; their assumptions and open
+qualifications are collected in {doc}`concepts/calibrated_interval_semantics`.
 
 ## Software architecture and reference
 
-- {doc}`concepts/architecture` – runtime components and extension points.
-- {doc}`concepts/explanation_structures` – explanation data structures.
-- {doc}`concepts/error_handling` – runtime safeguards and exceptions.
-- {doc}`concepts/parameter-reference` – parameter definitions.
-- {doc}`reference/index` – API reference and explanation schema.
-
-The {doc}`concepts/index` page lists all concept pages.
+The calibrated runtime coordinates prediction and explanation operations.
+The {doc}`architecture <concepts/architecture>` describes those
+responsibilities and their extension points. The sidebar provides the
+parameter, data-structure and API references for inspecting a specific
+operation.
 
 ## Project governance (for maintainers)
 
 Release, testing and documentation policies are kept separate from the
-learning path: see {doc}`governance/index`, also listed under
+scientific explanations: see {doc}`governance/index`, also listed under
 *CE Project, Vision & Evolution* in the sidebar.
 
 ```{toctree}

@@ -170,16 +170,16 @@ on the [citation page](citing.md).
 
 A {doc}`short comparison page <compare>` gives more detail.
 
-## Where to go next
+<span id="where-to-go-next"></span>
 
-| You want to | Go to |
-|---|---|
-| Try CE on a real example | {doc}`Quick Start <get-started/index>` |
-| See which tasks and outputs CE supports | {doc}`get-started/ce-tasks-and-modes` |
-| Understand how CE calibrates | {doc}`foundations/concepts/calibration_methods` |
-| Learn to read explanations | {doc}`foundations/how-to/interpret_explanations` |
-| Look up a term | {doc}`Glossary <glossary/index>` |
-| Read the regulatory context | {doc}`practitioner/playbooks/eu-ai-act-compliance` |
+## Interpreting a concrete CE output
+
+{doc}`get-started/ce-by-example` follows one prediction through calibration,
+factual rules and alternatives. The
+{doc}`interpretation guide <foundations/how-to/interpret_explanations>`
+explains the returned quantities, while
+{doc}`foundations/concepts/calibration_methods` develops the statistical
+construction behind them.
 
 ## References
 

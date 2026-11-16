@@ -161,5 +161,5 @@ semantics page; that wording is under review by the CE authors.*
 ## Related pages
 
 - {doc}`index` (practitioner hub)
-- {doc}`../foundations/concepts/ce_workflow` (how CE works, with a learning path)
+- {doc}`../foundations/concepts/ce_workflow` (how CE works)
 - {doc}`../get-started/troubleshooting`

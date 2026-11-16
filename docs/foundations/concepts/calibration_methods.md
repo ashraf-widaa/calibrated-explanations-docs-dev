@@ -14,13 +14,6 @@ framework: **Venn–Abers predictors** for probabilities and **conformal predict
 systems (CPS)** for numeric targets. This page explains what the two methods compute,
 what they guarantee, and where the guarantees stop.
 
-**What you will learn**
-
-- What it means for a probability to be calibrated, and why calibration is not accuracy.
-- How Venn–Abers produces two probabilities, p0 and p1, and what CE reports.
-- How a conformal predictive system turns calibration errors into prediction intervals,
-  and why they cover the truth at the requested rate on average.
-
 **Prerequisites:** {doc}`../../get-started/ml-foundations` (data roles) and
 {doc}`../../get-started/ce-tasks-and-modes` (CE's three modes). The mathematical parts assume
 conditional expectation and order statistics.
@@ -29,10 +22,9 @@ For explanation construction before the mathematics, read
 {doc}`ce_workflow` ("How an explanation is built"). This page then explains
 the calibration methods supplying those predictions and scenario outputs.
 
-**How to read this page.** Each section starts with a plain-language summary, then
-explains the mechanism and CE's output, then gives the construction and the formal
-statement. You can stop after the first two parts. Four kinds of boxes separate the
-statements:
+Theoretical results, implementation behavior and illustrative examples have
+different evidential roles. The annotations below distinguish them and keep
+unresolved author-review questions visible.
 
 | Box | Meaning |
 |---|---|

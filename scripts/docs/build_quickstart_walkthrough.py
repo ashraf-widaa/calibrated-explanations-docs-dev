@@ -53,36 +53,15 @@ def code(text):
 md(r"""
 # Python walkthrough: from a trained model to calibrated explanations
 
-This page works like a notebook. Each section has a short explanation, the
-code, the output that code produced when this page was built, and what the
-output means. You can run the same cells yourself: DOWNLOAD_LINK, or copy the
-cells into a Python session.
+A model's score and a calibrated probability are different outputs. This
+example fits a binary classifier, calibrates it on held-out cases, and
+examines the factual rules and alternative predictions for one test case.
+The code and displayed outputs come from the same executed notebook.
 
-**One of the [Python tutorials](../tutorials/index.md).** Each section follows
-the same pattern: a **question**, the code that answers it, the real output,
-the concept behind it, and what you can conclude. The same example without
-code is [CE by example](ce-by-example.md) in the Quick Start.
-
-**Before you start.** You should know what a feature, a label and a
-train/test split are, and why CE adds a calibration step; if not, read
-[Why CE](why-ce.md) first. We use **binary classification**; other tasks are
-introduced in [Tasks, modes and capabilities](ce-tasks-and-modes.md). No
-statistics beyond "probability" and "average" is needed.
-
-**What you will learn**
-
-1. The questions CE answers about one prediction (section 1).
-2. Why a model needs three separate data sets (section 2).
-3. Why accuracy alone says nothing about probabilities (section 3).
-4. Why probabilities need a calibration check (section 4).
-5. What CE's calibrated probability and its range are, and what they
-   guarantee (section 5).
-6. How CE builds an explanation (section 6), and how to read one (section 7).
-7. How alternative scenarios relate to the explanation (section 8).
-8. What you can and cannot conclude (section 9).
-
-Sections 1–10 form the core path. Regression, guarded explanations and
-options for shaping explanations follow as extra sections.
+You can run the cells yourself: DOWNLOAD_LINK. The same numerical example
+without code is [CE by example](ce-by-example.md). The explanation of
+[Why CE](why-ce.md) introduces the role of calibration; other prediction
+tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
 Install the packages once:
 
@@ -685,25 +664,21 @@ not with single rules. *How to read them is under review by the CE authors.*
 """)
 
 md(r"""
-### Where to go next
+<span id="where-to-go-next"></span>
 
-| You want to | Go to |
-|---|---|
-| Understand calibration and uncertainty properly | [Calibrated interval semantics](../foundations/concepts/calibrated_interval_semantics.md) |
-| Read explanations in more depth | [Interpret calibrated explanations](../foundations/how-to/interpret_explanations.md) |
-| Learn more about alternatives | [Alternative explanations](../foundations/concepts/alternatives.md) |
-| Go deeper on threshold regression | [Probabilistic regression](../foundations/concepts/probabilistic_regression.md) |
-| Use guarded explanations | [Guarded explanations tutorial](quickstart_guarded.md) |
-| Look up method signatures | [Quick API](quick_api.md) |
-| See how CE calibrates its outputs | [How CE Calibrates](../foundations/concepts/calibration_methods.md) |
-| See the whole workflow and a learning path | [The CE workflow](../foundations/concepts/ce_workflow.md) |
-| Use CE with your own models and pipelines | [Integrate with pipelines](../foundations/how-to/integrate_with_pipelines.md) |
-| Read this example again without code | [CE by example](ce-by-example.md) |
-| Find the other Python tutorials | [Python tutorials](../tutorials/index.md) |
-| Choose a task and mode for your problem | [Tasks, modes and capabilities](ce-tasks-and-modes.md) |
-| Apply CE to your own data | [Apply CE to your own data](apply-to-your-data.md) |
-| Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
-| Fix installation problems | [Troubleshooting](troubleshooting.md) |
+### Interpreting the example in practice
+
+The [CE workflow](../foundations/concepts/ce_workflow.md) connects the
+calibration and substitution steps used in this example.
+
+The [interpretation guide](../foundations/how-to/interpret_explanations.md)
+connects these rules and plots to the returned records. Their statistical
+qualifications are collected in
+[calibrated interval semantics](../foundations/concepts/calibrated_interval_semantics.md).
+To see how the prediction information is constructed, compare this example
+with [the calibration methods](../foundations/concepts/calibration_methods.md).
+The [integration guide](../sections/software-integration.md) connects the
+same fitted-and-calibrated workflow to use in an application.
 """)
 
 
@@ -897,14 +872,14 @@ widest_note = (
 
 page = f"""# CE by example: one prediction, explained
 
-**Path B of the Quick Start.** This page follows one real prediction from a
+This page follows one real prediction from a
 model's raw output to a calibrated explanation, **without code**. Every number,
 table and the plot below are CE outputs produced by the code of the
 [Python walkthrough](quickstart_walkthrough.md), which runs the same example
 step by step; this page is regenerated from that run. This is an educational
 example on a public dataset, not clinical decision support.
 
-**Before this:** [Why CE](why-ce.md) (Path A) explains why CE adds a calibration
+[Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
 ## 1. The question
@@ -1035,20 +1010,16 @@ different range, what would the calibrated probability be?*
 
 {CONCLUDE.strip()}
 
-## Continue
+<span id="continue"></span>
 
-- **Run it yourself:** the [Python walkthrough](quickstart_walkthrough.md)
-  shows the code and outputs behind this page, with a downloadable notebook.
-- **Next:** [Tasks, modes and capabilities](ce-tasks-and-modes.md) (Path C),
-  for regression and the other CE modes.
-- **Go deeper:** [How CE calibrates: Venn–Abers predictors](../foundations/concepts/calibration_methods.md)
-  (section 2), [The CE workflow](../foundations/concepts/ce_workflow.md) (how an
-  explanation is built) and the formal
-  [guarantees by mode](../foundations/concepts/calibrated_interval_semantics.md).
-- **See also:** [How to read CE explanations](../foundations/how-to/interpret_explanations.md).
-- **Before this:** [Why CE](why-ce.md).
+## Applying and interpreting this example
 
-
+The [Python walkthrough](quickstart_walkthrough.md) contains the code and
+outputs behind this case. The [CE workflow](../foundations/concepts/ce_workflow.md)
+connects the rule, substituted predictions and weight calculation; the
+[interpretation guide](../foundations/how-to/interpret_explanations.md)
+explains the returned records. Other tasks and output quantities are
+distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 """
 companion = page_dir / "ce-by-example.md"
 companion.write_text(page, encoding="utf-8")
