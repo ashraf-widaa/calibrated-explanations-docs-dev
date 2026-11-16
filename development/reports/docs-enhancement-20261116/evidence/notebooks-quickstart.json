@@ -1,0 +1,53 @@
+{
+  "summary": {
+    "invocation_id": "873fd16a-9eaa-4562-9d56-2f3fd3439fe7",
+    "total": 3,
+    "passed": 1,
+    "failed": 1,
+    "timed_out": 1,
+    "skipped_noexec": 0,
+    "skipped_slow": 0,
+    "mode": "advisory"
+  },
+  "notebooks": [
+    {
+      "notebook": "quickstart.ipynb",
+      "status": "timed_out",
+      "elapsed_seconds": 41.02,
+      "errors": [
+        {
+          "cell": -1,
+          "etype": "TimeoutError",
+          "evalue": "A cell timed out while it was being executed, after 30 seconds.\nThe message was: Cell execution timed out.\nHere is a preview of the cell contents:\n-------------------\n['from sklearn.datasets import fetch_openml', 'from sklearn.model_selection import train_test_split', '', 'dataset = fetch_openml(name=\"wine\", version=7, as_frame=True, parser=\"auto\")', '']\n...\n['feature_names = dataset.feature_names', '', 'x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=2, stratify=y)', '', 'X_prop_train, x_cal, y_prop_train, y_cal = train_test_split(x_train, y_train, test_size=0.25)']\n-------------------\n"
+        }
+      ],
+      "invocation_id": "873fd16a-9eaa-4562-9d56-2f3fd3439fe7",
+      "skip_reason": null,
+      "mode": "advisory"
+    },
+    {
+      "notebook": "quickstart_guarded.ipynb",
+      "status": "failed",
+      "elapsed_seconds": 14.23,
+      "errors": [
+        {
+          "cell": -1,
+          "etype": "CellExecutionError",
+          "evalue": "An error occurred while executing the following cell:\n------------------\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.model_selection import train_test_split\n\ndataset = fetch_openml(name=\"wine\", version=7, as_frame=True, parser=\"auto\")\n\nX = dataset.data.values.astype(float)\ny = (dataset.target.values == \"True\").astype(int)\n\nfeature_names = dataset.feature_names\n\nx_train, x_test, y_train, y_test = train_test_split(X, y, test_size=2, stratify=y)\n\nX_prop_train, x_cal, y_prop_train, y_cal "
+        }
+      ],
+      "invocation_id": "873fd16a-9eaa-4562-9d56-2f3fd3439fe7",
+      "skip_reason": null,
+      "mode": "advisory"
+    },
+    {
+      "notebook": "quickstart_tiny.ipynb",
+      "status": "passed",
+      "elapsed_seconds": 11.416,
+      "errors": [],
+      "invocation_id": "873fd16a-9eaa-4562-9d56-2f3fd3439fe7",
+      "skip_reason": null,
+      "mode": "advisory"
+    }
+  ]
+}

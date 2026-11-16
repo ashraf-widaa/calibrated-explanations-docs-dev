@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "invocation_id": "8d4bc90d-bc6f-4059-a609-d15bf17efe7a",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "timed_out": 0,
+    "skipped_noexec": 0,
+    "skipped_slow": 0,
+    "mode": "advisory"
+  },
+  "notebooks": [
+    {
+      "notebook": "notebooks\\core_demos\\demo_binary_classification.ipynb",
+      "status": "passed",
+      "elapsed_seconds": 29.177,
+      "errors": [],
+      "invocation_id": "8d4bc90d-bc6f-4059-a609-d15bf17efe7a",
+      "skip_reason": null,
+      "mode": "advisory"
+    },
+    {
+      "notebook": "notebooks\\core_demos\\demo_multiclass_glass.ipynb",
+      "status": "passed",
+      "elapsed_seconds": 215.047,
+      "errors": [],
+      "invocation_id": "8d4bc90d-bc6f-4059-a609-d15bf17efe7a",
+      "skip_reason": null,
+      "mode": "advisory"
+    },
+    {
+      "notebook": "notebooks\\core_demos\\demo_probabilistic_regression.ipynb",
+      "status": "passed",
+      "elapsed_seconds": 134.177,
+      "errors": [],
+      "invocation_id": "8d4bc90d-bc6f-4059-a609-d15bf17efe7a",
+      "skip_reason": null,
+      "mode": "advisory"
+    },
+    {
+      "notebook": "notebooks\\core_demos\\demo_regression.ipynb",
+      "status": "passed",
+      "elapsed_seconds": 156.718,
+      "errors": [],
+      "invocation_id": "8d4bc90d-bc6f-4059-a609-d15bf17efe7a",
+      "skip_reason": null,
+      "mode": "advisory"
+    }
+  ]
+}
