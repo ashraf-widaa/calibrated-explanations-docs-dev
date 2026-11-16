@@ -75,7 +75,7 @@ Ensured explanation
   ensured filter because its uncertainty interval is not wider than the
   interval of the original prediction. This is a comparison of reported widths,
   not a guarantee of stronger evidence or a beneficial intervention.
-  *The scientific interpretation remains under review.*
+  *Wording under review.*
 
   **Learn more:** {doc}`../practitioner/playbooks/ensured-explanations`
 
