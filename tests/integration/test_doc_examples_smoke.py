@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
@@ -159,6 +160,10 @@ def test_should_execute_regulatory_query_fragments_with_binary_bounds(name: str)
             assert context["probs"].shape == (len(context["low"]), 2)
             assert context["low"].ndim == context["high"].ndim == 1
             assert np.all(np.isfinite(context["high"] - context["low"]))
+        if "factual" in context:
+            archived = json.loads(json.dumps(context["factual"][0].build_rules_payload()))
+            assert archived["core"]["kind"] == "factual"
+            assert archived["core"]["prediction"]["value"] == context["factual"][0].predict
         checked += 1
     assert checked >= 3
 

@@ -513,7 +513,7 @@ reviewers, enforce review quality, or impose a review workflow. **Required:**
 Documented escalation procedures, reviewer training, and a workflow management
 system that records reviewer decisions and links them back to the CE audit log.
 
-(56-fundamental-rights-impact-assessment-art-99-recital-66)=
+(fundamental-rights-impact-assessment-art-9-9-recital-66)=
 
 ### 5.6 Fundamental Rights Impact Assessment
 Article 27 addresses fundamental-rights impact assessments for specified
