@@ -226,11 +226,12 @@ The one-month response deadline (Art. 12(3)) must be tracked per request.
 personal data without undue delay where the data are no longer necessary, consent
 is withdrawn, or processing was unlawful (Art. 17(1)).
 
-**c) How `calibrated_explanations` contributes:** The explanation payloads produced
-by `build_rules_payload()` contain the input feature vector, which may constitute personal data.
-The `data_subject_ref` field enables targeted deletion of all inference-time records
-for a specific individual. Note: erasure of explanation records does not affect the
-trained model -- model unlearning is a separate requirement (see Section 9.1).
+**c) How `calibrated_explanations` contributes:** Explanation payloads can
+contain personal information, including feature values. The application adds
+`data_subject_ref` in the logging example; CE does not supply that identifier.
+An application can use it to find stored records. Deleting those records does
+not change the fitted model. **Review question:** What further action on data
+or model artifacts is required in the particular case?
 
 **d) Code:**
 
@@ -642,11 +643,11 @@ once the claimant establishes a *prima facie* case of disparate impact.
 | GDPR | Arts. 13-14 Logic description in privacy notice | `explain_factual` / `list_rules()` | **Review required** |
 | GDPR | Art. 15 Right of access | Accountability log + `data_subject_ref` retrieval | **Review required** |
 | GDPR | Art. 17 Right to erasure | `data_subject_ref` deletion from log | **Review required — supporting records only** -- model unlearning requires separate tooling |
-| GDPR | Art. 21 Right to object | Factual explanation as compelling-grounds documentation | **Review required** |
+| GDPR | Art. 21 Right to object | Model-response records for separate grounds review | **Review required** |
 | GDPR | Art. 22 Automated decision safeguards (human intervention, express view, contest) | `predict_proba` gate + `explain_factual` + `explore_alternatives` | **Review required** |
-| GDPR | Art. 25 Data protection by design | Feature utility analysis for data minimisation | **Review required** |
+| GDPR | Art. 25 Data protection by design | Feature-weight inspection; separate utility and legal assessment needed | **Review required** |
 | GDPR | Art. 35 DPIA technical annex | Uncertainty summary + per-group Mondrian analysis | **Review required** |
-| PLD 2024 | Art. 9(4) On-demand technical disclosure | `build_rules_payload()` payloads + disclosure package function | **Review required** |
+| PLD 2024 | Art. 9 Disclosure of evidence | `build_rules_payload()` payloads + application disclosure package | **Review required** |
 | AI Liability Dir. (withdrawn) | Historical draft only | No current obligation established by this withdrawn proposal | **Historical reference** |
 | DSA | Art. 27 Recommender system transparency | Potential supporting model-response records; no automatic mapping to statutory parameters | **Review required** |
 | DSA | Individual explanation applicability | Local CE output; required information and applicable provision need legal review | **Review required** |
