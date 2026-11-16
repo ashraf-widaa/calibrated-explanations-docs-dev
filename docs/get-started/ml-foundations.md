@@ -93,6 +93,13 @@ flowchart LR
     TE --> R
 ```
 
+Read the three branches from **All labelled data** as separate roles, not
+three successive training stages. Only the proper training branch fits the
+model. The trained model and calibration branch meet at the calibrated
+explainer; the test branch supplies cases on which to evaluate its outputs.
+This separation lets CE relate model outputs to held-out outcomes before
+producing predictions and explanations for new cases.
+
 | Step | Purpose |
 |---|---|
 | Data preparation | Clean the data and choose the features |

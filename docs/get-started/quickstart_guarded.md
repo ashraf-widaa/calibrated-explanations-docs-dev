@@ -117,6 +117,18 @@ bounded on both sides, such as `0.06233 < mean concave points <= 0.08508`,
 because the guard works on ranges of feature values that it has checked
 against the calibration data.
 
+The upper axis is probability: `P(y=1)` is *benign* and `P(y!=1)` is
+*malignant*, with short vertical marks for the estimates and shaded
+extensions for the bounds. The lower axis is feature weight, centered on
+the black zero line. The `mean concave points` rule has a range wholly below
+zero; the other five displayed ranges cross zero, so their direction is
+unsettled by those ranges. The right axis lists the observed feature values.
+The grey band represents the prediction bounds shifted around zero. These
+comparisons describe the model's response, not causal effects. The bounded
+feature conditions show which rules were retained; they do not certify every
+value in each condition as in distribution. The audit below reports what
+the guard tested and removed.
+
 ## 4. Audit guarded filtering
 
 ```python

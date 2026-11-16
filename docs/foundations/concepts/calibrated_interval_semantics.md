@@ -39,6 +39,17 @@ a different meaning. The figure shows one real CE output of each type.
 </figure>
 ```
 
+Compare the horizontal scales before comparing the bars. Panel A shows a
+probability of *benign*, with the estimate marked between two Venn–Abers
+values. Panel B uses target units: the estimate 273.4 and observed value 321
+are separate markers, and the 5th–95th percentile interval extends from
+186.5 to 409.2. That observation lies inside this particular interval; one
+case cannot establish coverage. Panel C returns to a probability scale for
+the event `y <= 150`, rather than locating the target value itself. Its
+estimate 0.077 and bounds are therefore not directly comparable with the
+values in B. The method-specific qualifications below govern these outputs;
+the diagram does not add a guarantee for an individual case.
+
 - **A, classification:** see the {doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`
   (section 5) and, for the method, {doc}`calibration_methods` (section 2).
 - **B and C, regression:** see the {doc}`regression tutorial <../../get-started/quickstart_regression>`

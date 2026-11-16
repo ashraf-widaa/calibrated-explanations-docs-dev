@@ -136,6 +136,15 @@ value). Below it, each rule has one bar covering its weight's range: red for
 rules that raise the probability, blue for rules that lower it. A rule whose
 range crosses 0 has no dark part. The walkthrough explains the plot
 {doc}`in detail <quickstart_walkthrough>` (section 7).
+In this plot, class `y=1` is *versicolor*; `y!=1` groups the other
+classes. The sepal rules have ranges entirely to the right of zero, while
+the petal-rule ranges cross zero despite extending far to the right. Thus
+bar length alone does not establish a direction. The right-hand numbers are
+the case's feature values in centimeters. The grey band shows the
+prediction bounds shifted around zero, not another feature's contribution.
+These are the default multiclass bounds described above; the weight ranges
+do not establish individual coverage or causal effects.
+
 For more, see {doc}`../foundations/how-to/interpret_explanations`.
 
 For multiclass all-class explanations:

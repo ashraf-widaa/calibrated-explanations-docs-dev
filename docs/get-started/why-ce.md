@@ -38,6 +38,14 @@ remain open:
 </figure>
 ```
 
+Follow the arrows from the data split to the trained model, then through
+**Calibrate** and **Explain** to the two output boxes. The calibration set
+feeds the added calibration step; the test set feeds the final evaluation
+and interpretation step. Thus CE adds information about predictions and
+model responses while keeping training and final evaluation separate.
+The blue and orange groups distinguish existing steps from CE's additions;
+the labels identify their roles without relying on color.
+
 What changes:
 
 1. **A third data set.** Part of the labelled data becomes a *calibration
@@ -78,6 +86,15 @@ The figure shows how to read the three parts:
   <figcaption>Reading a CE output for the example case: the prediction, one factual rule and one alternative, each with its range.</figcaption>
 </figure>
 ```
+
+Read the panels from top to bottom. Panel 1 places the probability of
+*benign* on a 0-to-1 scale; its estimate and range are below the 0.5 label
+boundary. Panel 2 switches to a weight scale centered on zero: the negative
+weight and range describe a condition associated with a lower model
+probability of *benign*. Panel 3 returns to the probability scale for the
+opposite feature condition. Its range crosses 0.5 even though its estimate
+does not. This compares model responses, without establishing a causal
+effect or recommending an intervention.
 
 ## The four ideas behind it
 

@@ -119,6 +119,16 @@ walkthrough. Each bar covers a weight's range; red bars raise the probability
 of *benign*, blue bars lower it.
 ```
 
+Read the upper probability scale separately from the lower feature-weight
+scale. The vertical marks above locate the estimates; the black zero line
+below separates negative from positive weights. The first rule's range is
+wholly negative, whereas several later ranges cross zero. Those crossing
+ranges do not settle the direction of the comparison. The numbers on the
+right are measured feature values, not weights. These model-response
+weights need not sum to the prediction and do not identify causal effects.
+The next section changes a feature condition and reads the resulting
+probability instead of a weight.
+
 The [guide to reading CE explanations](../foundations/how-to/interpret_explanations.md)
 explains every element of this plot.
 

@@ -40,9 +40,13 @@ mathematics.
 </figure>
 ```
 
-You keep your model and your training. CE adds a **calibration set** held out
-from training, a **Calibrate** step and an **Explain** step. In return, every
-prediction and every explanation comes with a range.
+Follow the arrows from labelled data through training to prediction: these
+are the conventional steps. The branch labelled **Calibration set** supplies
+held-out examples to **Calibrate**, and **Explain** uses the calibrated
+outputs to construct explanations. The final box groups the prediction and
+explanation, each with a reported range. These ranges describe different
+quantities; their meaning depends on the task and output, as the paths below
+explain. CE adds these steps without retraining your model.
 
 ## Choose your path
 

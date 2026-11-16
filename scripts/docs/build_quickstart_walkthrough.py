@@ -282,6 +282,14 @@ flowchart LR
     H --> M["merged estimate, between low and high"]
     L --> M
 ```
+
+The two branches use the same model score with opposite hypothetical labels
+for the new case. Reading the two fitted curves at that score supplies
+`low` and `high`; both arrows then meet at the merged estimate. The
+hypothetical labels are part of Venn–Abers calibration, not two observed
+outcomes or two retrained predictive models. The pair and merged estimate
+have different calibration qualifications (see the semantics note below).
+The next cell prints these three quantities for actual test cases.
 """)
 
 code(r"""
@@ -460,6 +468,12 @@ md(r"""
 """)
 
 md(r"""
+Read the sign and whether a range crosses zero before judging its length.
+The first rule's entire range is negative; the later ranges crossing zero
+do not settle the comparison's direction. These weight ranges have no
+formal coverage guarantee and do not establish causal effects. Next we
+inspect alternative predictions on the probability scale.
+
 ## 8. Alternative explanations of our case
 
 **Question.** What would the model predict if one feature were different?
@@ -987,6 +1001,16 @@ CE output for case 2, drawn by CE's own plot function in the Python
 walkthrough. Each bar covers a weight's range; red bars raise the probability
 of *benign*, blue bars lower it.
 ```
+
+Read the upper probability scale separately from the lower feature-weight
+scale. The vertical marks above locate the estimates; the black zero line
+below separates negative from positive weights. The first rule's range is
+wholly negative, whereas several later ranges cross zero. Those crossing
+ranges do not settle the direction of the comparison. The numbers on the
+right are measured feature values, not weights. These model-response
+weights need not sum to the prediction and do not identify causal effects.
+The next section changes a feature condition and reads the resulting
+probability instead of a weight.
 
 The [guide to reading CE explanations](../foundations/how-to/interpret_explanations.md)
 explains every element of this plot.

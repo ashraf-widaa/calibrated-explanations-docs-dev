@@ -242,6 +242,14 @@ flowchart LR
     L --> M
 ```
 
+The two branches use the same model score with opposite hypothetical labels
+for the new case. Reading the two fitted curves at that score supplies
+`low` and `high`; both arrows then meet at the merged estimate. The
+hypothetical labels are part of Venn–Abers calibration, not two observed
+outcomes or two retrained predictive models. The pair and merged estimate
+have different calibration qualifications (see the semantics note below).
+The next cell prints these three quantities for actual test cases.
+
 ```python
 proba, (low, high) = explainer.predict_proba(X_test[:5], uq_interval=True)
 y_pred = explainer.predict(X_test)
@@ -449,6 +457,12 @@ Output: factual explanation plot for test case 2.
 - The grey vertical band is this case's own probability range redrawn around
   zero on the weight scale (from 0.286 − 0.333 to 0.286 − 0.167).
 - The right-hand axis shows the case's actual feature values.
+
+Read the sign and whether a range crosses zero before judging its length.
+The first rule's entire range is negative; the later ranges crossing zero
+do not settle the comparison's direction. These weight ranges have no
+formal coverage guarantee and do not establish causal effects. Next we
+inspect alternative predictions on the probability scale.
 
 ## 8. Alternative explanations of our case
 

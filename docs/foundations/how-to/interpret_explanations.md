@@ -52,6 +52,18 @@ figure shows both for one case.
 </figure>
 ```
 
+Read the panels from top to bottom. Panel 1 places the probability of
+*benign* on a 0-to-1 scale; its estimate and range are below the 0.5 label
+boundary. Panel 2 switches to a weight scale centered on zero: the negative
+weight and range describe a condition associated with a lower model
+probability of *benign*. Panel 3 returns to the probability scale for the
+opposite feature condition. Its range crosses 0.5 even though its estimate
+does not. This compares model responses, without establishing a causal
+effect or recommending an intervention.
+
+The collections below make these prediction, rule and alternative values
+available for inspection in Python.
+
 ## 1. Start with the explanation collections
 
 Calibrated explanations return collections (`CalibratedExplanations`, `AlternativeExplanations`) that behave like sequences. The first step is to look at the summary for each item:

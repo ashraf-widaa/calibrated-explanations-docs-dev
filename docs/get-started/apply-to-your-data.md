@@ -149,6 +149,14 @@ value). Below it, each rule has one bar covering its weight's range: red for
 rules that raise the probability, blue for rules that lower it. A rule whose
 range crosses 0 has no dark part. The walkthrough explains the plot
 {doc}`in detail <quickstart_walkthrough>` (section 7).
+Here `P(y=1)` means *benign* and `P(y!=1)` means *malignant*.
+The first four rule ranges lie to the right of zero, whereas the last two
+cross it: those two ranges do not settle the direction of the model-response
+comparison. The right-hand labels give this case's measured feature values,
+not weights. The grey band redraws the prediction bounds as offsets around
+zero; it is not an extra rule. Weight ranges are not confidence intervals
+for causal effects, and the weights need not sum to the prediction.
+
 Use `explainer.explore_alternatives(...)` for what-if alternatives;
 {doc}`../foundations/how-to/interpret_explanations` explains how to read both.
 

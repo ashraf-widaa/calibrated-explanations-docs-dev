@@ -18,6 +18,14 @@ source code. Start here if you want to understand CE rather than just use it.
 </figure>
 ```
 
+The arrows show where each data split is used. Training data fit the model;
+calibration data enter **Calibrate**; test data reach **Evaluate and
+interpret** alongside the outputs. The two CE output boxes separate a
+calibrated prediction from the rules and weights that explain model
+responses. A range in one box does not automatically carry the statistical
+interpretation of a range in the other. The numbered steps below follow
+these labelled roles.
+
 1. **Split the data.** The model trains on one part (the *proper training
    set*). A second part, the *calibration set*, is never used for training.
 2. **Fit.** An ordinary model is trained, exactly as without CE.
