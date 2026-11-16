@@ -66,3 +66,35 @@ def test_schema_sketch_is_not_a_python_block() -> None:
 
 def test_tutorials_state_the_verified_versions() -> None:
     assert "CE 1.0.2" in _text("tutorials/index.md")
+
+
+def test_should_not_present_probability_containment_as_outcome_coverage() -> None:
+    """N-07: checking p inside its own bounds is not observed-target coverage."""
+    page = _text("practitioner/playbooks/eu-ai-act-compliance.md")
+    assert "in_interval.mean()" not in page
+    assert "certifiable bound" not in page
+    assert "**Covered**" not in page
+    assert "does not measure" in page and "coverage of observed outcomes" in page
+
+
+def test_should_identify_withdrawn_proposal_in_status_and_checklist() -> None:
+    """Verified legislative status must agree across the existing playbook."""
+    page = _text("practitioner/playbooks/eu-data-liability-compliance.md")
+    assert "6 October 2025" in page
+    assert "In legislative process" not in page
+    assert "AI Act compliance defeats presumption" not in page
+    assert "**Covered**" not in page
+    assert "Art. 27 Recommender system transparency" in page
+
+
+def test_should_keep_pair_and_explanation_guarantees_separate() -> None:
+    """SR-03/SR-07: removing an overclaim must not erase the review boundary."""
+    semantics = _text("foundations/concepts/calibrated_interval_semantics.md")
+    assert "must not be transferred to the" in semantics
+    assert "merged probability" in semantics and "SR-03" in semantics
+    assert "SR-02" in semantics and "SR-15" in semantics
+    ensured = _text("practitioner/playbooks/ensured-explanations.md")
+    assert "actively reduce epistemic uncertainty" not in ensured
+    assert "Proceed with confidence" not in ensured
+    assert "uncertainty_high" not in ensured
+    assert "under review" in ensured and "no wider" in ensured

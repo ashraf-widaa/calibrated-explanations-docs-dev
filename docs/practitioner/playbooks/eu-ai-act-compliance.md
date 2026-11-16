@@ -1,4 +1,6 @@
-# Satisfying EU AI Act Requirements with `calibrated_explanations`
+(satisfying-eu-ai-act-requirements-with-calibrated-explanations)=
+
+# CE outputs in EU AI Act review
 
 > [!WARNING]
 > **LEGAL DISCLAIMER — NO COMPLIANCE GUARANTEE**
@@ -20,26 +22,23 @@
 
 ## 1. Executive Summary
 
-The EU AI Act (Regulation (EU) 2024/1689) imposes legally enforceable obligations
-on providers and deployers of high-risk AI systems, including requirements for
-transparency, uncertainty documentation, human oversight, and the right of affected
-persons to receive meaningful explanations. Accuracy metrics alone — precision,
-recall, AUC — do not satisfy these obligations. A model that achieves 95 % accuracy
-on a held-out test set still cannot, by itself, tell a regulator *why* a specific
-individual was denied credit, *how confident* the system was at the time of that
-decision, or *what change* to the individual's circumstances would have produced a
-different outcome. The AI Act requires precisely this per-instance, traceable,
-uncertainty-aware information.
+CE can produce records that are relevant when reviewing an AI deployment:
+calibrated predictions, factual feature rules, alternative model-response
+scenarios, and their reported ranges. Whether those records meet a particular
+legal obligation depends on the system and the applicable law.
 
-`calibrated_explanations` addresses this gap in a single, scikit-learn-compatible
-framework. Built on Venn-Abers calibration and conformal prediction, it delivers
-three complementary outputs: (1) **factual rule tables** — human-readable per-instance
-feature attributions with statistically valid uncertainty intervals, (2)
-**(counterfactual) alternatives** — minimal actionable changes that would flip or shift
-the prediction, and (3) **calibrated probability intervals** — empirically valid
-coverage-guarantee bounds that can be used to trigger human oversight when uncertainty
-is unacceptably high. These outputs map directly onto the transparency, documentation,
-human oversight, accuracy, and fairness articles of the AI Act.
+**Review status.** The article-to-capability mappings below are review prompts,
+not findings of compliance. Exact calibration and coverage statements remain
+subject to the qualifications in
+{doc}`../../foundations/concepts/calibrated_interval_semantics`.
+Explanation ranges are not formal per-feature coverage guarantees, and
+alternatives are not necessarily minimal, actionable or causal.
+
+**Questions for scientific and legal reviewers:** Which records are relevant to
+each obligation? What additional evidence and organizational controls are
+required? Which claims about coverage, fairness, or oversight are justified for
+the particular task and deployment? These questions remain open; the library's
+presence does not answer them.
 
 Deploying `calibrated_explanations` alongside an existing model requires no
 architectural changes to the model itself. It wraps the model via
@@ -109,7 +108,7 @@ appropriate mitigation measures throughout the lifecycle (Art. 9(1)–(6)).
 
 **c) How `calibrated_explanations` contributes:** Uncertainty quantification is a
 prerequisite for rational risk management. `predict_proba` with `uq_interval=True`
-provides empirically valid lower and upper probability bounds for every prediction.
+returns lower and upper values with mode-specific qualifications; see the semantics reference. These are not a general certificate of validity.
 Wide intervals signal cases where the model's evidence base is weak — these are
 exactly the cases that pose elevated risk and that a risk management system must
 identify and route to additional controls. The interval width can be used as a
@@ -389,36 +388,21 @@ accuracy, robustness, and consistency of performance. Accuracy metrics must be
 declared in the technical documentation. Providers must document the expected level
 of accuracy and the measures taken to achieve it (Art. 15(1)–(2)).
 
-**c) How `calibrated_explanations` contributes:** Venn-Abers calibration and
-conformal prediction deliver **empirical coverage guarantees**: the stated significance
-level (e.g., 90 % confidence) corresponds to a statistically verifiable empirical
-coverage on the calibration set. This is a stronger claim than a point accuracy
-metric — it is a **certifiable bound** on prediction interval validity. The
-calibration error (difference between nominal and empirical coverage) can be measured
-and reported as a quantitative accuracy declaration for Annex IV.
+**c) What CE can contribute:** Record the mode, model and calibration
+configuration, and evaluate outputs on untouched test data. Probability
+calibration, regression interval coverage, and predictive accuracy are different
+properties. None is a general certificate of robustness or regulatory compliance.
 
-**d) Code:**
+**d) Evaluation:** Follow {doc}`../evaluate_ce` for classification probability
+metrics and, separately, regression interval coverage. Checking whether a
+predicted probability lies inside its own reported bounds does not measure
+coverage of observed outcomes. There is no universal 90% classification
+confidence setting implied by a call to `predict_proba`.
 
-```python
-# Measure empirical coverage on a held-out validation set
-probs, (low, high) = explainer.predict_proba(x_val, uq_interval=True)
-nominal_confidence = 0.90  # passed as `confidence` at calibrate() time
-
-# For classification: empirical coverage = fraction of true labels within interval
-in_interval = (low[range(len(y_val)), y_val] <= probs[range(len(y_val)), y_val]) & \
-              (probs[range(len(y_val)), y_val] <= high[range(len(y_val)), y_val])
-empirical_coverage = in_interval.mean()
-
-print(f"Nominal confidence: {nominal_confidence:.2%}")
-print(f"Empirical coverage: {empirical_coverage:.2%}")
-# A well-calibrated system: empirical ≈ nominal (difference < 2 pp)
-```
-
-**e) Audit documentation:** Report both nominal confidence and empirical coverage
-in the technical documentation's accuracy section. Repeat this measurement for each
-sub-population identified in the data governance section (Art. 10), and for each
-model version deployed. Include the calibration set size and split procedure
-(stratified vs. random) as Annex IV §1(c) artefacts.
+**e) Review question:** Which task-specific evaluation and system-level evidence
+are needed for Article 15 and Annex IV? This requires scientific and legal
+review. The earlier calibration-set coverage/certification claim is withdrawn
+pending that review (N-07).
 
 ---
 
@@ -467,16 +451,20 @@ final decision, the probability and interval, and the alternative rules.
 
 ## 4. Compliance Checklist
 
+These rows identify possible supporting records. Their presence does not
+establish that an obligation is satisfied; the mappings remain under legal
+review (N-01).
+
 | Article | Obligation summary | CE feature / method | Status |
 |---|---|---|---|
-| Art. 9 | Identify and quantify AI system risks throughout lifecycle | `predict_proba(uq_interval=True)` — interval width as risk indicator | **Covered** |
-| Art. 10 | Examine training data for bias; ensure representativeness across groups | `calibrate(..., bins=group_labels_cal)` then `explain_factual(..., bins=group_labels_test)` - Mondrian per-group intervals | **Covered** |
-| Art. 11 + Annex IV | Produce technical documentation including accuracy and traceability | `as_json()` — serialisable explanation payload; calibration configuration | **Covered** |
-| Art. 12 | Log events: input data, result, date/time — for defined retention period | `as_json()` appended to audit log with timestamp and record ID | **Partially covered** — log infrastructure and retention policy must be provided by deployer |
-| Art. 13 | Transparent operation; deployer can interpret system outputs | `explain_factual()` — `print_rules()` human-readable rule table | **Covered** |
-| Art. 14 | Enable human oversight; allow override before automated action | `predict_proba` straddle/width gates; `RejectPolicy.FLAG` | **Covered** |
-| Art. 15 | Declared, verifiable accuracy; robustness documentation | Empirical coverage vs. nominal confidence (Venn-Abers guarantee) | **Covered** |
-| Art. 50 | Right to explanation; inform affected persons in plain language | `explore_alternatives()` — actionable counterfactual rules | **Covered** |
+| Art. 9 | Identify and quantify AI system risks throughout lifecycle | `predict_proba(uq_interval=True)` — interval width as risk indicator | **Review required** |
+| Art. 10 | Examine training data for bias; ensure representativeness across groups | `calibrate(..., bins=group_labels_cal)` then `explain_factual(..., bins=group_labels_test)` - Mondrian per-group intervals | **Review required** |
+| Art. 11 + Annex IV | Produce technical documentation including accuracy and traceability | `as_json()` — serialisable explanation payload; calibration configuration | **Review required** |
+| Art. 12 | Log events: input data, result, date/time — for defined retention period | `as_json()` appended to audit log with timestamp and record ID | **Review required — supporting records only** — log infrastructure and retention policy must be provided by deployer |
+| Art. 13 | Transparent operation; deployer can interpret system outputs | `explain_factual()` — `print_rules()` human-readable rule table | **Review required** |
+| Art. 14 | Enable human oversight; allow override before automated action | `predict_proba` straddle/width gates; `RejectPolicy.FLAG` | **Review required** |
+| Art. 15 | Declared, verifiable accuracy; robustness documentation | Task-specific probability metrics or regression coverage on held-out data | **Review required** |
+| Art. 50 / Art. 86 | Article 50 concerns transparency obligations for certain AI systems; Article 86 concerns explanation of individual decision-making | Factual and alternative model-response records; legal applicability requires review | **Review required** |
 
 ---
 
@@ -657,3 +645,10 @@ with audit_log.open("a", encoding="utf-8") as f:
 - Johansson, U., Löfström, T., & Boström, H. (2021).
   *Venn-Abers Predictors.*
   In: Conformal and Probabilistic Prediction with Applications (COPA 2021).
+
+
+## Sources for corrected article references
+
+The [official AI Act text](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX%3A32024R1689)
+distinguishes Article 50 from Article 86. This corrects the former checklist
+label (N-08); it does not establish that CE satisfies either article.
