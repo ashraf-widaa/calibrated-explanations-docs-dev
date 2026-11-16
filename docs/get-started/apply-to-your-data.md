@@ -97,12 +97,15 @@ P(benign) = 0.08  [0.00, 0.08]
 P(benign) = 0.72  [0.67, 0.88]
 ```
 
-Each line is the calibrated probability of the positive class (here *benign*,
-label 1) with its lower and upper value. The first three cases are clear-cut,
-with narrow ranges. The fourth, 0.72 [0.67, 0.88], is less certain: the
-calibration data support a probability of *benign* anywhere from about 0.67 to
-0.88. The range need not be centred on the probability. For regression, use
-`explainer.predict(x, uq_interval=True)` instead.
+Each line reports the merged probability estimate for the positive class
+(here *benign*, label 1) and the two Venn–Abers values. For the fourth case,
+the estimate is 0.72 and the reported endpoints are approximately 0.67 and
+0.88. The pair and the merged estimate have different qualifications: these
+endpoints are not a conventional confidence interval containing an individual
+case's unknown true probability. The range need not be centred on the estimate.
+See {doc}`../foundations/concepts/calibrated_interval_semantics` (Mode 1)
+for the interpretation and outstanding author-review questions. For interval
+regression, use `explainer.predict(x, uq_interval=True)` instead.
 
 ## 5. Explain a prediction
 
