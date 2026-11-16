@@ -1,0 +1,33 @@
+{
+  "feature": "27",
+  "feature_index": 27,
+  "weight_uncertainty": {
+    "representation": "venn_abers",
+    "calibrated_value": -0.19047619047619052,
+    "lower_bound": -0.3142857142857143,
+    "upper_bound": -0.047619047619047616,
+    "legacy_interval": [
+      -0.3142857142857143,
+      -0.047619047619047616
+    ],
+    "threshold": null,
+    "raw_percentiles": null,
+    "confidence_level": null
+  },
+  "prediction_uncertainty": {
+    "representation": "venn_abers",
+    "calibrated_value": 0.2857142857142857,
+    "lower_bound": 0.16666666666666666,
+    "upper_bound": 0.3333333333333333,
+    "legacy_interval": [
+      0.16666666666666666,
+      0.3333333333333333
+    ],
+    "threshold": null,
+    "raw_percentiles": null,
+    "confidence_level": null
+  },
+  "prediction_value": 0.2857142857142857,
+  "condition_text": "27 > 0.14",
+  "instance_value": 0.1521
+}

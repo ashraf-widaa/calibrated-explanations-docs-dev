@@ -1,0 +1,48 @@
+{
+  "baseline": "481ee05ba8abea826d6b135ab008d223b69fbdc4",
+  "implementation_commit": "efdc9ad19abdf09f08a79dd8d4083a224b36ece1",
+  "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "sphinx": "7.4.7",
+    "pytest": "9.0.3",
+    "numpy": "2.3.4",
+    "scikit-learn": "1.8.0",
+    "pandas": "2.3.3",
+    "crepes": "0.9.1",
+    "venn-abers": "1.5.4",
+    "playwright": "1.65.0"
+  },
+  "tests": {
+    "passed": 369,
+    "failed": 0,
+    "scope": "tests/docs plus interpretation and Quick API integration examples"
+  },
+  "strict_builds": {
+    "beta": "passed; zero Sphinx warnings",
+    "standard": "passed; zero Sphinx warnings"
+  },
+  "internal_links": {
+    "beta": {
+      "pages": 158,
+      "broken": 0
+    },
+    "standard": {
+      "pages": 158,
+      "broken": 0
+    }
+  },
+  "layout": {
+    "pages": 32,
+    "scenarios": 128,
+    "issues": []
+  },
+  "unavailable_checks": [
+    "quick profile: mypy unavailable",
+    "targeted lint: Ruff unavailable"
+  ],
+  "not_run": [
+    "full repository suite",
+    "notebooks",
+    "statistical/legal certification"
+  ]
+}
