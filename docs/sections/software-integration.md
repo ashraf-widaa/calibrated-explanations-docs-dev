@@ -137,5 +137,3 @@ Checklists for upgrading between CE versions.
 The library source (`src/calibrated_explanations`) and its test suite (`tests/`) on GitHub.
 :::
 ::::
-
-Entry-point tier: Tier 3.

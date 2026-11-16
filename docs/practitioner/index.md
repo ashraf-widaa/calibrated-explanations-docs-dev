@@ -29,5 +29,3 @@ playbooks/index
 advanced/index
 narrative_templates
 ```
-
-Entry-point tier: Tier 1.

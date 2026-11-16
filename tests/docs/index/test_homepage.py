@@ -102,13 +102,13 @@ def test_commercial_services_is_a_separate_section_after_resources() -> None:
     )
 
 
-def test_footer_metadata_beta_marker_and_tier_label_last() -> None:
-    """STD-004 §4.5: the tier label stays at the bottom of the page."""
+def test_footer_metadata_keeps_beta_marker_without_learning_tiers() -> None:
+    """The Beta marker remains; audience metadata is not reader-facing."""
     page = text().rstrip()
-    assert page.endswith("Entry-point tier: Tier 1.\n\n:::")
+    assert page.endswith(":::")
     meta = page.rsplit(":::{container} ce-meta", 1)[1]
     assert "```{only} ce_beta\nCE Beta Documentation\n```" in meta
-    assert page.count("Entry-point tier:") == 1
+    assert "Entry-point tier:" not in page
 
 
 def test_homepage_has_no_audit_wording_or_undefined_icons() -> None:

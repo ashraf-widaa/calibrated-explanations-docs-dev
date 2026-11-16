@@ -12,5 +12,3 @@ Troubleshooting <../get-started/troubleshooting>
 Upgrade guides <../upgrade/index>
 Migration guides <../migration/index>
 ```
-
-Entry-point tier: Tier 3.

@@ -23,5 +23,3 @@ prerequisites, guarantees, assumptions, and non-guarantees.
 - Practitioners: {doc}`../practitioner/index`
 - Researchers: {doc}`../researcher/index`
 - Contributors: {doc}`../contributor/index`
-
-Entry-point tier: Tier 2.

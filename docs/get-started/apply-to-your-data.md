@@ -267,5 +267,3 @@ Please:
   {doc}`quick_api`; known errors in {doc}`troubleshooting`.
 - **Before this:** {doc}`apply-overview` (the workflow without code) and
   {doc}`ce-tasks-and-modes`.
-
-Entry-point tier: Tier 3.

@@ -202,5 +202,3 @@ would change the real outcome.
   {doc}`../foundations/concepts/alternatives` and {doc}`../citing`.
 - **Before this:** {doc}`ce-tasks-and-modes` (choosing the mode) and
   {doc}`apply-overview` (the practical workflow without code).
-
-Entry-point tier: Tier 2.

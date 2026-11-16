@@ -36,5 +36,3 @@ agent_skills
 ../get-started/copilot-setup
 ../maintenance/legacy-plotting-reference
 ```
-
-Entry-point tier: Tier 1.

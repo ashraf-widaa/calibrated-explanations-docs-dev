@@ -89,5 +89,3 @@ guarded interval candidates.
 - {doc}`../../get-started/quickstart_guarded`
 - {doc}`alternatives`
 - {doc}`../how-to/interpret_explanations`
-
-Entry-point tier: Tier 3.

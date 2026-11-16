@@ -12,5 +12,3 @@ Software Overview & Versions <software-overview-versions>
 Installation & Configuration <../get-started/installation>
 Internal Software Architecture <../foundations/concepts/architecture>
 ```
-
-Entry-point tier: Tier 3.

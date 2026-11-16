@@ -73,5 +73,3 @@ A short comparison of CE with SHAP, LIME and conformal prediction packages.
 A detailed practitioner guide to how CE's outputs relate to EU AI Act obligations. It is not evidence of compliance, and its compliance wording is under review.
 :::
 ::::
-
-Entry-point tier: Tier 3.

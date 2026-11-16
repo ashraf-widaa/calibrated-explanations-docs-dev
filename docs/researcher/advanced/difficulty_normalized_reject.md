@@ -261,5 +261,3 @@ practitioners should:
 
 This is an open research direction. Conditional validity and Mondrian variants
 are listed under Open Questions above.
-
-Entry-point tier: Tier 3

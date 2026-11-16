@@ -746,5 +746,3 @@ confidence levels result in more rejections:
 See the
 [reject-policy ablation study](https://github.com/kristinebergs/calibrated-explanations-studies/blob/main/legacy/reject_policy_ablation.py)
 for empirical comparisons of different confidence levels on standard datasets.
-
-Entry-point tier: Tier 2

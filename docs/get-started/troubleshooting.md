@@ -203,5 +203,3 @@ python -c "from calibrated_explanations import __version__; print(__version__)"
 Attach the command outputs when filing an issue so maintainers can reproduce
 setup differences quickly. If the plugin command is not found on your `PATH`,
 the `python -m` form above runs it directly.
-
-Entry-point tier: Tier 3.

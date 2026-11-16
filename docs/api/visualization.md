@@ -78,5 +78,3 @@ follow-up decision in the release plan.
 
 - ADR-036 (PlotSpec canonical contract and validation boundary)
 - ADR-037 (visualization extension and rendering governance)
-
-Entry-point tier: Tier 3.

@@ -156,7 +156,6 @@ alternative_explanation.plot()
 
 Full signatures, methods and parameters: {doc}`AlternativeExplanation API reference <../_autosummary/calibrated_explanations.explanations.AlternativeExplanation>`.
 
-Entry-point tier: Tier 3.
 
 ## Narrative facts
 

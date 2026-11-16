@@ -230,5 +230,3 @@ Each line names the term, its category (**S** = Scientific & Theoretical,
 Scientific & Theoretical <science>
 Software & Technical <software>
 ```
-
-Entry-point tier: Tier 3.

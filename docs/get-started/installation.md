@@ -63,5 +63,3 @@ uv pip install -e .[dev] -c constraints.txt
 
 This `uv` command is optional and constraint-based. The project does not treat
 `uv.lock` as an authoritative dependency lockfile.
-
-Entry-point tier: Tier 2.

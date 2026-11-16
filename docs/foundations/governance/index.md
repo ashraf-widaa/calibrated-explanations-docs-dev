@@ -15,5 +15,3 @@ waivers_inventory
 release_notes
 pr_guide
 ```
-
-Entry-point tier: Tier 3

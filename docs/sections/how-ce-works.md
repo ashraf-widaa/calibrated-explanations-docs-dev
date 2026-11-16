@@ -90,5 +90,3 @@ L3 · What holds in every mode, and what CE does not guarantee.
 Prerequisites; general statistics are not fully covered.
 :::
 ::::
-
-Entry-point tier: Tier 3.

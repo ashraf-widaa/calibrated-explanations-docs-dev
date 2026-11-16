@@ -120,5 +120,3 @@ B · CE by example <ce-by-example>
 C1 · Tasks, modes and capabilities <ce-tasks-and-modes>
 C2 · Apply CE: the practical workflow <apply-overview>
 ```
-
-Entry-point tier: Tier 1.

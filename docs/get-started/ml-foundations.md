@@ -184,5 +184,3 @@ Löfström, Löfström, Johansson and Sönströd (2024),
   not guaranteed).
 - **See also:** the {doc}`Glossary of scientific terms <../glossary/science>`
   and {doc}`../what-is-ce`.
-
-Entry-point tier: Tier 1.

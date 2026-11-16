@@ -157,5 +157,3 @@ authors.*
 - {doc}`../how-to/interpret_explanations`
 - {doc}`../../tasks/probabilistic_regression`
 - {doc}`calibrated_interval_semantics`
-
-Entry-point tier: Tier 3.

@@ -341,5 +341,3 @@ ValidationError
 
   **Learn more:** {doc}`../foundations/concepts/error_handling`
 ```
-
-Entry-point tier: Tier 3.

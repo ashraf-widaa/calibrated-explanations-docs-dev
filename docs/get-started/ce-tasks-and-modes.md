@@ -235,5 +235,3 @@ states the qualifications and open author-review questions for each mode.
 
 Go deeper: {doc}`../foundations/concepts/calibration_methods` shows how
 Venn–Abers and conformal predictive systems work, with worked examples.
-
-Entry-point tier: Tier 1.

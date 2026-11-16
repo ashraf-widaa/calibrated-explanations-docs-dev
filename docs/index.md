@@ -139,6 +139,5 @@ appendices/rtd_tier_map
 CE Beta Documentation
 ```
 
-Entry-point tier: Tier 1.
 
 :::

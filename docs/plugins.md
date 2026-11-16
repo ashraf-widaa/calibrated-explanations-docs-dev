@@ -50,7 +50,6 @@ Install and register a plugin only when you trust its source and maintainer.
    opt-in, such as the in-tree FAST bundle.
 3. **Community plugins** are independently owned and maintained packages.
 
-Entry-point tier: Tier 1.
 
 ```{toctree}
 :hidden:

@@ -256,5 +256,3 @@ Exchangeability
 
   **Learn more:** {doc}`../foundations/concepts/calibrated_interval_semantics`
 ```
-
-Entry-point tier: Tier 3.

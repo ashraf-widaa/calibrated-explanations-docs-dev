@@ -13,5 +13,3 @@ its choice of quickstart are now part of
 {doc}`get-started/ce-tasks-and-modes`, in the section
 [Choosing your workflow](get-started/ce-tasks-and-modes.md#choosing-your-workflow).
 New to CE? Start at the {doc}`Quick Start <get-started/index>`.
-
-Entry-point tier: Tier 1.

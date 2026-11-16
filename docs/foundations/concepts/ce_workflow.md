@@ -159,5 +159,3 @@ depth). You can enter at any level.
 
 Open scientific questions that the CE authors are reviewing are marked
 *under review* on the pages above.
-
-Entry-point tier: Tier 3.

@@ -20,5 +20,3 @@ For guarantees, assumptions and non-guarantees, see
 
 ../appendices/changelog_links
 ```
-
-Entry-point tier: Tier 3.

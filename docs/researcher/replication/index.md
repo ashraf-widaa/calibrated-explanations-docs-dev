@@ -21,5 +21,3 @@ is not guaranteed to reproduce an older published result exactly.
 General method documentation and formal explanation semantics remain in this
 core documentation. For the theory and its limits, see
 {doc}`../../foundations/concepts/calibrated_interval_semantics`.
-
-Entry-point tier: Tier 2.

@@ -185,5 +185,3 @@ Config lifecycle payloads must not include raw config values, environment
 strings, or raw pyproject payload blobs. In particular, `validation_failure`
 details are restricted to location and issue-count metadata (see ADR-034 Open
 Item 1 in `development/adrs/ADR-034-centralized-configuration-management.md`).
-
-Entry-point tier: Tier 3

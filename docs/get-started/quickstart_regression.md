@@ -180,5 +180,3 @@ model's behaviour, not the effect of changing a patient's measurements.
   {doc}`../foundations/how-to/interpret_explanations` and {doc}`../citing`.
 - **Before this:** {doc}`ce-tasks-and-modes` (choosing the mode) and
   {doc}`apply-overview` (the practical workflow without code).
-
-Entry-point tier: Tier 2.

@@ -278,8 +278,8 @@ def test_terminology_change_note_moved_to_migration() -> None:
 
 
 @pytest.mark.parametrize("page", [HUB, *CATEGORY_PAGES.values()], ids=lambda p: p.name)
-def test_glossary_pages_carry_tier_footer(page: Path) -> None:
-    assert page.read_text(encoding="utf-8").rstrip().endswith("Entry-point tier: Tier 3.")
+def test_glossary_pages_do_not_display_learning_tier_footers(page: Path) -> None:
+    assert "Entry-point tier:" not in page.read_text(encoding="utf-8")
 
 
 # G-P3 (run stage 04): contextual cross-links into the glossary, one per landing page.

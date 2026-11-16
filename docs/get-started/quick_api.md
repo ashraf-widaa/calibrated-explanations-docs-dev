@@ -194,5 +194,3 @@ p, (plo, phi) = explainer.predict_proba(X_sample, uq_interval=True, threshold=12
 
 Verified with CE 1.0.2 (released) and 1.1.0.dev0 (this Beta's source) on
 2026-11-16; the example's printed output is checked by the documentation tests.
-
-Entry-point tier: Tier 2.

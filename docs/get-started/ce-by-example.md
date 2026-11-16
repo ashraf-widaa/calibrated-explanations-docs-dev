@@ -186,5 +186,3 @@ above 0.5.
   [guarantees by mode](../foundations/concepts/calibrated_interval_semantics.md).
 - **See also:** [How to read CE explanations](../foundations/how-to/interpret_explanations.md).
 - **Before this:** [Why CE](why-ce.md).
-
-Entry-point tier: Tier 1.

@@ -722,5 +722,3 @@ not with single rules. *How to read them is under review by the CE authors.*
 | Apply CE to your own data | [Apply CE to your own data](apply-to-your-data.md) |
 | Install, configure and integrate CE | [CE Software & Integration](../sections/software-integration.md) |
 | Fix installation problems | [Troubleshooting](troubleshooting.md) |
-
-Entry-point tier: Tier 1.

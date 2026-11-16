@@ -181,5 +181,3 @@ Key audit fields:
 - **Before this:** {doc}`quickstart_classification` or
   {doc}`quickstart_regression`, and {doc}`ce-tasks-and-modes` (guarded
   explanations are an explanation configuration, not a task).
-
-Entry-point tier: Tier 2.

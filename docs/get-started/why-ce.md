@@ -153,5 +153,3 @@ data leakage and how to avoid it.
 - **See also:** {doc}`../what-is-ce` (what CE adds and how it compares) and,
   if you want to apply CE now, Path C: {doc}`ce-tasks-and-modes`.
 - **Before this:** {doc}`ml-foundations` (Path A, step 1).
-
-Entry-point tier: Tier 3.

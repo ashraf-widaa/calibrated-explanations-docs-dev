@@ -135,5 +135,3 @@ tier assignment for the page.
 | `tasks/probabilistic_regression.md` | Tier 2 |
 | `tasks/regression.md` | Tier 2 |
 | `tutorials/index.md` | Tier 1 |
-
-Entry-point tier: Tier 3.

@@ -40,5 +40,3 @@ Regression tutorial <../get-started/quickstart_regression>
 Guarded explanations tutorial <../get-started/quickstart_guarded>
 Apply CE to your own data <../get-started/apply-to-your-data>
 ```
-
-Entry-point tier: Tier 1.

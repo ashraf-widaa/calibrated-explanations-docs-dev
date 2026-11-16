@@ -50,5 +50,3 @@ Optional plugins; companion and commercial resources are separate.
 Report library bugs or request features on GitHub; support is best-effort. Feedback on these Beta pages goes to the [Beta documentation repository](https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues).
 :::
 ::::
-
-Entry-point tier: Tier 3.

@@ -199,5 +199,3 @@ A {doc}`short comparison page <compare>` gives more detail.
 - Vovk, V., Shen, J., Manokhin, V., and Xie, M. (2019). Nonparametric
   predictive distributions based on conformal prediction. *Machine Learning*,
   108, 445–474. [doi:10.1007/s10994-018-5755-8](https://doi.org/10.1007/s10994-018-5755-8).
-
-Entry-point tier: Tier 3.

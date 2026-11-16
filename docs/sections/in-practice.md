@@ -81,5 +81,3 @@ Interpretation, API choice, evaluation and playbooks for decision policies, ensu
 A short comparison of CE with SHAP, LIME and conformal prediction packages.
 :::
 ::::
-
-Entry-point tier: Tier 3.

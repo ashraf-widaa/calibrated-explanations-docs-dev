@@ -24,5 +24,3 @@ replication/index
 advanced/index
 future_work
 ```
-
-Entry-point tier: Tier 1.

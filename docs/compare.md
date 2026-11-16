@@ -27,5 +27,3 @@ For guarantees and open qualifications, see
 For an example, read {doc}`get-started/ce-by-example`. Method papers and CE
 evaluations are listed in {doc}`citing`; assess performance on your own
 held-out data using {doc}`practitioner/evaluate_ce`.
-
-Entry-point tier: Tier 3.

@@ -153,5 +153,3 @@ Control: keep this mapping in Tier 3 reference pages and keep Tier 1 and Tier 2 
 - `development/adrs/ADR-013-interval-calibrator-plugin-strategy.md`
 - {doc}`probabilistic_regression`
 - {doc}`terminology`
-
-Entry-point tier: Tier 3.

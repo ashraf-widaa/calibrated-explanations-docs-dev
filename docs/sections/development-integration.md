@@ -15,5 +15,3 @@ API & Technical Reference <../api/index>
 Model & Pipeline Integration <../foundations/how-to/integrate_with_pipelines>
 Extensions & Customization <../plugins>
 ```
-
-Entry-point tier: Tier 3.

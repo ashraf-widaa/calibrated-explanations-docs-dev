@@ -179,5 +179,3 @@ the diagram does not add a guarantee for an individual case.
 - `development/adrs/ADR-021-calibrated-interval-semantics.md` (maintainer-only docs set)
 - `development/adrs/ADR-012-documentation-and-gallery-build-policy.md` (maintainer-only docs set)
 - `development/adrs/ADR-026-explanation-plugin-semantics.md` (maintainer-only docs set)
-
-Entry-point tier: Tier 3.

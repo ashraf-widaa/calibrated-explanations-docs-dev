@@ -99,5 +99,3 @@ the main calls are summarised in the {doc}`Quick API <quick_api>`.
 - **Before this:** {doc}`ce-tasks-and-modes` (Path C, step 1).
 - **Elsewhere in the documentation:** see
   {ref}`Where should I go next? <quick-start-next>` on the Quick Start page.
-
-Entry-point tier: Tier 1.

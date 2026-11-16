@@ -163,5 +163,3 @@ semantics page; that wording is under review by the CE authors.*
 - {doc}`index` (practitioner hub)
 - {doc}`../foundations/concepts/ce_workflow` (how CE works, with a learning path)
 - {doc}`../get-started/troubleshooting`
-
-Entry-point tier: Tier 3.

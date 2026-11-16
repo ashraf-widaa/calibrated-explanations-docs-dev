@@ -785,7 +785,7 @@ for c in nb.cells:
             )
         elif o.output_type == "error":
             raise SystemExit(f"cell failed: {o.ename}: {o.evalue}")
-md_out.write_text("\n\n".join(parts) + "\n\nEntry-point tier: Tier 1.\n", encoding="utf-8")
+md_out.write_text("\n\n".join(parts) + "\n", encoding="utf-8")
 
 
 # --- 2. Downloadable notebook: absolute links to the Beta site ---------------
@@ -1048,7 +1048,7 @@ different range, what would the calibrated probability be?*
 - **See also:** [How to read CE explanations](../foundations/how-to/interpret_explanations.md).
 - **Before this:** [Why CE](why-ce.md).
 
-Entry-point tier: Tier 1.
+
 """
 companion = page_dir / "ce-by-example.md"
 companion.write_text(page, encoding="utf-8")

@@ -144,5 +144,3 @@ them is under review by the CE authors.*
 - Löfström, H., Löfström, T., Johansson, U., and Sönströd, C. (2024).
   [Calibrated explanations: with uncertainty information and counterfactuals](https://doi.org/10.1016/j.eswa.2024.123154).
   *Expert Systems with Applications*, 246, 123154.
-
-Entry-point tier: Tier 3.
