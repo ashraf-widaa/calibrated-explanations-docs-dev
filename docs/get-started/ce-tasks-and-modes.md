@@ -103,7 +103,7 @@ in every mode; they are not a third kind of prediction task.
 :::{div} ce-table-compact
 | Mode | Output | Read it as |
 |---|---|---|
-| Classification | Calibrated class probability with lower and upper probability | "Of the cases that get a model score like this one, about this share belong to the class" |
+| Classification | Merged class-probability estimate and two Venn–Abers values | An estimate and reported bounds; the pair and merged estimate have different qualifications, explained below |
 | Interval regression | Point prediction with a prediction interval (default 5th–95th percentile) | "The outcome is likely to fall in this range" |
 | Probabilistic regression | Calibrated probability of `y ≤ t` with lower and upper probability | "The chance the outcome is at or below `t`" |
 :::
@@ -206,10 +206,15 @@ Operational issues, such as errors from specific call orders, are listed in
 The {ref}`three output types, side by side <ce-output-types>`, on the guarantees page show
 one real example of each.
 
-All three modes rely on one assumption, **exchangeability**: the calibration
-data and the new cases come from the same process, and their order does not
-matter. Independent samples from one stable population satisfy it; data from
-before and after a change in practice may not.
+The calibration methods require **exchangeability** and the relevant
+method-specific calibration protocol. Intuitively, the calibration and new
+cases must be comparable without their order carrying information about
+their joint distribution. Independent samples from one stable population
+satisfy exchangeability; data from before and after a change in practice may
+not. The predictive model and fitted scoring components must be fixed at the
+stages required by each protocol. The
+{doc}`canonical semantics <../foundations/concepts/calibrated_interval_semantics>`
+states the qualifications and open author-review questions for each mode.
 
 - **Classification** uses Venn–Abers calibration. It calibrates the model's
   score twice, once assuming the new case belongs to the class and once
