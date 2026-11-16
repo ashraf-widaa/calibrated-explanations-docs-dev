@@ -168,6 +168,47 @@ def test_should_execute_regulatory_query_fragments_with_binary_bounds(name: str)
     assert checked >= 3
 
 
+@pytest.mark.parametrize("example", ["override", "default", "ensured", "difficulty"])
+def test_should_execute_documented_reject_prediction_examples(example: str) -> None:
+    """ADR-029/ADR-038: public reject calls use canonical call-time keywords."""
+    from crepes.extras import DifficultyEstimator
+    from calibrated_explanations import RejectPolicySpec
+    from calibrated_explanations.core.exceptions import ConfigurationError
+
+    context = _build_classification_context()
+    wrapper = context["explainer"]
+    wrapper.fit(context["x_proper"], context["y_proper"])
+    wrapper.calibrate(context["x_cal"], context["y_cal"])
+    assert wrapper.fitted and wrapper.calibrated
+    context.update(
+        wrapper=wrapper,
+        RejectPolicySpec=RejectPolicySpec,
+        x_train=context["x_proper"], y_train=context["y_proper"],
+        x_test=context["X_query"], X_new=context["X_query"],
+        difficulty_estimator=DifficultyEstimator().fit(
+            X=context["x_proper"], learner=context["fitted_model"]
+        ),
+    )
+    page = Path("docs/practitioner/advanced/reject-policy.md")
+    blocks = [block for block in _python_blocks(page) if "confidence=0.95" in block]
+    assert len(blocks) == 4
+    block = blocks[["override", "default", "ensured", "difficulty"].index(example)]
+    if example == "difficulty":
+        # The guide explicitly identifies this research selector as unsupported
+        # by the public wrapper; do not silently substitute the default strategy.
+        with pytest.raises(ConfigurationError, match="unknown keyword arguments.*strategy"):
+            exec(compile(block, str(page), "exec"), context)  # noqa: S102
+        return
+    exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    result = context["result"]
+    assert result.prediction.shape == (len(context["X_query"]),)
+    assert result.rejected.shape == (len(context["X_query"]),)
+    assert result.metadata["effective_confidence"] == 0.95
+    if example == "ensured":
+        assert result.metadata["reject_ncf"] == "ensured"
+        assert result.metadata["reject_ncf_w"] == 0.5
+
+
 def _python_blocks(path: Path) -> list[str]:
     return re.findall(r"```python\n(.*?)```", path.read_text(encoding="utf-8"), re.S)
 

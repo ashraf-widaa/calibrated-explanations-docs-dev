@@ -168,7 +168,7 @@ To override the auto-selection, pass `ncf` explicitly:
 from calibrated_explanations import RejectPolicySpec
 
 spec = RejectPolicySpec.flag(ncf="default", w=0.5)
-result = wrapper.predict(X_new, reject_policy=spec, confidence=0.95)
+result = wrapper.predict(X_new, reject_policy=spec, reject_confidence=0.95)
 print(wrapper.explainer.reject_ncf)           # "default"
 print(wrapper.explainer.reject_ncf_auto_selected)  # False
 ```
@@ -308,17 +308,25 @@ wrapper.fit(x_train, y_train)
 wrapper.calibrate(x_cal, y_cal, feature_names=feature_names)
 
 policy = RejectPolicySpec.flag(ncf="default")
-result = wrapper.predict(x_test, reject_policy=policy, confidence=0.95)
+result = wrapper.predict(x_test, reject_policy=policy, reject_confidence=0.95)
 print(result.metadata["reject_rate"])
 ```
 
 ```python
 policy = RejectPolicySpec.flag(ncf="ensured", w=0.5)
-result = wrapper.predict(x_test, reject_policy=policy, confidence=0.95)
+result = wrapper.predict(x_test, reject_policy=policy, reject_confidence=0.95)
 print(result.metadata["reject_ncf"], result.metadata["reject_ncf_w"])
 ```
 
 ### Experimental difficulty-normalized reject scoring
+
+**Current public-API limitation.** The implementation contains an experimental
+difficulty-normalized reject strategy, but this candidate's
+`WrapCalibratedExplainer.predict` does not accept a `strategy` keyword.
+The call below therefore raises `ConfigurationError` for the unknown keyword;
+it is an illustration of the boundary, not a runnable recipe for selecting
+that strategy. Use the public `default`/`ensured` examples above for supported
+prediction calls. No equivalent wrapper invocation is asserted here.
 
 ```python
 from calibrated_explanations import RejectPolicySpec, WrapCalibratedExplainer
@@ -336,11 +344,10 @@ policy = RejectPolicySpec.flag(ncf="default")
 result = wrapper.predict(
     x_test,
     reject_policy=policy,
-    confidence=0.95,
+    reject_confidence=0.95,
     strategy="experimental.difficulty_normalized",
 )
-print(result.metadata["reject_rate"])
-print(result.metadata["difficulty_normalized"])
+# Expected: ConfigurationError naming the unsupported 'strategy' keyword.
 ```
 
 Keep this path explicitly experimental. It preserves the public `RejectPolicy`
