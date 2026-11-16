@@ -15,6 +15,10 @@ expansions remain proposals for Product Owner approval.
 - RTD: not activated, built, or published for this branch. There is no new
   deployed commit or build ID to report. The current brief, section 14,
   requires explicit publication authorization after validation.
+  After the normal GitHub push, the public RTD version endpoint returned
+  HTTP 200 with `active=false`, `built=false`, and identifier
+  `beta/rtd-tutorial-corrections-20261116`. The version is registered but
+  remains inactive and unbuilt.
 - Reserved preview address, **not a verified publication**:
   https://calibrated-explanations-beta.readthedocs.io/en/beta-rtd-tutorial-corrections-20261116/
 - Official CE, experimental main/latest, and earlier candidate branches were
@@ -213,6 +217,7 @@ environment was installed or upgraded.
 | `python -B scripts/local_checks.py --profile quick` | Could not complete: **mypy not found**. Ruff is also unavailable. No unrelated installation attempted. |
 | `git diff --check` | Passed. |
 | User-owned staged changes | Main-checkout index fingerprint remained `C9186FF498C07E76EE43D484845F91200DC43E22341953A0F454751307177527`; work performed in the new worktree. |
+| GitHub publication | Normal push succeeded; remote branch HEAD matched local HEAD. Protected main, enhancement and source-faithful candidate refs retained their baseline commits. |
 
 Local raw evidence and screenshots:
 `C:/Users/ashra/AppData/Local/Temp/ce-rtd-corr-20261116/verification/`.
