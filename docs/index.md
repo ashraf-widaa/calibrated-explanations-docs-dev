@@ -77,10 +77,10 @@ Regulation Context (EU AI Act) <practitioner/playbooks/eu-ai-act-compliance>
 
 Overview <sections/how-ce-works>
 The CE Workflow <foundations/concepts/ce_workflow>
-Essential Foundations <foundations/index>
-Calibration & Uncertainty <foundations/concepts/calibrated_interval_semantics>
 Statistical Methods Behind CE <foundations/concepts/calibration_methods>
+Guarantees by Mode <foundations/concepts/calibrated_interval_semantics>
 How to Read CE Explanations <foundations/how-to/interpret_explanations>
+Essential Foundations <foundations/index>
 ```
 
 ```{toctree}

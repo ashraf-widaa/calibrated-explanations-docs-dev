@@ -1,0 +1,86 @@
+"""WP-14: How CE Works reads as a levelled progression along task -> mode -> method -> output -> assumptions.
+
+Also guards the scientific distinctions added to the workflow page and the removal of the
+telemetry walkthrough from the interpretation guide.
+"""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+DOCS = ROOT / "docs"
+LANDING = DOCS / "sections" / "how-ce-works.md"
+WORKFLOW = DOCS / "foundations" / "concepts" / "ce_workflow.md"
+INTERPRET = DOCS / "foundations" / "how-to" / "interpret_explanations.md"
+METHODS = DOCS / "foundations" / "concepts" / "calibration_methods.md"
+
+
+def _flat(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split())
+
+
+def test_landing_states_the_chain_and_a_levelled_reading_order() -> None:
+    text = _flat(LANDING)
+    assert "task → CE mode → statistical method → output and what its range means → assumptions and guarantees" in text
+    steps = re.findall(r"\d\. \{(?:doc|ref)\}`[^`]+` \((L[123](?:–L[123])?)\)", text)
+    assert steps == ["L1", "L2–L3", "L3", "L1–L2", "L2"]
+    for label in ("ce-workflow-methods", "ce-workflow-guarantees", "ce-workflow-explanations"):
+        assert f"<{label}>`" in text
+        assert f"({label})=" in WORKFLOW.read_text(encoding="utf-8")
+
+
+def test_sidebar_follows_the_reading_order() -> None:
+    index = (DOCS / "index.md").read_text(encoding="utf-8")
+    group = index.split(':caption: "How CE Works: The Theory Behind It"')[1].split("```")[0]
+    order = [
+        "sections/how-ce-works",
+        "foundations/concepts/ce_workflow",
+        "foundations/concepts/calibration_methods",
+        "foundations/concepts/calibrated_interval_semantics",
+        "foundations/how-to/interpret_explanations",
+        "foundations/index",
+    ]
+    positions = [group.index(f"<{page}>") for page in order]
+    assert positions == sorted(positions)
+    assert "Guarantees by Mode <foundations/concepts/calibrated_interval_semantics>" in group
+
+
+def test_workflow_table_separates_the_three_output_meanings() -> None:
+    text = _flat(WORKFLOW)
+    assert "Bounds of a probability, not a confidence interval" in text
+    assert "holds on average over many cases, not for each case" in text
+    assert "Bounds of the probability of an event, not an interval for the value" in text
+    assert "explanation types**, not modes" in text
+    assert "teaching view of CE" in text
+
+
+def test_workflow_keeps_the_guarantee_distinctions_apart() -> None:
+    text = _flat(WORKFLOW)
+    for phrase in (
+        "**Probability calibration**",
+        "**Coverage**",
+        "*marginal* coverage",
+        "**Explanation ranges**",
+        "**Model correctness**",
+        "**Distribution shift**",
+    ):
+        assert phrase in text, phrase
+    # Open author questions keep their markers (SR-07, SR-15).
+    assert "described as either is under review by the CE authors" in text
+    assert "threshold events in probabilistic regression is under review by the CE authors" in text
+
+
+def test_interpretation_guide_links_telemetry_instead_of_teaching_it() -> None:
+    text = INTERPRET.read_text(encoding="utf-8")
+    assert "{doc}`configure_telemetry`" in text
+    assert 'telemetry["plot_source"]' not in text
+    assert "ce-reading-an-output.svg" in text
+    assert "ensures calibrated explanations drive safe" not in text
+    assert "advanced/demo_under_the_hood.ipynb" in text
+
+
+def test_wide_theory_tables_use_the_phone_layout() -> None:
+    assert METHODS.read_text(encoding="utf-8").count(":::{div} ce-table-compact") == 4
+    assert WORKFLOW.read_text(encoding="utf-8").count(":::{div} ce-table-compact") == 2

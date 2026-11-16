@@ -29,19 +29,42 @@ source code. Start here if you want to understand CE rather than just use it.
    with one feature changed at a time, and reports how much each feature's
    value moves the calibrated prediction, again with a range.
 
+These five steps are a teaching view of CE. They follow the calls you make
+(`fit`, `calibrate`, `predict` or `predict_proba`, `explain_factual` or
+`explore_alternatives`), not every internal step of the implementation.
+
+(ce-workflow-methods)=
+
 ## Which method CE uses for each task
 
-| Task | Question | Calibration method | Output |
-|---|---|---|---|
-| Classification | Which class, and how probable? | Venn-Abers predictors | Calibrated class probability with lower and upper bounds |
-| Interval regression | Where will the value fall? | Conformal predictive system (CPS) | Prediction with an interval for requested percentiles |
-| Probabilistic regression | How likely is an event on the value? | CPS scores calibrated with Venn-Abers | Calibrated event probability with lower and upper bounds |
+Read each row from left to right: the task and question decide the CE mode,
+the mode decides the calibration method, and the method decides what the
+range in the output means.
+
+:::{div} ce-table-compact
+| Task | Question | Calibration method | Output | Read the range as |
+|---|---|---|---|---|
+| Classification | Which class, and how probable? | Venn-Abers predictors | Calibrated class probability with lower and upper bounds | Bounds of a probability, not a confidence interval |
+| Interval regression | Where will the value fall? | Conformal predictive system (CPS) | Prediction with an interval for requested percentiles | An interval for the value; the requested coverage holds on average over many cases, not for each case |
+| Probabilistic regression | How likely is an event on the value? | CPS scores calibrated with Venn-Abers | Calibrated event probability with lower and upper bounds | Bounds of the probability of an event, not an interval for the value |
+:::
+
+The exact statements, with their conditions, are in
+{doc}`calibrated_interval_semantics`; the methods are derived in
+{doc}`calibration_methods` (section 4). *The validity statement for
+threshold events in probabilistic regression is under review by the CE
+authors.*
+
+Factual and alternative explanations are **explanation types**, not modes:
+both are available in every mode above.
 
 **Venn-Abers**, in one sentence: CE fits the relation between model score and
 outcome twice, once pretending the new case is positive and once negative;
 the two fits give the lower and upper probability. **A conformal predictive
 system**, in one sentence: CE uses the model's errors on the calibration set
 to say how far the true value is likely to be from the prediction.
+
+(ce-workflow-explanations)=
 
 ## How an explanation is built
 
@@ -56,6 +79,8 @@ other ranges directly. The
 {doc}`walkthrough, section 6 <../../get-started/quickstart_walkthrough>`
 shows each step with real numbers.
 
+(ce-workflow-guarantees)=
+
 ## What the guarantees rest on
 
 The calibration guarantees hold under one assumption: the calibration data
@@ -66,11 +91,29 @@ computed from calibrated outputs, but no formal per-feature guarantee is
 claimed for them. Explanations describe the model; they are not causal. See
 {doc}`calibrated_interval_semantics` for the exact statements per task.
 
+Six things are easy to mix up; keep them apart:
+
+- **Probability calibration** (classification, probabilistic regression) is a
+  property of the probabilities over many cases.
+- **Coverage** (interval regression) is the share of intervals that contain
+  the true value, on average over cases (*marginal* coverage). It is not a
+  statement about each case, nor about each subgroup unless CE calibrates per
+  group ({doc}`../how-to/conditional_calibration`).
+- **Explanation ranges** are computed from calibrated outputs; no formal
+  guarantee is claimed for them.
+- **Model correctness**: none of the above says that the model, or one
+  prediction, is right.
+- **Distribution shift**: when new cases differ from the calibration data,
+  the statements no longer apply; recalibrate on recent data.
+- **Aleatoric and epistemic uncertainty**: *whether CE's ranges should be
+  described as either is under review by the CE authors.*
+
 ## Learning path
 
 Each row is one concept, from Level 1 (understand) to Level 3 (study in
 depth). You can enter at any level.
 
+:::{div} ce-table-compact
 | Concept | Level 1: understand | Level 2: apply and interpret | Level 3: study in depth |
 |---|---|---|---|
 | Why CE | {doc}`../../what-is-ce` | {doc}`../../get-started/ce-tasks-and-modes` | Löfström et al. (2024), see {doc}`../../citing` |
@@ -83,6 +126,7 @@ depth). You can enter at any level.
 | Subgroup (Mondrian) calibration | {doc}`Glossary <../../glossary/science>` | {doc}`../how-to/conditional_calibration` | Löfström and Löfström (2024), see {doc}`../../citing` |
 | Guarantees and limits | {doc}`../../what-is-ce` | This page | {doc}`calibrated_interval_semantics`; {doc}`calibration_methods` (section 5) |
 | Implementation and tests | — | {doc}`architecture` | [Source code](https://github.com/Moffran/calibrated_explanations/tree/main/src/calibrated_explanations); [calibration tests](https://github.com/Moffran/calibrated_explanations/tree/main/tests/unit/calibration) |
+:::
 
 Open scientific questions that the CE authors are reviewing are marked
 *under review* on the pages above.

@@ -158,9 +158,11 @@ Venn–Abers predictor from the `venn_abers` package (`calibration/venn_abers.py
 
 Ten calibration cases and a test score {math}`s = 0.50`:
 
+:::{div} ce-table-compact
 | Score {math}`s_i` | 0.05 | 0.15 | 0.25 | 0.35 | 0.45 | 0.55 | 0.65 | 0.75 | 0.85 | 0.95 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Label {math}`y_i` | 0 | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 | 1 |
+:::
 
 *Test case labelled 0.* In score order the labels are 0, 0, 1, 0, 0, **0**, 1, 1, 0, 1, 1.
 Pool-adjacent-violators merges the 1 at 0.25 with the three 0s that follow (mean
@@ -509,19 +511,23 @@ single calibration set can land somewhat above or below the requested rate.
 
 ## 4. Classification, interval regression and thresholded regression
 
+:::{div} ce-table-compact
 | Mode | Call | Method | Output |
 |---|---|---|---|
 | Classification | `predict_proba(x, uq_interval=True)` | Venn–Abers on model scores | {math}`p` and {math}`[p_0, p_1]` |
 | Interval regression | `predict(x, uq_interval=True, low_high_percentiles=(l, h))` | Split CPS on residuals, full calibration set | Median and prediction interval |
 | Thresholded (probabilistic) regression | `predict_proba(x, threshold=t, uq_interval=True)` | CPS score, then Venn–Abers on the event {math}`y \le t`, on two halves of the calibration set | {math}`P(y \le t)` and {math}`[p_0, p_1]` |
+:::
 
 The two kinds of interval answer different questions. *Terms under review.*
 
+:::{div} ce-table-compact
 | | Classification and thresholded regression | Interval regression |
 |---|---|---|
 | What is uncertain | A probability | The value of {math}`y` |
 | Interval | Venn–Abers pair {math}`[p_0, p_1]` (*probability interval*) | CPS percentiles in units of {math}`y` (*prediction interval*) |
 | Formal statement | Calibration of {math}`p_Y`, selected by the unknown true label | Marginal coverage of {math}`y` |
+:::
 
 :::{admonition} How CE does it: thresholded regression
 :class: tip
@@ -579,6 +585,7 @@ P(y <= 150) = 0.056, probability interval [0.000, 0.059]
 
 ## 5. Assumptions and limitations
 
+:::{div} ce-table-compact
 | Situation | What happens | What to do |
 |---|---|---|
 | Future data differ from the calibration data (drift, new population) | The guarantees no longer apply | Monitor; recalibrate on recent data |
@@ -588,6 +595,7 @@ P(y <= 150) = 0.056, probability interval [0.000, 0.059]
 | One-sided intervals | The open side is not a calibrated bound (a placeholder in v1.0.2; `-inf`/`inf` from v1.1.0) | Treat that side as open |
 | Merged probability | No exact calibration guarantee | Use {math}`[p_0, p_1]` when validity matters |
 | Multiclass default normalisation | Bounds rescaled; an upper bound can exceed 1 | `normalization="simplex"` |
+:::
 
 Explanations are built on these calibrated outputs, but the guarantees above are stated
 for predictions, not for feature weights and their intervals. The CE regression paper

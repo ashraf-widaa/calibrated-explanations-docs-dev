@@ -4,7 +4,7 @@ sidebarclass: how-to
 
 # Interpret calibrated explanations
 
-Understanding the explanation objects is the core reason to use this library. This guide shows how to read factual and alternative explanations, relate them to the calibrated predictions and uncertainty intervals they produce, and tie everything back to the plots and telemetry that document provenance.
+Understanding the explanation objects is the core reason to use this library. This guide shows how to read factual and alternative explanations, relate them to the calibrated predictions and uncertainty intervals they produce, and connect them to the plots. What the ranges mean in each mode is defined in {doc}`../concepts/calibrated_interval_semantics`.
 
 For regression, the `prediction_interval` is a **conformal interval** produced by **Conformal Predictive Systems (CPS)**, and the interval percentiles are controlled by `low_high_percentiles`.
 
@@ -25,6 +25,24 @@ For regression, the `prediction_interval` is a **conformal interval** produced b
   explanation. Metadata retains the complementary quantities for ranking and
   provenance.
 - More terms: {doc}`Glossary <../../glossary/index>`.
+```
+
+## Factual and alternative explanations at a glance
+
+Factual and alternative explanations are two **explanation types**, not
+calibration modes: both can be produced in every mode (classification,
+interval regression, probabilistic regression). A factual explanation describes
+the case as it is; an alternative explanation describes how the calibrated
+prediction would respond if one feature had a value in another range. The
+figure shows both for one case.
+
+```{raw} html
+<figure class="ce-figure ce-figure--compact">
+  <a href="../../_static/figures/ce-reading-an-output.svg" title="Open the figure at full size">
+    <img src="../../_static/figures/ce-reading-an-output.svg" width="480" height="572" alt="Three panels. 1, calibrated prediction: the calibrated probability of benign is 0.29, with a range from 0.17 to 0.33, all below 0.5, so the label is malignant. 2, factual rule worst concave points greater than 0.14: weight minus 0.19, with a range from minus 0.31 to minus 0.05, all below 0, so this condition lowers the probability of benign. 3, alternative worst concave points below 0.14: the calibrated probability of benign would be 0.48, with a range from 0.33 to 0.60, instead of 0.29 now; this describes how the model would respond, not a recommended action.">
+  </a>
+  <figcaption>CE output for case 2 of the Python walkthrough: the calibrated prediction (1), one factual rule with its weight and range (2), and one alternative with the calibrated prediction it would give (3). Panel 3 describes the model's response, not a recommended action.</figcaption>
+</figure>
 ```
 
 ## 1. Start with the explanation collections
@@ -148,30 +166,18 @@ When reviewing alternative explanations, use `plot(style="alternative")` (or ope
 
 If the plot does not match the table, regenerate the explanation—the library guarantees they use the same data.
 
-## 4. Tie everything back to telemetry
+## 4. Provenance and telemetry
 
-Telemetry proves which components produced the explanation:
-
-```python
-telemetry = getattr(factual_batch, "telemetry", {})
-print(telemetry["interval_source"])
-print(telemetry["plot_source"])
-print(telemetry["uncertainty"])
-```
-
-Interpretation tips:
-
-- `interval_source` / `proba_source` show the calibration algorithms in play. Namespaced identifiers such as `registry:interval.default` indicate trusted plugins; `legacy:` prefixes mean a fallback was used.
-- `plot_source` surfaces the renderer (for example `plot_spec.default.factual`). Investigate if a legacy fallback appears unexpectedly.
-- The nested `uncertainty` dictionary mirrors the structure already discussed and is the authoritative source for machine-readable exports.
-- `preprocessor` provides ADR-009 provenance so you can reproduce how categorical encoders or scalers shaped the data.
+Reading an explanation does not require telemetry. When you need to record
+which calibration and plotting components produced an explanation (for audits
+or for comparing environments), see {doc}`configure_telemetry`.
 
 ## 5. Validate in notebooks and downstream systems
 
 After you absorb the tables and plots:
 
-1. Run the [demo notebooks](https://github.com/Moffran/calibrated_explanations/tree/main/notebooks) (`demo_under_the_hood.ipynb`, classification/regression demos) and compare their telemetry dumps to your production environment.
+1. Run the [demo notebooks](https://github.com/Moffran/calibrated_explanations/tree/main/notebooks) (`advanced/demo_under_the_hood.ipynb` and the classification and regression demos in `core_demos/`) and compare their outputs with your own environment.
 2. Embed the interpretation checks into dashboards—surface calibrated prediction vs. interval charts and highlight scenarios with wide rule uncertainty.
 3. Share this guide with auditors and stakeholders so everyone relies on the same vocabulary when discussing factual or alternative explanations.
 
-Keeping the interpretation workflow front and centre ensures calibrated explanations drive safe, explainable decisions rather than becoming another opaque model output.
+Keeping the interpretation workflow front and centre helps people read calibrated explanations consistently. It does not by itself make a decision safe: the guarantees and their limits are in {doc}`../concepts/calibrated_interval_semantics`.
