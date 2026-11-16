@@ -48,6 +48,11 @@ flowchart LR
     RUNTIME --> FAST
 ```
 
+Read the incoming arrows as the learner and data supplied to the public
+wrapper. The `fit` and `calibrate` labels distinguish training from
+calibration. The outgoing branches are methods you can choose after
+calibration; they are not successive stages that every request executes.
+
 `WrapCalibratedExplainer` coordinates the scikit-learn-style lifecycle:
 
 1. `fit(...)` fits the predictive learner.
@@ -86,6 +91,13 @@ flowchart TB
     EO -. "operates on shared runtime state" .-> CE
     RO -. "operates on shared runtime state" .-> CE
 ```
+
+The solid arrows lead from the public wrapper to the shared calibrated
+runtime, then through `PluginManager` to the three orchestrators. The dashed
+arrows point back to the state those orchestrators use. This explains how CE
+can separate prediction, explanation and rejection responsibilities while
+sharing one calibrated runtime; it does not mean every call runs all three.
+The table below assigns a responsibility to each box.
 
 The responsibilities are deliberately separated:
 
@@ -134,6 +146,11 @@ flowchart LR
 
     EP -. "requests calibrated prediction<br/>and interval evaluations" .-> PO
 ```
+
+Read each solid chain from its API call to its output. The dashed link from
+the explanation implementation to `PredictionOrchestrator` shows that
+constructing CE rules requires calibrated evaluations. It does not turn an
+explanation request into a separate user-facing prediction request.
 
 The prediction path returns prediction data directly. Depending on the method
 and arguments, this can include calibrated probabilities, prediction
@@ -209,6 +226,15 @@ flowchart TB
 
     V2 -->|"default compatibility conversion"| LEGACY
 ```
+
+Follow the central chain to the decision for the original input batch.
+The branch labelled **Select payload source rows** then applies the policy:
+all rows for `FLAG`, rejected rows for `ONLY_REJECTED`, or accepted rows for
+`ONLY_ACCEPTED`. Optional prediction and explanation branches populate the
+payload. Decision, payload and metadata meet at `RejectResultV2`; the last
+arrow converts that strict representation into the default public
+`RejectResult`. Filtering a payload therefore does not change which
+original rows the decision describes.
 
 The reject result separates two concerns.
 
@@ -311,6 +337,14 @@ flowchart LR
     PM --> PLOT
 ```
 
+The left-hand boxes provide settings to `ConfigManager`; the registry
+provides information about available implementations to `PluginManager`.
+The trust-policy input constrains that registry path. The three outgoing
+branches identify selected interval, explanation and plot implementations.
+These arrows show selection inputs and results, not an execution sequence
+or a claim that every discovered plugin runs. The precedence list below
+explains which setting wins when configuration sources overlap.
+
 Configuration precedence is:
 
 1. call-site override;
@@ -366,6 +400,13 @@ flowchart TB
     PLOTREQ --> PLOTSPEC
     PLOTSPEC --> RENDER
 ```
+
+Start at the runtime and follow the solid arrow to explanation objects.
+From there, serialization leads to portable JSON, while an explicit plot
+request leads through `PlotSpec` to a renderer. The dashed side branches
+show optional performance support and operational observation. Thus a CE
+explanation can be inspected without drawing a plot, and drawing one does
+not require serialization or rejection first.
 
 Cache, parallel execution, and feature filtering are opt-in performance
 capabilities. They must not redefine the calibrated semantics of predictions
