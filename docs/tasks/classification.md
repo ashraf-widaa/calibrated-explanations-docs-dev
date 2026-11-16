@@ -5,8 +5,8 @@ Calibrated Explanations wraps standard scikit-learn classifiers to produce uncer
 ## Classification semantics note
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
-- **Mode-specific guarantees**: Venn-Abers provides calibrated class probabilities with interval bounds.
-- **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
+- **Mode-specific guarantees**: CE returns a Venn-Abers pair and a merged class probability; the exact pair/merged-probability validity wording remains under author review (SR-03).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or regime shift.
 - **Explanation-envelope limits**: rule and feature-level intervals summarize model behavior, not causal effects.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -85,6 +85,11 @@ multi_alternative = explainer.explore_alternatives(x_test, multi_labels_enabled=
 ```
 
 ### Multi-label mode support matrix (`multi_labels_enabled=True`)
+
+The all-classes view is experimental, as noted in
+{doc}`../get-started/ce-tasks-and-modes`. "Supported" below describes the
+available API operations; it does not establish statistical validity or
+graduate the feature from experimental status.
 
 | Capability | Status | Notes |
 | :--- | :--- | :--- |

@@ -92,16 +92,16 @@ al. (2024) for classification and Löfström et al. (2025) for regression; the
 
 ## What CE guarantees, and what it does not
 
-CE's guarantees are **statistical and conditional**. They hold for the
+CE's guarantees are **statistical and depend on stated assumptions**. They hold for the
 calibrated predictions, under an assumption about the data, and they differ by
 task.
 
 :::{div} ce-table-compact
 | CE does provide | CE does not provide |
 |---|---|
-| Classification: calibrated class probabilities with interval bounds from Venn-Abers | A guarantee for any single individual case |
+| Classification: a Venn-Abers pair and a merged probability, with their distinct qualifications in the semantics reference | A guarantee for any single individual case |
 | Interval regression: intervals for requested percentiles from a conformal predictive system | Guarantees after the data change (drift, a new population, a new period) |
-| Probabilistic regression: calibrated probabilities for threshold events | Causal statements: explanations describe the **model**, not what would happen if the world changed |
+| Probabilistic regression: event probabilities and ranges; exact validity wording remains under author review | Causal statements: explanations describe the **model**, not what would happen if the world changed |
 | Explanations computed from calibrated outputs, with ranges | Formal per-feature guarantees for explanation ranges |
 :::
 
@@ -163,7 +163,7 @@ on the [citation page](citing.md).
 | Method family | Designed to produce | Calibration of the model's output | Uncertainty for each explanation |
 |---|---|---|---|
 | Feature-attribution methods such as LIME and SHAP | A number per feature explaining the model's own output | Not part of the method | Not part of the standard methods |
-| Conformal prediction packages | Prediction sets or intervals with coverage guarantees | Yes, for predictions | No feature-level explanations |
+| Conformal prediction packages | Prediction sets or intervals with coverage guarantees | Coverage calibration; not necessarily probability calibration | No feature-level explanations |
 | Calibrated Explanations | Calibrated predictions with ranges, and rule-based explanations with ranges | Yes (Venn-Abers, conformal predictive systems) | Yes, as ranges derived from calibrated outputs |
 :::
 

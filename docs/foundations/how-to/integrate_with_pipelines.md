@@ -56,8 +56,10 @@ config = ExplainerConfig(
 explainer = WrapCalibratedExplainer.from_config(config)
 ```
 
-When you call `fit` and `calibrate`, the wrapper fits both the underlying model
-and the preprocessing pipeline.
+In this workflow, `fit` fits preprocessing on the proper training data and
+trains the model on the transformed data. The subsequent `calibrate` call
+applies that fitted preprocessing to the held-out calibration data. Keep
+training, calibration and test data separate before fitting any transformer.
 
 ```python
 explainer.fit(x_proper, y_proper)

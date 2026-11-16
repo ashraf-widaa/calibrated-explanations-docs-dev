@@ -48,7 +48,8 @@ What changes:
    with a lower and an upper value.
 4. **Explanations from the calibrated output.** CE explains a prediction by
    asking the calibrated model again with one feature changed at a time, so
-   every explanation inherits the calibration and has its own range.
+   explanations are computed from calibrated outputs and have their own ranges.
+   This does not transfer a prediction guarantee to a feature weight.
 
 ## What CE gives you: one example
 

@@ -27,6 +27,34 @@ _DEPRECATIONS_PATH = Path("docs/migration/deprecations.md")
 _USE_PLUGINS_PATH = Path("docs/practitioner/advanced/use_plugins.md")
 
 
+def test_should_execute_interpretation_fragments_with_public_payloads() -> None:
+    """Exercise the documented rule/prediction distinction (ADR-021, SR-14)."""
+    context = _build_classification_context()
+    wrapper = context["explainer"]
+    wrapper.fit(context["x_proper"], context["y_proper"])
+    wrapper.calibrate(context["x_cal"], context["y_cal"])
+    assert wrapper.fitted and wrapper.calibrated
+    context["x_test"] = context["X_te"][2:3]
+    page = Path("docs/foundations/how-to/interpret_explanations.md")
+    for block in _python_blocks(page):
+        exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    factual = context["factual"]
+    alternative = context["alternative"]
+    assert isinstance(factual.get_rules(), dict)
+    factual_core = context["factual_payload"]["core"]
+    alternative_core = context["alternative_payload"]["core"]
+    assert factual_core["prediction"]["value"] == factual.predict
+    assert factual.predict == pytest.approx(0.286, abs=0.0005)
+    assert alternative_core["kind"] == "alternative"
+    assert factual_core["feature_rules"] and alternative_core["feature_rules"]
+    assert "weight" in factual_core["feature_rules"][0]
+    assert "prediction" in alternative_core["feature_rules"][0]
+    assert [row["prediction"]["value"] for row in alternative_core["feature_rules"]] == pytest.approx(
+        alternative.get_rules()["predict"]
+    )
+    assert "uncertainty" in factual.to_telemetry()
+
+
 def _python_blocks(path: Path) -> list[str]:
     return re.findall(r"```python\n(.*?)```", path.read_text(encoding="utf-8"), re.S)
 

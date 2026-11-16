@@ -73,8 +73,9 @@ Conjunction
 Ensured explanation
   An {term}`alternative explanation <Alternative explanation>` kept by the
   ensured filter because its uncertainty interval is not wider than the
-  interval of the original prediction, so the calibration data gives the
-  proposed change stronger support. *Wording under review.*
+  interval of the original prediction. This is a comparison of reported widths,
+  not a guarantee of stronger evidence or a beneficial intervention.
+  *The scientific interpretation remains under review.*
 
   **Learn more:** {doc}`../practitioner/playbooks/ensured-explanations`
 
@@ -96,9 +97,10 @@ Factual explanation
 
 Feature weight
   The calibrated contribution of one feature rule to the prediction, reported
-  with its own uncertainty interval. A positive weight pushes the calibrated
-  prediction towards the positive outcome, a negative weight pulls it away, and
-  a larger magnitude means more influence.
+  with its own uncertainty interval. A positive weight raises the calibrated
+  output being explained relative to the substituted values; a negative weight
+  lowers that output. Identify the class, numeric target or threshold event
+  before interpreting the sign or units.
 
   **Learn more:** {doc}`../foundations/how-to/interpret_explanations`
 

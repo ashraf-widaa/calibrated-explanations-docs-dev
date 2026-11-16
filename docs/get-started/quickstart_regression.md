@@ -20,7 +20,7 @@ into training, calibration and test sets.
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
 - **Mode-specific guarantees**: percentile intervals use CPS for requested percentile bounds.
-- **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
 - **Explanation-envelope limits**: feature-level intervals summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -28,8 +28,8 @@ into training, calibration and test sets.
 ## Probabilistic or thresholded regression semantics note
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
-- **Mode-specific guarantees**: threshold queries use CPS with Venn-Abers for calibrated event probabilities.
-- **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
+- **Mode-specific guarantees**: threshold queries return event probabilities and ranges from CPS scores followed by Venn-Abers; the exact validity statement remains under author review (SR-15).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift, and no causal guarantee from threshold probabilities.
 - **Explanation-envelope limits**: feature-level intervals summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.

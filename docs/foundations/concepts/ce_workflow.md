@@ -83,10 +83,13 @@ shows each step with real numbers.
 
 ## What the guarantees rest on
 
-The calibration guarantees hold under one assumption: the calibration data
-and the new cases are **exchangeable**, roughly, drawn from the same stable
-process. They are statistical statements about many cases, not about one
-case, and they apply to the calibrated predictions. Explanation ranges are
+The calibration data and new cases must be **exchangeable**, roughly, drawn
+from the same stable process, and the method's calibration protocol must be
+respected. For example, the predictive model is fixed before calibration;
+{doc}`calibration_methods` states the detailed prerequisites. The exact
+validity wording remains under author review. The statements concern
+calibrated predictions over calibration/test draws, not guaranteed correctness
+for one case. Explanation ranges are
 computed from calibrated outputs, but no formal per-feature guarantee is
 claimed for them. Explanations describe the model; they are not causal. See
 {doc}`calibrated_interval_semantics` for the exact statements per task.

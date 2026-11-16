@@ -2,6 +2,13 @@
 
 This page is the semantics source for user-facing documentation.
 
+Read an output description separately from a statistical guarantee. The
+exact guarantee wording for the Venn–Abers pair and its merged probability
+(SR-03), CPS coverage (SR-02), and threshold-event probabilities (SR-15)
+remains under review by the CE authors. The
+{doc}`methods page <calibration_methods>` distinguishes the cited results
+from CE's implementation and from illustrative examples.
+
 New to these ideas? The Quick Start introduces each mode in plain language in
 {doc}`../../get-started/ce-tasks-and-modes` and shows them in use in the
 {doc}`../../get-started/quickstart_walkthrough`.
@@ -44,10 +51,21 @@ a different meaning. The figure shows one real CE output of each type.
 - Calibrate on a held-out calibration split.
 
 ### Mode-specific guarantees
-- Outputs are calibrated class probabilities with interval bounds from Venn-Abers.
+- CE returns a merged class probability and the two Venn–Abers values.
+  The exact calibration property of the pair must not be transferred to the
+  merged probability. These bounds are not a conventional confidence interval
+  for an individual case's unknown probability. *Wording under author review
+  (SR-03); see {doc}`calibration_methods`, section 2.*
+- In multiclass classification, the default normalization also rescales the
+  bounds; an upper bound can exceed 1. These rescaled values must not be read
+  as unchanged binary Venn–Abers bounds. See
+  {doc}`../../get-started/ce-tasks-and-modes` for the normalization choices.
 
 ### Assumptions
-- Calibration and deployment samples are exchangeable or distribution-matched.
+- Calibration and new cases must satisfy the method's exchangeability
+  assumption, with the predictive model fixed before calibration. Older CE
+  wording also says "distribution-matched"; whether that wording is sufficient
+  is under author review (SR-01).
 
 ### Explicit non-guarantees
 - No guarantee under distribution drift or regime shift.
@@ -65,10 +83,16 @@ a different meaning. The figure shows one real CE output of each type.
 - Calibrate with CPS on a held-out calibration split.
 
 ### Mode-specific guarantees
-- Percentile intervals are CPS-based predictive intervals for requested percentiles.
+- CE returns a CPS median and prediction interval for the requested percentiles.
+  Coverage concerns the target value over calibration/test draws, not the
+  correctness of each point prediction. The precise finite-sample statement,
+  endpoint conventions, ties, and subgroup conditions are under author review
+  (SR-02); see {doc}`calibration_methods`, section 3.
 
 ### Assumptions
-- Exchangeability or calibration-deployment distribution match.
+- Exchangeability of calibration and new cases, with the model and any fitted
+  difficulty estimator fixed before calibration. The alternative
+  "distribution-matched" wording remains under review (SR-01).
 
 ### Explicit non-guarantees
 - No guarantee that requested percentiles remain calibrated after drift.
@@ -85,11 +109,16 @@ a different meaning. The figure shows one real CE output of each type.
 - Build threshold event probabilities through CPS outputs calibrated with Venn-Abers.
 
 ### Mode-specific guarantees
-- Returns calibrated event probabilities for threshold queries such as `P(y <= t)`
-  or interval events.
+- Returns event probabilities and lower/upper values from CPS scores followed
+  by Venn–Abers calibration, for queries such as `P(y <= t)` or interval events.
+  This is a range for an event probability, not a prediction interval for
+  the numeric target. The exact validity statement is under author review
+  (SR-15); the pair/merged-probability distinction also applies.
 
 ### Assumptions
-- Exchangeability or deployment match to calibration distribution.
+- Exchangeability and the calibration/scoring construction described in
+  {doc}`calibration_methods`, section 4. The alternative
+  "distribution-matched" wording remains under review (SR-01).
 
 ### Explicit non-guarantees
 - No guarantee for threshold probability calibration under drift.

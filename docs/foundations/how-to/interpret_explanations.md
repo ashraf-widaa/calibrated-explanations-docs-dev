@@ -49,6 +49,11 @@ figure shows both for one case.
 
 Calibrated explanations return collections (`CalibratedExplanations`, `AlternativeExplanations`) that behave like sequences. The first step is to look at the summary for each item:
 
+The code fragments below assume an `explainer` that is already fitted and
+calibrated, and a query matrix `x_test`. For a complete setup, run the
+{doc}`Quick API example <../../get-started/quick_api>` and use its `X_test`
+as `x_test` here.
+
 ```python
 factual_batch = explainer.explain_factual(x_test[:1])
 factual = factual_batch[0]
@@ -64,15 +69,18 @@ Key attributes shared by both modes:
 | Attribute | Description |
 | --------- | ----------- |
 | `predict` | Calibrated probability (classification) or numeric estimate (regression). |
-| `prediction_interval` | Tuple of `(low, high)` values; mirrors `uncertainty["lower_bound"]`/`["upper_bound"]`. |
-| `rules` | Ordered list of feature-level rules, highest absolute weight first. |
-| `telemetry` | Dictionary describing the interval, probability, and plot sources that produced the explanation. |
+| `prediction_interval` | Tuple of `(low, high)` from the explanation's prediction record; its meaning depends on the mode. |
+| `get_rules()` | Rule dictionary with aligned lists such as `rule`, `weight` and `predict`; not a list of rule objects. |
+| `build_rules_payload()` | Structured `core` and `metadata` dictionaries; `core["feature_rules"]` is a list of rule records. |
+| `to_telemetry()` | Explanation uncertainty and rule metadata; runtime provenance is documented separately in {doc}`configure_telemetry`. |
 
 For regression with a scalar `threshold` `t`, the `predict` value is the calibrated event probability `P(y <= t)`; with a `(low, high)` threshold it is the probability that the outcome lies within those bounds. The interval gives the lower and upper calibrated probability for that event. See {doc}`../concepts/calibrated_interval_semantics` (Mode 3).
 
 ## 2. Examine the rule tables in detail
 
-Rules translate the calibration result into actionable statements. Use the helper payloads to inspect them in a structured way.
+Rules describe the calibrated model's response in terms of feature conditions.
+Use the helper payloads to inspect them in a structured way; a rule is not an
+instruction to change a real-world feature.
 
 ### 2.1 Factual explanations
 
@@ -105,7 +113,7 @@ The `build_rules_payload` result is a dictionary with two top-level keys:
 
 Read the factual core from top to bottom:
 
-1. **Weight sign** – positive weights push the calibrated prediction towards the positive outcome; negative weights pull it away. Large magnitude implies greater influence.
+1. **Weight sign and units** – first identify the output being explained. For the binary example it is `P(benign)`; a positive factual weight means the current condition raises that output relative to the substituted values, and a negative weight means it lowers it. For interval regression, weights are in target units; for probabilistic regression, they are in event-probability units. In multiclass explanations, identify the class being explained before interpreting a sign.
 2. **Condition** – confirms the feature value observed in the instance (for example, `glucose >= 140`). Use this to cross-check domain constraints.
 3. **Prediction** – available through the metadata, showing the calibrated contribution when the feature is perturbed; compare it to `predict` to understand marginal impact.
 4. **Weight interval** – the core payload keeps only the numeric bounds; consult the metadata if you need the representation (percentile vs. probabilistic) or raw percentiles used to derive them.
@@ -137,7 +145,11 @@ for extra in alternative_metadata:
 - `core["feature_rules"]` lists the alternative feature conditions alongside the calibrated prediction estimate and uncertainty interval for each alternative scenario.
 - `metadata["feature_rules"]` retains the richer calibration context: the difference from the factual baseline (`weight_value`), the detailed uncertainty metadata, and the alternative value used to create the scenario.
 
-Use these payloads to answer “which change makes the most difference?”—the best candidate is the scenario with the highest calibrated probability swing and acceptable feature adjustments. If explanation envelopes remain wide, treat the scenario with caution and look for additional calibration data. Alternatives describe how the model's calibrated output responds to a different feature range; they are not causal counterfactuals, and changing a feature in the real world need not change the outcome.
+Compare the alternative prediction with the current one, and inspect its range.
+A large change in model output is not evidence that a real-world action is
+feasible, beneficial or causal. Alternatives describe how the model's calibrated
+output responds to a different feature range; changing a feature in the real
+world need not change the outcome.
 ## 3. Connect explanations to plots
 
 PlotSpec plots visualise the same rule rankings and uncertainty intervals:
@@ -164,7 +176,9 @@ Interpret the chart as follows:
 
 When reviewing alternative explanations, use `plot(style="alternative")` (or open the alternative tab in interactive renderers) to see how the suggested feature changes alter the bars and the calibrated outcome.
 
-If the plot does not match the table, regenerate the explanation—the library guarantees they use the same data.
+If the plot does not match the table, check the selected instance, output class,
+ranking and plotting options. Record the CE version and a reproducing example
+before reporting a mismatch.
 
 ## 4. Provenance and telemetry
 

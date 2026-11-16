@@ -22,6 +22,10 @@
 
 ### Changed
 
+- **Experimental documentation:** distinguish prediction calibration, interval
+  coverage and explanation ranges; correct API descriptions and regulatory
+  references while retaining unresolved scientific and legal review questions.
+
 - **Narrative provider plans withdrawn (#231, #233, #234):** the narrative
   provider plugin family, provider API and provider verification chain are not
   planned. `to_narrative()`, `to_dataframe()`, `narrate()` and

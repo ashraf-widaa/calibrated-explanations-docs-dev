@@ -110,8 +110,8 @@ Each name links to its entry in the API reference.
 ### Classification
 
 - **Calibration prerequisites**: fit on proper split and calibrate on held-out calibration split.
-- **Mode-specific guarantees**: Venn-Abers calibrated class probabilities with intervals.
-- **Assumptions**: exchangeability or calibration-deployment distribution match.
+- **Mode-specific guarantees**: CE returns a Venn-Abers pair and a merged class probability; the exact pair/merged-probability validity wording remains under author review (SR-03).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or regime shift.
 - **Explanation-envelope limits**: feature-level intervals are model-response summaries, not causal claims.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -120,7 +120,7 @@ Each name links to its entry in the API reference.
 
 - **Calibration prerequisites**: fit regression model and calibrate CPS on held-out calibration split.
 - **Mode-specific guarantees**: CPS percentile intervals for requested `low_high_percentiles`.
-- **Assumptions**: exchangeability or calibration-deployment distribution match.
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
 - **Explanation-envelope limits**: interval effects on explanations summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
@@ -128,8 +128,8 @@ Each name links to its entry in the API reference.
 ### Probabilistic or thresholded regression
 
 - **Calibration prerequisites**: fit regression model and calibrate before threshold queries.
-- **Mode-specific guarantees**: threshold events use CPS with Venn-Abers calibrated probabilities.
-- **Assumptions**: exchangeability or calibration-deployment distribution match.
+- **Mode-specific guarantees**: threshold queries return event probabilities and ranges from CPS scores followed by Venn-Abers; the exact validity statement remains under author review (SR-15).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift and no causal guarantee from threshold probabilities.
 - **Explanation-envelope limits**: feature-level probability shifts are model-response summaries.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.

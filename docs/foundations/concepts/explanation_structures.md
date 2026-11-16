@@ -46,8 +46,8 @@ The `CalibratedExplanation` abstract base class defines the core interface and s
 - **`conditions`**: List of condition objects used in rule generation
 
 #### State Flags
-- **`_has_rules`**: Boolean indicating if rules have been computed
-- **`_has_conjunctive_rules`**: Boolean indicating if conjunctive rules exist
+- **`has_rules`**: Boolean indicating if rules have been computed
+- **`has_conjunctive_rules`**: Boolean indicating if conjunctive rules exist
 - **`focus_columns`**: Optional list of feature indices to focus explanations on
 
 #### Metadata

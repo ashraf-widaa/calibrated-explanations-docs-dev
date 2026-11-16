@@ -17,8 +17,8 @@ can split into training, calibration and test sets.
 ## Classification semantics note
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
-- **Mode-specific guarantees**: Venn-Abers provides calibrated probability intervals for class predictions.
-- **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
+- **Mode-specific guarantees**: CE returns a Venn-Abers pair and a merged class probability; the exact pair/merged-probability validity wording remains under author review (SR-03).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or regime shift.
 - **Explanation-envelope limits**: feature-level intervals are model-behavior summaries, not causal guarantees.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.

@@ -1,6 +1,8 @@
 # Ensured Explanations Playbook
 
-Ensured explanations actively reduce epistemic uncertainty in alternative explanations, helping you find more reliable intervention recommendations.
+Ensured explanations filter existing alternatives by comparing their reported
+interval widths with the original prediction's width. This is a way to inspect
+model-response scenarios, not a guarantee about an intervention.
 
 > **Audience:** Practitioner
 
@@ -9,36 +11,35 @@ Ensured explanations actively reduce epistemic uncertainty in alternative explan
 
 - Ensured explanations are a *filtering and ranking framework* over existing
     alternative rules.
-- Ensured filtering prefers alternatives with **narrower uncertainty
-    intervals** than the base prediction interval.
+- The implementation retains alternatives whose reported uncertainty interval
+    is **no wider** than the base prediction interval.
 - The calibration guarantees behind uncertainty intervals require that the
     calibration set and your deployment queries are exchangeable / distribution
-    matched.
+    matched. The alternative distribution-match wording and exact validity
+    statements remain under author review; see
+    {doc}`../../foundations/concepts/calibrated_interval_semantics`.
 ```
 
 ## What are Ensured Explanations?
 
-Standard alternative explanations may have wide uncertainty intervals when the calibration data doesn't cover the proposed scenario well. **Ensured explanations** use strategies to:
-
-1. Prioritize alternatives with lower epistemic uncertainty
-2. Flag alternatives where confidence is insufficient
-3. Guide users toward more reliable recommendations
+An alternative reports the calibrated model's prediction for another feature
+range. Its interval can be wider or narrower than the current prediction's
+interval. The ensured filter compares these widths; ranking controls can then
+order the retained scenarios. Neither step establishes a better real-world
+decision.
 
 ## When to Use
 
-* **High-stakes decisions**: Medical diagnosis, loan approval, safety-critical systems
-* **Audit requirements**: Need to justify confidence in recommendations
-* **Uncertainty-sensitive domains**: When acting on uncertain alternatives is risky
-* **Resource-constrained interventions**: When you can only pursue a few alternatives
+Use the filter when you want to compare alternative model outputs while
+excluding scenarios with wider reported intervals. Record the task, explained
+class or threshold, and filtering options so that the comparison is meaningful.
 
 ## Understanding Epistemic vs Aleatoric Uncertainty
 
-| Type | Source | Can Be Reduced? | Example |
-| :--- | :--- | :--- | :--- |
-| **Epistemic** | Limited data/knowledge | Yes (more data) | "We haven't seen this scenario before" |
-| **Aleatoric** | Inherent randomness | No | "This outcome varies naturally" |
-
-Ensured explanations focus on **reducing epistemic uncertainty** by identifying alternatives where the calibration data provides strong support.
+Whether CE's reported ranges should be interpreted as epistemic or aleatoric
+uncertainty remains under review by the CE authors (SR-07). This guide describes
+the observable width comparison and does not claim that the filter measures or
+reduces a separately identified uncertainty component.
 
 ## Usage Pattern
 
@@ -50,7 +51,7 @@ The ensured framework is exposed directly on the alternative explanation objects
 alternatives = explainer.explore_alternatives(x_test)
 alt0 = alternatives[0]
 
-# Ensured: alternatives with narrower uncertainty intervals than the base
+# Ensured: alternatives with intervals no wider than the base prediction's
 ensured = alt0.ensured_explanations()
 
 # Super: alternatives reinforcing the base prediction
@@ -93,67 +94,47 @@ Notes:
 
 ## Setting Uncertainty Thresholds
 
-Choose thresholds based on your domain requirements:
-
-| Domain | Suggested Threshold | Rationale |
-| :--- | :--- | :--- |
-| Medical diagnosis | 0.05–0.10 | High stakes require narrow intervals |
-| Financial decisions | 0.10–0.15 | Moderate risk tolerance |
-| Exploratory analysis | 0.20–0.30 | Wider intervals acceptable for insights |
-
-```{admonition} Threshold Selection
-:class: tip
-
-Start with a conservative threshold (e.g., 0.10) and observe how many alternatives pass. If too few pass:
-
-1. Consider whether you need more calibration data
-2. Relax the threshold slightly
-3. Accept that some scenarios genuinely have high uncertainty
-```
+The ensured filter uses a relative comparison with the base interval; it is
+not an application-specific safety threshold. There is no validated universal
+width cutoff for medical, financial or other decisions in this guide. Numeric
+regression widths are in target units, while classification and threshold-event
+widths are in probability units; do not compare them as if they shared a scale.
 
 ## Best Practices
 
 ### 1. Document Your Confidence Criteria
 
-```python
-# Make your filtering criteria explicit and reproducible
-ENSURED_CONFIG = {
-    "max_interval_width": 0.12,
-    "min_calibration_support": 10,  # if available
-    "domain": "credit_approval"
-}
-
-def is_ensured(alternative, config=ENSURED_CONFIG):
-    width = alternative.uncertainty_high - alternative.uncertainty_low
-    return width < config["max_interval_width"]
-```
+Record the base prediction, its interval, the query, the CE version and the
+arguments passed to `ensured_explanations`. The core filtering examples above
+assume an already fitted and calibrated `explainer`; use the
+{doc}`Quick API <../../get-started/quick_api>` for a complete setup.
 
 ### 2. Report Both Ensured and All Alternatives
 
 ```python
 all_alternatives = alternatives[0]
-ensured_alternatives = [a for a in all_alternatives if is_ensured(a)]
+ensured_alternatives = all_alternatives.ensured_explanations()
 
 print(f"Total alternatives: {len(all_alternatives)}")
 print(f"Ensured alternatives: {len(ensured_alternatives)}")
-print(f"Ensured ratio: {len(ensured_alternatives)/len(all_alternatives):.1%}")
+if len(all_alternatives):
+    print(f"Ensured ratio: {len(ensured_alternatives)/len(all_alternatives):.1%}")
 ```
 
 ### 3. Consider Augmenting Calibration Data
 
-If important scenarios consistently fail the ensured threshold:
-
-* Collect more calibration data for those regions
-* Use Mondrian calibration to improve group-specific estimates
-* Document which scenarios remain uncertain
+If scenarios of interest have wide intervals, investigate the data and
+calibration protocol. More data or subgroup calibration may be relevant, but
+neither is a guaranteed remedy. Evaluate any change on held-out data and record
+the assumptions; see {doc}`../evaluate_ce`.
 
 ## Interpreting Ensured Results
 
-| Outcome | Interpretation | Action |
+| Outcome | What it establishes | What it does not establish |
 | :--- | :--- | :--- |
-| Many ensured alternatives | Good calibration coverage | Proceed with confidence |
-| Few ensured alternatives | Sparse calibration regions | Collect more data or accept uncertainty |
-| No ensured alternatives | Novel scenario | Defer to expert or flag for review |
+| Many retained alternatives | Many scenarios passed the width comparison | Good coverage or permission to act |
+| Few retained alternatives | Few scenarios passed the width comparison | A diagnosis of sparse data |
+| No retained alternatives | No candidate passed with the chosen options | That the case is necessarily novel |
 
 ## Research Background
 

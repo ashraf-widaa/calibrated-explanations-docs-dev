@@ -9,7 +9,7 @@ Regression in Calibrated Explanations is **conformal interval regression** imple
 
 - **Calibration prerequisites**: fit on `x_proper, y_proper` and calibrate on held-out `x_cal, y_cal`.
 - **Mode-specific guarantees**: CPS returns calibrated percentile intervals for requested `low_high_percentiles`.
-- **Assumptions**: calibration and deployment data are exchangeable or distribution-matched.
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
 - **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
 - **Explanation-envelope limits**: feature-level interval effects summarize model behavior under perturbation.
 - **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
