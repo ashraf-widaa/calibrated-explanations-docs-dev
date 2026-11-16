@@ -1,10 +1,9 @@
 # Evaluate CE on your own data
 
-This guide takes you from a working example to a checked, reproducible
-application: how to set CE up on your own data, how to check its calibrated
-outputs on held-out data, the most common mistakes, and the situations where
-CE's outputs should not be trusted. It assumes you have completed the
-{doc}`Quick Start <../get-started/index>`.
+Use this guide once your CE workflow runs. It checks the outputs on held-out
+data: label accuracy, probability scores and reliability for classification,
+and observed target coverage and width for interval regression. For the
+integration steps, start with {doc}`../get-started/apply-to-your-data`.
 
 The checks below are **empirical**: they tell you how CE behaved on your test
 data. They do not prove a guarantee, and they do not replace the conditions in

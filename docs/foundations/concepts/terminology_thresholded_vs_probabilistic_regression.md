@@ -6,6 +6,10 @@ In user-facing docs and APIs, use `probabilistic regression`. In architecture an
 
 Both terms refer to regression with a non-`None` `threshold` query that returns calibrated event probabilities with interval bounds.
 
+For usage and interpretation, read {doc}`probabilistic_regression`. The
+definition below connects that workflow to implementation terminology; the
+inventory and history are mainly for documentation maintainers.
+
 For full guarantees, assumptions, explicit non-guarantees, and feature-level interval limits, use {doc}`calibrated_interval_semantics`.
 
 ## Use in docs
@@ -20,7 +24,8 @@ For full guarantees, assumptions, explicit non-guarantees, and feature-level int
 
 Definition source: `docs/foundations/concepts/probabilistic_regression.md`.
 
-It refers to regression predictions queried as probability events by threshold, for example `P(y <= t)` or interval events. The output is a calibrated event probability plus interval bounds.
+The question is about an event on the numeric target, such as `P(y <= t)`,
+rather than a range of target values.
 
 User-level API pattern:
 
@@ -53,8 +58,8 @@ va = VennAbers(None, (self.ce.y_cal[cal_va] <= y_threshold).astype(int), ...)
 
 ### 1.3 Evidence of equivalence
 
-- ADR-021 section "Thresholded regression: CPS probabilities calibrated by Venn-Abers" explicitly describes the same path as the probabilistic regression flow.
-- Runtime API signal is identical: this mode is selected by providing `threshold`.
+ADR-021 describes the same CPS-score/Venn–Abers path. Providing `threshold`
+selects that path under either name; the names do not select different APIs.
 
 ### 1.4 Why two terms exist
 
@@ -63,6 +68,8 @@ va = VennAbers(None, (self.ce.y_cal[cal_va] <= y_threshold).astype(int), ...)
 | Emphasis | Mechanism (threshold operation) | Output (calibrated probabilities) |
 | Primary audience | Architecture and implementation contributors | Practitioners and API users |
 | Typical context | ADRs, plugin internals, design notes | Quickstarts, concept guides, notebooks |
+
+:::{dropdown} Maintainer reference: usage inventory and history
 
 ## Section 2: Terminology inventory
 
@@ -135,6 +142,8 @@ Control: keep this mapping in Tier 3 reference pages and keep Tier 1 and Tier 2 
 - Allowed technical mechanism term: `thresholded regression`
 - Do not present them as different modes
 - When uncertain, prefer user-facing term and add one parenthetical mechanism note if needed
+
+:::
 
 ## Section 6: Related references
 

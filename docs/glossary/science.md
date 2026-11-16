@@ -249,10 +249,10 @@ Drift
   **Learn more:** {doc}`../foundations/concepts/calibrated_interval_semantics`
 
 Exchangeability
-  The assumption, stated for every CE mode, that the calibration data and the
-  cases CE is applied to are exchangeable or distribution-matched: their joint
-  distribution does not change when the cases are reordered. CE's calibration
-  guarantees depend on it. *Wording under review.*
+  Reordering the calibration and new cases leaves their joint distribution
+  unchanged. CE's calibration statements depend on this assumption and the
+  method's protocol. Whether "distribution-matched" is an adequate alternative
+  description remains under author review. *Wording under review.*
 
   **Learn more:** {doc}`../foundations/concepts/calibrated_interval_semantics`
 ```

@@ -5,6 +5,10 @@ own problem involves: the steps, what each step produces, how to check it, and
 which tutorial to run next. It assumes you have chosen a task and mode in
 {doc}`ce-tasks-and-modes` (step 1).
 
+Use this as a planning guide. When you are ready to implement the steps,
+{doc}`apply-to-your-data` supplies the code; {doc}`../practitioner/evaluate_ce`
+then separates empirical checks from claims about guarantees.
+
 ## The seven steps at a glance
 
 1. **Check that CE fits.** Confirm a supervised task (a class or a number per
