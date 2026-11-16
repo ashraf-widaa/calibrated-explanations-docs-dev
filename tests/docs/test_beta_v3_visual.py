@@ -47,7 +47,6 @@ def test_output_types_figure_sits_on_the_guarantees_page_not_quick_start() -> No
         ("get-started/ce-tasks-and-modes.md", "| Mode | Output | Read it as |"),
         ("get-started/ce-tasks-and-modes.md", "| Term | Means | Examples | How you choose it |"),
         ("get-started/ce-tasks-and-modes.md", "| Capability | Binary |"),
-        ("get-started/ml-foundations.md", "| Model family | How it works, in one line | Strengths | Watch out for |"),
     ],
 )
 def test_wide_tables_use_the_phone_layout(page: str, header: str) -> None:

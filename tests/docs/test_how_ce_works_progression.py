@@ -59,16 +59,15 @@ def test_workflow_table_separates_the_three_output_meanings() -> None:
 def test_workflow_keeps_the_guarantee_distinctions_apart() -> None:
     text = _flat(WORKFLOW)
     for phrase in (
-        "**Probability calibration**",
-        "**Coverage**",
-        "*marginal* coverage",
-        "**Explanation ranges**",
-        "**Model correctness**",
-        "**Distribution shift**",
+        "class or event probability",
+        "numeric target",
+        "explanation weight",
+        "not formal per-feature coverage guarantees",
+        "semantics reference <calibrated_interval_semantics>",
     ):
         assert phrase in text, phrase
     # Open author questions keep their markers (SR-07, SR-15).
-    assert "described as either is under review by the CE authors" in text
+    assert "aleatoric or epistemic uncertainty remains under author review" in text
     assert "threshold events in probabilistic regression is under review by the CE authors" in text
 
 
