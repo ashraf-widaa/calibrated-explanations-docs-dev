@@ -1,6 +1,10 @@
 # Explanation Structures
 
-This document provides a comprehensive overview of the internal data structures used by the `CalibratedExplanation` classes and their subclasses. Understanding these structures is crucial for developers working with or extending the calibrated explanations framework.
+This reference is for developers inspecting or extending explanation internals.
+It describes storage and rule-generation structures, including private helpers;
+these are not a recommended interface for application code. To read returned
+explanations through public methods, use
+{doc}`../how-to/interpret_explanations` first.
 
 ## Overview
 

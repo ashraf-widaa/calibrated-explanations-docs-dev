@@ -6,9 +6,10 @@ uncertainty range**, and **explanations of each prediction with an uncertainty
 range for every feature's effect**. It works with models that have a
 scikit-learn-style classification or regression interface.
 
-This page explains the problem CE addresses, what it contributes, what it does
-and does not guarantee, and when it is a good fit. No mathematics is needed;
-links at the end lead to the full treatment.
+Use this overview to understand CE's purpose, outputs and fit for your task.
+For the steps CE adds to a model workflow, read {doc}`get-started/why-ce`;
+for a concrete output, read {doc}`get-started/ce-by-example`. No mathematics
+is needed here; the links below lead to mechanisms and formal qualifications.
 
 (wic-problem)=
 
@@ -25,13 +26,12 @@ benign". Two things can go wrong with taking it at face value.
    how well the data support it. Two cases with the same score can rest on
    very different amounts of evidence.
 
-Explanation methods inherit both problems. Most explanation tools, such as
-LIME and SHAP, explain whatever the model outputs. If those outputs are
-miscalibrated, the explanation describes a miscalibrated model; and a
-feature's importance is usually reported as one number, without saying how
-certain it is. This does not make such methods wrong: they answer a different
-question (which features drive the model's output), and that answer does not
-include how far the output or the explanation can be relied on.
+An explanation of a raw model output does not itself calibrate that output.
+Feature-attribution methods such as LIME and SHAP answer a useful question:
+which features contribute to the model response? CE addresses the related
+question of explaining calibrated outputs with reported ranges. The
+{doc}`comparison <compare>` distinguishes these outputs without ranking
+the methods generally.
 
 (wic-calibration)=
 
@@ -71,7 +71,8 @@ calibrated output**.
   case's own feature values move the calibrated prediction, and by how much.
   An *alternative explanation* shows what the model would predict if a feature
   had a value in a different range.
-- **Three output modes for two prediction tasks.** Classification (binary and multiclass), interval regression
+- **Three output modes for two prediction tasks.** Classification (binary and
+  multiclass), interval regression
   ("where will the value fall?") and probabilistic regression ("how likely is
   the value to be below a threshold?").
 

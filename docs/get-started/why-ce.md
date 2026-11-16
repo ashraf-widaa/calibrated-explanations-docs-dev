@@ -1,7 +1,9 @@
 # Why CE: from a conventional to a CE workflow
 
 **Path A, step 2.** This page answers one question: *why is CE needed, and
-how does a CE workflow differ from a conventional one?* It needs no code. If
+how does a CE workflow differ from a conventional one?* Follow the changes
+to the workflow here; use {doc}`../what-is-ce` for the broader project overview
+and comparison. No code is needed. If
 terms such as *feature*, *label* or *test set* are new, read
 {doc}`ml-foundations` first.
 
@@ -79,9 +81,9 @@ The figure shows how to read the three parts:
 
 ## The four ideas behind it
 
-- **Calibration.** A probability is calibrated if, among cases given about
-  70%, about 70% turn out positive. CE calibrates with Venn-Abers predictors
-  for classification and conformal predictive systems for regression.
+- **Calibration.** CE relates model outputs to known outcomes on held-out
+  data. See {ref}`Calibration is not accuracy <wic-calibration>` for the
+  probability interpretation and {doc}`ce-tasks-and-modes` for CE's modes.
 - **Range (uncertainty).** The lower and upper value around a prediction
   (panel 1). It shows how firmly the calibration data support that
   prediction. It is a statement about many cases, not a promise about one
@@ -103,15 +105,10 @@ The figure shows how to read the three parts:
 | The same features for new cases | New cases must be described exactly like the training and calibration data |
 | Some extra computation | An explanation asks the calibrated model for many extra predictions per explained case |
 
-Each data set has one job. The **training set** fits the model. The
-**calibration set** lets CE measure how the model's outputs relate to real
-outcomes; calibrating on training data makes the model look more reliable
-than it is. The **test set** checks the model and CE's outputs on untouched
-cases; using it for training or calibration gives over-optimistic results.
-Any information from the calibration or test data that reaches training, for
-example scaling statistics computed on all the data, is **data leakage**:
-split first, and fit every preprocessing step on the training data only
-(details in {doc}`ml-foundations`, section A5).
+Keep these data roles separate: train the model, calibrate CE on held-out
+cases, then evaluate on untouched test cases. Split before fitting
+preprocessing as well. {doc}`ML essentials <ml-foundations>` (A5) explains
+data leakage and how to avoid it.
 
 ## Assumptions and limitations
 

@@ -5,7 +5,7 @@ adapters.
 
 ## Current default posture
 
-As of **v0.11.3 Task 6**, PlotSpec is the default user-facing plotting path for:
+PlotSpec has been the default user-facing plotting path since **v0.11.3** for:
 
 - `plot_probabilistic`
 - `plot_regression`
@@ -17,6 +17,10 @@ As of **v0.11.3 Task 6**, PlotSpec is the default user-facing plotting path for:
 
 This default change follows the v0.11.2 semantic/visual mending evidence and
 human review recorded under `development/finished-work/plot_spec/`.
+
+For a usage example, start with {doc}`../foundations/how-to/plot_with_plotspec`.
+The historical notes below explain the transition; they are not extra setup
+steps for current users.
 
 ## Legacy opt-out and fallback
 
@@ -38,7 +42,7 @@ PlotSpec can still be requested explicitly with:
 
 ## v0.11.2 Task 9 mending status
 
-The opt-in PlotSpec path now has semantic parity coverage for all six planned
+During the v0.11.2 opt-in phase, semantic parity coverage was added for six
 families: factual probabilistic, factual regression, alternative probabilistic,
 alternative regression, triangular, and global. Triangular and global PlotSpec
 dataclasses render through concrete matplotlib adapter branches rather than
@@ -46,7 +50,7 @@ placeholder primitives. Global PlotSpec payloads preserve threshold and
 class-label semantics so thresholded and class-conditioned axis labels remain
 available to renderers.
 
-This evidence is the basis for the v0.11.3 default promotion.
+This historical evidence supported the v0.11.3 default promotion described above.
 
 ## Core modules
 

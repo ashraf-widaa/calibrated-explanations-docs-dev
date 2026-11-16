@@ -25,6 +25,10 @@ what they guarantee, and where the guarantees stop.
 {doc}`../../get-started/ce-tasks-and-modes` (CE's three modes). The mathematical parts assume
 conditional expectation and order statistics.
 
+For explanation construction before the mathematics, read
+{doc}`ce_workflow` ("How an explanation is built"). This page then explains
+the calibration methods supplying those predictions and scenario outputs.
+
 **How to read this page.** Each section starts with a plain-language summary, then
 explains the mechanism and CE's output, then gives the construction and the formal
 statement. You can stop after the first two parts. Four kinds of boxes separate the
@@ -50,6 +54,10 @@ statements:
 | {math}`p` | CE's single (merged) probability |
 | {math}`\alpha_i = y_i - \hat y(x_i)` | Calibration residuals; {math}`\alpha_{(k)}` is the {math}`k`-th smallest |
 | {math}`l, h` | Requested lower and upper percentiles as fractions (5 % is 0.05) |
+
+The mathematical notation uses fractions. The Python API uses percentage
+values: `low_high_percentiles=(5, 95)` corresponds to {math}`l=0.05` and
+{math}`h=0.95`. The call examples below use the API convention.
 
 ## 1. Calibration
 
@@ -122,7 +130,7 @@ Eq. 3, which uses top-label accuracy and confidence; this is the binary form).
 
 Section 2 shows a reliability table for the walkthrough data.
 
-**Isotonic regression.** A standard way to calibrate scores is to fit a non-decreasing
+**Background for Venn–Abers: isotonic regression.** A standard way to calibrate scores is to fit a non-decreasing
 function {math}`f` that minimises {math}`\sum_i \big(y_i - f(s_i)\big)^2` on the calibration
 set. The *pool-adjacent-violators* algorithm computes it: scan the cases in score order;
 whenever a fitted value is larger than the next one, merge them into one block whose value
@@ -515,7 +523,7 @@ single calibration set can land somewhat above or below the requested rate.
 | Mode | Call | Method | Output |
 |---|---|---|---|
 | Classification | `predict_proba(x, uq_interval=True)` | Venn–Abers on model scores | {math}`p` and {math}`[p_0, p_1]` |
-| Interval regression | `predict(x, uq_interval=True, low_high_percentiles=(l, h))` | Split CPS on residuals, full calibration set | Median and prediction interval |
+| Interval regression | `predict(x, uq_interval=True, low_high_percentiles=(5, 95))` | Split CPS on residuals, full calibration set | Median and prediction interval |
 | Thresholded (probabilistic) regression | `predict_proba(x, threshold=t, uq_interval=True)` | CPS score, then Venn–Abers on the event {math}`y \le t`, on two halves of the calibration set | {math}`P(y \le t)` and {math}`[p_0, p_1]` |
 :::
 

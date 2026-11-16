@@ -1,9 +1,10 @@
 # Theory & literature
 
-Calibrated Explanations builds on a multi-year research program spanning binary
-and multiclass classification, probabilistic and interval regression, and
-uncertainty-aware interpretation tooling. Use this page to locate published
-papers, benchmark references, and funding acknowledgements.
+Use this page for a short account of CE's research contributions and their
+relationship to the software. Use {doc}`../../citing` for complete references
+and BibTeX, and {doc}`../replication/index` for the route to study-specific
+code and environments. Published results, current API behavior and proposed
+research directions are distinct sources of information.
 
 ## Publication highlights
 

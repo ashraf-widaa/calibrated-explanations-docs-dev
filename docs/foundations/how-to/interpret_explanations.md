@@ -4,7 +4,11 @@ sidebarclass: how-to
 
 # Interpret calibrated explanations
 
-Understanding the explanation objects is the core reason to use this library. This guide shows how to read factual and alternative explanations, relate them to the calibrated predictions and uncertainty intervals they produce, and connect them to the plots. What the ranges mean in each mode is defined in {doc}`../concepts/calibrated_interval_semantics`.
+Use this guide after generating explanations: identify the quantity being
+explained, read the conditions and weights, then inspect the public rule
+payloads and plots. For how the substituted predictions are constructed,
+read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
+{doc}`../concepts/calibrated_interval_semantics`.
 
 For regression, the `prediction_interval` is a **conformal interval** produced by **Conformal Predictive Systems (CPS)**, and the interval percentiles are controlled by `low_high_percentiles`.
 
@@ -64,7 +68,7 @@ print(f"Mode: {factual.get_mode()}  Calibrated prediction: {factual.predict:.3f}
 print(f"Mode: {alternative.get_mode()}  Calibrated prediction: {alternative.predict:.3f}")
 ```
 
-Key attributes shared by both modes:
+Key attributes shared by both explanation types:
 
 | Attribute | Description |
 | --------- | ----------- |

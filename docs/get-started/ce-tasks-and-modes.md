@@ -84,6 +84,20 @@ Probabilistic regression is not a separate kind of model: the model is the
 same regression model, and only the question asked of its predictions changes
 when you pass a `threshold`.
 
+## Four terms that are easy to mix up
+
+:::{div} ce-table-compact
+| Term | Means | Examples | How you choose it |
+|---|---|---|---|
+| **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
+| **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
+| **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
+| **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
+:::
+
+Guarded explanations, for example, are an explanation configuration available
+in every mode; they are not a third kind of prediction task.
+
 ## What the outputs mean
 
 :::{div} ce-table-compact
@@ -103,36 +117,6 @@ These three are the **semantic modes** of CE's documentation: a semantic mode
 is *how to interpret an output*. It is not an API argument; you select it
 through the model type and whether you pass a `threshold`.
 
-### How the uncertainty differs between modes
-
-The {ref}`three output types, side by side <ce-output-types>`, on the guarantees page show
-one real example of each.
-
-All three modes rely on one assumption, **exchangeability**: the calibration
-data and the new cases come from the same process, and their order does not
-matter. Independent samples from one stable population satisfy it; data from
-before and after a change in practice may not.
-
-- **Classification** uses Venn–Abers calibration. It calibrates the model's
-  score twice, once assuming the new case belongs to the class and once
-  assuming it does not. The two results are the lower and upper probability.
-  Under exchangeability, the value that matches the case's true outcome is
-  calibrated in the long run; because that outcome is unknown when you
-  predict, CE reports both. The single probability CE reports merges the pair
-  into one number between them; it is designed to stay close to calibrated
-  but does not keep the exact guarantee. The bounds are **not** a
-  conventional confidence interval for an unknown true probability.
-- **Interval regression** uses conformal prediction, which turns the model's
-  errors on the calibration set into intervals (CE uses conformal predictive
-  systems). Under exchangeability, intervals contain the true value at the
-  requested rate *on average over cases* (marginal coverage), not for every
-  individual case. *Wording under review by the CE authors.*
-- **Probabilistic regression** combines both: a conformal predictive
-  distribution gives the event probability, and Venn–Abers calibrates it.
-
-Go deeper: {doc}`../foundations/concepts/calibration_methods` shows how
-Venn–Abers and conformal predictive systems work, with worked examples.
-
 ### What explanations mean in every mode
 
 Explanations sit on top of the calibrated output:
@@ -149,20 +133,6 @@ Explanations describe the model's behaviour. They are not causal claims about
 the world, and acting on an alternative does not guarantee a different real
 outcome. The canonical statement of guarantees and non-guarantees for each
 mode is {doc}`../foundations/concepts/calibrated_interval_semantics`.
-
-## Four terms that are easy to mix up
-
-:::{div} ce-table-compact
-| Term | Means | Examples | How you choose it |
-|---|---|---|---|
-| **Prediction task** | What the model predicts | Classification (a class), regression (a number) | Your problem and your model |
-| **CE mode** | Which question CE answers about the prediction, and so how to read the output | Classification; interval regression; probabilistic regression | The model type, and whether you pass a `threshold` |
-| **Calibration method** | The statistical procedure CE uses to calibrate the output | Venn-Abers predictors; conformal predictive systems (CPS); CPS followed by Venn-Abers | Set by the mode, not chosen separately |
-| **Explanation configuration** | How explanations are produced or constrained | Factual or alternative explanations; guarded explanations; conjunctions; excluded features | Arguments to the explanation calls |
-:::
-
-Guarded explanations, for example, are an explanation configuration available
-in every mode; they are not a third kind of prediction task.
 
 **Continue**
 
@@ -230,5 +200,35 @@ Go deeper: {doc}`../foundations/how-to/interpret_explanations`,
 
 Operational issues, such as errors from specific call orders, are listed in
 {doc}`troubleshooting`.
+
+## How the uncertainty differs between modes
+
+The {ref}`three output types, side by side <ce-output-types>`, on the guarantees page show
+one real example of each.
+
+All three modes rely on one assumption, **exchangeability**: the calibration
+data and the new cases come from the same process, and their order does not
+matter. Independent samples from one stable population satisfy it; data from
+before and after a change in practice may not.
+
+- **Classification** uses Venn–Abers calibration. It calibrates the model's
+  score twice, once assuming the new case belongs to the class and once
+  assuming it does not. The two results are the lower and upper probability.
+  Under exchangeability, the value that matches the case's true outcome is
+  calibrated in the long run; because that outcome is unknown when you
+  predict, CE reports both. The single probability CE reports merges the pair
+  into one number between them; it is designed to stay close to calibrated
+  but does not keep the exact guarantee. The bounds are **not** a
+  conventional confidence interval for an unknown true probability.
+- **Interval regression** uses conformal prediction, which turns the model's
+  errors on the calibration set into intervals (CE uses conformal predictive
+  systems). Under exchangeability, intervals contain the true value at the
+  requested rate *on average over cases* (marginal coverage), not for every
+  individual case. *Wording under review by the CE authors.*
+- **Probabilistic regression** combines both: a conformal predictive
+  distribution gives the event probability, and Venn–Abers calibrates it.
+
+Go deeper: {doc}`../foundations/concepts/calibration_methods` shows how
+Venn–Abers and conformal predictive systems work, with worked examples.
 
 Entry-point tier: Tier 1.

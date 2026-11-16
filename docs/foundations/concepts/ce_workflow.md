@@ -119,22 +119,15 @@ computed from calibrated outputs, but no formal per-feature guarantee is
 claimed for them. Explanations describe the model; they are not causal. See
 {doc}`calibrated_interval_semantics` for the exact statements per task.
 
-Six things are easy to mix up; keep them apart:
+When reading a range, first ask what it refers to: a class or event
+probability, a numeric target, or an explanation weight. These quantities have
+different interpretations. The {doc}`semantics reference <calibrated_interval_semantics>`
+keeps the formal qualifications together; {doc}`../how-to/interpret_explanations`
+connects them to returned records.
 
-- **Probability calibration** (classification, probabilistic regression) is a
-  property of the probabilities over many cases.
-- **Coverage** (interval regression) is the share of intervals that contain
-  the true value, on average over cases (*marginal* coverage). It is not a
-  statement about each case, nor about each subgroup unless CE calibrates per
-  group ({doc}`../how-to/conditional_calibration`).
-- **Explanation ranges** are computed from calibrated outputs; no formal
-  guarantee is claimed for them.
-- **Model correctness**: none of the above says that the model, or one
-  prediction, is right.
-- **Distribution shift**: when new cases differ from the calibration data,
-  the statements no longer apply; recalibrate on recent data.
-- **Aleatoric and epistemic uncertainty**: *whether CE's ranges should be
-  described as either is under review by the CE authors.*
+Whether CE's ranges should be described as aleatoric or epistemic uncertainty
+remains under author review. Do not infer either interpretation from width
+alone.
 
 ## Learning path
 
