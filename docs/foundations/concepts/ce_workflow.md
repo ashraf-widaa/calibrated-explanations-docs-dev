@@ -68,16 +68,41 @@ to say how far the true value is likely to be from the prediction.
 
 ## How an explanation is built
 
-For each feature, CE splits the feature's values into ranges using the
-calibration data, notes which range the case falls in (the *rule*, such as
-`worst concave points > 0.14`), and substitutes typical values from the other
-range(s). The difference between the case's calibrated prediction and the
-calibrated predictions with substituted values is the feature's **weight**,
-and the differences between the corresponding bounds give the weight's
-range. *Alternative explanations* report the calibrated predictions for
-other ranges directly. The
+Start with the quantity CE is explaining. In the running binary example it is
+the probability of *benign*, not the probability of the predicted class
+*malignant*. CE reports 0.286, with a prediction range of [0.167, 0.333].
+
+1. **Find a factual rule.** CE groups a numerical feature's values into ranges
+   using calibration data. The case satisfies
+   `worst concave points > 0.14`; this observed condition is its factual rule.
+2. **Substitute feature values.** Keep the case's other features fixed and ask
+   the calibrated model again with representative values from another range.
+   CE summarizes those substituted outputs. This asks about the model's
+   response, not about changing the real-world patient.
+3. **Compare the predictions.** For the other side of this split,
+   `worst concave points < 0.14`, the summarized probability is 0.476.
+   The factual weight compares the original with the substituted output:
+   0.286 − 0.476 = −0.190. Relative to those substituted values, the observed
+   condition lowers the modeled probability of *benign*.
+4. **Read the alternative directly.** The alternative reports 0.476 with
+   range [0.333, 0.600]. The same substituted scenario supports the factual
+   comparison and the alternative row, but they report different quantities:
+   a contribution versus a scenario prediction.
+
+The factual weight also has a derived range, approximately [−0.31, −0.05]
+here. In this single-feature comparison, CE subtracts the substituted-output
+bounds from the original point prediction and orders the resulting values.
+It does not subtract the original lower bound from another lower bound.
+These derived ranges describe the computation; they are not formal
+per-feature coverage guarantees.
+
+This is one numerical feature and one split. Other features can have more
+candidate ranges; conjunctions combine conditions. The
 {doc}`walkthrough, section 6 <../../get-started/quickstart_walkthrough>`
-shows each step with real numbers.
+shows the calculation and its output, while
+{doc}`../how-to/interpret_explanations` explains how to read the rule payloads.
+The general scientific interpretation of explanation ranges remains under
+author review (SR-14).
 
 (ce-workflow-guarantees)=
 

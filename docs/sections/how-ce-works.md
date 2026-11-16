@@ -28,16 +28,16 @@ assumptions and references).
 
 1. {doc}`The CE workflow <../foundations/concepts/ce_workflow>` (L1): the
    whole picture, the chain above, and a learning path.
-2. {doc}`Statistical methods behind CE <../foundations/concepts/calibration_methods>`
+2. {ref}`How an explanation is built <ce-workflow-explanations>` (L1–L2): rules,
+   substituted values, factual weights and alternative predictions.
+3. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`
+   (L2): factual and alternative explanations, rule tables and plots.
+4. {doc}`Statistical methods behind CE <../foundations/concepts/calibration_methods>`
    (L2–L3): Venn–Abers predictors and conformal predictive systems, with
    worked examples and derivations.
-3. {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`
+5. {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`
    (L3): the canonical statement of what holds in each mode, under which
    assumptions, and what does not.
-4. {ref}`How an explanation is built <ce-workflow-explanations>` (L1–L2): rules,
-   weights and their ranges.
-5. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`
-   (L2): factual and alternative explanations, rule tables and plots.
 
 Missing a prerequisite? The {doc}`Essential Foundations <../foundations/index>`
 hub collects them; the {doc}`Quick Start <../get-started/index>` gives the

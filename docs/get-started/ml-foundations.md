@@ -14,17 +14,10 @@ cells.
 
 ## A1. What is an AI/ML model?
 
-**Artificial intelligence (AI)** is the broad goal of building systems that
-perform tasks we associate with intelligence. **Machine learning (ML)** is one
-way to get there: instead of writing rules by hand, we let a program learn
-patterns from examples. **Deep learning** is a part of machine learning that
-uses large neural networks.
-
-```{mermaid}
-flowchart LR
-    AI["Artificial intelligence<br/>(the broad goal)"] --> ML["Machine learning<br/>(learn patterns from data)"]
-    ML --> DL["Deep learning<br/>(large neural networks)"]
-```
+**Machine learning (ML)** learns patterns from examples instead of relying
+entirely on rules written by hand. It is one approach to artificial intelligence
+(AI). For CE, the relevant object is the trained predictive model: something
+you can ask for a class or a numeric prediction.
 
 A model learns a relationship between **inputs** and an **output**:
 
@@ -40,19 +33,14 @@ cases it has never seen.
 
 ## A2. How does machine learning learn?
 
-Machine learning methods differ in what kind of feedback they learn from.
+CE works with **supervised** predictive models, trained on examples with known
+targets. In the running example, the inputs are cell measurements and the known
+target is malignant or benign. CE needs additional labelled cases for
+calibration after the model has been trained.
 
-| Learning approach | Learns from | Typical example |
-|---|---|---|
-| Supervised learning | Examples with known targets | Predicting a diagnosis from labelled patient records |
-| Unsupervised learning | Examples without targets | Grouping customers with similar behaviour |
-| Self-supervised learning | Targets created from the data itself | Predicting a hidden word in a sentence |
-| Reinforcement learning | Rewards from acting in an environment | Learning to play a game by trial and error |
-
-Calibrated Explanations works with **supervised** predictive models: models
-trained on labelled examples that predict a class or a number for a new case.
-It does not explain clustering, reinforcement-learning policies or generated
-text.
+Clustering, reinforcement-learning policies and generated text are outside
+the core workflows described here. You do not need a survey of those methods
+to follow CE.
 
 ## A3. From a problem to a prediction task
 
@@ -65,21 +53,16 @@ input data.
 | One of two categories | Binary classification | *malignant* or *benign*, plus a probability such as 0.29 for *benign* |
 | One of several categories | Multiclass classification | *setosa*, *versicolor* or *virginica*, plus a probability for each |
 | A number | Regression | a disease-progression score of 172 |
-| New content | Generation | a paragraph of text |
 
 A probability is not a separate task: classification models usually output a
 probability for each class alongside the predicted label, and a regression
 model can be asked how likely an outcome above or below some value is. Those
 probabilities are what calibration, later on this path, makes reliable.
 
-Data comes in many forms: **tabular** data (rows and columns, like a
-spreadsheet), **images**, **text** and **time series**. The same data can
-support different tasks. Patient records can feed a classifier (*will this
-patient be readmitted?*) or a regression model (*how many days until
-readmission?*). The form of the data does not decide the task for you.
-
-CE's core workflows are classification and regression on tabular features.
-Generation is listed here only for contrast.
+These CE workflows use **tabular** features: rows describe cases and columns
+describe measurements. The same patient records could support classification
+(*will this patient be readmitted?*) or regression (*how many days until
+readmission?*). Choose the question before choosing how to read CE's output.
 
 ## A4. Model families, architectures and algorithms
 
@@ -98,23 +81,22 @@ flowchart LR
 - The **model family** and **architecture** describe the form of the model.
 - The **training algorithm** is the procedure that sets its parameters.
 
-You do not need to remember the families below to use CE; skim the table and
-move on. Common model families for tabular data:
+CE does not require one model family. The example uses a random forest; the
+important compatibility question is whether your model provides the prediction
+methods CE needs. Some common families illustrate the distinction:
 
 :::{div} ce-table-compact
 | Model family | How it works, in one line | Strengths | Watch out for |
 |---|---|---|---|
 | Linear models | Weighted sum of features | Fast, transparent | Miss non-linear patterns |
-| Decision trees | A sequence of yes/no questions | Easy to read | Unstable, overfit easily |
 | Random forests and other ensembles | Many trees vote or average | Strong default for tables | Less transparent |
 | Neural networks | Layers of learned transformations | Very flexible | Need more data and tuning |
-| Transformers | Neural networks built around attention | State of the art for text and sequences | Large and data-hungry |
 :::
 
-Choose a model by the size and type of your data, the accuracy you need, how
-fast it must run, and how much transparency the setting requires. CE adds
-calibrated uncertainty and explanations on top of whichever model you choose;
-it does not require a particular family.
+Model selection is a separate task; the
+[scikit-learn user guide](https://scikit-learn.org/stable/user_guide.html)
+provides deeper background. For CE, check the model interface in
+{doc}`ce-tasks-and-modes`, then keep training and calibration data separate.
 
 ## A5. Developing a model: the data sets and their roles
 
@@ -161,29 +143,16 @@ as mean absolute error describe how far predictions are from the truth.
 
 ## A6. Why predictions are not enough
 
-A model with high accuracy can still mislead you about individual cases.
+A model can predict the right class often while reporting misleading
+probabilities. **Calibration** asks whether predicted probabilities agree with
+outcome frequencies over cases; it is different from label accuracy.
 
-- **Probabilities may be miscalibrated.** Many models output scores that look
-  like probabilities but are not: of the cases a model scores at 0.9, far
-  fewer or far more than 90% may actually be positive. A **calibrated**
-  probability matches the observed frequency of outcomes.
-- **Uncertainty is usually hidden.** A single number such as 0.29 says nothing
-  about how well the data support it. Reporting a range shows whether the
-  estimate rests on many comparable cases or very few.
-- **Predictions need reasons.** People who act on a prediction often need to
-  know which features it depends on, so they can check it against their own
-  knowledge.
-- **Ordinary explanations have limits.** Many explanation methods report a
-  feature's importance without saying how certain that importance is, and
-  without connecting it to a calibrated prediction.
-
-Calibrated Explanations addresses these points for supported supervised
-models. It calibrates the model's outputs on held-out data, reports
-uncertainty for predictions and for each feature's effect, and offers
-alternative explanations that show how the prediction would change. These
-guarantees hold under {doc}`stated assumptions <../foundations/concepts/calibrated_interval_semantics>`, and an explanation never proves
-cause and effect. The next page, {doc}`why-ce`, shows how a CE workflow
-differs from a conventional one.
+CE calibrates first, then explains the calibrated output with feature rules
+and ranges. The next page, {doc}`why-ce`, shows what changes in the workflow
+and follows one output. Its ranges have
+{doc}`mode-specific meanings and limits <../foundations/concepts/calibrated_interval_semantics>`;
+they do not establish that an individual prediction is correct or that a
+feature causes the outcome.
 
 Go deeper: {doc}`../foundations/concepts/calibration_methods` explains what
 calibration means and how CE calibrates.

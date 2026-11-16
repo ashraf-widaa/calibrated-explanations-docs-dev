@@ -1,7 +1,7 @@
 # CE: What & Why
 
-Understand how AI models work, why trusting their outputs is challenging and
-what Calibrated Explanations contributes.
+Understand what Calibrated Explanations adds to a predictive model, why
+calibration matters, and how to interpret CE's outputs and limits.
 
 **The problem.** A model's output often looks like a probability, but it may
 not behave like one, and it does not say how much evidence lies behind it.

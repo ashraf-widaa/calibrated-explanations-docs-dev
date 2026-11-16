@@ -45,6 +45,25 @@ def test_should_execute_interpretation_fragments_with_public_payloads() -> None:
     alternative_core = context["alternative_payload"]["core"]
     assert factual_core["prediction"]["value"] == factual.predict
     assert factual.predict == pytest.approx(0.286, abs=0.0005)
+    rules = factual.get_rules()
+    feature_pos = rules["feature"].index(27)  # worst concave points, worked case 2
+    assert rules["weight"][feature_pos] == pytest.approx(-0.190, abs=0.0005)
+    metadata = next(
+        row for row in context["factual_payload"]["metadata"]["feature_rules"]
+        if row["feature_index"] == 27
+    )["prediction_uncertainty"]
+    assert (metadata["lower_bound"], metadata["upper_bound"]) == factual.prediction_interval
+    alternative_rules = alternative.get_rules()
+    scenario = next(
+        i for i, feature in enumerate(alternative_rules["feature"])
+        if feature == 27 and abs(alternative_rules["predict"][i] - 0.476) < 0.0005
+    )
+    assert rules["weight_low"][feature_pos] == pytest.approx(
+        factual.predict - alternative_rules["predict_high"][scenario]
+    )
+    assert rules["weight_high"][feature_pos] == pytest.approx(
+        factual.predict - alternative_rules["predict_low"][scenario]
+    )
     assert alternative_core["kind"] == "alternative"
     assert factual_core["feature_rules"] and alternative_core["feature_rules"]
     assert "weight" in factual_core["feature_rules"][0]
