@@ -197,7 +197,7 @@ when the population changes.
 | Symptom | Likely cause | What to do |
 |---|---|---|
 | `ConfigurationError` mentioning `predict_proba` | The classifier has no `predict_proba` (for example `LinearSVC`) | Use a classifier with `predict_proba`, or wrap it in `CalibratedClassifierCV` first |
-| An explanation has no rules | The calibrated probability does not change when any single feature changes, typically for cases at the edge of the range (such as 0.03 [0.00, 0.03]) | Nothing is wrong; read the prediction and its range. Alternative explanations may still be informative |
+| An explanation has no rules | The cause depends on the explanation configuration; the earlier saturated-probability explanation has not been reproduced | If guarded filtering is enabled, inspect its audit ({doc}`quickstart_guarded`); retain the prediction and report a reproducing case if the empty result is unexpected |
 | Very wide ranges | Small calibration set, or few calibration cases like this one | Use more calibration data; check the range widths on the test set |
 | `UserWarning` about feature names | The model was fitted on a pandas DataFrame | Fit the model on NumPy arrays |
 | `ValidationError: Invalid argument type` when indexing explanations | Indexing with a NumPy integer | Use a plain `int`, for example `factual[int(i)]` |

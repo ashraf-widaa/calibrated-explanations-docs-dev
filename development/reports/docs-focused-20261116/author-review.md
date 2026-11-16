@@ -35,5 +35,11 @@ No item below is closed by the documentation edits, tests or a successful build.
 - ADR-021 governs output interpretation; empirical execution establishes API
   behavior in a particular environment, not statistical or legal validity.
 
+The worked-case factual metadata was also checked through the public API:
+`prediction_uncertainty` contains the original prediction's [0.167, 0.333]
+range, not the substituted scenario's [0.333, 0.600] range. The interpretation
+guide now distinguishes them. This resolves an API-description issue, not a
+new scientific validity question; no source-code change was needed.
+
 No messages were sent to authors or legal reviewers. The Product Owner can
 route these questions; no new public "open questions" page was created.

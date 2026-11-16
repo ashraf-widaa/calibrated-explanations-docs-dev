@@ -51,9 +51,11 @@ which tutorial to run next. It assumes you have chosen a task and mode in
 - **Keep preprocessing inside the model.** A scikit-learn pipeline fitted on
   the training set is applied in the same way to every case CE passes to the
   model. CE passes NumPy arrays to the model, so fit the pipeline on arrays.
-- **The calibration set is evidence.** Its size limits how firm the ranges
-  can be: with few calibration cases, ranges become wide. There is no fixed
-  minimum; a few hundred cases is a common starting point.
+- **Check calibration data for your mode.** Sample size affects the available
+  information, but a range's width is not a universal measure of data support.
+  There is no single sample count that establishes adequate calibration for
+  every task. Inspect held-out results and, when using groups, the number of
+  calibration cases in each group.
 - **Ranges describe many cases, not one.** What a range means, and what it
   does not guarantee, differs between modes; the canonical statement is
   {doc}`../foundations/concepts/calibrated_interval_semantics`.

@@ -39,10 +39,11 @@ Teaching games from Grejna about decisions under uncertainty. Educational; their
 :::
 
 :::{grid-item-card} Use CE on Your Own Data
-:link: ../foundations/how-to/integrate_with_pipelines
+:link: ../get-started/apply-to-your-data
 :link-type: doc
 
-Apply CE in Python to your own model and data, inside a scikit-learn pipeline.
+Follow the complete fit, calibrate, predict, explain and evaluate workflow.
+For preprocessing details, continue to the pipeline integration guide.
 :::
 
 :::{grid-item-card} Example Notebooks

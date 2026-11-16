@@ -8,6 +8,12 @@ For guarantees, assumptions and non-guarantees, see
 
 For short definitions of library terms, see the {doc}`Software & Technical Glossary <../glossary/software>`.
 
+**First use:** {doc}`install the package <../get-started/installation>`,
+run the complete {doc}`Quick API example <../get-started/quick_api>`, then
+choose a {doc}`Python tutorial <../tutorials/index>` for your task.
+The architecture and extension references below are for when you need to
+understand or change the implementation.
+
 ## Software Foundations
 
 ::::{grid} 1 2 3 3

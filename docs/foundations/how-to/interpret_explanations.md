@@ -99,17 +99,18 @@ for rule in factual_core["feature_rules"]:
 # the metadata block preserves the detailed calibration artefacts
 factual_metadata = factual_payload["metadata"]["feature_rules"]
 for extra in factual_metadata:
-    print(
-        f"  repr={extra['weight_uncertainty']['representation']} "
-        f"prediction interval=({extra['prediction_uncertainty']['lower_bound']:.3f}, "
-        f"{extra['prediction_uncertainty']['upper_bound']:.3f})"
-    )
+    print(f"  repr={extra['weight_uncertainty']['representation']}")
 ```
 
 The `build_rules_payload` result is a dictionary with two top-level keys:
 
 - `core` contains the calibrated prediction (`core["prediction"]`) and the factual feature rules (`core["feature_rules"]`).
 - `metadata` exposes the full uncertainty records and any derived artefacts (such as the baseline prediction) so downstream consumers can distinguish provenance data from the explanation itself.
+
+Use the factual core for weight intervals and the alternative core for scenario
+prediction intervals. In the worked case, factual metadata's
+`prediction_uncertainty` records the original prediction's range, not the
+substituted scenario's range. Do not use it to reconstruct a weight interval.
 
 Read the factual core from top to bottom:
 

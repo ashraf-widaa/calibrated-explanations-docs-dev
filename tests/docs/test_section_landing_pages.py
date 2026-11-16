@@ -31,7 +31,7 @@ def test_in_practice_cards_point_to_verified_destinations() -> None:
         "https://calibrated-explanations-demo.ju.se/",
         "https://calibrated-explanations-demo.ju.se/expert",
         "https://games.grejna.ai/",
-        "../foundations/how-to/integrate_with_pipelines",
+        "../get-started/apply-to-your-data",
         "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
         "../practitioner/evaluate_ce",
         "../tasks/index",

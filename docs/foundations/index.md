@@ -19,6 +19,7 @@ advanced material.
 
 ## Scientific and statistical foundations
 
+- {doc}`concepts/calibration_methods` – how CE uses Venn–Abers and CPS, from intuition to derivations.
 - {doc}`concepts/calibrated_interval_semantics` – semantics, assumptions and non-guarantees for each mode.
 - {doc}`concepts/probabilistic_regression` – probabilistic and interval regression.
 - {doc}`concepts/terminology_thresholded_vs_probabilistic_regression` – thresholded versus probabilistic regression.

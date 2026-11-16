@@ -91,6 +91,9 @@ for the Mondrian-specific details.
 
 ## Minimum Category Size
 
-Aim for at least 30-50 calibration samples per category. Smaller categories can
-produce unstable or very wide intervals and should be documented as an assumption
-boundary in audits.
+Record the calibration count in every category. No universal count establishes
+adequate calibration: the requested percentiles, task and data matter.
+Small categories can make finite percentile endpoints unavailable or empirical
+checks unstable. For endpoint conventions, see
+{doc}`../concepts/calibration_methods` (section 3); for held-out checks, see
+{doc}`../../practitioner/evaluate_ce`.
