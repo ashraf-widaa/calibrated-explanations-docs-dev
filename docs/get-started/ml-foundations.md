@@ -38,9 +38,8 @@ targets. In the running example, the inputs are cell measurements and the known
 target is malignant or benign. CE needs additional labelled cases for
 calibration after the model has been trained.
 
-Clustering, reinforcement-learning policies and generated text are outside
-the core workflows described here. You do not need a survey of those methods
-to follow CE.
+These pages focus on supervised prediction: first learn from known outcomes,
+then calibrate and explain predictions for new cases.
 
 ## A3. From a problem to a prediction task
 
@@ -56,8 +55,8 @@ input data.
 
 A probability is not a separate task: classification models usually output a
 probability for each class alongside the predicted label, and a regression
-model can be asked how likely an outcome above or below some value is. Those
-probabilities are what calibration, later on this path, makes reliable.
+model can be asked about an event on its numeric target. CE calibrates these
+outputs in different ways; {doc}`ce-tasks-and-modes` introduces the choices.
 
 These CE workflows use **tabular** features: rows describe cases and columns
 describe measurements. The same patient records could support classification
@@ -66,37 +65,16 @@ readmission?*). Choose the question before choosing how to read CE's output.
 
 ## A4. Model families, architectures and algorithms
 
-Four words are often mixed up. They answer different questions:
+A model's family describes its form; its training algorithm describes how
+it is fitted. The running example uses a random forest, an ensemble of
+decision trees. CE does not require this particular family or algorithm.
 
-```{mermaid}
-flowchart LR
-    P["Problem<br/>Is this tumour benign?"] --> T["Task<br/>Binary classification"]
-    T --> F["Model family<br/>Tree ensemble"]
-    F --> A["Architecture<br/>Random forest, 100 trees"]
-    A --> O["Training algorithm<br/>Bootstrap sampling + greedy splits"]
-```
-
-- The **learning approach** is how the model gets feedback (A2).
-- The **task** is what it predicts (A3).
-- The **model family** and **architecture** describe the form of the model.
-- The **training algorithm** is the procedure that sets its parameters.
-
-CE does not require one model family. The example uses a random forest; the
-important compatibility question is whether your model provides the prediction
-methods CE needs. Some common families illustrate the distinction:
-
-:::{div} ce-table-compact
-| Model family | How it works, in one line | Strengths | Watch out for |
-|---|---|---|---|
-| Linear models | Weighted sum of features | Fast, transparent | Miss non-linear patterns |
-| Random forests and other ensembles | Many trees vote or average | Strong default for tables | Less transparent |
-| Neural networks | Layers of learned transformations | Very flexible | Need more data and tuning |
-:::
-
-Model selection is a separate task; the
+For CE, the practical question is whether the fitted model supplies the
+prediction methods the chosen workflow needs: `predict`, and for classifiers
+`predict_proba`. The {doc}`tasks and modes guide <ce-tasks-and-modes>` explains
+compatibility. Model selection is a separate task; use the
 [scikit-learn user guide](https://scikit-learn.org/stable/user_guide.html)
-provides deeper background. For CE, check the model interface in
-{doc}`ce-tasks-and-modes`, then keep training and calibration data separate.
+for deeper background on families, algorithms and tuning.
 
 ## A5. Developing a model: the data sets and their roles
 
@@ -162,22 +140,17 @@ calibration means and how CE calibrates.
 An **explanation** of a prediction tells you which inputs the prediction
 depends on, so a person can check it against what they know.
 
-- **Local or global.** A *local* explanation describes one prediction ("for
-  this tumour sample, the measurement `worst concave points` mattered most").
-  A *global* explanation describes the model as a whole ("across all samples,
-  these features matter most"). CE explains individual predictions: its
-  explanations are local.
-- **Two common forms.** Some methods give each feature a number, a
-  *feature attribution*, that shows how much it pushed the prediction up or
-  down; LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee,
-  2017) are widely used examples. Other methods give *rules*: conditions
-  such as `worst concave points > 0.14` that hold for the case. CE combines
-  the two: each rule comes with a weight, and each weight comes with an
-  uncertainty range.
-- **What an explanation shows.** It describes how the **model** responds to
-  its inputs. It does not show that a feature causes the outcome in the
-  real world, and it can only be as reliable as the model and the data
-  behind it.
+CE gives **local explanations**: explanations of individual predictions,
+rather than a **global** description of the whole model. A factual explanation
+pairs a feature condition, such as `worst concave points > 0.14`, with a weight
+and a range. The weight describes the model's response to substituted feature
+values; it does not show that the feature causes the outcome.
+
+Other methods use feature attributions, numbers describing each feature's
+contribution to an output. LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP
+(Lundberg and Lee, 2017) are examples. For how CE combines conditions and
+weights, continue to the worked example rather than treating the methods as
+interchangeable.
 
 The {doc}`walkthrough <quickstart_walkthrough>` shows how CE builds and reads
 one explanation step by step. CE's explanation method is described in
