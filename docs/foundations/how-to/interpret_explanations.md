@@ -10,7 +10,10 @@ payloads and plots. For how the substituted predictions are constructed,
 read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
 {doc}`../concepts/calibrated_interval_semantics`.
 
-For regression, the `prediction_interval` is a **conformal interval** produced by **Conformal Predictive Systems (CPS)**, and the interval percentiles are controlled by `low_high_percentiles`.
+For **interval regression without a threshold**, `prediction_interval` is a
+target prediction interval produced by a **conformal predictive system (CPS)**;
+`low_high_percentiles` selects its percentiles. With a threshold, the explained
+quantity is an event probability and its bounds, as described below.
 
 ```{admonition} Terminology
 :class: tip
