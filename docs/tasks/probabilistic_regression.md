@@ -84,7 +84,7 @@ explanation = explainer.explain_factual(
 
 ## Go further
 
-- Executable demo: [demo_probabilistic_regression.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_probabilistic_regression.ipynb)
+- Executable demo: [demo_probabilistic_regression.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_probabilistic_regression.ipynb) (ran without errors with CE 1.1.0.dev0, this Beta's source, on 2026-11-16)
 - Full signatures: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 - Check CE on your own data: {doc}`../practitioner/evaluate_ce`
 

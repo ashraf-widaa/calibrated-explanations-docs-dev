@@ -201,7 +201,9 @@ when the population changes.
 | Very wide ranges | Small calibration set, or few calibration cases like this one | Use more calibration data; check the range widths on the test set |
 | `UserWarning` about feature names | The model was fitted on a pandas DataFrame | Fit the model on NumPy arrays |
 | `ValidationError: Invalid argument type` when indexing explanations | Indexing with a NumPy integer | Use a plain `int`, for example `factual[int(i)]` |
-| Explanations are slow | Many features or many cases explained at once | Explain fewer cases, use `features_to_ignore`, see {doc}`../practitioner/performance-tuning` |
+| Explanations are slow | Many features or many cases explained at once | Explain fewer cases, use `features_to_ignore` (on its own explainer: see the known issue in {doc}`troubleshooting`), see {doc}`../practitioner/performance-tuning` |
+
+Full list, with exact messages and reproduced fixes: {doc}`troubleshooting`.
 
 ## Use an AI coding assistant to integrate CE (optional)
 

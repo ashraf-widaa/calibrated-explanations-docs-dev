@@ -109,8 +109,8 @@ multi_alternative = explainer.explore_alternatives(x_test, multi_labels_enabled=
 
 ## Go further
 
-- Executable demo: [demo_binary_classification.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_binary_classification.ipynb)
-- Executable demo: [demo_multiclass_glass.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_multiclass_glass.ipynb)
+- Executable demo: [demo_binary_classification.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_binary_classification.ipynb) (ran without errors with CE 1.1.0.dev0, this Beta's source, on 2026-11-16)
+- Executable demo: [demo_multiclass_glass.ipynb](https://github.com/Moffran/calibrated_explanations/blob/main/notebooks/core_demos/demo_multiclass_glass.ipynb) (ran without errors with CE 1.1.0.dev0, this Beta's source, on 2026-11-16; takes several minutes)
 - Full signatures: {doc}`WrapCalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer>`
 - Check CE on your own data: {doc}`../practitioner/evaluate_ce`
 
