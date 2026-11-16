@@ -22,6 +22,12 @@
 
 ### Changed
 
+- **Experimental source-faithful documentation refinement:** correct binary and
+  threshold-bound indexing, opt-in difficulty estimation and unsupported payload
+  calls. Reconcile regulatory references and review questions, shorten ML
+  prerequisites, and clarify the roles of existing learning and reference pages.
+  Public URLs, navigation and previously published candidates are preserved.
+
 - **Experimental documentation:** distinguish prediction calibration, interval
   coverage and explanation ranges; correct API descriptions and regulatory
   references while retaining unresolved scientific and legal review questions.

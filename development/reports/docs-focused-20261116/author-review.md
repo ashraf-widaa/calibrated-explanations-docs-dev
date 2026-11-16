@@ -43,3 +43,31 @@ new scientific validity question; no source-code change was needed.
 
 No messages were sent to authors or legal reviewers. The Product Owner can
 route these questions; no new public "open questions" page was created.
+
+## Source-faithful refinement follow-up (16 November 2026)
+
+The separate `beta/source-faithful-refinement-20261116` branch retains every
+question above. Verified API corrections do not close scientific questions.
+
+- **SR-02:** What validity statement applies when the difficulty estimator is
+  fitted on proper-training data and then held fixed? What evidence supports
+  any minimum category-size recommendation? The implementation's default has
+  no difficulty estimator; configuration and coverage are separate questions.
+- **SR-07/SR-09/SR-14:** Which uncertainty interpretations may research summaries
+  and introductory definitions use? Width comparisons and model-response
+  computations do not establish epistemic reduction or actionable interventions.
+- **SR-16:** Which statements about reject confidence, singleton prediction sets
+  and accepted-case error are justified? Guard filtering and rejection must not
+  be described as the same procedure or as merged-probability thresholds.
+- **N-01/N-07/N-08:** Which CE records support a deployment's transparency,
+  oversight or assessment obligations? Correcting the Article 50/86 distinction
+  and Article 27 FRIA reference does not determine applicability or sufficiency.
+- **Legal follow-up:** Which retention, disclosure and rights-handling processes
+  are appropriate under the applicable law? Which outcome-based fairness and
+  utility analyses are needed? The earlier claims that weights prove necessity,
+  widths establish discrimination, or CE records refute liability are withdrawn.
+  Product Liability Directive article mappings are narrowed to Articles 6
+  (damage), 7 (defectiveness), 9 (disclosure) and 10 (burden of proof); legal
+  conclusions and the earlier monetary-threshold statement are not retained.
+
+No reviewer decisions have been inferred and no external messages were sent.

@@ -1,0 +1,48 @@
+{
+  "baseline": "c28679db5de356b4a21b501a898ad1770c45cb63",
+  "implementation_commit": "c6d713cccd9080011ed8b0dd8cd5fa3ffa8b0225",
+  "python": "3.13.7",
+  "docs_and_integration": {
+    "passed": 377,
+    "deselected": 1,
+    "reason": "wheel-install environment creation excluded"
+  },
+  "strict_builds": {
+    "beta": "passed; zero Sphinx warnings",
+    "standard": "passed; zero Sphinx warnings"
+  },
+  "internal_links": {
+    "pages_each": 158,
+    "broken_each": 0
+  },
+  "compatibility": {
+    "heading_anchors_checked": 1201,
+    "missing_pages": [],
+    "missing_anchors": [],
+    "source_mismatches": []
+  },
+  "layout": {
+    "pages": 31,
+    "scenarios": 124,
+    "issues": 0,
+    "math_per_methods_page": 137,
+    "widths": [
+      390,
+      1440
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ]
+  },
+  "unavailable_checks": [
+    "quick profile: mypy not installed",
+    "Ruff not installed"
+  ],
+  "limits": [
+    "no statistical or legal certification",
+    "no full accessibility or educational study",
+    "no dependency or notebook environment changes",
+    "no full source-code regression suite"
+  ]
+}
