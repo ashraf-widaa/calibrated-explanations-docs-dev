@@ -8,7 +8,12 @@ The core of the library is the `CalibratedExplainer`, which handles the calibrat
 
 ### CalibratedExplainer
 
-The `CalibratedExplainer` is the core class of the library. It takes a machine learning model (classifier or regressor) and a calibration dataset. It fits Venn-Abers calibrators (for classification) or Conformal Predictive Systems (for regression) to the model's predictions. This process ensures that the explanations generated are calibrated, meaning the predicted probabilities or intervals reflect the true underlying uncertainty.
+`CalibratedExplainer` takes a fitted classifier or regressor and held-out
+calibration data. It uses Venn–Abers for classification and CPS for regression;
+threshold-event queries also use Venn–Abers. Explanations are computed from
+these calibrated outputs. Prediction guarantees do not transfer automatically
+to explanation-weight ranges; see
+{doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 For a task-oriented view of the same capabilities (classification, conformal interval regression via CPS, and probabilistic/thresholded regression), see {doc}`../tasks/index`.
 
@@ -22,20 +27,22 @@ from sklearn.model_selection import train_test_split
 
 # Load data
 X, y = load_iris(return_X_y=True)
-x_train, x_cal, y_train, y_cal = train_test_split(
+x_train, x_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, stratify=y, random_state=0
+)
+x_proper, x_cal, y_proper, y_cal = train_test_split(
+    x_train, y_train, test_size=0.25, stratify=y_train, random_state=0
 )
 
 # Train model
 model = RandomForestClassifier(random_state=0)
-model.fit(x_train, y_train)
+model.fit(x_proper, y_proper)
 
 # Initialize explainer
 explainer = CalibratedExplainer(model, x_cal, y_cal, mode='classification')
 
 # Explain a test instance
-x_test = x_cal[:1]
-explanations = explainer.explain_factual(x_test)
+explanations = explainer.explain_factual(x_test[:1])
 ```
 
 Full signatures, methods and parameters: {doc}`CalibratedExplainer API reference <../_autosummary/calibrated_explanations.core.CalibratedExplainer>`.
@@ -134,7 +141,11 @@ Full signatures, methods and parameters: {doc}`FactualExplanation API reference 
 
 ### AlternativeExplanation
 
-An `AlternativeExplanation` (often called a counterfactual explanation) explores *what if* scenarios. It suggests changes to the feature values that would result in a different prediction (e.g., flipping a classification label or moving a regression prediction into a different range).
+An `AlternativeExplanation` reports model predictions for substituted feature
+values or ranges. An alternative may reinforce the current prediction, move
+it towards a boundary, or change the predicted class. It need not flip a label,
+be minimal, or describe a feasible real-world action. See
+{doc}`../foundations/concepts/alternatives` for construction and interpretation.
 
 **Example Usage:**
 

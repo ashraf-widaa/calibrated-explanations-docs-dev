@@ -1,12 +1,19 @@
 # Normalization and Difficulty Estimation
 
-For regression tasks, Calibrated Explanations can use **normalized residuals** and **difficulty estimation** to improve interval calibration, especially for heteroscedastic data (where prediction variance differs across instances).
+Use difficulty estimation when regression errors vary across the input space.
+CE can scale calibration residuals by a positive difficulty estimate, then use
+the same estimator when predicting. This changes how interval widths adapt to
+the input; it does not establish a new coverage guarantee.
 
 ## What is Difficulty Estimation?
 
-Difficulty estimation adjusts prediction intervals based on how "difficult" each instance is to predict. Instances with higher variance in the underlying model get wider intervals, while easier-to-predict instances get narrower intervals.
+An estimator assigns a difficulty value to each input. In normalized CPS,
+residuals are divided by this value during calibration and prediction ranges
+are scaled back at inference. The value depends on the estimator you choose;
+it is not a direct observation of the case's true uncertainty.
 
-**Without difficulty estimation**: All instances get the same interval width (homoscedastic assumption)
+**Without difficulty estimation**: A global CPS uses common residual quantiles.
+Conditioning and endpoint clipping can still affect reported widths.
 
 **With difficulty estimation**: Interval width scales with estimated prediction difficulty
 
@@ -30,21 +37,28 @@ Consider difficulty estimation when:
 
 ## How It Works
 
-The underlying `IntervalRegressor` from the `crepes` library supports several normalization strategies:
+CE's interval-regression implementation uses `crepes` CPS. The relevant choices are:
 
 1. **Standard (no normalization)**: Residuals are used directly
-2. **Sigma normalization**: Residuals are divided by an estimated standard deviation
-3. **Difficulty-based**: Uses a secondary model to estimate per-instance difficulty
+2. **Normalized residuals**: Residuals are divided by positive difficulty estimates
+3. **Choice of estimator**: For example, ensemble variation or a neighbourhood-based estimate
 
-The difficulty estimator predicts how uncertain each instance is, and the conformal intervals are scaled accordingly.
+Fit the estimator using proper-training data and keep it fixed for calibration
+and inference. See the [crepes documentation](https://crepes.readthedocs.io/)
+for estimator choices and their prerequisites.
 
 ## Configuration
 
-Difficulty estimation is configured through the internal `IntervalRegressor` or `ConformalPredictiveSystem` when setting up the explainer.
+Use the public wrapper's `set_difficulty_estimator` method after calibration.
+It reinitializes the calibration internals with the supplied estimator.
+The fragments below assume a regression `model`, proper-training and
+calibration splits, and a query matrix `x_test`; see the
+{doc}`regression tutorial <../../get-started/quickstart_regression>` for setup.
 
 ### Basic Usage
 
-For most users, the default CPS configuration handles difficulty automatically:
+By default, no difficulty estimator is configured. This example uses
+unnormalized residuals:
 
 ```python
 from calibrated_explanations import WrapCalibratedExplainer
@@ -63,51 +77,53 @@ prediction, (low, high) = explainer.predict(
 
 ### Advanced Configuration
 
-For advanced users needing explicit difficulty estimation:
+For an ensemble regressor such as the tutorial's random forest, fit an
+estimator of ensemble variation on the proper-training inputs. Then attach
+it through the wrapper:
 
 ```python
-from crepes import ConformalPredictiveSystem
+from crepes.extras import DifficultyEstimator
 
-# Create CPS with specific normalization
-cps = ConformalPredictiveSystem()
-
-# Fit with normalization model
-# (Consult crepes documentation for full options)
-cps.fit(
-    residuals=y_cal - model.predict(x_cal),
-    sigmas=difficulty_estimates  # Per-instance difficulty scores
-)
+difficulty = DifficultyEstimator().fit(X=x_proper, learner=model)
+explainer.set_difficulty_estimator(difficulty)
+prediction, (low, high) = explainer.predict(x_test, uq_interval=True)
 ```
 
 ## Trade-offs
 
 | Aspect | Without Normalization | With Normalization |
 | :--- | :--- | :--- |
-| Interval width | Constant | Instance-specific |
+| Interval width | Common residual quantiles in a global CPS | Scaled by the estimated difficulty |
 | Complexity | Simpler | Requires difficulty model |
-| Coverage | May vary by region | More uniform coverage |
+| Coverage | Subject to the CPS assumptions | Subject to the normalization protocol and CPS assumptions; evaluate by region |
 | Computation | Faster | Slightly slower |
 
 ## Interpreting Normalized Intervals
 
 When difficulty estimation is active:
 
-* **Narrow intervals**: The model is confident about this instance
-* **Wide intervals**: High estimated difficulty or sparse calibration region
-* **Varying widths**: Expected behavior reflecting instance-specific uncertainty
+* **Narrow or wide intervals**: Read in target units, at the requested percentiles.
+* **Varying widths**: Can reflect the estimator's input-dependent scaling.
+* **Coverage by region**: Check on held-out outcomes; width alone does not establish it.
+
+The exact validity wording for normalized and group-conditioned intervals
+remains under author review (SR-02). See
+{doc}`../../foundations/concepts/calibrated_interval_semantics`.
 
 ```python
+import numpy as np
+
 prediction, (low, high) = explainer.predict(x_test, uq_interval=True)
 
 # Examine interval widths
 widths = high - low
 
-# Identify easy vs hard instances
+# Compare relatively narrow and wide intervals in this query batch
 easy_instances = widths < np.percentile(widths, 25)
 hard_instances = widths > np.percentile(widths, 75)
 
-print(f"Easy instances (narrow intervals): {easy_instances.sum()}")
-print(f"Hard instances (wide intervals): {hard_instances.sum()}")
+print(f"Relatively narrow intervals: {easy_instances.sum()}")
+print(f"Relatively wide intervals: {hard_instances.sum()}")
 ```
 
 ## Research Background

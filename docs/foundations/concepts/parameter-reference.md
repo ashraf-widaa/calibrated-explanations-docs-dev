@@ -18,13 +18,14 @@ of subtle bugs.
 
 | Legacy / removed name | Canonical name | Role | Context | User-settable? |
 |---|---|---|---|---|
-| `confidence` | `reject_confidence` | Reject coverage target: minimum p-value to *accept* a prediction | `predict_reject` / reject orchestrator | YES |
+| `confidence` | `reject_confidence` | Sets reject significance to `1 - reject_confidence`; acceptance depends on the prediction set | `predict_reject` / reject orchestrator | YES |
 | `significance` | `GuardedOptions.confidence` | Guard conformity threshold; `significance = 1 − confidence` | `explain_factual(..., guarded_options=GuardedOptions(confidence=...))` / `_guarded_explain` | YES (experimental) |
 | `confidence_level` | `confidence_level` (unchanged) | Regression coverage level; derived from `low_high_percentiles` but also passable directly as an alternative to `threshold` | Regression methods | YES (alternative to `threshold`) |
 
-**Key relationship:** `significance` and `confidence` (reject) are mathematical
-inverses of the same conformal threshold concept. `significance = 0.1` is the same
-conformity requirement as `confidence = 0.9`. The rename is complete: use
+**Key relationship:** Each coverage-style setting is converted to a significance
+level as `1 - confidence`, within its own procedure. The guard and reject
+procedures act on different objects; equal settings do not make them equivalent.
+The rename is complete: use
 `GuardedOptions.confidence` for guarded explanations and `reject_confidence` for
 reject-policy prediction paths. The legacy names were removed in v0.11.5 and now
 raise `ConfigurationError` in the v0.11.6 fail-fast paths.
@@ -37,12 +38,13 @@ raise `ConfigurationError` in the v0.11.6 fail-fast paths.
 probabilistic regression. The explainer produces calibrated probabilities for
 P(y ≤ threshold).
 
-**Type and valid range:** `float`, `int`, or array-like (one value per instance for
-instance-specific thresholds). `None` means "not applicable" — used only in
-regression mode.
+**Type and valid range:** `float`, `int`, a tuple `(low, high)` for the event
+`low < y ≤ high`, or array-like thresholds aligned with the query cases.
+`None` selects ordinary interval regression rather than an event query.
 
 **Applies to:** `explain_factual`, `explore_alternatives`, `predict_proba` (in
-regression mode). Ignored for classification tasks.
+regression mode). Passing a non-`None` threshold to classification raises
+`ValidationError`.
 
 **Behavior:** When set, the CE regression path calls
 `IntervalRegressor.predict_probability(x, y_threshold=threshold)`. The parameter is
@@ -118,18 +120,19 @@ alternatives for specifying the regression configuration. Passing both raises a
 > `confidence` was removed in v0.11.5. Use `reject_confidence`; v0.11.6 raises
 > `ConfigurationError` for the legacy alias.
 
-**Definition:** The reject coverage target — the minimum calibrated probability
-required to *accept* a prediction. A prediction with conformal p-value below
-`1 - confidence` is rejected.
+**Definition:** The removed name for `reject_confidence`, which sets the
+significance level to `1 - reject_confidence` in the reject procedure.
+This is not a threshold on the merged class probability. The reject procedure
+accepts a singleton prediction set; empty and multi-label sets are rejected.
 
 **Type and valid range:** `float` in (0, 1). Default: `0.95`.
 
 **Applies to:** `predict_reject`, `apply_policy`, and the reject orchestrator.
 
-**Behavior:** Higher values are *stricter* (fewer predictions accepted). A value of
-`0.95` means predictions must have at least a 0.95 conformal coverage to be
-accepted. Internally the reject path computes `epsilon = 1 - confidence` as the
-conformal significance level.
+**Behavior:** `reject_confidence=0.95` gives significance `0.05`. Interpret the
+result through the prediction set, not as a 95% probability that an accepted
+prediction is correct. Exact validity and reject-rate interpretations remain
+under review (SR-16); see {doc}`../../practitioner/advanced/reject-policy`.
 
 **Disambiguation:**
 - NOT `significance`: they are mathematical inverses
@@ -160,12 +163,11 @@ internal `_guarded_explain` module. This parameter remains part of the
 `[EXPERIMENTAL]` guarded explanation API, but the legacy `significance=` kwarg and
 `guarded=True` call form were removed in v0.11.5.
 
-**Behavior:** A **larger** `significance` value is **stricter** (fewer bins
-accepted). This is the reverse of how `reject_confidence` works in the reject path:
-for legacy `significance`, raising the value makes the guard harder to pass; for
-`reject_confidence`, raising the value makes the reject threshold harder to pass.
-`GuardedOptions.confidence` resolves this counter-intuitive direction by expressing
-both surfaces as coverage values where higher = more inclusive.
+**Behavior:** For fixed guard p-values, raising the legacy `significance`
+threshold accepts fewer candidates. Raising `GuardedOptions.confidence` lowers
+that threshold and accepts more candidates. This describes the implemented
+guard filter; it is not a statement about reject rates in the separate reject
+procedure.
 
 **Disambiguation:**
 - NOT `confidence` (reject path): mathematical inverse

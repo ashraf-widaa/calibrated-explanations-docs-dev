@@ -108,6 +108,28 @@ def test_should_apply_documented_threshold_policy_to_event_bounds() -> None:
     assert np.all(context["accept"] | context["reject"] | context["defer"])
 
 
+def test_should_reinitialize_regression_bounds_when_documented_difficulty_is_attached() -> None:
+    """ADR-021: normalization is opt-in and resetting it restores baseline outputs."""
+    context = _build_regression_context()
+    context["model"] = RandomForestRegressor(random_state=42)
+    context["x_test"] = context["X_sample"]
+    page = Path("docs/practitioner/advanced/normalization-guide.md")
+    blocks = _python_blocks(page)
+    exec(compile(blocks[0], str(page), "exec"), context)  # noqa: S102
+    wrapper = context["explainer"]
+    assert wrapper.fitted and wrapper.calibrated
+    baseline = tuple(np.array(a, copy=True) for a in (context["low"], context["high"]))
+    for block in blocks[1:]:
+        exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    widths = context["high"] - context["low"]
+    assert np.all(np.isfinite(widths)) and np.all(widths > 0)
+    assert np.ptp(widths) > 0
+    wrapper.set_difficulty_estimator(None)
+    _, restored = wrapper.predict(context["x_test"], uq_interval=True)
+    np.testing.assert_allclose(restored[0], baseline[0])
+    np.testing.assert_allclose(restored[1], baseline[1])
+
+
 def _python_blocks(path: Path) -> list[str]:
     return re.findall(r"```python\n(.*?)```", path.read_text(encoding="utf-8"), re.S)
 
