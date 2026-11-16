@@ -130,6 +130,39 @@ def test_should_reinitialize_regression_bounds_when_documented_difficulty_is_att
     np.testing.assert_allclose(restored[1], baseline[1])
 
 
+@pytest.mark.parametrize("name", ["eu-ai-act-compliance", "eu-data-liability-compliance"])
+def test_should_execute_regulatory_query_fragments_with_binary_bounds(name: str) -> None:
+    """ADR-021: exercise query masks and rule inspection, not legal sufficiency."""
+    page = Path("docs/practitioner/playbooks") / f"{name}.md"
+    checked = 0
+    for block in _python_blocks(page):
+        if ("predict_proba(" not in block and "rules = exp.get_rules()" not in block) or "with " in block:
+            continue  # Application persistence adapters are outside this query check.
+        context = _build_classification_context()
+        # Give the documented category-label examples two stable categories.
+        boundary = np.median(context["x_proper"][:, 0])
+        for key in ("x_proper", "x_cal", "X_query"):
+            context[key] = np.array(context[key], copy=True)
+            context[key][:, 0] = context[key][:, 0] > boundary
+        wrapper = context["explainer"]
+        wrapper.fit(context["x_proper"], context["y_proper"])
+        wrapper.calibrate(context["x_cal"], context["y_cal"])
+        assert wrapper.fitted and wrapper.calibrated
+        context.update(
+            x_val=context["X_query"], X_users=context["X_query"], protected_feature_idx=0,
+            user_segment_labels_cal=context["x_cal"][:, 0],
+            user_segment_labels=context["X_query"][:, 0],
+            escalate_to_human_reviewer=lambda *args, **kwargs: None,
+        )
+        exec(compile(block, str(page), "exec"), context)  # noqa: S102
+        if "probs" in context:
+            assert context["probs"].shape == (len(context["low"]), 2)
+            assert context["low"].ndim == context["high"].ndim == 1
+            assert np.all(np.isfinite(context["high"] - context["low"]))
+        checked += 1
+    assert checked >= 3
+
+
 def _python_blocks(path: Path) -> list[str]:
     return re.findall(r"```python\n(.*?)```", path.read_text(encoding="utf-8"), re.S)
 

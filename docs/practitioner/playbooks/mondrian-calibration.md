@@ -79,8 +79,11 @@ them with a trusted older calibrated-explanations environment and re-save.
 
 ## Minimum Category Size
 
-Each category needs enough calibration samples for useful intervals. As a rule of
-thumb, aim for at least 30-50 calibration samples per category and document any
-smaller category as an assumption boundary.
+Record the calibration count in every category. There is no universal sample
+count that establishes adequate calibration. The task, requested percentiles
+and observed held-out behavior matter. See the
+{doc}`conditional-calibration guide <../../foundations/how-to/conditional_calibration>`
+for endpoint limitations and evaluation links. Exact group-specific validity
+wording remains under author review (SR-02).
 
 See also: [](../../foundations/how-to/conditional_calibration.md).

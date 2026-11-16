@@ -19,12 +19,14 @@ references and BibTeX entries, see {doc}`../../citing`.
   calibrated factual and alternative rules across 25 benchmarks. DOI:
   [`10.1016/j.eswa.2024.123154`](https://linkinghub.elsevier.com/retrieve/pii/S0957417424000198).
 - **Machine Learning journal (2025):** Regression and probabilistic regression
-  extension with interval guarantees mirroring the classification workflow. DOI:
+  extension to numeric predictions and threshold-event probabilities. For the
+  distinct output semantics and current qualifications, see
+  {doc}`../../foundations/concepts/calibrated_interval_semantics`. DOI:
   [`10.1007/s10994-024-06642-8`](https://link.springer.com/article/10.1007/s10994-024-06642-8).
 - **xAI 2024 proceedings:** Conditional calibrated explanations for fairness-aware
   deployments. DOI:
   [`10.1007/978-3-031-63787-2_17`](https://link.springer.com/chapter/10.1007/978-3-031-63787-2_17).
-- **PMLR 230 (2024):** Multiclass calibration analysis with empirical guarantees
+- **PMLR 230 (2024):** Multiclass calibration analysis with empirical evaluation
   and tutorial material. Proceedings and artefacts available through the
   [PMLR volume](https://proceedings.mlr.press/v230/lofstrom24a.html) and
   [paper/slides (MLResearch assets)](https://raw.githubusercontent.com/mlresearch/v230/main/assets/lofstrom24a/lofstrom24a.pdf).
@@ -33,13 +35,14 @@ references and BibTeX entries, see {doc}`../../citing`.
   reliability. DOI:
   [`10.1007/s10472-023-09837-2`](https://doi.org/10.1007/s10472-023-09837-2).
 - **xAI 2025 proceedings (CCIS 2580, 2026):** Fast calibrated explanations:
-  plugin-oriented acceleration of rule generation while preserving uncertainty
-  guarantees. DOI:
+  efficient construction of uncertainty-aware explanations. The publication's
+  claims and the installed plugin's supported behavior must be distinguished. DOI:
   [`10.1007/978-3-032-08333-3_16`](https://link.springer.com/chapter/10.1007/978-3-032-08333-3_16).
 
 ### Preprints and in-flight studies
-- **Ensured explanations (2024):** Investigates strategies that actively reduce
-  epistemic uncertainty in the generated alternatives. Preprint:
+- **Ensured explanations (2024):** Studies uncertainty in alternative explanations.
+  The software's ensured filter compares reported widths; the uncertainty
+  interpretation remains under author review (SR-07/SR-09). Preprint:
   [`arXiv:2410.05479`](https://arxiv.org/abs/2410.05479).
 
 ## Benchmarks and evaluations

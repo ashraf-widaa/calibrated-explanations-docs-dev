@@ -34,6 +34,14 @@ legislative-status and article-reference errors. Other legal mappings require
 qualified review before use; scientific output qualifications are in
 {doc}`../../foundations/concepts/calibrated_interval_semantics`.
 
+The code fragments are separate integration examples. They assume a fitted
+and calibrated binary classifier, query data and application-owned storage or
+callbacks where indicated. Use the {doc}`Quick API <../../get-started/quick_api>`
+for CE setup. The class probabilities have two columns; their `low` and
+`high` bounds are one-dimensional vectors. Group-conditioned fragments must
+calibrate and query with corresponding group labels. Thresholds and retention
+settings shown are illustrative, not validated legal policies.
+
 ## 1. Executive Summary
 
 The EU AI Act receives the most attention in the AI compliance discourse, but it is
@@ -98,7 +106,7 @@ for demonstrating compliance with all these principles (Art. 5(2) -- the
 **accountability principle**).
 
 **c) How `calibrated_explanations` contributes:** Accountability requires *demonstrable*
-compliance. `as_json()` produces a per-decision serialisable record encoding the
+compliance. `build_rules_payload()` produces a per-decision serialisable record encoding the
 input features, prediction, calibrated probability, and explanation weights. When
 a regulator or data subject asks "how was this decision made?", the stored JSON
 payload can help inspect the model response. Probability quality can be evaluated
@@ -129,14 +137,14 @@ with audit_log.open("a", encoding="utf-8") as f:
                 "low": float(low[i]),
                 "high": float(high[i])
             },
-            "factual_explanation": exp.as_json(),
+            "factual_explanation": exp.build_rules_payload(),
         }
         f.write(json.dumps(record) + "\n")
 ```
 
 **e) Audit documentation:** The accountability log must be accessible to the Data
 Protection Officer. Define a retention schedule proportionate to the purpose
-(Art. 5(1)(e)); credit decisions commonly require >= 5 years.
+(Art. 5(1)(e)); have the applicable period confirmed for the deployment.
 
 ---
 
@@ -151,12 +159,7 @@ the data subject about the existence of automated decision-making (including
 profiling) and provide *meaningful information about the logic involved*, the
 significance, and envisaged consequences (Arts. 13(2)(f), 14(2)(g)).
 
-**c) How `calibrated_explanations` contributes:** The privacy notice required by
-Arts. 13/14 must describe the system's logic in a way a layperson can understand.
-`print_rules()` from `explain_factual` demonstrates the concrete form that logic
-takes per instance. Organisations can use the factual rule table structure
-(feature -> direction -> weight +/- uncertainty interval) as the template for the
-"logic description" in their privacy notices.
+**c) How `calibrated_explanations` contributes:** Factual rule records can help reviewers inspect a model response. A per-case explanation is not a complete description of the processing system. **Review question:** What information about logic, significance and consequences is needed for the applicable notice, and can its intended readers understand it?
 
 **d) Code:**
 
@@ -166,7 +169,7 @@ sample_factual = explainer.explain_factual(x_cal[:10])
 
 print("Features used in decisions and their typical influence range:")
 for exp in sample_factual:
-    exp.print_rules()
+    print(exp.list_rules())
     print("---")
 ```
 
@@ -184,11 +187,7 @@ update the notice whenever the model or feature set changes.
 information about the logic* of any automated processing, as well as the significance
 and envisaged consequences (Art. 15(1)(h)).
 
-**c) How `calibrated_explanations` contributes:** When a data subject submits a
-Subject Access Request (SAR), the stored explanation records keyed on
-`data_subject_ref` enable retrieval of all payloads for that individual.
-`print_rules()` renders those payloads in plain language suitable for the SAR
-response letter.
+**c) How `calibrated_explanations` contributes:** An application can index stored explanation records by a subject reference. Retrieval, identity checks and response preparation belong to the application. **Review question:** Which records may or must be disclosed, and what explanation should accompany them? Printing a live explanation object is not the same as rendering an archived JSON record.
 
 **d) Code:**
 
@@ -228,7 +227,7 @@ personal data without undue delay where the data are no longer necessary, consen
 is withdrawn, or processing was unlawful (Art. 17(1)).
 
 **c) How `calibrated_explanations` contributes:** The explanation payloads produced
-by `as_json()` contain the input feature vector, which may constitute personal data.
+by `build_rules_payload()` contain the input feature vector, which may constitute personal data.
 The `data_subject_ref` field enables targeted deletion of all inference-time records
 for a specific individual. Note: erasure of explanation records does not affect the
 trained model -- model unlearning is a separate requirement (see Section 9.1).
@@ -270,10 +269,7 @@ personal data.
 discontinue unless it can demonstrate compelling legitimate grounds that override the
 data subject's interests (Art. 21(1)).
 
-**c) How `calibrated_explanations` contributes:** The factual rule table and
-calibrated probability provide the *specific grounds* a controller can use to
-document the compelling legitimate basis. Wide intervals or irrelevant dominant
-features would undermine the legitimate interest claim and strengthen the objection.
+**c) How `calibrated_explanations` contributes:** Factual rules and probability records can be inspected as model information. **Review question:** What grounds and evidence are relevant to an objection in this deployment? Neither a narrow range nor a feature weight establishes a compelling legitimate basis.
 
 **d) Code:**
 
@@ -283,9 +279,9 @@ probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
 
 interval_width = high[0] - low[0]
 if interval_width > 0.30:
-    print("High uncertainty: legitimate interest claim may not override objection.")
+    print("Width exceeds this example's review threshold; legal grounds are not assessed.")
 else:
-    print(f"Compelling grounds documented: {factual[0].as_json()}")
+    print(f"Model record for separate review: {factual[0].build_rules_payload()}")
 ```
 
 **e) Audit documentation:** Log Art. 21 objection events alongside the explanation
@@ -305,21 +301,12 @@ effects (Art. 22(1)). Where permitted, the controller must implement safeguards
 including the right to obtain *human intervention*, to *express their view*, and to
 *contest the decision* (Art. 22(3)).
 
-**c) How `calibrated_explanations` contributes:** Art. 22 is the single most
-operationally demanding GDPR obligation for ML deployers. `calibrated_explanations`
-addresses all three statutory safeguards:
-
-- **Human intervention:** The uncertainty-based escalation gate prevents solely
-  automated decisions in uncertain cases by routing them to a human reviewer.
-- **Express their view:** The factual rule table renders the model reasoning in plain
-  language, giving the individual something concrete to react to.
-- **Contest the decision:** `explore_alternatives` generates actionable counterfactuals
-  showing what the individual could change to obtain a different outcome.
+**c) How `calibrated_explanations` contributes:** An application can present factual rules, record alternative model responses and route selected cases to human review. CE does not implement the surrounding rights-handling process. **Review question:** Which decisions are in scope, and how will intervention, expression of views and contestation be supported? Alternatives are not guaranteed actionable changes.
 
 **d) Code:**
 
 ```python
-# Three-safeguard implementation for GDPR Art. 22(3)
+# Model records and an illustrative gate for a separate rights-handling process
 
 # 1. Human intervention gate -- route uncertain decisions
 probs, (low, high) = explainer.predict_proba(X_query, uq_interval=True)
@@ -330,11 +317,11 @@ if straddles.any():
 
 # 2. Individual can express their view -- factual explanation in decision notice
 factual = explainer.explain_factual(X_query)
-factual[0].print_rules()
+print(factual[0].list_rules())
 
 # 3. Individual can contest -- counterfactual alternatives in decision letter
 alternatives = explainer.explore_alternatives(X_query)
-alternatives[0].print_rules()
+print(alternatives[0].list_rules())
 ```
 
 **e) Audit documentation:** The Art. 22 record must contain the factual rule table,
@@ -351,11 +338,7 @@ triggered, and (if triggered) the reviewer's decision and rationale.
 to data protection principles by design. By default, only personal data necessary
 for each specific purpose shall be processed (Art. 25(1)-(2)).
 
-**c) How `calibrated_explanations` contributes:** Feature importance explainability
-is a tool for **data minimisation by design** (Art. 5(1)(c)). Examining which
-features consistently carry low or negligible weight across a validation set
-identifies features that add no predictive utility and therefore have no legitimate
-reason to be processed.
+**c) How `calibrated_explanations` contributes:** Feature weights can prompt investigation of how a model uses inputs. A low weight does not prove that a feature has no predictive utility or no lawful processing purpose. **Review question:** What separate utility analysis and legal assessment support retaining or removing each feature?
 
 **d) Code:**
 
@@ -363,21 +346,16 @@ reason to be processed.
 import numpy as np
 
 factual = explainer.explain_factual(x_val)
-all_weights = np.array([
-    list(exp.as_json()["feature_weights"].values())
-    for exp in factual
-])
-mean_abs_weights = np.abs(all_weights).mean(axis=0)
-
-print("Feature utility analysis (mean |weight|):")
-for name, w in zip(feature_names, mean_abs_weights):
-    flag = "  <- consider removing" if w < 0.01 else ""
-    print(f"  {name}: {w:.4f}{flag}")
+for case_index, exp in enumerate(factual):
+    rules = exp.get_rules()
+    print(f"Case {case_index}: recorded model-response weights")
+    for condition, weight in zip(rules["rule"], rules["weight"]):
+        print(f"  {condition}: {weight:.4f}")
 ```
 
-**e) Audit documentation:** Record the feature utility analysis in the DPIA (see
-Section 3.8) as evidence of the data minimisation measure taken. Document the
-decision to retain or remove each feature, with justification.
+**e) Review documentation:** Keep these model-response records separate from
+feature-utility experiments and legal findings. Document the evidence and
+review supporting any decision to retain or remove a feature.
 
 ---
 
@@ -391,11 +369,7 @@ carry out a DPIA before processing begins. The DPIA must describe the processing
 assess necessity and proportionality, identify risks, and document measures to
 address them (Art. 35(1), (7)).
 
-**c) How `calibrated_explanations` contributes:** A DPIA requires a description of
-the processing logic (Art. 35(7)(b)). The factual rule table format, the empirical
-coverage statistics, per-group interval widths (Mondrian), and the uncertainty-based
-escalation thresholds are all concrete technical inputs to the DPIA's risk assessment
-and mitigation sections.
+**c) How `calibrated_explanations` contributes:** A review package can include the model workflow, held-out task metrics, group-specific diagnostics and proposed escalation rules. **Review question:** Which of these records are relevant to this DPIA, and what additional system and organizational evidence is required?
 
 **d) Code:**
 
@@ -430,28 +404,22 @@ Review the DPIA when the model or data pipeline changes materially (Art. 35(11))
 The revised PLD explicitly includes AI software as a **product** (Art. 4(1)).
 Key obligations for ML systems:
 
-- **Defective product (Art. 6):** A product is defective when it does not provide
-  the safety the public is entitled to expect, taking into account its presentation,
-  reasonably foreseeable use, and applicable safety regulations (including the AI Act).
-- **Rebuttable disclosure presumption (Art. 9(4)):** Unjustified refusal to disclose
-  technical evidence leads to a **presumption of defect**.
-- **Damage categories (Art. 4(6)):** Includes material economic loss (>= EUR 1 000)
-  and loss of data processed for personal rather than professional purposes.
+- **Damage:** Article 6 sets out the covered categories.
+- **Defectiveness:** Article 7 sets out the defectiveness assessment.
+- **Evidence:** Article 9 addresses disclosure; Article 10 addresses the burden
+  of proof and presumptions.
+
+See the [official directive](https://eur-lex.europa.eu/eli/dir/2024/2853/oj).
+The earlier article mapping and monetary-threshold description are withdrawn;
+their applicability should not be inferred from a CE record.
 
 ### 4.2 How `calibrated_explanations` Contributes
 
-An organisation that can produce, on demand, the serialised explanation payload
-(`as_json()`), calibration evidence (empirical coverage vs. nominal), and per-group
-uncertainty analysis (Mondrian) is in a substantially stronger legal position than
-one relying solely on aggregate accuracy metrics:
-
-- The **factual rule table** refutes a claim that the system was a black box.
-- The **calibrated probability interval** demonstrates accurately represented
-  confidence, countering overconfidence claims.
-- The **counterfactual alternatives** demonstrate identifiable conditions under which
-  the outcome would differ, relevant to causation analysis.
-- The **Mondrian per-group uncertainty** documents that no group was systematically
-  disadvantaged through reduced reliability.
+Stored prediction and explanation records can be assembled for a disclosure
+review. **Review questions:** Which records are relevant and disclosable in
+the particular case? What additional evidence is needed? CE weights do not
+establish causation, calibrated ranges do not refute liability, and Mondrian
+calibration does not prove the absence of group disadvantage.
 
 ### 4.3 Code
 
@@ -460,7 +428,7 @@ import calibrated_explanations
 
 def generate_pld_disclosure_package(subject_ref: str,
                                     empirical_coverage: float) -> dict:
-    """Produce on-demand disclosure package for PLD Art. 9(4) requests."""
+    """Assemble application records for a disclosure review."""
     records = get_records_for_subject(subject_ref)  # from Section 3.3
     return {
         "subject_ref": subject_ref,
@@ -476,9 +444,10 @@ def generate_pld_disclosure_package(subject_ref: str,
 
 ### 4.4 Audit Documentation
 
-Retain explanation payloads for at least 10 years from the product placement date
-(Art. 14 limitation period). Implement a cryptographic integrity mechanism
-(e.g., append-only hash chain) so stored records cannot be retroactively altered.
+Have legal reviewers determine retention, access and disclosure policies.
+A limitation or expiry period is not itself an instruction to retain every
+personal-data record for that period. Document the integrity controls used
+for records that are retained.
 
 ---
 
@@ -556,10 +525,7 @@ review.
 measures for specific systemic risks identified in their risk assessment, including
 measures targeting algorithmic amplification of harm (Art. 35(1)(d)).
 
-**c) How `calibrated_explanations` contributes:** Mondrian conditional calibration
-measures per-user-segment whether model confidence and output distributions differ
-between groups -- a quantitative basis for both the risk assessment and the mitigation
-evidence documentation.
+**c) How `calibrated_explanations` contributes:** Mondrian calibration allows outputs to be examined within defined groups. Differences in predicted probabilities or range widths are descriptive observations. **Review question:** Which outcome-based metrics, group definitions and safeguards are appropriate for the particular risk assessment?
 
 **d) Code:**
 
@@ -605,16 +571,10 @@ a particular disadvantage without objective justification (Art. 2(1)(b) in each)
 
 ### 7.2 How `calibrated_explanations` Contributes
 
-Mondrian conditional calibration provides the primary analytical tool:
-
-- **Per-group prediction distributions:** `calibrate(..., bins=group_labels_cal)`
-  followed by `predict_proba(..., bins=group_labels)` reveals
-  whether predicted probabilities are systematically different across groups.
-- **Per-group uncertainty:** Wider intervals for a protected group indicate reduced
-  reliability -- a direct quantitative indicator of indirect adverse impact.
-- **Per-group feature importance:** `explain_factual(..., bins=group_labels)` identifies
-  whether different features drive predictions across groups, the first step in
-  detecting proxy discrimination.
+The example compares model outputs by group. It does not establish indirect
+discrimination, identify proxy discrimination or prove legal justification.
+**Review question:** Which group definitions, outcome-based metrics and legal
+tests apply? A probability-width comparison alone cannot answer this.
 
 ### 7.3 Code
 
@@ -632,45 +592,38 @@ probs, (low, high) = explainer.predict_proba(
     bins=protected_labels,
 )
 
-# Step 1: Compare outcome distributions across protected groups
+# Step 1: Describe predicted probabilities across groups, not observed outcomes
 for group in np.unique(protected_labels):
     mask = protected_labels == group
     print(f"Group {group!r}: mean P(positive) = {probs[mask, 1].mean():.3f}")
 
-# Step 2: Statistical test for differential impact
+# Step 2: Exploratory comparison of predicted probabilities
 groups = np.unique(protected_labels)
 if len(groups) == 2:
     g0 = protected_labels == groups[0]
     g1 = protected_labels == groups[1]
     _, p = stats.ttest_ind(probs[g0, 1], probs[g1, 1])
     if p < 0.05:
-        print(f"WARNING: significant outcome disparity (p={p:.4f}) -- "
-              "indirect discrimination risk.")
+        print(f"Predicted probabilities differ in this exploratory test (p={p:.4f}); "
+              "this is not a legal finding or a validated fairness assessment.")
 
-# Step 3: Per-group interval width as reliability disparity metric
+# Step 3: Describe per-group range widths
 widths = high - low
 for group in np.unique(protected_labels):
     mask = protected_labels == group
     print(f"Group {group!r}: mean interval width = {widths[mask].mean():.3f}")
 
-# Step 4: Mondrian factual explanation -- identify proxy features per group
+# Step 4: Inspect model-response rules within groups
 factual = explainer.explain_factual(x_val, bins=protected_labels)
-# Review factual[i].as_json() for group-specific feature importance patterns
+# Review factual[i].build_rules_payload() for group-specific feature importance patterns
 ```
 
 ### 7.4 Objective Justification Documentation
 
-If disparate outcomes are detected, the Equal Treatment Directives permit the
-practice only if *objectively justified by a legitimate aim* and the means are
-*appropriate and necessary*. The factual rule table demonstrates:
-
-- **Necessity:** The feature has meaningful predictive weight (the rule table weight
-  and its uncertainty interval are both substantial and non-zero).
-- **Proportionality:** The feature contribution is bounded and does not overwhelm all
-  other relevant features in the rule table.
-
-Document this justification in the DPIA (Art. 35 GDPR) and, for employment contexts,
-in the AI Act technical documentation.
+**Review questions:** Which justification test applies, and what evidence
+of necessity and proportionality does it require? Feature weights alone do
+not establish either. Keep the model analysis distinct from the legal
+assessment and record who reviewed each.
 
 ### 7.5 Audit Documentation
 
@@ -685,15 +638,15 @@ once the claimant establishes a *prima facie* case of disparate impact.
 
 | Regulation | Provision | CE feature / method | Status |
 |---|---|---|---|
-| GDPR | Art. 5(2) Accountability | `as_json()` per-decision audit log | **Review required** |
-| GDPR | Arts. 13-14 Logic description in privacy notice | `explain_factual` / `print_rules()` | **Review required** |
+| GDPR | Art. 5(2) Accountability | `build_rules_payload()` per-decision audit log | **Review required** |
+| GDPR | Arts. 13-14 Logic description in privacy notice | `explain_factual` / `list_rules()` | **Review required** |
 | GDPR | Art. 15 Right of access | Accountability log + `data_subject_ref` retrieval | **Review required** |
 | GDPR | Art. 17 Right to erasure | `data_subject_ref` deletion from log | **Review required — supporting records only** -- model unlearning requires separate tooling |
 | GDPR | Art. 21 Right to object | Factual explanation as compelling-grounds documentation | **Review required** |
 | GDPR | Art. 22 Automated decision safeguards (human intervention, express view, contest) | `predict_proba` gate + `explain_factual` + `explore_alternatives` | **Review required** |
 | GDPR | Art. 25 Data protection by design | Feature utility analysis for data minimisation | **Review required** |
 | GDPR | Art. 35 DPIA technical annex | Uncertainty summary + per-group Mondrian analysis | **Review required** |
-| PLD 2024 | Art. 9(4) On-demand technical disclosure | `as_json()` payloads + disclosure package function | **Review required** |
+| PLD 2024 | Art. 9(4) On-demand technical disclosure | `build_rules_payload()` payloads + disclosure package function | **Review required** |
 | AI Liability Dir. (withdrawn) | Historical draft only | No current obligation established by this withdrawn proposal | **Historical reference** |
 | DSA | Art. 27 Recommender system transparency | Potential supporting model-response records; no automatic mapping to statutory parameters | **Review required** |
 | DSA | Individual explanation applicability | Local CE output; required information and applicable provision need legal review | **Review required** |

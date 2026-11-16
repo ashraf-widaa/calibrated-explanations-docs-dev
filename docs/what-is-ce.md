@@ -71,7 +71,7 @@ calibrated output**.
   case's own feature values move the calibrated prediction, and by how much.
   An *alternative explanation* shows what the model would predict if a feature
   had a value in a different range.
-- **Three tasks.** Classification (binary and multiclass), interval regression
+- **Three output modes for two prediction tasks.** Classification (binary and multiclass), interval regression
   ("where will the value fall?") and probabilistic regression ("how likely is
   the value to be below a threshold?").
 
