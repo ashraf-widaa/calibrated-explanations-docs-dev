@@ -2,6 +2,13 @@
 
 This page maps the public RTD pages to STD-004 tiers.
 
+Three navigation labels serve different purposes. **Entry-point tiers** below
+classify pages by their intended audience under STD-004. **Learning depths
+L1/L2/L3** guide how far to study a concept (understand, apply, investigate).
+**Quick Start Paths A/B/C** select a reader's immediate goal (understand CE,
+learn by example, apply it to data). A path or learning depth is not a new
+tier assignment for the page.
+
 - Tier assignment policy follows `development/standards/STD-004-documentation-audience-standard.md`.
 - Entry-point pages also include bottom-of-page `Entry-point tier: Tier X.` labels.
 
