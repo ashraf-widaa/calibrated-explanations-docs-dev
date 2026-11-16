@@ -66,8 +66,8 @@ Quick Start <get-started/index>
 
 Overview <sections/what-and-why>
 What CE Is <what-is-ce>
-Trustworthy AI <practitioner/playbooks/eu-ai-act-compliance>
 The Explainability Gap <compare>
+Regulation Context (EU AI Act) <practitioner/playbooks/eu-ai-act-compliance>
 ```
 
 ```{toctree}

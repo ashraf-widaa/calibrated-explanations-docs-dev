@@ -10,6 +10,8 @@ This page explains the problem CE addresses, what it contributes, what it does
 and does not guarantee, and when it is a good fit. No mathematics is needed;
 links at the end lead to the full treatment.
 
+(wic-problem)=
+
 ## The problem: a prediction and an explanation are not enough
 
 A model's output often looks like a probability: "0.9 that this sample is
@@ -27,7 +29,31 @@ Explanation methods inherit both problems. Most explanation tools, such as
 LIME and SHAP, explain whatever the model outputs. If those outputs are
 miscalibrated, the explanation describes a miscalibrated model; and a
 feature's importance is usually reported as one number, without saying how
-certain it is.
+certain it is. This does not make such methods wrong: they answer a different
+question (which features drive the model's output), and that answer does not
+include how far the output or the explanation can be relied on.
+
+(wic-calibration)=
+
+## Calibration is not accuracy
+
+**Accuracy** asks how often the predicted class is right. **Calibration** asks
+whether the probabilities mean what they say: among the cases given about 0.7,
+about 70% should turn out positive. The two are different properties.
+
+- A model can be **accurate but miscalibrated**: it picks the right class most
+  of the time, while its probabilities are too extreme or too cautious. Modern
+  neural networks are a well-documented example (Guo et al., 2017).
+- A model can be **calibrated but of little use**: a model that gives every
+  case the overall share of positives as its probability is calibrated, yet it
+  cannot tell one case from another.
+
+Calibration is not designed to make a model more accurate, and it says nothing
+about whether one individual prediction is correct. It makes the probabilities
+usable as probabilities, over many cases. {doc}`How CE calibrates
+<foundations/concepts/calibration_methods>` explains the methods.
+
+(wic-adds)=
 
 ## What CE adds
 
@@ -49,10 +75,20 @@ calibrated output**.
   ("where will the value fall?") and probabilistic regression ("how likely is
   the value to be below a threshold?").
 
+**A small example.** In the breast-cancer example used throughout these
+pages, the random forest's raw score that test case 2 is benign is 0.16. After
+calibration, CE reports a probability of 0.286 with the range [0.167, 0.333],
+so the predicted class is malignant. A factual explanation then lists the
+feature conditions of that case with a weight, and a range for each weight.
+{doc}`CE by example <get-started/ce-by-example>` walks through this case and
+its explanations step by step.
+
 The methods are published in peer-reviewed work, starting with Löfström et
 al. (2024) for classification and Löfström et al. (2025) for regression; the
 [citation page](citing.md) lists all papers, including multiclass, conditional
 (Mondrian), fast and guarded explanations.
+
+(wic-guarantees)=
 
 ## What CE guarantees, and what it does not
 
@@ -60,12 +96,17 @@ CE's guarantees are **statistical and conditional**. They hold for the
 calibrated predictions, under an assumption about the data, and they differ by
 task.
 
+:::{div} ce-table-compact
 | CE does provide | CE does not provide |
 |---|---|
 | Classification: calibrated class probabilities with interval bounds from Venn-Abers | A guarantee for any single individual case |
 | Interval regression: intervals for requested percentiles from a conformal predictive system | Guarantees after the data change (drift, a new population, a new period) |
 | Probabilistic regression: calibrated probabilities for threshold events | Causal statements: explanations describe the **model**, not what would happen if the world changed |
 | Explanations computed from calibrated outputs, with ranges | Formal per-feature guarantees for explanation ranges |
+:::
+
+A range is not a statement that a prediction is correct: a case with a narrow
+range can still turn out differently from the prediction.
 
 **The assumption.** The calibration data and the new cases must be
 *exchangeable*: roughly, drawn from the same stable process, so that their
@@ -77,7 +118,14 @@ under review by the CE authors*.
 The [semantics reference](foundations/concepts/calibrated_interval_semantics.md)
 is the canonical statement of all guarantees and non-guarantees.
 
+(wic-fit)=
+
 ## When CE is a good fit
+
+The list below describes situations where CE's outputs can be used. It is not
+a list of demonstrated benefits: the published evaluations are on the
+{doc}`citation page <citing>`, and whether CE helps in your own setting is
+something to measure ({doc}`practitioner/evaluate_ce`).
 
 CE fits when:
 
@@ -103,17 +151,21 @@ Points to plan for:
 - **Not a replacement for evaluation.** CE does not tell you whether the model
   is accurate enough for the task; evaluate that separately.
 
+(wic-compare)=
+
 ## How CE relates to other methods
 
 The differences below are about **what each kind of method is designed to
 produce**, not about which performs better. Published comparisons are listed
 on the [citation page](citing.md).
 
+:::{div} ce-table-compact
 | Method family | Designed to produce | Calibration of the model's output | Uncertainty for each explanation |
 |---|---|---|---|
 | Feature-attribution methods such as LIME and SHAP | A number per feature explaining the model's own output | Not part of the method | Not part of the standard methods |
 | Conformal prediction packages | Prediction sets or intervals with coverage guarantees | Yes, for predictions | No feature-level explanations |
 | Calibrated Explanations | Calibrated predictions with ranges, and rule-based explanations with ranges | Yes (Venn-Abers, conformal predictive systems) | Yes, as ranges derived from calibrated outputs |
+:::
 
 A {doc}`short comparison page <compare>` gives more detail.
 
@@ -130,6 +182,10 @@ A {doc}`short comparison page <compare>` gives more detail.
 
 ## References
 
+- Guo, C., Pleiss, G., Sun, Y., and Weinberger, K. Q. (2017).
+  [On calibration of modern neural networks](https://proceedings.mlr.press/v70/guo17a.html).
+  *Proceedings of the 34th International Conference on Machine Learning*,
+  PMLR 70, 1321–1330.
 - Löfström, H., Löfström, T., Johansson, U., and Sönströd, C. (2024).
   [Calibrated explanations: with uncertainty information and counterfactuals](https://doi.org/10.1016/j.eswa.2024.123154).
   *Expert Systems with Applications*, 246, 123154.

@@ -10,6 +10,8 @@ one used later in the {doc}`walkthrough <quickstart_walkthrough>`: deciding
 whether a breast-tumour sample is malignant or benign from measurements of its
 cells.
 
+(ml-a1)=
+
 ## A1. What is an AI/ML model?
 
 **Artificial intelligence (AI)** is the broad goal of building systems that
