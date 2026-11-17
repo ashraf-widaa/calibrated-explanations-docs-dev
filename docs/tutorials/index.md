@@ -23,11 +23,20 @@ numbers.
 | {doc}`Guarded explanations tutorial <../get-started/quickstart_guarded>` | Users who need explanations restricted to typical feature values | Add guarded options to an explanation call and read the guard's audit |
 | {doc}`Apply CE to your own data <../get-started/apply-to-your-data>` | Practitioners integrating CE into their own work | Wrap an existing model, calibrate, explain, check on a test set, save and reload; includes a reviewable prompt for AI coding assistants |
 
+**Suggested order.** Start with the Python walkthrough, which follows one
+binary case from data to explanation. Then take the tutorial for your task:
+the classification tutorial for multiclass problems, the regression tutorial
+for intervals and threshold probabilities. Add the guarded tutorial if
+explanations should stay within typical feature values. Finish with
+*Apply CE to your own data*. Install the package with the `viz` extra first
+({doc}`../get-started/installation`), because most tutorials draw plots.
+
 Guarantees are mode-specific; the canonical statement is
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
-**After the tutorials:** {doc}`../practitioner/evaluate_ce` (evaluate CE on your
-own data), {doc}`../foundations/how-to/integrate_with_pipelines` and the
+**After the tutorials:** {doc}`../practitioner/evaluate_ce` (check
+probabilities, intervals, threshold events and subgroups on your own held-out
+data), {doc}`../foundations/how-to/integrate_with_pipelines` and the
 {doc}`Quick API <../get-started/quick_api>`.
 
 ```{toctree}
