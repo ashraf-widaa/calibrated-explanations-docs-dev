@@ -34,15 +34,21 @@ The `low_high_percentiles` parameter (tuple `(low, high)`) governs the CPS inter
 * One-sided: `(-np.inf, 95)` or `(5, np.inf)`.
 
 For a one-sided interval, the open side is not a calibrated bound: treat that
-side of the interval as open. How it is reported depends on the CE version:
+side of the interval as open. Reporting depends on the source revision as
+well as the package version:
 
-* **v1.0.2** (current release) reports the open side as the smallest
-  (`-np.inf`) or largest (`np.inf`) target value in the calibration set. That
-  value is a placeholder only.
-* **From v1.1.0** the open side is reported as `-inf` or `inf` itself, and JSON
-  exports encode it as the strings `"-inf"` and `"inf"`. Plots may still clip
-  it to the observed target range for display
-  ([CHANGELOG, issue #237](https://github.com/Moffran/calibrated_explanations/blob/main/CHANGELOG.md)).
+* **This Beta's source at `2bc637bc`** reports the open side as the smallest
+  target for a `-np.inf` request or the largest target for a `np.inf` request.
+  That finite value is a placeholder only, not a coverage endpoint.
+* **The official source at `371bd806`** returns `-inf` or `inf` itself. Its
+  JSON export encodes infinities as the strings `"-inf"` and `"inf"`; plots may
+  still clip them to the observed target range for display. See the
+  [pinned official implementation](https://github.com/Moffran/calibrated_explanations/blob/371bd8060bd279fbfd41f7509097617561ac1ae4/src/calibrated_explanations/calibration/interval_regressor.py)
+  and the release notes for issue #237.
+
+Both source revisions identify as `1.1.0-dev`; that label alone cannot select
+the endpoint behavior. This documentation clarification does not reconcile
+the implementations or decide which behavior should ship.
 
 Code that consumes intervals should handle an unbounded side explicitly.
 Because the point prediction is the median, a one-sided interval whose finite

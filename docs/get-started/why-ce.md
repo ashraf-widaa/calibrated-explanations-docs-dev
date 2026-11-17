@@ -128,11 +128,15 @@ data leakage and how to avoid it.
 
 ## Assumptions and limitations
 
-- **Same process.** The guarantees assume the calibration data and new cases
-  are *exchangeable*: drawn from the same stable process. You cannot prove
-  this from the data; if the population or process changes, recalibrate.
+- **Data and protocol.** Calibration and new cases must be *exchangeable*:
+  reordering them leaves their joint distribution unchanged. Independent
+  samples from one stable population are an example. Keep the predictive
+  model and fitted preprocessing fixed before calibration; the full
+  method-specific prerequisites are in the semantics reference. An empirical
+  calibration check alone cannot establish these conditions.
 - **Many cases, not one.** Calibration statements describe behaviour over many
-  cases. They do not guarantee anything about one individual prediction.
+  cases. They do not guarantee correctness for an individual prediction or
+  locate its unknown "true probability" inside the reported pair.
 - **Mode-specific guarantees.** What the range guarantees differs between
   classification, interval regression and probabilistic regression; see
   {doc}`../foundations/concepts/calibrated_interval_semantics`.

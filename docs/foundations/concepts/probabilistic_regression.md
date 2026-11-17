@@ -9,8 +9,13 @@ you can ask CE two different questions about it:
   regression*: a calibrated probability, for example "a 42% chance that the
   value is at most 150".
 
-The model and the calibration are the same; only the question changes. This
-page explains both, shows real outputs, and lists common mistakes. For the
+The same fitted regression model and calibrated wrapper support both queries,
+but the calibration paths differ: interval mode uses a CPS on the full
+calibration set; probabilistic mode uses separate subsets for CPS scoring and
+Venn–Abers calibration. The latter returns a merged estimate and reported
+bounds; the pair's exact calibration property must not be attributed to the
+merged estimate. This page explains both, shows real outputs, and lists common
+mistakes. For the
 guarantees, assumptions and non-guarantees of each mode, use
 {doc}`calibrated_interval_semantics`.
 

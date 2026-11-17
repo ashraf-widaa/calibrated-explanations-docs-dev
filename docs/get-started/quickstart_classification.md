@@ -85,15 +85,23 @@ Each line shows the predicted class, its calibrated probability and the lower
 and upper value of that probability. Cases 1 and 2 are predicted firmly. For
 case 0 the probability of *setosa* is 0.73, but the range runs from 0.00 to
 1.00: with only 30 calibration cases, the calibration data hardly constrain it.
-More calibration data would narrow such ranges.
+More representative calibration data can help, but narrowing the range for
+every individual case is not guaranteed.
 
-`normalization="simplex"` keeps each class's bounds as calibrated. Without it
-(the default for multiclass), CE rescales the bounds together with the
+`normalization="simplex"` preserves each class's raw Venn–Abers pair while
+normalizing the point estimates; this does not establish joint multiclass
+validity. With the default multiclass `scale` normalization, CE rescales the bounds together with the
 probabilities, and an upper bound can then exceed 1; see limitation 1 in
 {doc}`ce-tasks-and-modes`. For binary classification the option makes no
 difference to how you read the output.
 
 ## 4. Generate calibrated factual explanations
+
+The `simplex` setting above applies only to that prediction call. The
+explanation calls below use the default multiclass `scale` normalization,
+which rescales the bounds as well as the estimates. The explanation plot
+therefore does not show the raw bounds from step 3. The interpretation of
+these rescaled ranges remains under author review (SR-13).
 
 ```python
 factual = explainer.explain_factual(x_test[:5])

@@ -186,13 +186,24 @@ except Exception:
 
 Interpret the chart as follows:
 
-1. **Bar length** corresponds to the absolute weight shown in the rule table.
+1. **Weight range.** With `uncertainty=True`, each bar spans the rule's
+   lower and upper weight values. Its length is not the absolute point weight;
+   read that estimate from the rule table. A range crossing zero does not
+   establish a direction, and excluding zero is not a statistical significance test.
 2. **Colour** indicates direction. With the default plot style, classification and
    probabilistic-regression plots draw contributions that raise the prediction in red
    and those that lower it in blue; plain regression plots swap the two (raise in blue,
    lower in red). The colours come from the plot style configuration and can be changed.
-3. **Shaded band** around each bar is the rule-level uncertainty interval.
-4. **Vertical line** over the summary panel mirrors the calibrated prediction and its `(low, high)` bounds.
+3. **Dark and light portions.** In the default factual uncertainty plot,
+   the dark portion runs from zero to the range endpoint nearest zero. The
+   remaining range is light; a range crossing zero has no dark portion.
+   The grey band behind the rules redraws the original prediction range on
+   the weight scale; it is not a confidence region for the feature weights.
+4. **Prediction panel.** The vertical marker is the point estimate; the
+   reported lower and upper values determine the dark/light probability bar.
+   Interval-regression headers instead show the numeric estimate and target
+   interval. These prediction quantities have different qualifications from
+   the derived weight ranges; see {doc}`../concepts/calibrated_interval_semantics`.
 
 When reviewing alternative explanations, use `plot(style="alternative")` (or open the alternative tab in interactive renderers) to see how the suggested feature changes alter the bars and the calibrated outcome.
 

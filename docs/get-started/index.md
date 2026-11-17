@@ -8,10 +8,10 @@ contribution.
 
 **What CE gives you**
 
-- **Calibrated predictions with ranges.** For classification, a calibrated
-  probability with a lower and an upper value. For regression, a prediction
-  with an interval, or the probability that the outcome is at or below a
-  threshold you choose.
+- **Predictions from calibrated outputs.** For classification, a merged
+  probability estimate and two Venn–Abers values. For interval regression,
+  a numeric prediction with a target-value interval; for probabilistic
+  regression, an event-probability estimate with reported bounds.
 - **Factual explanations.** The feature conditions behind one prediction,
   each with a weight and a range for that weight.
 - **Alternative explanations.** What the calibrated prediction would be if
@@ -19,8 +19,11 @@ contribution.
 - **Your own model.** CE wraps scikit-learn-style classifiers and regressors,
   trained or not, and leaves the model itself unchanged.
 
-What the ranges mean differs by task, and CE's guarantees assume that the
-calibration data and new cases come from the same stable process.
+The pair, merged estimate and explanation ranges have different statistical
+qualifications. These depend on the task and calibration protocol, including
+held-out calibration data and exchangeability. See the
+{doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`;
+exact validity wording remains under CE author review.
 
 This Quick Start gives you the big picture without code. It links to the
 Python tutorials when you want to run CE, and to the theory when you want the

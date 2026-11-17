@@ -56,9 +56,9 @@ range in the output means.
 :::{div} ce-table-compact
 | Task | Question | Calibration method | Output | Read the range as |
 |---|---|---|---|---|
-| Classification | Which class, and how probable? | Venn-Abers predictors | Calibrated class probability with lower and upper bounds | Bounds of a probability, not a confidence interval |
-| Interval regression | Where will the value fall? | Conformal predictive system (CPS) | Prediction with an interval for requested percentiles | An interval for the value; the requested coverage holds on average over many cases, not for each case |
-| Probabilistic regression | How likely is an event on the value? | CPS scores calibrated with Venn-Abers | Calibrated event probability with lower and upper bounds | Bounds of the probability of an event, not an interval for the value |
+| Classification | Which class, and how probable? | Venn-Abers predictors | Merged probability estimate and reported bounds | Bounds of a probability, not a confidence interval (raw pairs); rescaled multiclass bounds require separate interpretation |
+| Interval regression | Where will the value fall? | Conformal predictive system (CPS) | Prediction with an interval for requested percentiles | An interval for the target value; coverage holds on average over many cases, not for each case, under the method's conditions; exact wording remains under author review |
+| Probabilistic regression | How likely is an event on the value? | CPS scores calibrated with Venn-Abers | Merged event-probability estimate and reported bounds | Bounds of the probability of an event, not an interval for the value; the merge does not inherit the pair's exact calibration property |
 :::
 
 The exact statements, with their conditions, are in

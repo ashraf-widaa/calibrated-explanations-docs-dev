@@ -176,12 +176,13 @@ Go deeper: {doc}`../foundations/how-to/interpret_explanations`,
    same meaning as in binary classification. By default CE then divides every
    class's probability *and* its bounds by the sum of the class probabilities,
    so that the probabilities add up to 1. The rescaled bounds no longer carry
-   the Venn–Abers meaning, and an upper bound can exceed 1. Use them only to
-   compare uncertainty between classes. If you need per-class bounds that keep
-   their Venn–Abers meaning, pass `normalization="simplex"` to `predict_proba`:
-   the bounds stay as calibrated, and only the class probabilities are scaled
-   to add up to 1, so a probability may then fall slightly outside its own
-   bounds.
+   the raw Venn–Abers interpretation, and an upper bound can exceed 1.
+   `normalization="simplex"` preserves the raw per-class pairs and normalizes
+   only the point estimates to add up to 1. A normalized estimate can then lie
+   outside its own raw pair. Preserving a pair does not establish a joint
+   multiclass or predicted-class-selection guarantee. The interpretation of
+   rescaled bounds and any cross-class uncertainty comparison remains under
+   author review (SR-13).
 2. **All-class explanations are experimental.** By default a multiclass
    explanation explains the predicted class only; `multi_labels_enabled=True`
    is not part of the stable interface.

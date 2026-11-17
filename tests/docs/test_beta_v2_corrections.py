@@ -17,12 +17,18 @@ def _text(rel: str) -> str:
     return (DOCS / rel).read_text(encoding="utf-8").replace("\r\n", "\n")
 
 
-def test_one_sided_intervals_are_version_aware() -> None:
+def test_one_sided_intervals_identify_source_revision_and_open_side() -> None:
+    """The same development version identifies two different endpoint implementations."""
     regression = _text("tasks/regression.md")
-    assert "v1.0.2" in regression and "From v1.1.0" in regression
+    assert "This Beta's source at `2bc637bc`" in regression
+    assert "official source at `371bd806`" in regression
+    assert "finite value is a placeholder only, not a coverage endpoint" in regression
     assert "`-inf` or `inf`" in regression
+    assert "Both source revisions identify as `1.1.0-dev`" in regression
     methods = _text("foundations/concepts/calibration_methods.md")
-    assert "a placeholder in v1.0.2; `-inf`/`inf` from v1.1.0" in methods
+    assert "finite placeholder" in methods and "`371bd806`" in methods
+    assert "Treat the side as open" in methods
+    assert "from v1.1.0" not in methods
 
 
 def test_percentiles_are_not_called_confidence_levels() -> None:

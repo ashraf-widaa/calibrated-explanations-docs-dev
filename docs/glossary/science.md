@@ -154,10 +154,11 @@ Calibration
 
 Venn-Abers predictor
 Venn–Abers predictor
-  The calibration method CE uses for classification. It turns the model's
-  scores into calibrated probabilities with an interval, a lower and an upper
-  bound. In probabilistic regression it calibrates the event probabilities
-  derived from the {term}`conformal predictive system <Conformal predictive system>`.
+  CE's classification calibration method. It produces a probability pair and
+  a merged estimate from model scores; the pair's exact calibration property
+  does not transfer to the merge. In probabilistic regression it calibrates
+  CPS event scores. Multiclass normalization changes how the returned bounds
+  should be read; exact validity wording remains under author review.
 
   **Learn more:** {doc}`../foundations/concepts/calibration_methods` (section 2)
 ```
@@ -168,10 +169,12 @@ Venn–Abers predictor
 :sorted:
 
 Uncertainty interval
-  The low and high bounds CE reports with a calibrated prediction. In
-  classification and probabilistic regression it bounds the calibrated
-  probability; in interval regression it is a CPS percentile interval for the
-  predicted value. What it guarantees depends on the mode and its assumptions.
+  In classification and probabilistic regression, reported lower and upper
+  values associated with a probability estimate; multiclass rescaling needs
+  separate interpretation. They are not conventional confidence limits for an
+  individual's unknown probability. In interval regression, a CPS percentile
+  interval for the target value. Explanation-weight ranges are derived
+  quantities with different qualifications. See the mode-specific semantics.
 
   **Learn more:** {doc}`../foundations/concepts/calibrated_interval_semantics`
 ```
@@ -218,11 +221,11 @@ Conditional calibration
 
 Probabilistic regression
 Thresholded regression
-  A regression query that returns the calibrated probability of a threshold
-  event, such as P(y ≤ t), with an interval for that probability. It is
-  selected by passing a {term}`threshold`; CPS outputs are calibrated with
-  Venn-Abers. "Thresholded regression" names the same mode in implementation
-  documents.
+  A regression query for an event such as P(y ≤ t), selected with a
+  {term}`threshold`. CPS scores are calibrated with Venn–Abers; CE returns a
+  merged event-probability estimate and reported bounds, rather than a target-value
+  interval. Exact validity wording remains under author review. "Thresholded
+  regression" names the same mode in implementation documents.
 
   **Learn more:** {doc}`../foundations/concepts/calibrated_interval_semantics`
 

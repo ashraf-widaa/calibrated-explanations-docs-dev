@@ -48,9 +48,11 @@ about 70% should turn out positive. The two are different properties.
   case the overall share of positives as its probability is calibrated, yet it
   cannot tell one case from another.
 
-Calibration is not designed to make a model more accurate, and it says nothing
-about whether one individual prediction is correct. It makes the probabilities
-usable as probabilities, over many cases. {doc}`How CE calibrates
+Calibration concerns probability forecasts over many cases and says nothing
+about whether one individual prediction is correct. It does not guarantee
+improved accuracy.
+In CE, the Venn–Abers pair and its merged estimate have different validity
+qualifications. {doc}`How CE calibrates
 <foundations/concepts/calibration_methods>` explains the methods.
 
 (wic-adds)=
@@ -64,9 +66,10 @@ calibrated output**.
   *calibration set*) to learn how the model's outputs relate to real outcomes.
   For classification it uses Venn-Abers predictors; for regression it uses
   conformal predictive systems.
-- **Uncertainty on every output.** Each calibrated prediction comes with a
-  lower and an upper value. Each feature's effect in an explanation also comes
-  with a range.
+- **Prediction bounds and explanation ranges.** Request prediction bounds
+  with `uq_interval=True`; explanation outputs also include ranges for
+  feature weights or alternative scenarios. These derived ranges do not
+  inherit a formal per-feature guarantee from prediction calibration.
 - **Two kinds of explanation.** A *factual explanation* shows which of the
   case's own feature values move the calibrated prediction, and by how much.
   An *alternative explanation* shows what the model would predict if a feature
@@ -93,9 +96,10 @@ al. (2024) for classification and Löfström et al. (2025) for regression; the
 
 ## What CE guarantees, and what it does not
 
-CE's guarantees are **statistical and depend on stated assumptions**. They hold for the
-calibrated predictions, under an assumption about the data, and they differ by
-task.
+CE's guarantees are **statistical and depend on stated assumptions** and the
+method-specific calibration protocol. They differ by task and returned
+quantity; the pair's validity must not be transferred to its merged estimate
+or to explanation-weight ranges.
 
 :::{div} ce-table-compact
 | CE does provide | CE does not provide |
@@ -109,10 +113,12 @@ task.
 A range is not a statement that a prediction is correct: a case with a narrow
 range can still turn out differently from the prediction.
 
-**The assumption.** The calibration data and the new cases must be
-*exchangeable*: roughly, drawn from the same stable process, so that their
-order does not matter. You cannot prove this from the data; it is a judgement
-about how the data were collected and how the model is used. The current
+**Data and protocol assumptions.** The calibration data and the new cases must be
+*exchangeable*: reordering them leaves their joint distribution unchanged.
+Independent draws from one stable population are an example. The predictive
+model and any fitted preprocessing or difficulty estimator must be fixed
+before the calibration cases are used. Exchangeability cannot be established
+by an empirical calibration check alone. The current
 documentation also speaks of "distribution-matched" data; *that wording is
 under review by the CE authors*.
 

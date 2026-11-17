@@ -133,8 +133,9 @@ is their mean; repeat until the values never decrease.
 **In one minute.** For each new case, CE asks the calibration data two "what if"
 questions: what calibrated probability would this case get if it turned out negative
 (p0), and if it turned out positive (p1)? CE reports both as the interval
-`[low, high]`, together with one combined probability. The interval is narrow when many
-calibration cases have similar scores, and wide when few do.
+`[low, high]`, together with one combined probability. Its width measures sensitivity
+of the isotonic construction to the added label. Nearby calibration-score support
+is a useful intuition for width, not a deterministic sample-size rule.
 
 **How it works.**
 
@@ -150,7 +151,9 @@ calibration cases have similar scores, and wide when few do.
 
 `predict_proba(x, uq_interval=True)` returns `probs` and `(low, high)`. For binary
 classification, `low` and `high` are {math}`p_0` and {math}`p_1` for the positive class,
-with shape `(n_samples,)`, and `probs[:, 1]` is the merged {math}`p`. CE uses an inductive
+with shape `(n_samples,)`, and, with the default `interval_summary`, `probs[:, 1]`
+is the merged {math}`p`. Other summary options select a different point estimate;
+the merge formula describes the default. CE uses an inductive
 Venn–Abers predictor from the `venn_abers` package (`calibration/venn_abers.py`).
 :::
 
@@ -181,8 +184,9 @@ not 0.375.
 :class: important
 
 **Validity of Venn–Abers predictors** (Vovk and Petej, 2014; Vovk, Petej and Fedorova,
-2015). If the calibration cases and the test case are exchangeable (for example,
-independent draws from one distribution), the probability selected by the *true* label,
+2015). With the scoring model fixed before calibration and the calibration cases
+and test case exchangeable (for example, independent draws from one distribution),
+the probability selected by the *true* label,
 {math}`p_Y`, is perfectly calibrated:
 
 ```{math}
@@ -213,7 +217,11 @@ lot. This is an intuition, not a theorem.
 CE fits one Venn–Abers predictor per class (class against the rest). With the default
 normalisation it divides every class's probability **and** its bounds by the sum of the
 class probabilities, so the probabilities add up to 1 but an upper bound can exceed 1.
-`normalization="simplex"` keeps the raw Venn–Abers bounds. See
+`normalization="simplex"` keeps the raw Venn–Abers bounds while normalizing the
+default merged estimates. A normalized estimate may then lie outside its raw pair.
+Preserving each pair does not establish joint multiclass validity or a guarantee
+after selecting the predicted class. Those interpretations remain under author
+review (SR-13). See
 {doc}`../../get-started/ce-tasks-and-modes`.
 :::
 
@@ -329,9 +337,11 @@ the range from how wrong the model was on the calibration cases.
 `(low, high)`. CE uses a split conformal predictive system from the `crepes` package
 (`calibration/interval_regressor.py`). `predict(x)` returns the CPS median, which can
 differ from the model's own prediction. A one-sided request (`-np.inf` or `np.inf`)
-leaves one side open: v1.0.2 reports it as the smallest or largest calibration target
-(a placeholder), and from v1.1.0 it is reported as `-inf` or `inf`; in neither case is
-it a bound (see {doc}`../../tasks/regression`).
+leaves one side open. This Beta's pinned implementation reports the calibration-target
+minimum or maximum as a finite placeholder; the official source at `371bd806`
+returns an infinity instead. The shared `1.1.0-dev` version label does not distinguish
+these revisions. Treat the side as open and check the source revision, as explained
+in {doc}`../../tasks/regression`.
 :::
 
 ### Exchangeability
@@ -345,9 +355,11 @@ changed after calibration, are not. *Wording under review: some CE pages also sa
 ### Conformal predictive systems
 
 A *conformal predictive system* (Vovk et al., 2019) outputs a whole predictive
-distribution {math}`Q(y)` instead of a single interval. The *split* version used by CE
-has guaranteed validity and is computationally efficient (Vovk et al., 2020). The
-unsmoothed value that `crepes` computes is
+distribution {math}`Q(y)` instead of a single interval. Vovk et al. (2020) study
+validity and computational efficiency of split predictive distributions. The
+following construction describes the unnormalised, non-Mondrian case; difficulty
+scaling and category-specific calibration require the corresponding protocol.
+The unsmoothed value that `crepes` computes in this case is
 
 ```{math}
 Q(y) = \frac{\#\{\, i : \hat y(x) + \alpha_i \le y \,\} + 1}{n + 1},
@@ -423,7 +435,7 @@ calibration set.
 :::{admonition} Theoretical guarantee
 :class: important
 
-If calibration and future cases are exchangeable, CE's {math}`(l, h)` prediction interval
+Under assumptions 1–3 and the endpoint conventions stated above, the {math}`(l, h)` prediction interval
 contains the true value with probability at least {math}`h - l`, **on average over cases**
 (marginal coverage; Vovk, Gammerman and Shafer, 2022; Lei et al., 2018). It is not a
 statement about each individual case, or about each subgroup.
@@ -592,9 +604,9 @@ P(y <= 150) = 0.056, probability interval [0.000, 0.059]
 | Subgroups with different noise | Coverage holds on average, not per group | Mondrian `bins`; check coverage per group |
 | Calibration data also used for training | Errors look too small; intervals too narrow | Keep training, calibration and test data separate |
 | Small calibration set | Wide Venn–Abers intervals; extreme percentiles may be undefined; thresholded queries use half the set | Use a larger calibration set |
-| One-sided intervals | The open side is not a calibrated bound (a placeholder in v1.0.2; `-inf`/`inf` from v1.1.0) | Treat that side as open |
-| Merged probability | No exact calibration guarantee | Use {math}`[p_0, p_1]` when validity matters |
-| Multiclass default normalisation | Bounds rescaled; an upper bound can exceed 1 | `normalization="simplex"` |
+| One-sided intervals | Reporting differs between this Beta and the pinned official source despite the shared development version label | Treat the side as open; check the source revision |
+| Merged probability | Does not inherit the pair's exact calibration property | Keep the pair/merge distinction; the pair is not an individual-probability confidence interval |
+| Multiclass default normalisation | Bounds rescaled; an upper bound can exceed 1 | `normalization="simplex"` preserves raw pairs, without establishing joint multiclass validity |
 :::
 
 Explanations are built on these calibrated outputs, but the guarantees above are stated
@@ -613,7 +625,7 @@ their decisions:
 - whether coverage is stated as "at least" or "about" the requested rate, and the
   Mondrian statement;
 - the terms *probability interval* and *prediction interval*;
-- exchangeability as the single stated assumption;
+- exchangeability and the method-specific data-use and fitted-component prerequisites;
 - the default multiclass normalisation;
 - how the uncertainty intervals of feature weights should be described.
 :::
