@@ -34,8 +34,9 @@ these labelled roles.
 2. **Fit.** An ordinary model is trained, exactly as without CE.
 3. **Calibrate.** CE looks at how the trained model's outputs relate to the
    real outcomes on the calibration set. The model itself is not changed.
-4. **Predict.** Every prediction comes back calibrated and with a range: a
-   lower and an upper value.
+4. **Predict.** Request calibrated predictions and, with `uq_interval=True`,
+   their lower and upper values. The task and method determine how those
+   values should be interpreted.
 5. **Explain.** CE explains a prediction by asking the calibrated model again
    with one feature changed at a time, and reports how much each feature's
    value moves the calibrated prediction, again with a range.

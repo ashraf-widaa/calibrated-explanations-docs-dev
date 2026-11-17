@@ -117,6 +117,10 @@ set in two, so its ranges can be wider than in classification (limitation 3 in
 
 ## 5. Explain a prediction
 
+The preceding `predict_proba` call asked about the event `y <= 150`.
+The next call omits `threshold` and explains the numeric target instead, so
+its weights are in target units rather than changes in event probability.
+
 ```python
 factual = explainer.explain_factual(x_test[:1])
 rules = factual[0].get_rules()

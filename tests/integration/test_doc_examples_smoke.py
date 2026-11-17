@@ -109,6 +109,27 @@ def test_should_apply_documented_threshold_policy_to_event_bounds() -> None:
     assert np.all(context["accept"] | context["reject"] | context["defer"])
 
 
+def test_should_keep_target_explanations_after_a_documented_threshold_query() -> None:
+    """ADR-021: a threshold prediction does not change the next explanation's quantity."""
+    page = Path("docs/get-started/quickstart_regression.md")
+    blocks = _python_blocks(page)
+    context: dict[str, object] = {}
+    for block in blocks[:2]:
+        exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    wrapper = context["explainer"]
+    assert wrapper.fitted and wrapper.calibrated
+    query = context["x_test"][:1]
+    before = wrapper.explain_factual(query)[0]
+    for block in blocks[2:5]:
+        exec(compile(block, str(page), "exec"), context)  # noqa: S102
+    after = context["factual"][0]
+    assert after.is_regression() and not after.is_thresholded()
+    np.testing.assert_allclose(after.get_rules()["weight"], before.get_rules()["weight"])
+    event = wrapper.explain_factual(query, threshold=150)[0]
+    assert event.is_regression() and event.is_thresholded() and event.is_probabilistic()
+    assert 0 <= event.predict <= 1
+
+
 def test_should_reinitialize_regression_bounds_when_documented_difficulty_is_attached() -> None:
     """ADR-021: normalization is opt-in and resetting it restores baseline outputs."""
     context = _build_regression_context()

@@ -10,10 +10,12 @@ Explanation methods that describe that output inherit both limits: they show
 which features drive the output, not how far the output or the explanation can
 be relied on.
 
-CE first calibrates the model's outputs on data the model
-never saw, then explains the calibrated output, and gives every prediction and
-every feature effect a range. It does not establish cause and effect, and its
-guarantees hold only under stated assumptions. For guarantees, assumptions and
+CE first calibrates the model's outputs on held-out data, then explains the
+calibrated output. Prediction calls can return uncertainty information when
+requested, and explanations report ranges for their feature weights. These
+ranges describe different quantities; their interpretation depends on the
+task and method. They do not establish cause and effect, and statistical
+guarantees require the stated assumptions. For guarantees, assumptions and
 non-guarantees, see {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 <span id="read-in-this-order"></span>
