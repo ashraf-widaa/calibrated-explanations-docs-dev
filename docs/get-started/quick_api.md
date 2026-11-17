@@ -11,12 +11,13 @@ Full signatures are in the {doc}`API reference <../api/index>`.
 :::{div} ce-table-compact
 | Question | Answer |
 |---|---|
+| How do I install it? | `pip install calibrated-explanations` (Python 3.10 or later). Plotting needs the `viz` extra: `pip install "calibrated-explanations[viz]"`. Details and other extras: {doc}`installation`. |
 | What do I import? | `from calibrated_explanations import WrapCalibratedExplainer` |
 | Which model? | A scikit-learn-style model with `fit` and `predict`; a classifier also needs `predict_proba`. CE wraps it and does not change it. |
 | Which data? | Three parts with known labels: a **proper training set** for `fit`, a **calibration set** the model never saw for `calibrate`, and the cases you want to predict or explain. |
 | What are the minimum steps? | `fit` → `calibrate` → `predict_proba` or `predict` → `explain_factual` or `explore_alternatives`. |
 | Which call for my task? | Classification: `predict_proba`. Interval regression: `predict(..., uq_interval=True)`. Probabilistic regression: `predict_proba(..., threshold=...)`. See {doc}`ce-tasks-and-modes`. |
-| What comes back? | Calibrated predictions with a lower and an upper value, and explanation collections you can print, plot or export. The ranges mean different things per task: see {doc}`../foundations/concepts/calibrated_interval_semantics`. |
+| What comes back? | Calibrated predictions; with `uq_interval=True`, also a lower and an upper value. Explanation calls return collections you can print, plot or export, with a range for each feature weight. The prediction bounds and the weight ranges mean different things, and the bounds differ per task: see {doc}`../foundations/concepts/calibrated_interval_semantics`. |
 | Something fails? | See {doc}`troubleshooting`. |
 :::
 

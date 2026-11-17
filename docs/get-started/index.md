@@ -28,10 +28,12 @@ exact validity wording remains under CE author review.
 This Quick Start explains CE without code.
 
 **To run CE now:** install the package ({doc}`installation`; Python 3.10 or
-later), then follow the {doc}`Python walkthrough <quickstart_walkthrough>` or
-another of the {doc}`Python tutorials <../tutorials/index>`, which show
-executable code with real output. The {doc}`Quick API <quick_api>` lists the
-main calls.
+later, with the `viz` extra if you want plots). The
+{doc}`Quick API <quick_api>` page has a complete minimal example you can copy
+and run in one go; the {doc}`Python walkthrough <quickstart_walkthrough>`
+then follows the same case step by step, and the other
+{doc}`Python tutorials <../tutorials/index>` cover each task, all with
+executable code and real output.
 
 ## Where CE fits
 
