@@ -131,6 +131,51 @@ Narrower intervals are more useful, but only if the share stays acceptable.
 *What coverage CE guarantees, and under which assumption, is stated on the
 semantics page; that wording is under review by the CE authors.*
 
+### Threshold events (probabilistic regression)
+
+With a `threshold`, CE returns the calibrated probability of an event such as
+*y ≤ 150* instead of an interval. Check it like a classification probability:
+compare it with how often the event actually happened on the test set.
+
+```python
+threshold = 150
+p_event, (p_lo, p_hi) = reg.predict_proba(Xr_test, threshold=threshold, uq_interval=True)
+p = p_event[:, 1]
+observed = (yr_test <= threshold).astype(int)
+print(f"Observed share with y <= {threshold}: {observed.mean():.3f}")
+print(f"Mean predicted P(y <= {threshold}):  {p.mean():.3f}")
+print(f"Brier score: {brier_score_loss(observed, p):.4f}")
+print(f"Mean width of [low, high]: {np.mean(p_hi - p_lo):.3f}")
+frac_pos, mean_pred = calibration_curve(observed, p, n_bins=4, strategy="quantile")
+print("Reliability (quantile bins): mean predicted -> observed share")
+for mp, fp in zip(mean_pred, frac_pos):
+    print(f"  {mp:.2f} -> {fp:.2f}")
+```
+
+```text
+Observed share with y <= 150: 0.528
+Mean predicted P(y <= 150):  0.444
+Brier score: 0.1965
+Mean width of [low, high]: 0.123
+Reliability (quantile bins): mean predicted -> observed share
+  0.19 -> 0.21
+  0.42 -> 0.47
+  0.60 -> 0.74
+  0.76 -> 0.86
+```
+
+**Reading it.** The event probability is in column 1, `p_event[:, 1]`. On
+these 89 test cases the predicted probabilities are on average lower than the
+observed shares (0.444 against 0.528), most visibly in the upper bins. With
+about 22 cases per bin and one split, a difference of this size can arise by
+chance; repeat the check with other seeds or more data before concluding that
+the event probabilities are systematically too low. The event construction
+uses half of the calibration set for the conformal scores and half for
+Venn–Abers calibration (see
+{doc}`../foundations/concepts/probabilistic_regression`), so its estimates
+rest on fewer calibration cases than the intervals above. *The exact validity
+statement for these event probabilities is under review by the CE authors.*
+
 ## 4. Common mistakes
 
 | Mistake | Consequence | Do instead |
@@ -157,6 +202,36 @@ semantics page; that wording is under review by the CE authors.*
   filter such values out (experimental).
 - **The model is not good enough.** CE calibrates and explains a model; it does
   not make a weak model accurate. Evaluate accuracy for your task separately.
+
+### Checking a subgroup
+
+To see whether a subgroup behaves differently, repeat the coverage check of
+section 3 within each group. Here the groups are the two values of the
+diabetes dataset's `sex` column, which it stores as two scaled numbers.
+
+```python
+sex = Xr_test[:, 1]  # the 'sex' column; the dataset stores it as two scaled values
+for value in np.unique(sex):
+    group = sex == value
+    inside_g = (yr_test[group] >= lo[group]) & (yr_test[group] <= hi[group])
+    print(f"group sex={value:+.3f}: {group.sum()} cases, inside {inside_g.mean():.3f}, "
+          f"mean width {np.mean(hi[group] - lo[group]):.1f}")
+```
+
+```text
+group sex=-0.045: 54 cases, inside 0.963, mean width 222.8
+group sex=+0.051: 35 cases, inside 0.943, mean width 222.8
+```
+
+**Reading it.** Both groups show a share near the requested 90% here, but
+with 54 and 35 cases this says little: a few cases more or less inside would
+change the shares noticeably. The mean width is the same in both groups
+because standard conformal intervals have the same width for every case.
+If groups differ systematically in how hard they are to predict, consider
+{doc}`difficulty-adapted intervals <advanced/normalization-guide>` or
+{doc}`Mondrian (conditional) calibration <../foundations/how-to/conditional_calibration>`.
+*What Mondrian calibration guarantees within each group, and under which
+conditions, is under review by the CE authors.*
 
 ## Related pages
 
