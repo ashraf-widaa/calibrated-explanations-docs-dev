@@ -101,13 +101,13 @@ effect or recommending an intervention.
   data. See {ref}`Calibration is not accuracy <wic-calibration>` for the
   probability interpretation and {doc}`ce-tasks-and-modes` for CE's modes.
 - **Range (uncertainty).** The lower and upper value around a prediction
-  (panel 1). It shows how firmly the calibration data support that
-  prediction. It is a statement about many cases, not a promise about one
-  case, and its exact meaning depends on the task.
+  (panel 1), returned when requested. It is CE's calibrated uncertainty
+  information for that prediction: a statement about many cases, not a
+  promise about one case, and its exact meaning depends on the task.
 - **Factual explanation.** For each feature, a rule that holds for the case and
   a weight: how much the calibrated prediction would differ with typical
   values from the other side of the condition, with a range (panel 2). A
-  range that includes 0 means the direction is not firmly supported.
+  range that includes 0 does not establish a direction.
 - **Alternative explanation.** What the calibrated prediction would be if one
   feature had a value in a different range (panel 3).
 

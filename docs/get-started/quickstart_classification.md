@@ -8,10 +8,11 @@ yet chosen a mode, start with {doc}`ce-tasks-and-modes`.
 ## Prerequisites
 
 ```bash
-pip install calibrated-explanations scikit-learn
+pip install "calibrated-explanations[viz]" scikit-learn
 ```
 
-You need a classifier with `predict` and `predict_proba`, and labelled data you
+The `viz` extra installs Matplotlib, which the plotting step below needs. You
+need a classifier with `predict` and `predict_proba`, and labelled data you
 can split into training, calibration and test sets.
 
 ## Classification semantics note
@@ -153,6 +154,12 @@ prediction bounds shifted around zero, not another feature's contribution.
 These are the default multiclass bounds described above; the weight ranges
 do not establish individual coverage or causal effects.
 
+The plot therefore shows two different kinds of range. The **prediction
+bounds** in the top panel come from the calibration itself. Each **weight
+range** below is derived by comparing calibrated predictions after
+substituting feature values; it is not a calibrated statement about the
+feature, and no formal guarantee is claimed for it.
+
 For more, see {doc}`../foundations/how-to/interpret_explanations`.
 
 For multiclass all-class explanations:
@@ -193,8 +200,8 @@ would change the real outcome.
 
 - Calibrating on the training data: the model then looks more reliable than it
   is. Always calibrate on held-out cases.
-- Reading `[low, high]` as a guarantee for one case: it describes how firmly
-  the calibration data support the probability, over many cases.
+- Reading `[low, high]` as a guarantee for one case: the bounds describe
+  calibrated behaviour over many cases, not the correctness of one prediction.
 - Reading the default multiclass bounds as probabilities (limitation 1).
 - Treating a weight as a cause, or an alternative as a recommended action.
 

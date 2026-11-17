@@ -7,6 +7,12 @@ same steps without code are in {doc}`apply-overview` (Quick Start). The
 example uses binary classification on a public dataset, standing in for your
 data; each step says what to change for your problem.
 
+Install the package with the `viz` extra, which the plotting step needs:
+
+```bash
+pip install "calibrated-explanations[viz]" scikit-learn
+```
+
 ## Before you start: four checks
 
 | Check | What to look for | If it fails |
@@ -42,8 +48,9 @@ print(len(x_proper), len(x_cal), len(x_test))
 Split **before** any preprocessing, so that no information from the
 calibration or test set reaches training. `stratify` keeps the class balance
 equal across sets (classification only). There is no fixed rule for the size
-of the calibration set; a few hundred cases is a common starting point, and
-with very few cases the ranges become wide.
+of the calibration set; a few hundred cases is a common starting point. Very
+small calibration sets tend to give wide ranges, but more data does not
+guarantee a narrower range for every case.
 
 ## 2. Train your model, or use one you already have
 
@@ -209,7 +216,7 @@ when the population changes.
 |---|---|---|
 | `ConfigurationError` mentioning `predict_proba` | The classifier has no `predict_proba` (for example `LinearSVC`) | Use a classifier with `predict_proba`, or wrap it in `CalibratedClassifierCV` first |
 | An explanation has no rules | The cause depends on the explanation configuration; the earlier saturated-probability explanation has not been reproduced | If guarded filtering is enabled, inspect its audit ({doc}`quickstart_guarded`); retain the prediction and report a reproducing case if the empty result is unexpected |
-| Very wide ranges | Small calibration set, or few calibration cases like this one | Use more calibration data; check the range widths on the test set |
+| Very wide ranges | Small calibration set, or few calibration cases like this one | Use a larger, representative calibration set if you have one; check the range widths on the test set. More data tends to help on average but does not narrow every case |
 | `UserWarning` about feature names | The model was fitted on a pandas DataFrame | Fit the model on NumPy arrays |
 | `ValidationError: Invalid argument type` when indexing explanations | Indexing with a NumPy integer | Use a plain `int`, for example `factual[int(i)]` |
 | Explanations are slow | Many features or many cases explained at once | Explain fewer cases, use `features_to_ignore` (on its own explainer: see the known issue in {doc}`troubleshooting`), see {doc}`../practitioner/performance-tuning` |

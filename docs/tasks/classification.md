@@ -42,8 +42,8 @@ For multiclass models, `low` and `high` have one column per class, shape
 ### 2. Factual explanation
 
 Returns the conditions that hold for each case, with a weight per condition and a
-range for each weight. The ranges show how firmly the calibration data support each
-weight; no formal guarantee is claimed for them. *Whether these ranges should be
+range for each weight. The ranges are derived by comparing calibrated predictions
+after substituting feature values; no formal guarantee is claimed for them. *Whether these ranges should be
 described as epistemic or aleatoric uncertainty is under review by the CE authors.*
 
 ```python

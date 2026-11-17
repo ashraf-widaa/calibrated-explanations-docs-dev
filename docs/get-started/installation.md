@@ -24,6 +24,10 @@ Extras are opt-in so you only pull the dependencies you need:
 | `dev` | Full development toolchain (linters, docs, tests). | `pip install "calibrated-explanations[dev]"` |
 | `external-plugins` | In-tree optional FAST explanation and interval dependencies. | `pip install "calibrated-explanations[external-plugins]"` |
 
+The {doc}`Python tutorials <../tutorials/index>` draw explanation plots, so
+install the `viz` extra before running them; without Matplotlib, CE raises an
+error that names this extra when a plot is requested.
+
 Published-study environments and reproduction dependencies are maintained in
 the
 [Calibrated Explanations Studies](https://github.com/kristinebergs/calibrated-explanations-studies)

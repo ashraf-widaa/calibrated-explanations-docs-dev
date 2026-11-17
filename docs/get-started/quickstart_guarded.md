@@ -12,10 +12,11 @@ uses binary classification.
 ## Prerequisites
 
 ```bash
-pip install calibrated-explanations scikit-learn
+pip install "calibrated-explanations[viz]" scikit-learn
 ```
 
-You need a calibrated explainer, as in {doc}`quickstart_classification` or
+The `viz` extra installs Matplotlib for the plots on this page. You need a
+calibrated explainer, as in {doc}`quickstart_classification` or
 {doc}`quickstart_regression`.
 
 ## Classification guarded semantics note
