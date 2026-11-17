@@ -129,6 +129,9 @@ weights need not sum to the prediction and do not identify causal effects.
 The next section changes a feature condition and reads the resulting
 probability instead of a weight.
 
+<a href="../_images/walkthrough-figure-1.png">Open the factual plot at full size</a>
+to inspect the labels and ranges.
+
 The [guide to reading CE explanations](../foundations/how-to/interpret_explanations.md)
 explains every element of this plot.
 

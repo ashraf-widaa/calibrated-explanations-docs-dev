@@ -1,0 +1,8 @@
+{% extends "!base.html" %}
+{% block extrahead %}
+  {{ super() }}
+  {% if ce_beta_version_picker %}
+    <meta name="readthedocs-addons-api-version" content="1">
+    <script src="{{ pathto('_static/ce-rtd-versions.js', 1) }}"></script>
+  {% endif %}
+{% endblock %}

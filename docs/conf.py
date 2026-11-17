@@ -223,6 +223,9 @@ if (
     # Lets pages show Beta-only content (for example the homepage footer marker)
     # through the ``only`` directive; official builds never set this tag.
     tags.add("ce_beta")  # noqa: F821 - ``tags`` is injected by Sphinx
+    # Integrate the version picker into the mobile sidebar on this candidate.
+    # Do not change project-wide RTD addon settings or older previews.
+    html_context = {"ce_beta_version_picker": True}
 
 # Homepage styles
 html_static_path = ["_static"]

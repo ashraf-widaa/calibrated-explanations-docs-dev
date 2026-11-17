@@ -1,5 +1,40 @@
 /* Documentation-page figures (Quick Start and concept pages). The homepage has its own ce-home.css. */
 
+/* The native version picker shares the existing mobile navigation drawer.
+   Keep RTD's default widget unless the picker has valid version data. */
+.ce-rtd-version-picker {
+  display: none;
+}
+
+@media (max-width: 67em) {
+  .ce-rtd-version-picker {
+    display: block;
+    padding: 1rem;
+  }
+
+  .ce-rtd-version-picker label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .ce-rtd-version-picker select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.4rem;
+    color: var(--color-foreground-primary);
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-background-border);
+    border-radius: 0.2rem;
+    font: inherit;
+  }
+
+  body.ce-rtd-versions-ready readthedocs-flyout {
+    display: none;
+  }
+}
+
 .ce-figure {
   margin: 1.5rem auto 1.75rem;
   text-align: center;
