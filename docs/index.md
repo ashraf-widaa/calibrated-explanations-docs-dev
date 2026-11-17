@@ -8,6 +8,14 @@
 
 Understand machine-learning predictions through calibrated, uncertainty-aware explanations.
 
+**Calibrated Explanations (CE)** is an open-source Python library for
+scikit-learn-style classification and regression models. It calibrates a
+model's outputs on held-out data, can report lower and upper bounds for each
+prediction, and explains each prediction with a range for every feature's
+weight. Its purpose is to make the probabilities, intervals and explanations
+of a model interpretable under stated assumptions, rather than taking raw
+model scores at face value; what each range means depends on the task.
+
 :::{container} ce-hero-actions
 
 ```{button-ref} get-started/index
@@ -66,7 +74,7 @@ Quick Start <get-started/index>
 
 Overview <sections/what-and-why>
 What CE Is <what-is-ce>
-The Explainability Gap <compare>
+Comparison with Other Methods <compare>
 Regulation Context (EU AI Act) <practitioner/playbooks/eu-ai-act-compliance>
 ```
 

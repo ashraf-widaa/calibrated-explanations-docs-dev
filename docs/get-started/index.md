@@ -1,10 +1,10 @@
 # Quick Start — Understand, Explore and Apply CE
 
-**Calibrated Explanations (CE)** is a Python library that works with your
-classification or regression model. It calibrates the model's predictions on
-data the model has not seen, gives each prediction a range (a lower and an
-upper value), and explains each prediction with a range for every feature's
-contribution.
+**Calibrated Explanations (CE)** is an open-source Python library for
+scikit-learn-style classification and regression models. It calibrates a
+model's outputs on held-out data, can report lower and upper bounds for each
+prediction, and explains each prediction with a range for every feature's
+weight.
 
 **What CE gives you**
 
@@ -25,9 +25,13 @@ held-out calibration data and exchangeability. See the
 {doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`;
 exact validity wording remains under CE author review.
 
-This Quick Start gives you the big picture without code. It links to the
-Python tutorials when you want to run CE, and to the theory when you want the
-mathematics.
+This Quick Start explains CE without code.
+
+**To run CE now:** install the package ({doc}`installation`; Python 3.10 or
+later), then follow the {doc}`Python walkthrough <quickstart_walkthrough>` or
+another of the {doc}`Python tutorials <../tutorials/index>`, which show
+executable code with real output. The {doc}`Quick API <quick_api>` lists the
+main calls.
 
 ## Where CE fits
 
@@ -85,12 +89,10 @@ and the practical workflow, with links to the Python tutorials.
 already know machine learning and CE's ideas, go straight to B; if you only
 need to know whether CE fits your problem, start with C.
 
-## Before you start
+(before-you-start)=
 
-- **Install:** see {doc}`installation` (Python 3.10 or later).
-- **Run CE:** the {doc}`Python tutorials <../tutorials/index>` have executable
-  examples with real output; the {doc}`Quick API <quick_api>` lists the main
-  calls.
+## Reference and further reading
+
 - **Look things up:** the {doc}`Glossary <../glossary/index>` defines the terms,
   and the {doc}`API reference <../api/index>` gives full signatures.
 - **Go deeper:** {doc}`../foundations/concepts/ce_workflow` gives a learning

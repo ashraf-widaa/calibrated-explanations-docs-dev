@@ -3,9 +3,6 @@
 Understand how the CE library is built, installed, integrated, extended and
 maintained.
 
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
-
 For short definitions of library terms, see the {doc}`Software & Technical Glossary <../glossary/software>`.
 
 **First use:** {doc}`install the package <../get-started/installation>`,
@@ -116,18 +113,25 @@ Optional telemetry and provenance records.
 ::::{grid} 1 2 3 3
 :gutter: 3
 
-:::{grid-item-card} Troubleshooting & Upgrades
+:::{grid-item-card} Troubleshooting
 :link: ../get-started/troubleshooting
 :link-type: doc
 
 Common installation and runtime problems.
 :::
 
-:::{grid-item-card} Upgrades & Migration
+:::{grid-item-card} Upgrade Guides
 :link: ../upgrade/index
 :link-type: doc
 
 Checklists for upgrading between CE versions.
+:::
+
+:::{grid-item-card} Migration Guides
+:link: ../migration/index
+:link-type: doc
+
+Breaking changes between major releases, deprecations and terminology updates.
 :::
 
 :::{grid-item-card} Source Code and Tests

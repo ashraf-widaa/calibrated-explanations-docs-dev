@@ -2,9 +2,6 @@
 
 Learn about CE's purpose, research, development, community and ecosystem.
 
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
-
 ::::{grid} 1 2 3 3
 :gutter: 3
 

@@ -2,9 +2,6 @@
 
 Understand what the CE library provides, how to install it and how it is built.
 
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
-
 ```{toctree}
 :maxdepth: 1
 

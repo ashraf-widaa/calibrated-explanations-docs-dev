@@ -12,8 +12,21 @@ This page summarises the software status and links to release references.
 - {doc}`../foundations/governance/release_notes`
 - {doc}`../upgrade/index`
 
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
+## Stability statement of the 1.0.0 release
+
+At the `1.0.0` release, the official documentation stated that the public
+API, the plugin trust model and the visualization extension contract were
+stable as of `1.0.0`, and that only patch-level defect fixes would be accepted
+against these contracts.
+
+This is a historical, version-specific statement about the 1.0.x release
+line. It does not establish that development revisions, including the
+`1.1.0-dev` sources these pages are built from, carry the same compatibility
+guarantees; check the release notes of the version you install. Before
+adopting a 1.0.x release, the official documentation recommends reviewing
+the {doc}`v1.0.0 upgrade checklist <../upgrade/v1.0.0-upgrade-checklist>`,
+the {doc}`Explanation Schema v1 freeze <../schema_v1>` and the
+[release notes](https://github.com/Moffran/calibrated_explanations/blob/main/CHANGELOG.md).
 
 ```{toctree}
 :maxdepth: 1

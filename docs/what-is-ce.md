@@ -1,9 +1,9 @@
 # What CE is and what it adds
 
 **Calibrated Explanations (CE)** is an open-source Python library that adds two
-things to a trained prediction model: **calibrated predictions with an
-uncertainty range**, and **explanations of each prediction with an uncertainty
-range for every feature's effect**. It works with models that have a
+things to a trained prediction model: **calibrated predictions, with lower and
+upper bounds available on request**, and **explanations of each prediction with
+an uncertainty range for every feature's weight**. It works with models that have a
 scikit-learn-style classification or regression interface.
 
 Use this overview to understand CE's purpose, outputs and fit for your task.

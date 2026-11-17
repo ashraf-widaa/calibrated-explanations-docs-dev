@@ -2,9 +2,6 @@
 
 Resolve problems and move between releases.
 
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
-
 ```{toctree}
 :maxdepth: 1
 

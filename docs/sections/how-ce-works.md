@@ -1,12 +1,12 @@
 # How CE Works: The Theory Behind It
 
 Explore the scientific foundations, statistical mechanisms and assumptions
-behind calibrated explanations.
-
-For guarantees, assumptions and non-guarantees, see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
-
-For short definitions of terms, see the {doc}`Scientific & Theoretical Glossary <../glossary/science>`.
+behind calibrated explanations. The pages follow one chain, from the
+workflow through the calibration methods to the guarantees each mode
+provides ({doc}`../foundations/concepts/calibrated_interval_semantics`) and
+the reading of explanation outputs. Readers new to the vocabulary can start
+with the {doc}`Essential Foundations <../foundations/index>` or the
+{doc}`Scientific & Theoretical Glossary <../glossary/science>`.
 
 ## The chain to follow
 
@@ -56,5 +56,4 @@ bounds, target prediction intervals and explanation-weight ranges do not
 share one guarantee. The
 {ref}`calibration prerequisites <ce-workflow-guarantees>` and
 {ref}`cross-mode non-guarantees <cross-mode-non-guarantees>` describe these
-limits. The {doc}`foundations <../foundations/index>` supply prerequisite
-concepts where needed.
+limits.

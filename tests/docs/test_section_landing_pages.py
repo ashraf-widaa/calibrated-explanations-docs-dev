@@ -26,18 +26,22 @@ def test_landing_pages_have_no_audit_wording(page: str) -> None:
 def test_in_practice_cards_point_to_verified_destinations() -> None:
     text = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
     links = re.findall(r"^:link: (\S+)$", text, flags=re.MULTILINE)
+    # Batch 2 grouped the same ten destinations: run in Python, apply and
+    # evaluate, explore in the browser.
     assert links == [
         "../tutorials/index",
-        "https://calibrated-explanations-demo.ju.se/",
-        "https://calibrated-explanations-demo.ju.se/expert",
-        "https://games.grejna.ai/",
-        "../get-started/apply-to-your-data",
         "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
+        "../get-started/apply-to-your-data",
         "../practitioner/evaluate_ce",
         "../tasks/index",
         "../practitioner/index",
         "../compare",
+        "https://calibrated-explanations-demo.ju.se/",
+        "https://calibrated-explanations-demo.ju.se/expert",
+        "https://games.grejna.ai/",
     ]
+    for heading in ("## Run CE in Python", "## Apply and evaluate", "## Explore in the browser"):
+        assert heading in text, heading
     assert "Decision Labs" not in text
     assert "not real-world guarantees" in text
 
@@ -62,6 +66,24 @@ def test_software_versions_page_states_release_and_python() -> None:
     assert "**Python:** 3.10 or later" in text
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert 'requires-python = ">=3.10"' in pyproject
+
+
+def test_v1_stability_statement_is_restored_as_version_specific() -> None:
+    """Batch 2: the official 1.0.0 stable-API notice returns, scoped to its release line."""
+    text = " ".join((SECTIONS / "software-overview-versions.md").read_text(encoding="utf-8").split())
+    assert "stable as of `1.0.0`" in text
+    assert "historical, version-specific statement about the 1.0.x release line" in text
+    assert "does not establish that development revisions" in text
+    assert "../upgrade/v1.0.0-upgrade-checklist" in text
+    assert "../schema_v1" in text
+
+
+def test_compare_page_has_one_descriptive_label() -> None:
+    index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
+    practice = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
+    assert "Comparison with Other Methods <compare>" in index
+    assert "The Explainability Gap" not in index
+    assert "{grid-item-card} Comparison with Other Methods" in practice
 
 
 def test_project_landing_routes_to_readme_and_feedback() -> None:
