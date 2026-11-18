@@ -9,8 +9,12 @@ The checks below are **empirical**: they tell you how CE behaved on your test
 data. They do not prove a guarantee, and they do not replace the conditions in
 the {doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`.
 
-**Learning journey, step 5 of 5.** This is the last step of the journey that
-starts on the {doc}`Quick Start <../get-started/index>`.
+```{raw} html
+<nav class="ce-journey" aria-label="Learning journey, step 5 of 5"><ol><li><a href="../get-started/installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="../get-started/quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="../get-started/apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li aria-current="step"><a href="evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+```
+
+**Learning journey, step 5 of 5 · about 30 minutes.** This is the last step of
+the journey that starts on {doc}`Get started <../get-started/index>`.
 
 ## 1. Set up reproducibly
 

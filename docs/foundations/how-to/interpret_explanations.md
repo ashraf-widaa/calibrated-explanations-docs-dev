@@ -10,15 +10,17 @@ payloads and plots. For how the substituted predictions are constructed,
 read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
 {doc}`../concepts/calibrated_interval_semantics`.
 
-**Learning journey, step 3 of 5.** Coming from the
-{doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`, use this
-page to read the records and plots you produced there. The next step is
-{doc}`../../get-started/apply-to-your-data`.
+```{raw} html
+<nav class="ce-journey" aria-label="Learning journey, step 3 of 5"><ol><li><a href="../../get-started/installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="../../get-started/quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li aria-current="step"><a href="interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="../../get-started/apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+```
 
-For **interval regression without a threshold**, `prediction_interval` is a
-target prediction interval produced by a **conformal predictive system (CPS)**;
-`low_high_percentiles` selects its percentiles. With a threshold, the explained
-quantity is an event probability and its bounds, as described below.
+**Learning journey, step 3 of 5 · about 15 minutes.** Coming from the
+{doc}`Quickstart <../../get-started/quickstart>` or the in-depth
+{doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`, use this
+page to read the records and plots you produced there. The examples are
+classification; regression outputs are covered in
+{ref}`a section of their own <interpret-regression-outputs>`. The next step is
+{doc}`../../get-started/apply-to-your-data`.
 
 ```{admonition} Terminology
 :class: tip
@@ -95,10 +97,7 @@ Key attributes shared by both explanation types:
 | `predict` | Calibrated probability (classification) or numeric estimate (regression). |
 | `prediction_interval` | Tuple of `(low, high)` from the explanation's prediction record; its meaning depends on the mode. |
 | `get_rules()` | Rule dictionary with aligned lists such as `rule`, `weight` and `predict`; not a list of rule objects. |
-| `build_rules_payload()` | Structured `core` and `metadata` dictionaries; `core["feature_rules"]` is a list of rule records. |
-| `to_telemetry()` | Explanation uncertainty and rule metadata; runtime provenance is documented separately in {doc}`configure_telemetry`. |
 
-For regression with a scalar `threshold` `t`, the `predict` value is the calibrated event probability `P(y <= t)`; with a `(low, high)` threshold it is the probability that the outcome lies within those bounds. The interval gives the lower and upper calibrated probability for that event. See {doc}`../concepts/calibrated_interval_semantics` (Mode 3).
 
 ## 2. Examine the rule tables in detail
 
@@ -216,13 +215,34 @@ If the plot does not match the table, check the selected instance, output class,
 ranking and plotting options. Record the CE version and a reproducing example
 before reporting a mismatch.
 
-## 4. Provenance and telemetry
+(interpret-regression-outputs)=
+
+## 4. Regression outputs
+
+For **interval regression without a threshold**, `prediction_interval` is a
+target prediction interval produced by a **conformal predictive system (CPS)**;
+`low_high_percentiles` selects its percentiles. With a threshold, the explained
+quantity is an event probability and its bounds, as described below.
+
+For regression with a scalar `threshold` `t`, the `predict` value is the calibrated event probability `P(y <= t)`; with a `(low, high)` threshold it is the probability that the outcome lies within those bounds. The interval gives the lower and upper calibrated probability for that event. See {doc}`../concepts/calibrated_interval_semantics` (Mode 3).
+
+<span id="provenance-and-telemetry"></span>
+
+## 5. Structured payloads, provenance and telemetry
+
+For pipelines and audits, two more methods return the same explanation as
+data:
+
+| Method | Returns |
+|---|---|
+| `build_rules_payload()` | Structured `core` and `metadata` dictionaries; `core["feature_rules"]` is a list of rule records. |
+| `to_telemetry()` | Explanation uncertainty and rule metadata; runtime provenance is documented separately in {doc}`configure_telemetry`. |
 
 Reading an explanation does not require telemetry. When you need to record
 which calibration and plotting components produced an explanation (for audits
 or for comparing environments), see {doc}`configure_telemetry`.
 
-## 5. Validate in notebooks and downstream systems
+## 6. Validate in notebooks and downstream systems
 
 After you absorb the tables and plots:
 

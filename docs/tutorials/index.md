@@ -47,5 +47,4 @@ Python walkthrough <../get-started/quickstart_walkthrough>
 Classification tutorial <../get-started/quickstart_classification>
 Regression tutorial <../get-started/quickstart_regression>
 Guarded explanations tutorial <../get-started/quickstart_guarded>
-Apply CE to your own data <../get-started/apply-to-your-data>
 ```

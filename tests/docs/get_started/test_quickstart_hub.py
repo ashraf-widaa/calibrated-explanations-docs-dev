@@ -1,8 +1,9 @@
-"""Quick Start as a code-free orientation hub (WP-1, PO decisions D-16 to D-21).
+"""Get Started hub (formerly Quick Start; WP-1, PO decisions D-16 to D-21, revised 2026-11-18).
 
-The landing page and every page in its toctree contain no code blocks and no
-mathematical derivations; executable pages keep their URLs but live in other
-sections; the hub links all other homepage entry points; and the code-free
+The hub page itself stays code-free (no code blocks, no derivations). Since the
+2026-11-18 DevEx review its sidebar holds the five learning-journey steps, including
+the executable Quickstart and Apply pages; the other tutorials keep living under
+Python Tutorials. The hub links all other homepage entry points, and the code-free
 "CE by example" page only quotes numbers produced by the Python walkthrough.
 """
 
@@ -18,10 +19,16 @@ DOCS = ROOT / "docs"
 GET_STARTED = DOCS / "get-started"
 INDEX = GET_STARTED / "index.md"
 
-# 2026-11-19 architecture: the Quick Start has one guided first step in its sidebar;
-# the other code-free orientation pages moved to the sections that own their topic.
+# 2026-11-18 DevEx review: the Get Started sidebar is the learning journey in order,
+# followed by the no-code example and the SHAP/LIME mapping.
 QUICK_START_TOCTREE = [
-    ("CE by Example", "ce-by-example"),
+    ("Installation", "installation"),
+    ("Quickstart", "quickstart"),
+    ("Read Your First Explanation", "../foundations/how-to/interpret_explanations"),
+    ("Apply CE to Your Own Data", "apply-to-your-data"),
+    ("Evaluate CE", "../practitioner/evaluate_ce"),
+    ("CE by Example (No Code)", "ce-by-example"),
+    ("Coming from SHAP or LIME", "coming-from-shap-lime"),
 ]
 CODE_FREE_PAGES = ["ml-foundations", "why-ce", "ce-by-example", "ce-tasks-and-modes", "apply-overview"]
 EXECUTABLE_PAGES = [
@@ -29,7 +36,6 @@ EXECUTABLE_PAGES = [
     "quickstart_classification",
     "quickstart_regression",
     "quickstart_guarded",
-    "apply-to-your-data",
 ]
 # MyST directives that are not code: figures, raw HTML figures, toctrees, admonitions, diagrams.
 ALLOWED_FENCES = re.compile(r"^```\{(figure|raw|toctree|admonition|mermaid)\}")

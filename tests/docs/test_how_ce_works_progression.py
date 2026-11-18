@@ -38,9 +38,10 @@ def test_sidebar_preserves_the_existing_reference_order() -> None:
         "foundations/concepts/ce_workflow",
         "foundations/concepts/calibration_methods",
         "foundations/concepts/calibrated_interval_semantics",
-        "foundations/how-to/interpret_explanations",
         "foundations/index",
     ]
+    # 2026-11-18: "How to read CE explanations" moved to Get Started (journey step 3);
+    # the hub still lists it in its reading order.
     positions = [group.index(f"<../{page}>") for page in order]
     assert positions == sorted(positions)
     assert "Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>" in group

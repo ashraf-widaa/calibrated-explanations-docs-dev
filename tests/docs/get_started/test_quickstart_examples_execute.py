@@ -18,6 +18,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
 PAGES = [
+    "docs/get-started/quickstart.md",
     "docs/get-started/quickstart_classification.md",
     "docs/get-started/quickstart_regression.md",
     "docs/get-started/quickstart_guarded.md",

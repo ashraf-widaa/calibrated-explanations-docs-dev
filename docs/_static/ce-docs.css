@@ -81,3 +81,76 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* Learning-journey progress bar (2026-11-18 DevEx review, V7). */
+.ce-journey ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0.5rem 0 1rem;
+  padding: 0;
+}
+.ce-journey li {
+  margin: 0;
+}
+.ce-journey a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem 0.2rem 0.25rem;
+  border: 1px solid var(--color-background-border);
+  border-radius: 999px;
+  font-size: 0.85em;
+  text-decoration: none;
+  color: var(--color-foreground-secondary);
+}
+.ce-journey .ce-journey-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: var(--color-background-secondary);
+  font-weight: 600;
+}
+.ce-journey li[aria-current="step"] a {
+  border-color: var(--color-brand-primary);
+  color: var(--color-foreground-primary);
+  font-weight: 600;
+}
+.ce-journey li[aria-current="step"] .ce-journey-n {
+  background: var(--color-brand-primary);
+  color: var(--color-background-primary);
+}
+
+/* Three data roles bar on the Quickstart (V2). */
+.ce-roles {
+  display: flex;
+  gap: 3px;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.85em;
+}
+.ce-role {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+  border-radius: 4px;
+  color: var(--color-foreground-primary);
+  overflow-wrap: anywhere;
+}
+.ce-role code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.95em;
+}
+.ce-role-train { background: color-mix(in srgb, #2b6cb0 22%, transparent); }
+.ce-role-cal { background: color-mix(in srgb, #dd6b20 26%, transparent); }
+.ce-role-test { background: color-mix(in srgb, #718096 24%, transparent); }
+@media (max-width: 600px) {
+  .ce-roles { flex-direction: column; }
+}

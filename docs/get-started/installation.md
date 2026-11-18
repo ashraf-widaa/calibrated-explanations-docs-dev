@@ -1,5 +1,12 @@
 # Installation
 
+```{raw} html
+<nav class="ce-journey" aria-label="Learning journey, step 1 of 5"><ol><li aria-current="step"><a href="installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+```
+
+**Learning journey, step 1 of 5 · about 2 minutes.** Install CE, check that
+it imports, then continue with the {doc}`Quickstart <quickstart>`.
+
 Calibrated Explanations is published on PyPI and conda-forge. Install the base
 package first, then add extras that unlock plotting, notebook examples, or
 contributor tooling.
@@ -50,7 +57,12 @@ python -c "import calibrated_explanations; print(calibrated_explanations.__versi
 
 This prints the version selected by your package manager (`1.0.0` or later).
 
-## Optional contributor fast path
+**Next in the learning journey (step 2 of 5):**
+{doc}`Quickstart: your first explanation <quickstart>` (about 10 minutes).
+
+<span id="optional-contributor-fast-path"></span>
+
+## For contributors: development install
 
 For repository development, `pip` remains the canonical fallback:
 

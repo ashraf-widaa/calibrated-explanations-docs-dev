@@ -8,34 +8,74 @@
 
 Understand machine-learning predictions through calibrated, uncertainty-aware explanations.
 
-**Calibrated Explanations (CE)** is an open-source Python library for
-scikit-learn-style classification and regression models. It calibrates a
-model's outputs on held-out data, can report lower and upper bounds for each
-prediction, and explains each prediction with a range for every feature's
-weight. Its purpose is to make the probabilities, intervals and explanations
-of a model interpretable under stated assumptions, rather than taking raw
-model scores at face value; what each range means depends on the task.
+**Calibrated Explanations (CE)** is an open-source Python library. Wrap your
+scikit-learn-style classifier or regressor, calibrate it on labelled data it
+has not seen, and get a calibrated prediction with a range, plus the feature
+conditions behind it, each with its own range.
 
 :::{container} ce-hero-actions
 
-```{button-ref} get-started/index
+```{button-ref} get-started/quickstart
 :ref-type: doc
 :color: primary
 
-Quick Start
+Quickstart: 10 minutes
+```
+
+```{button-ref} get-started/ce-by-example
+:ref-type: doc
+:color: secondary
+:outline:
+
+See an example, no code
 ```
 
 :::
 
 :::{container} ce-hero-hint
 
-New to CE? Start with one worked example, then run it yourself in Python.
+New to CE? Follow the five-step journey on {doc}`Get started <get-started/index>`.
 
 :::
 
 ::::
 
 :::::
+
+## Your first explanation
+
+```bash
+pip install "calibrated-explanations[viz]"
+```
+
+```python
+from calibrated_explanations import WrapCalibratedExplainer
+
+explainer = WrapCalibratedExplainer(model)      # your scikit-learn-style model
+explainer.fit(X_proper, y_proper)               # train as usual
+explainer.calibrate(X_cal, y_cal)               # labelled data the model has not seen
+explainer.explain_factual(X_test[:1]).plot()    # calibrated explanation with ranges
+```
+
+```{figure} get-started/walkthrough_assets/walkthrough-figure-1.png
+:alt: CE output for one breast-cancer case. Top: calibrated probability of benign 0.286 with its range from 0.167 to 0.333. Below: one bar per feature condition showing its weight range; worst concave points above 0.14 has the largest range, entirely below zero.
+:width: 640px
+:class: ce-home-figure
+
+The result for one case of the {doc}`Quickstart <get-started/quickstart>`:
+the calibrated probability with its range (top) and the conditions behind it,
+each with a weight range (bars). The ranges describe the model's behaviour,
+not causal effects.
+```
+
+| I am… | Start here |
+|---|---|
+| New to CE | {doc}`Quickstart <get-started/quickstart>`, then {doc}`how to read the result <foundations/how-to/interpret_explanations>` |
+| Using SHAP or LIME today | {doc}`Coming from SHAP or LIME <get-started/coming-from-shap-lime>` and the {doc}`comparison of methods <compare>` |
+| Putting CE into production | {doc}`Apply CE to your own data <get-started/apply-to-your-data>`, the {doc}`how-to guides <foundations/how-to/index>` and the {doc}`API reference <api/index>` |
+| A researcher | {doc}`The CE workflow <foundations/concepts/ce_workflow>` and the {doc}`statistical methods <foundations/concepts/calibration_methods>` |
+
+Every printed output in this documentation comes from a tested CE run.
 
 ## Documentation
 
@@ -64,7 +104,7 @@ Explore the research, terminology and open-source project.
 :maxdepth: 2
 
 Home <self>
-Quick Start <get-started/index>
+Get Started <get-started/index>
 CE: What & Why <sections/what-and-why>
 How CE Works <sections/how-ce-works>
 CE in Practice <sections/in-practice>

@@ -23,7 +23,6 @@ extensions.
 :maxdepth: 1
 :hidden:
 
-evaluate_ce
 task_api_comparison
 playbooks/index
 advanced/index

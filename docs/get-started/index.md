@@ -1,33 +1,19 @@
-# Quick Start — Understand, Explore and Apply CE
+# Get started
 
-**Calibrated Explanations (CE)** is an open-source Python library for
-scikit-learn-style classification and regression models. It calibrates a
-model's outputs on held-out data, can report lower and upper bounds for each
-prediction, and explains each prediction with a range for every feature's
-weight.
+<span id="quick-start-understand-explore-and-apply-ce"></span>
 
-**What CE gives you**
+**Calibrated Explanations (CE)** wraps a classification or regression model
+you already have. It calibrates the model's outputs on labelled data the model
+has not seen, then explains each calibrated prediction, with a range for the
+prediction and for every feature's weight.
 
-- **Predictions from calibrated outputs.** For classification, a merged
-  probability estimate and two Venn–Abers values. For interval regression,
-  a numeric prediction with a target-value interval; for probabilistic
-  regression, an event-probability estimate with reported bounds.
-- **Factual explanations.** The feature conditions behind one prediction,
-  each with a weight and a range for that weight.
-- **Alternative explanations.** What the calibrated prediction would be if
-  one feature had a different value.
-- **Your own model.** CE wraps scikit-learn-style classifiers and regressors,
-  trained or not, and leaves the model itself unchanged.
+**You need:**
 
-The pair, merged estimate and explanation ranges have different statistical
-qualifications. These depend on the task and calibration protocol, including
-held-out calibration data and exchangeability. See the
-{doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`;
-exact validity wording remains under CE author review.
-
-This Quick Start gives the big picture and one learning journey through the
-documentation; its first step needs no code.
-
+| You need | Details |
+|---|---|
+| Python 3.10 or later | Tested on Python 3.10 to 3.13 |
+| A scikit-learn-style model | `fit` and `predict`; a classifier also needs `predict_proba` |
+| Labelled data you can split three ways | Training, **calibration** (never shown to the model) and test |
 
 ## Where CE fits
 
@@ -55,33 +41,44 @@ explain. CE adds these steps without retraining your model.
 
 ## Your learning journey
 
-Follow these five steps in order. Each page ends with a link to the next one.
+Five steps, each about 2 to 30 minutes. Every page ends with a link to the next.
 
-1. **{doc}`CE by example <ce-by-example>`: start here (no code, about 15
-   minutes).** One real prediction, from the model's raw score to a
-   calibrated probability, a factual explanation and alternatives, with every
-   number taken from an executed CE run.
-2. **{doc}`Python walkthrough <quickstart_walkthrough>` (about 45 minutes).**
-   Run the same example yourself, step by step, with the code and real output.
-   Install the package first: {doc}`installation` (Python 3.10 or later, with
-   the `viz` extra for plots).
-3. **{doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`.**
-   What each field of the returned records and plots means, and which range
-   belongs to which quantity.
-4. **{doc}`Apply CE to your own data <apply-to-your-data>`.** Wrap your own
-   model, calibrate, explain, check and save.
-5. **{doc}`Evaluate CE on your own data <../practitioner/evaluate_ce>`.**
-   Empirical checks of probabilities, intervals, threshold events and
-   subgroups on held-out data.
+1. **{doc}`Install <installation>` (2 minutes).**
+   `pip install "calibrated-explanations[viz]"`; the `viz` extra adds plots.
+2. **{doc}`Quickstart: your first explanation <quickstart>` (10 minutes): start here.**
+   Train a model, calibrate it, and explain one prediction, with every output
+   shown.
+3. **{doc}`Read your first explanation <../foundations/how-to/interpret_explanations>` (15 minutes).**
+   Which number is the prediction, which is a weight, and what each range is.
+4. **{doc}`Apply CE to your own data <apply-to-your-data>` (30 minutes).**
+   Split, wrap, calibrate, explain, check and save.
+5. **{doc}`Evaluate CE on your own data <../practitioner/evaluate_ce>` (30 minutes).**
+   Are the probabilities calibrated and the intervals wide enough on *your*
+   held-out data?
 
-**Prefer to start with code?** The {doc}`Quick API <quick_api>` page has a
-complete minimal example you can copy and run in one go; it uses the same
-case as steps 1 and 2.
+**Prefer to see the result before writing code?** {doc}`CE by example <ce-by-example>`
+shows the Quickstart's prediction without code (15 minutes). The
+{doc}`Python walkthrough <quickstart_walkthrough>` is the in-depth version of
+step 2, and the {doc}`Quick API <quick_api>` page is a compact reference of
+the calls.
+
+**Coming from SHAP or LIME?** {doc}`Map your workflow to CE <coming-from-shap-lime>`.
 
 **Want the reasons first?** {doc}`Why CE <why-ce>` explains what changes in a
-machine-learning workflow when CE is added, and
-{doc}`Tasks, modes and capabilities <ce-tasks-and-modes>` helps you decide
-whether CE fits your problem.
+machine-learning workflow when CE is added.
+
+## Which CE task am I doing?
+
+| Your target | CE mode | Prediction call |
+|---|---|---|
+| A class | Classification | `predict_proba(X, uq_interval=True)` |
+| A number, with an interval | Interval regression | `predict(X, uq_interval=True)` |
+| The probability that a number is at most *t* | Probabilistic regression | `predict_proba(X, uq_interval=True, threshold=t)` |
+
+Every mode explains with `explain_factual(X)` and `explore_alternatives(X)`.
+More detail: {doc}`Tasks, modes and capabilities <ce-tasks-and-modes>`.
+What each range guarantees differs by mode: see
+{doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 (before-you-start)=
 
@@ -90,8 +87,7 @@ whether CE fits your problem.
 - **Look things up:** the {doc}`Glossary <../glossary/index>` defines the terms,
   and the {doc}`API reference <../api/index>` gives full signatures.
 - **Go deeper:** {doc}`../foundations/concepts/ce_workflow` gives a learning
-  path from intuition to the mathematics. Guarantees are mode-specific; the
-  canonical statement is {doc}`../foundations/concepts/calibrated_interval_semantics`.
+  path from intuition to the mathematics.
 - **Try it in the browser:** the
   [interactive web demo](https://calibrated-explanations-demo.ju.se/) shows CE
   without installing anything.
@@ -113,5 +109,11 @@ whether CE fits your problem.
 :hidden:
 :maxdepth: 1
 
-CE by Example <ce-by-example>
+Installation <installation>
+Quickstart <quickstart>
+Read Your First Explanation <../foundations/how-to/interpret_explanations>
+Apply CE to Your Own Data <apply-to-your-data>
+Evaluate CE <../practitioner/evaluate_ce>
+CE by Example (No Code) <ce-by-example>
+Coming from SHAP or LIME <coming-from-shap-lime>
 ```

@@ -48,11 +48,11 @@ def test_quick_start_landing_offers_one_learning_journey_in_order() -> None:
     # 2026-11-19: the three parallel A/B/C paths became one numbered journey with a
     # single recommended first step; Why CE and Tasks & modes stay linked as options.
     text = INDEX.read_text(encoding="utf-8").replace("\r\n", "\n")
-    journey = text.split("## Your learning journey", 1)[1].split("**Prefer to start with code?**", 1)[0]
+    journey = text.split("## Your learning journey", 1)[1].split("**Prefer to see the result before writing code?**", 1)[0]
     steps = re.findall(r"^\d\. \*\*\{doc\}`[^<`]*<([^>]+)>`", journey, re.MULTILINE)
     assert steps == [
-        "ce-by-example",
-        "quickstart_walkthrough",
+        "installation",
+        "quickstart",
         "../foundations/how-to/interpret_explanations",
         "apply-to-your-data",
         "../practitioner/evaluate_ce",
@@ -68,7 +68,7 @@ def test_quick_start_landing_offers_one_learning_journey_in_order() -> None:
 def test_quick_start_landing_links_setup_api_and_deeper_science() -> None:
     text = INDEX.read_text(encoding="utf-8")
     for target in (
-        "{doc}`installation`",
+        "<installation>`",
         "<../api/index>",
         "{doc}`../foundations/concepts/ce_workflow`",
         "{doc}`../foundations/concepts/calibrated_interval_semantics`",

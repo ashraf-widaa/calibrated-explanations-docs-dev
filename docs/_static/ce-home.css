@@ -1119,3 +1119,26 @@ body:has(#calibrated-explanations-ce) .ce-meta p {
     padding-right: 0;
   }
 }
+
+/* 2026-11-18 DevEx review: primary and secondary hero actions side by side. */
+#calibrated-explanations-ce .ce-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+#calibrated-explanations-ce .ce-hero-actions .sd-btn.sd-btn-outline-secondary {
+  background: transparent !important;
+  border: 2px solid #6d28d9;
+  color: var(--ce-text) !important;
+}
+
+#calibrated-explanations-ce .ce-hero-actions .sd-btn.sd-btn-outline-secondary::before {
+  -webkit-mask: var(--ce-i-book) center / contain no-repeat;
+  mask: var(--ce-i-book) center / contain no-repeat;
+}
+
+#your-first-explanation .ce-home-figure img {
+  height: auto;
+  max-width: 100%;
+}

@@ -1,7 +1,8 @@
 """Guards for the 2026-11-19 navigation architecture.
 
-The sidebar root is Home, Quick Start, the four documentation sections and
-Project & Resources. Each section hub parents its own pages through a real toctree,
+The sidebar root is Home, Get Started, the four documentation sections and
+Project & Resources (Get Started was named Quick Start until the 2026-11-18 DevEx
+review, which also moved the five learning-journey pages under it). Each section hub parents its own pages through a real toctree,
 no page has two sidebar parents, and no compulsory ML-essentials step remains.
 """
 
@@ -35,7 +36,7 @@ def _entries(rel: str) -> list[tuple[str | None, str]]:
 
 def test_sidebar_root_is_home_quick_start_four_sections_and_project() -> None:
     assert [label for label, _ in _entries("index.md")] == [
-        "Quick Start",
+        "Get Started",
         "CE: What & Why",
         "How CE Works",
         "CE in Practice",
@@ -50,7 +51,14 @@ def test_section_hubs_parent_their_pages() -> None:
         "sections/what-and-why.md": ["what-is-ce", "get-started/why-ce", "compare"],
         "sections/how-ce-works.md": ["foundations/concepts/ce_workflow", "get-started/ce-tasks-and-modes"],
         "sections/in-practice.md": ["tutorials/index", "tasks/index", "practitioner/index"],
-        "sections/software-integration.md": ["get-started/installation", "get-started/quick_api", "api/index"],
+        "sections/software-integration.md": ["get-started/quick_api", "api/index"],
+        "get-started/index.md": [
+            "get-started/installation",
+            "get-started/quickstart",
+            "foundations/how-to/interpret_explanations",
+            "get-started/apply-to-your-data",
+            "practitioner/evaluate_ce",
+        ],
         "sections/project-evolution.md": ["glossary/index", "researcher/index", "contributor/index"],
     }
     for hub, pages in expected.items():
@@ -76,5 +84,13 @@ def test_ml_essentials_is_optional_not_a_navigation_step() -> None:
         assert "get-started/ml-foundations" not in [t for _, t in _entries(rel)], rel
 
 
-def test_quick_start_has_one_guided_first_step() -> None:
-    assert _entries("get-started/index.md") == [("CE by Example", "get-started/ce-by-example")]
+def test_get_started_holds_the_learning_journey_in_order() -> None:
+    assert _entries("get-started/index.md") == [
+        ("Installation", "get-started/installation"),
+        ("Quickstart", "get-started/quickstart"),
+        ("Read Your First Explanation", "foundations/how-to/interpret_explanations"),
+        ("Apply CE to Your Own Data", "get-started/apply-to-your-data"),
+        ("Evaluate CE", "practitioner/evaluate_ce"),
+        ("CE by Example (No Code)", "get-started/ce-by-example"),
+        ("Coming from SHAP or LIME", "get-started/coming-from-shap-lime"),
+    ]

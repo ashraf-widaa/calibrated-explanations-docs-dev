@@ -150,7 +150,6 @@ citation and community).
 :maxdepth: 2
 
 Software Overview & Versions <software-overview-versions>
-Installation <../get-started/installation>
 Quick API <../get-started/quick_api>
 API & Technical Reference <../api/index>
 Model & Pipeline Integration <../foundations/how-to/integrate_with_pipelines>

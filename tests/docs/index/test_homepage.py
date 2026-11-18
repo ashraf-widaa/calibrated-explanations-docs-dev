@@ -50,7 +50,7 @@ def hrefs(fragment: str, css_class: str) -> list[str]:
     return re.findall(rf'<a class="{css_class}[^"]*" href="([^"]+)"', fragment)
 
 
-def test_hero_keeps_identity_message_and_one_primary_action() -> None:
+def test_hero_keeps_identity_message_and_two_actions() -> None:
     page = text()
     hero = page.split("\n## Documentation\n", 1)[0]
     assert page.startswith("# Calibrated Explanations [(CE)]{.ce-accent}")
@@ -58,9 +58,11 @@ def test_hero_keeps_identity_message_and_one_primary_action() -> None:
         "Understand machine-learning predictions through calibrated, "
         "uncertainty-aware explanations." in hero
     )
-    assert hero.count("{button-ref}") == 1
-    assert "```{button-ref} get-started/index" in hero
-    assert "New to CE? Start with one worked example, then run it yourself in Python." in hero
+    # 2026-11-18 DevEx review: a primary Quickstart action and a secondary no-code example.
+    assert hero.count("{button-ref}") == 2
+    assert "```{button-ref} get-started/quickstart\n:ref-type: doc\n:color: primary" in hero
+    assert "```{button-ref} get-started/ce-by-example\n:ref-type: doc\n:color: secondary\n:outline:" in hero
+    assert "New to CE? Follow the five-step journey on {doc}`Get started <get-started/index>`." in hero
 
 
 def test_four_documentation_cards_in_order_with_approved_descriptions() -> None:

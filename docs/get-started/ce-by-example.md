@@ -10,9 +10,10 @@ example on a public dataset, not clinical decision support.
 [Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
-**Learning journey, step 1 of 5.** This page is the recommended first step
-from the [Quick Start](index.md). Next, the
-[Python walkthrough](quickstart_walkthrough.md) runs the same example in code.
+**Learning journey: step 2 without code.** This page shows the prediction
+of the [Quickstart](quickstart.md) (step 2 of 5 on [Get started](index.md))
+without any code. Run it yourself in the Quickstart (about 10 minutes) or,
+step by step, in the [Python walkthrough](quickstart_walkthrough.md).
 
 ## 1. The question
 
@@ -193,5 +194,6 @@ explains the returned records. Other tasks and output quantities are
 distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
 **Next in the learning journey (step 2 of 5):** run this same example
-yourself in the [Python walkthrough](quickstart_walkthrough.md). The full
-journey is listed on the [Quick Start](index.md).
+yourself in the [Quickstart](quickstart.md) (about 10 minutes) or, step by
+step, in the [Python walkthrough](quickstart_walkthrough.md). The full journey
+is listed on [Get started](index.md).

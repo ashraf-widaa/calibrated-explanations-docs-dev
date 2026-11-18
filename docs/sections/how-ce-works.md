@@ -72,7 +72,8 @@ limits.
    the canonical assumptions, guarantees and non-guarantees, including the
    {ref}`open questions for the CE authors <open-author-questions>`.
 5. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`:
-   records, rule tables and plots.
+   records, rule tables and plots (step 3 of the learning journey in
+   {doc}`Get started <../get-started/index>`).
 6. {doc}`Essential foundations <../foundations/index>`: concept pages on
    alternatives, guarded explanations, probabilistic regression and
    explanation structures.
@@ -87,6 +88,5 @@ The CE Workflow <../foundations/concepts/ce_workflow>
 Tasks, Modes and Capabilities <../get-started/ce-tasks-and-modes>
 Statistical Methods Behind CE <../foundations/concepts/calibration_methods>
 Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>
-How to Read CE Explanations <../foundations/how-to/interpret_explanations>
 Essential Foundations <../foundations/index>
 ```

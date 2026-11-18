@@ -7,7 +7,11 @@ same steps without code are in {doc}`apply-overview`. The
 example uses binary classification on a public dataset, standing in for your
 data; each step says what to change for your problem.
 
-**Learning journey, step 4 of 5.** After
+```{raw} html
+<nav class="ce-journey" aria-label="Learning journey, step 4 of 5"><ol><li><a href="installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li aria-current="step"><a href="apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+```
+
+**Learning journey, step 4 of 5 · about 30 minutes.** After
 {doc}`reading CE explanations <../foundations/how-to/interpret_explanations>`
 (step 3), this page applies CE to your own model. The last step is
 {doc}`../practitioner/evaluate_ce`.

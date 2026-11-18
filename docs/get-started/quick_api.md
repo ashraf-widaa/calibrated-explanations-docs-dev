@@ -1,4 +1,6 @@
-# Quick API: main components and calls
+# Quick API: cheat sheet of the main calls
+
+<span id="quick-api-main-components-and-calls"></span>
 
 This page is a compact map of the calls you use with `WrapCalibratedExplainer`,
 part of {doc}`CE Software & Integration <../sections/software-integration>`.
@@ -61,7 +63,12 @@ explainer = WrapCalibratedExplainer(
 explainer.fit(X_proper, y_proper)
 
 # 2. Calibrate on the held-out calibration set.
-explainer.calibrate(X_cal, y_cal, feature_names=list(data.feature_names))
+explainer.calibrate(
+    X_cal,
+    y_cal,
+    feature_names=list(data.feature_names),
+    class_labels={0: "malignant", 1: "benign"},
+)
 
 # 3. Calibrated prediction with a range, for one test case.
 case = X_test[2:3]
@@ -87,6 +94,10 @@ so the predicted class is malignant. For binary classification, `low` and
 (here *benign*); they are bounds of a probability, not a confidence interval.
 `factual.plot()` and `alternatives.plot()` draw the explanations; the
 walkthrough shows and explains both plots.
+What each range guarantees differs by mode: see the
+{ref}`mode-specific semantics notes <quick-api-semantics-notes>` at the end of
+this page. The {doc}`Quickstart <quickstart>` runs the same example step by
+step, with the output of every step.
 
 ## Core calls by step
 
@@ -105,35 +116,6 @@ Each name links to its entry in the API reference.
 | Inspect | {py:meth}`to_narrative <calibrated_explanations.explanations.CalibratedExplanations.to_narrative>` | Plain-text narrative of the explanations |
 | Save | {py:meth}`save_state <calibrated_explanations.core.WrapCalibratedExplainer.save_state>`, {py:meth}`load_state <calibrated_explanations.core.WrapCalibratedExplainer.load_state>` | Store a fitted and calibrated explainer and load it again |
 :::
-
-## Mode-specific semantics notes
-
-### Classification
-
-- **Calibration prerequisites**: fit on proper split and calibrate on held-out calibration split.
-- **Mode-specific guarantees**: CE returns a Venn-Abers pair and a merged class probability; the exact pair/merged-probability validity wording remains under author review (SR-03).
-- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
-- **Explicit non-guarantees**: no guarantee under drift or regime shift.
-- **Explanation-envelope limits**: feature-level intervals are model-response summaries, not causal claims.
-- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
-
-### Percentile or interval regression
-
-- **Calibration prerequisites**: fit regression model and calibrate CPS on held-out calibration split.
-- **Mode-specific guarantees**: CPS percentile intervals for requested `low_high_percentiles`.
-- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
-- **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
-- **Explanation-envelope limits**: interval effects on explanations summarize model behavior under perturbation.
-- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
-
-### Probabilistic or thresholded regression
-
-- **Calibration prerequisites**: fit regression model and calibrate before threshold queries.
-- **Mode-specific guarantees**: threshold queries return event probabilities and ranges from CPS scores followed by Venn-Abers; the exact validity statement remains under author review (SR-15).
-- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
-- **Explicit non-guarantees**: no guarantee under drift and no causal guarantee from threshold probabilities.
-- **Explanation-envelope limits**: feature-level probability shifts are model-response summaries.
-- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 ## Core methods
 
@@ -185,6 +167,37 @@ pred, (low, high) = explainer.predict(
 p = explainer.predict_proba(X_sample, threshold=120.0)
 p, (plo, phi) = explainer.predict_proba(X_sample, uq_interval=True, threshold=120.0)
 ```
+
+(quick-api-semantics-notes)=
+
+## Mode-specific semantics notes
+
+### Classification
+
+- **Calibration prerequisites**: fit on proper split and calibrate on held-out calibration split.
+- **Mode-specific guarantees**: CE returns a Venn-Abers pair and a merged class probability; the exact pair/merged-probability validity wording remains under author review (SR-03).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
+- **Explicit non-guarantees**: no guarantee under drift or regime shift.
+- **Explanation-envelope limits**: feature-level intervals are model-response summaries, not causal claims.
+- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
+
+### Percentile or interval regression
+
+- **Calibration prerequisites**: fit regression model and calibrate CPS on held-out calibration split.
+- **Mode-specific guarantees**: CPS percentile intervals for requested `low_high_percentiles`.
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
+- **Explicit non-guarantees**: no guarantee under drift or fixed interval width across subpopulations.
+- **Explanation-envelope limits**: interval effects on explanations summarize model behavior under perturbation.
+- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
+
+### Probabilistic or thresholded regression
+
+- **Calibration prerequisites**: fit regression model and calibrate before threshold queries.
+- **Mode-specific guarantees**: threshold queries return event probabilities and ranges from CPS scores followed by Venn-Abers; the exact validity statement remains under author review (SR-15).
+- **Assumptions**: exchangeability under the method-specific calibration protocol; the alternative distribution-match wording remains under author review (SR-01).
+- **Explicit non-guarantees**: no guarantee under drift and no causal guarantee from threshold probabilities.
+- **Explanation-envelope limits**: feature-level probability shifts are model-response summaries.
+- **Formal semantics**: {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
 ## Continue
 

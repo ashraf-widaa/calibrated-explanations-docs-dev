@@ -10,9 +10,11 @@ without code is [CE by example](ce-by-example.md). The explanation of
 [Why CE](why-ce.md) introduces the role of calibration; other prediction
 tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
-**Learning journey, step 2 of 5.** You may have met this case without code in
-[CE by example](ce-by-example.md) (step 1). After this walkthrough, continue
-with [How to read CE explanations](../foundations/how-to/interpret_explanations.md)
+**Learning journey, step 2 of 5, in depth.** The [Quickstart](quickstart.md)
+runs this example in about 10 minutes; this walkthrough explains every step,
+including how the calibration works. The same case without code is
+[CE by example](ce-by-example.md). After this walkthrough, continue with
+[How to read CE explanations](../foundations/how-to/interpret_explanations.md)
 (step 3).
 
 Install the packages once:
