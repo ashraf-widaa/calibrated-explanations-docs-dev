@@ -29,15 +29,15 @@ def _text(rel: str) -> str:
     return (DOCS / rel).read_text(encoding="utf-8").replace("\r\n", "\n")
 
 
-def test_homepage_shows_install_code_figure_and_paths() -> None:
+def test_homepage_routes_readers_without_code_or_figures() -> None:
+    # Owner decision 2026-11-18: no code blocks and no figures on the homepage.
     page = _text("index.md")
-    first = page.split("## Your first explanation", 1)[1].split("## Documentation", 1)[0]
-    assert 'pip install "calibrated-explanations[viz]"' in first
-    for call in ("WrapCalibratedExplainer(model)", ".fit(", ".calibrate(", ".explain_factual("):
-        assert call in first, call
-    assert "walkthrough_assets/walkthrough-figure-1.png" in first and ":alt:" in first
+    start = page.split("## Start here", 1)[1].split("## Documentation", 1)[0]
     for target in ("get-started/quickstart", "get-started/coming-from-shap-lime", "api/index", "calibration_methods"):
-        assert target in first, target
+        assert target in start, target
+    fences = [line for line in page.splitlines() if line.startswith("```{") is False and line.startswith("```") and line.strip() != "```"]
+    assert fences == [], fences
+    assert "{figure}" not in page and "<img" not in page
 
 
 @pytest.mark.parametrize(("page", "step"), [(page, i + 1) for i, page in enumerate(JOURNEY_PAGES)])

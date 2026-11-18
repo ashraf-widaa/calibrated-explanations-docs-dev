@@ -42,31 +42,7 @@ New to CE? Follow the five-step journey on {doc}`Get started <get-started/index>
 
 :::::
 
-## Your first explanation
-
-```bash
-pip install "calibrated-explanations[viz]"
-```
-
-```python
-from calibrated_explanations import WrapCalibratedExplainer
-
-explainer = WrapCalibratedExplainer(model)      # your scikit-learn-style model
-explainer.fit(X_proper, y_proper)               # train as usual
-explainer.calibrate(X_cal, y_cal)               # labelled data the model has not seen
-explainer.explain_factual(X_test[:1]).plot()    # calibrated explanation with ranges
-```
-
-```{figure} get-started/walkthrough_assets/walkthrough-figure-1.png
-:alt: CE output for one breast-cancer case. Top: calibrated probability of benign 0.286 with its range from 0.167 to 0.333. Below: one bar per feature condition showing its weight range; worst concave points above 0.14 has the largest range, entirely below zero.
-:width: 640px
-:class: ce-home-figure
-
-The result for one case of the {doc}`Quickstart <get-started/quickstart>`:
-the calibrated probability with its range (top) and the conditions behind it,
-each with a weight range (bars). The ranges describe the model's behaviour,
-not causal effects.
-```
+## Start here
 
 | I am… | Start here |
 |---|---|

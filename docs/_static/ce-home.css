@@ -1138,7 +1138,3 @@ body:has(#calibrated-explanations-ce) .ce-meta p {
   mask: var(--ce-i-book) center / contain no-repeat;
 }
 
-#your-first-explanation .ce-home-figure img {
-  height: auto;
-  max-width: 100%;
-}
