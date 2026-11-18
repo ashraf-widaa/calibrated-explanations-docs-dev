@@ -2,8 +2,8 @@
 
 Explore the scientific foundations, statistical mechanisms and assumptions
 behind calibrated explanations. The pages follow one chain, from the
-workflow through the calibration methods to the guarantees each mode
-provides ({doc}`../foundations/concepts/calibrated_interval_semantics`) and
+workflow and the three CE modes through the calibration methods to the
+guarantees each mode provides ({doc}`../foundations/concepts/calibrated_interval_semantics`) and
 the reading of explanation outputs. Readers new to the vocabulary can start
 with the {doc}`Essential Foundations <../foundations/index>` or the
 {doc}`Scientific & Theoretical Glossary <../glossary/science>`.
@@ -57,6 +57,27 @@ share one guarantee. The
 {ref}`calibration prerequisites <ce-workflow-guarantees>` and
 {ref}`cross-mode non-guarantees <cross-mode-non-guarantees>` describe these
 limits.
+
+## Pages in this section
+
+1. {doc}`The CE workflow <../foundations/concepts/ce_workflow>`: how a
+   calibrated prediction becomes the input of an explanation, with one worked
+   construction.
+2. {doc}`Tasks, modes and capabilities <../get-started/ce-tasks-and-modes>`:
+   which mode answers which question, and the limitations of each.
+3. {doc}`Statistical methods behind CE <../foundations/concepts/calibration_methods>`:
+   Venn–Abers predictors and conformal predictive systems, with the formal
+   statements.
+4. {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`:
+   the canonical assumptions, guarantees and non-guarantees, including the
+   {ref}`open questions for the CE authors <open-author-questions>`.
+5. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`:
+   records, rule tables and plots.
+6. {doc}`Essential foundations <../foundations/index>`: concept pages on
+   alternatives, guarded explanations, probabilistic regression and
+   explanation structures.
+
+**Next section:** {doc}`CE in Practice <in-practice>`.
 
 ```{toctree}
 :hidden:

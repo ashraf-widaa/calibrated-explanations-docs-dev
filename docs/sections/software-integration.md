@@ -142,6 +142,9 @@ The library source (`src/calibrated_explanations`) and its test suite (`tests/`)
 :::
 ::::
 
+**Next:** {doc}`Project & Resources <project-evolution>` (glossary, research,
+citation and community).
+
 ```{toctree}
 :hidden:
 :maxdepth: 2

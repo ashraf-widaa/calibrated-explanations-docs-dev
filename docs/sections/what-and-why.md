@@ -3,8 +3,8 @@
 Understand what Calibrated Explanations adds to a predictive model, why
 calibration matters, and how to interpret CE's outputs and limits.
 {doc}`What CE Is <../what-is-ce>` defines the method's scope and assumptions;
-the section then compares CE with other explanation methods and closes with
-the regulatory context in which its outputs may be discussed.
+the section then shows what changes in a workflow when CE is added and
+compares CE with other explanation methods.
 
 A model's output often looks like a probability, but it may
 not behave like one, and it does not say how much evidence lies behind it.
@@ -53,8 +53,25 @@ helps distinguish CE's purpose from other explanation tools.
 
 CE outputs can also support a discussion of transparency and oversight.
 The {doc}`EU AI Act context <../practitioner/playbooks/eu-ai-act-compliance>`
-examines that relationship; it is not evidence of compliance, and its
+playbook (in *CE in Practice*) examines that relationship; it is not evidence of compliance, and its
 compliance wording remains under review.
+
+## Pages in this section
+
+Read them in this order:
+
+1. {doc}`What CE Is <../what-is-ce>`: the canonical definition, the problem
+   CE addresses, what it provides and what it does not.
+2. {doc}`Why CE <../get-started/why-ce>`: how a machine-learning workflow
+   changes when CE is added, shown in one figure.
+3. {doc}`Comparison with other methods <../compare>`: what CE answers that
+   attribution methods and conformal prediction alone do not.
+
+To see CE's outputs on one real prediction first, take
+{doc}`CE by example <../get-started/ce-by-example>`, the first step of the
+{doc}`Quick Start <../get-started/index>` journey.
+
+**Next section:** {doc}`How CE Works <how-ce-works>`.
 
 ```{toctree}
 :hidden:

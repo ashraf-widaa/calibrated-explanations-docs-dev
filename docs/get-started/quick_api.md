@@ -2,7 +2,7 @@
 
 This page is a compact map of the calls you use with `WrapCalibratedExplainer`,
 part of {doc}`CE Software & Integration <../sections/software-integration>`.
-For what each output means, start with {doc}`ce-tasks-and-modes` (Quick Start);
+For what each output means, start with {doc}`ce-tasks-and-modes` (How CE Works);
 for longer worked examples, see the {doc}`Python tutorials <../tutorials/index>`.
 Full signatures are in the {doc}`API reference <../api/index>`.
 

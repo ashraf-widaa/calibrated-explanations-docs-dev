@@ -10,6 +10,10 @@ installation. Demos and games illustrate how CE works; they do not validate CE
 for your data. Mode-specific guarantees and their assumptions are stated in
 {doc}`../foundations/concepts/calibrated_interval_semantics`.
 
+If you are new to CE, follow the five-step journey on the
+{doc}`Quick Start <../get-started/index>` first; it passes through the
+tutorials, the application guide and the evaluation guide below.
+
 ## Run CE in Python
 
 ::::{grid} 1 2 2 2
@@ -98,6 +102,8 @@ Step through project setup, calibration, explanation and prediction in the brows
 Teaching games from Grejna about decisions under uncertainty. Educational; their outputs are not real-world guarantees.
 :::
 ::::
+
+**Next section:** {doc}`CE Software & Integration <software-integration>`.
 
 ```{toctree}
 :hidden:

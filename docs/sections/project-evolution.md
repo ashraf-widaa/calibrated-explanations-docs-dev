@@ -48,6 +48,13 @@ Report library bugs or request features on GitHub; support is best-effort. Feedb
 :::
 ::::
 
+## Reference
+
+- {doc}`Glossary <../glossary/index>`: scientific and software terms, A–Z.
+- {doc}`Parameter reference <../foundations/concepts/parameter-reference>`:
+  the parameters of the main CE calls in one table.
+- {doc}`Citing CE <../citing>`: how to cite the method papers and the software.
+
 ```{toctree}
 :hidden:
 :maxdepth: 2

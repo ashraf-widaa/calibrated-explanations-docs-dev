@@ -148,6 +148,34 @@ the diagram does not add a guarantee for an individual case.
 - Explanation-level intervals should not be promoted as formal per-feature coverage
   guarantees unless explicitly proven for that claim.
 
+(open-author-questions)=
+
+## Open questions for the CE authors
+
+The statements on this page are deliberately limited where the exact
+scientific wording has not yet been confirmed by the CE authors. The open
+items are collected here so that they stay visible; none of them is resolved
+by this documentation. Pages that touch an item carry an inline *under review*
+note.
+
+| Item | What is open | Where it appears |
+|---|---|---|
+| SR-01 | Which exchangeability, data-use and fitted-component conditions apply to each CE path, and whether any distribution-match alternative is justified | Assumptions on this page; {doc}`calibration_methods`; {doc}`../../what-is-ce` |
+| SR-02 | The exact finite-sample statement for CPS intervals (ties, endpoints, one-sided requests, difficulty estimates) and the conditions for per-group (Mondrian) coverage | Mode 2; {doc}`calibration_methods`; {doc}`../../practitioner/evaluate_ce` |
+| SR-03 / SR-13 | Validity wording for the Venn–Abers pair versus the merged probability, rescaled multiclass bounds (upper bounds above 1) and selection of the predicted class | Mode 1; {doc}`../../get-started/ce-tasks-and-modes`; {doc}`../../tasks/classification` |
+| SR-15 | The validity statement for threshold-event probabilities built from CPS scores and Venn–Abers, including their merged output | Mode 3; {doc}`probabilistic_regression`; {doc}`../../practitioner/evaluate_ce` |
+| SR-08 / SR-10 / SR-14 | What a feature-weight range should be called and which inferences it supports (including zero crossing and conjunctions) | Explanation-envelope limits; {doc}`../how-to/interpret_explanations`; {doc}`alternatives` |
+| SR-07 / SR-09 | The interpretation of ensured filtering (no claim that it reduces an identified uncertainty component) | {doc}`../../practitioner/playbooks/ensured-explanations`; {doc}`../../practitioner/playbooks/index` |
+| SR-16 | Which accepted-case error and reject-rate statements hold for reject policies | {doc}`../../practitioner/advanced/reject-policy` |
+| SR-06 | Whether any evidence-backed stability comparison with other explainers can be stated | {doc}`../../compare` |
+| Legal | The mapping of CE records to EU AI Act and data or liability obligations; these pages are not evidence of compliance | {doc}`../../practitioner/playbooks/eu-ai-act-compliance`; {doc}`../../practitioner/playbooks/eu-data-liability-compliance` |
+| Versions | One-sided interval endpoints differ between the Beta source and the official source although both identify as `1.1.0-dev` | {doc}`../../tasks/regression` |
+
+The maintained registers are
+`development/reports/official-vs-beta-20261117/SCIENTIFIC_REVIEW_REGISTER.md`
+and `development/reports/docs-focused-20261116/author-review.md` (maintainer
+documents, not part of the published site).
+
 ## Further reading
 
 - {doc}`How CE Calibrates <calibration_methods>`: how CE computes the probabilities and
