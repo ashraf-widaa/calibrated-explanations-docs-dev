@@ -623,6 +623,31 @@ body:has(#calibrated-explanations-ce) .announcement-content a:focus-visible {
   body:has(#calibrated-explanations-ce) .sidebar-tree p.caption:nth-of-type(5) { --ce-mask: var(--ce-i-leaf); }
   body:has(#calibrated-explanations-ce) .sidebar-tree p.caption:nth-of-type(6) { --ce-mask: var(--ce-i-book); }
 
+  /* 2026-11-19 navigation: the sections are root entries (not caption groups);
+     the same section icons are attached to them. Root order: Home, Quick Start,
+     What & Why, How CE Works, In Practice, Software & Integration, Project & Resources. */
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(n+3) > .reference {
+    align-items: center;
+    display: flex;
+    gap: 9px;
+  }
+
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(n+3) > .reference::before {
+    background: var(--ce-muted);
+    content: "";
+    flex: none;
+    height: 16px;
+    -webkit-mask: var(--ce-mask) center / contain no-repeat;
+    mask: var(--ce-mask) center / contain no-repeat;
+    width: 16px;
+  }
+
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(3) > .reference { --ce-mask: var(--ce-i-cube); }
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(4) > .reference { --ce-mask: var(--ce-i-sigma); }
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(5) > .reference { --ce-mask: var(--ce-i-bars); }
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(6) > .reference { --ce-mask: var(--ce-i-code); }
+  body:has(#calibrated-explanations-ce) .sidebar-tree > ul > li.toctree-l1:nth-child(7) > .reference { --ce-mask: var(--ce-i-book); }
+
   body:has(#calibrated-explanations-ce) .sidebar-tree .current-page > .reference {
     background: linear-gradient(90deg, #7c3aed, #6d28d9);
     border-radius: 8px;
