@@ -57,3 +57,15 @@ share one guarantee. The
 {ref}`calibration prerequisites <ce-workflow-guarantees>` and
 {ref}`cross-mode non-guarantees <cross-mode-non-guarantees>` describe these
 limits.
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+The CE Workflow <../foundations/concepts/ce_workflow>
+Tasks, Modes and Capabilities <../get-started/ce-tasks-and-modes>
+Statistical Methods Behind CE <../foundations/concepts/calibration_methods>
+Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>
+How to Read CE Explanations <../foundations/how-to/interpret_explanations>
+Essential Foundations <../foundations/index>
+```

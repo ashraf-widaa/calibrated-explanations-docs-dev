@@ -44,15 +44,15 @@ def test_safe_defaults_doc_exists() -> None:
 
 def test_upgrade_index_in_toctree() -> None:
     # The upgrade and migration guides must stay discoverable from the sidebar:
-    # the homepage toctree lists the "Maintenance & Support" hub, whose own toctree
-    # lists both guides. (The L07 homepage no longer repeats them in its body text.)
-    # test_top_level_toctree_targets_exist checks only "Start here" and must NOT be
-    # modified.
+    # the homepage toctree lists the "CE Software & Integration" hub, whose own
+    # toctree lists both guides (2026-11-19 architecture; previously the separate
+    # "Maintenance & Support" hub). test_top_level_toctree_targets_exist checks
+    # only "Start here" and must NOT be modified.
     index = (DOCS / "index.md").read_text(encoding="utf-8")
-    hub = (DOCS / "sections" / "maintenance-support.md").read_text(encoding="utf-8")
+    hub = (DOCS / "sections" / "software-integration.md").read_text(encoding="utf-8")
     index_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", index, re.DOTALL))
     hub_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", hub, re.DOTALL))
-    assert "sections/maintenance-support" in index_toctrees
+    assert "sections/software-integration" in index_toctrees
     assert "../upgrade/index>" in hub_toctrees
     assert "../migration/index>" in hub_toctrees
 

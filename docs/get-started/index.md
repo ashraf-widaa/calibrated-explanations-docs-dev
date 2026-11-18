@@ -121,9 +121,5 @@ need to know whether CE fits your problem, start with C.
 :hidden:
 :maxdepth: 1
 
-A1 · Machine learning essentials <ml-foundations>
-A2 · Why CE: from a conventional to a CE workflow <why-ce>
-B · CE by example <ce-by-example>
-C1 · Tasks, modes and capabilities <ce-tasks-and-modes>
-C2 · Apply CE: the practical workflow <apply-overview>
+CE by Example <ce-by-example>
 ```

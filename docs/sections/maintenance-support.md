@@ -1,11 +1,11 @@
+---
+orphan: true
+---
+
 # Maintenance & Support
 
 Resolve problems and move between releases.
 
-```{toctree}
-:maxdepth: 1
-
-Troubleshooting <../get-started/troubleshooting>
-Upgrade guides <../upgrade/index>
-Migration guides <../migration/index>
-```
+- {doc}`Troubleshooting <../get-started/troubleshooting>`
+- {doc}`Upgrade guides <../upgrade/index>`
+- {doc}`Migration guides <../migration/index>`

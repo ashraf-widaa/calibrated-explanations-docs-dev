@@ -29,7 +29,7 @@ Quick Start
 
 :::{container} ce-hero-hint
 
-New to CE? Learn the essentials and try your first example.
+New to CE? Start with one worked example, then run it yourself in Python.
 
 :::
 
@@ -47,6 +47,10 @@ Choose the section that matches your goal.
 
 Guarantees are mode-specific. See {doc}`Calibrated interval semantics <foundations/concepts/calibrated_interval_semantics>`.
 
+Direct routes: {doc}`practitioners <practitioner/index>` ·
+{doc}`researchers <researcher/index>` · {doc}`contributors <contributor/index>` ·
+{doc}`foundations and concepts <foundations/index>`.
+
 :::
 
 ## Project & Resources
@@ -57,84 +61,15 @@ Explore the research, terminology and open-source project.
 
 ```{toctree}
 :hidden:
+:maxdepth: 2
 
 Home <self>
-```
-
-```{toctree}
-:hidden:
-
 Quick Start <get-started/index>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: "CE: What & Why"
-
-Overview <sections/what-and-why>
-What CE Is <what-is-ce>
-Comparison with Other Methods <compare>
-Regulation Context (EU AI Act) <practitioner/playbooks/eu-ai-act-compliance>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: "How CE Works: The Theory Behind It"
-
-Overview <sections/how-ce-works>
-The CE Workflow <foundations/concepts/ce_workflow>
-Statistical Methods Behind CE <foundations/concepts/calibration_methods>
-Guarantees by Mode <foundations/concepts/calibrated_interval_semantics>
-How to Read CE Explanations <foundations/how-to/interpret_explanations>
-Essential Foundations <foundations/index>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: "CE in Practice: Explore & Apply"
-
-Overview <sections/in-practice>
-Python tutorials <tutorials/index>
-tasks/index
-practitioner/index
-foundations/how-to/index
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: "CE Software & Integration"
-
-Overview <sections/software-integration>
-sections/software-foundations
-sections/development-integration
-sections/maintenance-support
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: Resources
-
-Glossary <glossary/index>
-Parameter Reference <foundations/concepts/parameter-reference>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 1
-:caption: "CE Project, Vision & Evolution"
-
-Overview <sections/project-evolution>
-Research & Publications <researcher/index>
-citing
-Development & Roadmap <ROADMAP>
-Community & Contributions <contributor/index>
-foundations/governance/index
-appendices/rtd_tier_map
+CE: What & Why <sections/what-and-why>
+How CE Works <sections/how-ce-works>
+CE in Practice <sections/in-practice>
+CE Software & Integration <sections/software-integration>
+Project & Resources <sections/project-evolution>
 ```
 
 ## Commercial Services

@@ -261,7 +261,7 @@ def test_hub_toctree_contains_both_categories() -> None:
 def test_homepage_links_to_glossary_in_sidebar_and_footer() -> None:
     """G-2b: Resources sidebar entry plus a visible Project & Resources link."""
     index = (DOCS / "index.md").read_text(encoding="utf-8")
-    assert "Glossary <glossary/index>" in index
+    assert "Glossary <../glossary/index>" in (DOCS / "sections" / "project-evolution.md").read_text(encoding="utf-8")
     foot = index.split("## Project & Resources", 1)[1].split("```", 1)[0]
     assert 'href="glossary/index.html"' in foot
     assert 'class="ce-section-card' not in foot

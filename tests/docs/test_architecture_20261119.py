@@ -1,0 +1,80 @@
+"""Guards for the 2026-11-19 navigation architecture.
+
+The sidebar root is Home, Quick Start, the four documentation sections and
+Project & Resources. Each section hub parents its own pages through a real toctree,
+no page has two sidebar parents, and no compulsory ML-essentials step remains.
+"""
+
+from __future__ import annotations
+
+import posixpath
+import re
+from collections import Counter
+from pathlib import Path
+
+DOCS = Path(__file__).resolve().parents[2] / "docs"
+TOCTREE = re.compile(r"^```\{toctree\}\n(.*?)^```", re.DOTALL | re.MULTILINE)
+
+
+def _text(rel: str) -> str:
+    return (DOCS / rel).read_text(encoding="utf-8").replace("\r\n", "\n")
+
+
+def _entries(rel: str) -> list[tuple[str | None, str]]:
+    found = []
+    for block in TOCTREE.findall(_text(rel)):
+        for line in block.splitlines():
+            line = line.strip()
+            if not line or line.startswith(":") or line.endswith("<self>"):
+                continue
+            m = re.match(r"(.*?)\s*<([^>]+)>$", line)
+            label, target = (m.group(1), m.group(2)) if m else (None, line)
+            found.append((label, posixpath.normpath(posixpath.join(posixpath.dirname(rel), target))))
+    return found
+
+
+def test_sidebar_root_is_home_quick_start_four_sections_and_project() -> None:
+    assert [label for label, _ in _entries("index.md")] == [
+        "Quick Start",
+        "CE: What & Why",
+        "How CE Works",
+        "CE in Practice",
+        "CE Software & Integration",
+        "Project & Resources",
+    ]
+    assert "Home <self>" in _text("index.md")
+
+
+def test_section_hubs_parent_their_pages() -> None:
+    expected = {
+        "sections/what-and-why.md": ["what-is-ce", "get-started/why-ce", "compare"],
+        "sections/how-ce-works.md": ["foundations/concepts/ce_workflow", "get-started/ce-tasks-and-modes"],
+        "sections/in-practice.md": ["tutorials/index", "tasks/index", "practitioner/index"],
+        "sections/software-integration.md": ["get-started/installation", "get-started/quick_api", "api/index"],
+        "sections/project-evolution.md": ["glossary/index", "researcher/index", "contributor/index"],
+    }
+    for hub, pages in expected.items():
+        targets = [target for _, target in _entries(hub)]
+        for page in pages:
+            assert page in targets, (hub, page)
+
+
+def test_no_page_has_two_sidebar_parents() -> None:
+    counts = Counter()
+    for path in DOCS.rglob("*.md"):
+        rel = path.relative_to(DOCS).as_posix()
+        if rel.startswith(("_", "_build")):
+            continue
+        counts.update(target for _, target in _entries(rel))
+    assert [t for t, n in counts.items() if n > 1] == []
+
+
+def test_ml_essentials_is_optional_not_a_navigation_step() -> None:
+    assert _text("get-started/ml-foundations.md").startswith("---\norphan: true\n---")
+    for path in DOCS.rglob("*.md"):
+        rel = path.relative_to(DOCS).as_posix()
+        assert "get-started/ml-foundations" not in [t for _, t in _entries(rel)], rel
+
+
+def test_quick_start_has_one_guided_first_step() -> None:
+    assert _entries("get-started/index.md") == [("CE by Example", "get-started/ce-by-example")]

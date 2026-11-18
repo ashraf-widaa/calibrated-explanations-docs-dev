@@ -43,4 +43,5 @@ mondrian-calibration
 ensured-explanations
 decision-policies
 eu-data-liability-compliance
+eu-ai-act-compliance
 ```

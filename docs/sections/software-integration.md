@@ -141,3 +141,19 @@ Breaking changes between major releases, deprecations and terminology updates.
 The library source (`src/calibrated_explanations`) and its test suite (`tests/`) on GitHub.
 :::
 ::::
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+Software Overview & Versions <software-overview-versions>
+Installation <../get-started/installation>
+Quick API <../get-started/quick_api>
+API & Technical Reference <../api/index>
+Model & Pipeline Integration <../foundations/how-to/integrate_with_pipelines>
+Extensions & Plugins <../plugins>
+Internal Software Architecture <../foundations/concepts/architecture>
+Troubleshooting <../get-started/troubleshooting>
+Upgrade Guides <../upgrade/index>
+Migration Guides <../migration/index>
+```

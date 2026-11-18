@@ -18,13 +18,12 @@ DOCS = ROOT / "docs"
 GET_STARTED = DOCS / "get-started"
 INDEX = GET_STARTED / "index.md"
 
+# 2026-11-19 architecture: the Quick Start has one guided first step in its sidebar;
+# the other code-free orientation pages moved to the sections that own their topic.
 QUICK_START_TOCTREE = [
-    ("A1 · Machine learning essentials", "ml-foundations"),
-    ("A2 · Why CE: from a conventional to a CE workflow", "why-ce"),
-    ("B · CE by example", "ce-by-example"),
-    ("C1 · Tasks, modes and capabilities", "ce-tasks-and-modes"),
-    ("C2 · Apply CE: the practical workflow", "apply-overview"),
+    ("CE by Example", "ce-by-example"),
 ]
+CODE_FREE_PAGES = ["ml-foundations", "why-ce", "ce-by-example", "ce-tasks-and-modes", "apply-overview"]
 EXECUTABLE_PAGES = [
     "quickstart_walkthrough",
     "quickstart_classification",
@@ -49,7 +48,7 @@ def test_quick_start_toctree_is_paths_a_b_c_only() -> None:
     assert _toctree(_text(INDEX)) == QUICK_START_TOCTREE
 
 
-@pytest.mark.parametrize("page", ["index", *[slug for _, slug in QUICK_START_TOCTREE]])
+@pytest.mark.parametrize("page", ["index", *CODE_FREE_PAGES])
 def test_quick_start_pages_have_no_code_or_derivations(page: str) -> None:
     text = _text(GET_STARTED / f"{page}.md")
     fences = [line for line in text.splitlines() if line.startswith("```") and line.strip() != "```"]
@@ -82,9 +81,9 @@ def test_executable_pages_keep_their_url_and_move_to_python_tutorials(slug: str)
 
 
 def test_tutorials_hub_and_quick_api_have_new_sidebar_homes() -> None:
-    assert "Python tutorials <tutorials/index>" in _text(DOCS / "index.md")
-    dev = _toctree(_text(DOCS / "sections" / "development-integration.md"))
-    assert ("Quick API", "../get-started/quick_api") in dev
+    assert "Python Tutorials <../tutorials/index>" in _text(DOCS / "sections" / "in-practice.md")
+    software = _toctree(_text(DOCS / "sections" / "software-integration.md"))
+    assert ("Quick API", "../get-started/quick_api") in software
     assert (GET_STARTED / "quick_api.md").is_file()
 
 

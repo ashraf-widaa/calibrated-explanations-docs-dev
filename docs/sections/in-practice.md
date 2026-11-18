@@ -98,3 +98,14 @@ Step through project setup, calibration, explanation and prediction in the brows
 Teaching games from Grejna about decisions under uncertainty. Educational; their outputs are not real-world guarantees.
 :::
 ::::
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+Python Tutorials <../tutorials/index>
+Apply CE: The Practical Workflow <../get-started/apply-overview>
+Tasks and Capabilities <../tasks/index>
+Practitioner Hub <../practitioner/index>
+How-to Guides <../foundations/how-to/index>
+```

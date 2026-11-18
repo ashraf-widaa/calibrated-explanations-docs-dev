@@ -81,8 +81,9 @@ def test_v1_stability_statement_is_restored_as_version_specific() -> None:
 def test_compare_page_has_one_descriptive_label() -> None:
     index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
     practice = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
-    assert "Comparison with Other Methods <compare>" in index
-    assert "The Explainability Gap" not in index
+    what = (SECTIONS / "what-and-why.md").read_text(encoding="utf-8")
+    assert "Comparison with Other Methods <../compare>" in what
+    assert "The Explainability Gap" not in index + what
     assert "{grid-item-card} Comparison with Other Methods" in practice
 
 
@@ -99,8 +100,10 @@ LANDING = ["what-and-why", "how-ce-works", "in-practice", "software-integration"
 
 @pytest.mark.parametrize("name", LANDING)
 def test_landing_pages_are_sidebar_overviews_not_orphans(name: str) -> None:
-    """Run stage 11: each homepage card's landing page is the first entry of its sidebar group."""
+    """Each homepage card's landing page is a root sidebar entry that parents its own pages."""
     index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
-    assert re.search(rf':caption: "[^"]+"\n\nOverview <sections/{name}>\n', index), name
+    root = re.search(r"```\{toctree\}\n(.*?)```", index, re.DOTALL).group(1)
+    assert re.search(rf"^[^\n<]+ <sections/{name}>$", root, re.MULTILINE), name
+    assert "```{toctree}" in (SECTIONS / f"{name}.md").read_text(encoding="utf-8"), name
     page = (SECTIONS / f"{name}.md").read_text(encoding="utf-8")
     assert not page.startswith("---\norphan: true")

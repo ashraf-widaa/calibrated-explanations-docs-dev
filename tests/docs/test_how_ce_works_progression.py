@@ -32,18 +32,18 @@ def test_landing_states_the_chain_without_learning_level_labels() -> None:
 
 def test_sidebar_preserves_the_existing_reference_order() -> None:
     index = (DOCS / "index.md").read_text(encoding="utf-8")
-    group = index.split(':caption: "How CE Works: The Theory Behind It"')[1].split("```")[0]
+    assert "How CE Works <sections/how-ce-works>" in index
+    group = (DOCS / "sections" / "how-ce-works.md").read_text(encoding="utf-8").split("```{toctree}")[1].split("```")[0]
     order = [
-        "sections/how-ce-works",
         "foundations/concepts/ce_workflow",
         "foundations/concepts/calibration_methods",
         "foundations/concepts/calibrated_interval_semantics",
         "foundations/how-to/interpret_explanations",
         "foundations/index",
     ]
-    positions = [group.index(f"<{page}>") for page in order]
+    positions = [group.index(f"<../{page}>") for page in order]
     assert positions == sorted(positions)
-    assert "Guarantees by Mode <foundations/concepts/calibrated_interval_semantics>" in group
+    assert "Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>" in group
 
 
 def test_workflow_table_separates_the_three_output_meanings() -> None:

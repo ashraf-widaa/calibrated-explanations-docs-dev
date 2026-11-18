@@ -47,3 +47,17 @@ Optional plugins; companion and commercial resources are separate.
 Report library bugs or request features on GitHub; support is best-effort. Feedback on these Beta pages goes to the [Beta documentation repository](https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues).
 :::
 ::::
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+Glossary <../glossary/index>
+Parameter Reference <../foundations/concepts/parameter-reference>
+Research & Publications <../researcher/index>
+Citing CE <../citing>
+Development & Roadmap <../ROADMAP>
+Community & Contributions <../contributor/index>
+Governance & Support <../foundations/governance/index>
+Documentation Maintenance <../appendices/rtd_tier_map>
+```

@@ -55,3 +55,12 @@ CE outputs can also support a discussion of transparency and oversight.
 The {doc}`EU AI Act context <../practitioner/playbooks/eu-ai-act-compliance>`
 examines that relationship; it is not evidence of compliance, and its
 compliance wording remains under review.
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+What CE Is <../what-is-ce>
+Why CE: From a Conventional to a CE Workflow <../get-started/why-ce>
+Comparison with Other Methods <../compare>
+```

@@ -60,7 +60,7 @@ def test_hero_keeps_identity_message_and_one_primary_action() -> None:
     )
     assert hero.count("{button-ref}") == 1
     assert "```{button-ref} get-started/index" in hero
-    assert "New to CE? Learn the essentials and try your first example." in hero
+    assert "New to CE? Start with one worked example, then run it yourself in Python." in hero
 
 
 def test_four_documentation_cards_in_order_with_approved_descriptions() -> None:
