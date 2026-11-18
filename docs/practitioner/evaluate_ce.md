@@ -9,6 +9,9 @@ The checks below are **empirical**: they tell you how CE behaved on your test
 data. They do not prove a guarantee, and they do not replace the conditions in
 the {doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`.
 
+**Learning journey, step 5 of 5.** This is the last step of the journey that
+starts on the {doc}`Quick Start <../get-started/index>`.
+
 ## 1. Set up reproducibly
 
 Use three separate data sets, fix every random seed, and keep the test set out
@@ -232,6 +235,13 @@ If groups differ systematically in how hard they are to predict, consider
 {doc}`Mondrian (conditional) calibration <../foundations/how-to/conditional_calibration>`.
 *What Mondrian calibration guarantees within each group, and under which
 conditions, is under review by the CE authors.*
+
+## After the learning journey
+
+You have now run, read, applied and checked CE. To go deeper, study
+{doc}`how CE works <../sections/how-ce-works>` (workflow, calibration methods
+and the guarantees by mode), or browse the task guides and playbooks in
+{doc}`CE in Practice <../sections/in-practice>`.
 
 ## Related pages
 

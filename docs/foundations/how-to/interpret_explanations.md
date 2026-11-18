@@ -10,6 +10,11 @@ payloads and plots. For how the substituted predictions are constructed,
 read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
 {doc}`../concepts/calibrated_interval_semantics`.
 
+**Learning journey, step 3 of 5.** Coming from the
+{doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`, use this
+page to read the records and plots you produced there. The next step is
+{doc}`../../get-started/apply-to-your-data`.
+
 For **interval regression without a threshold**, `prediction_interval` is a
 target prediction interval produced by a **conformal predictive system (CPS)**;
 `low_high_percentiles` selects its percentiles. With a threshold, the explained
@@ -226,3 +231,8 @@ After you absorb the tables and plots:
 3. Share this guide with auditors and stakeholders so everyone relies on the same vocabulary when discussing factual or alternative explanations.
 
 Keeping the interpretation workflow front and centre helps people read calibrated explanations consistently. It does not by itself make a decision safe: the guarantees and their limits are in {doc}`../concepts/calibrated_interval_semantics`.
+
+## Next in the learning journey
+
+**Step 4 of 5:** {doc}`../../get-started/apply-to-your-data` applies the same
+calls to your own model and data.

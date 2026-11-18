@@ -3,9 +3,14 @@
 **One of the {doc}`Python tutorials <../tutorials/index>`.** This page takes you from your own data and model to
 calibrated predictions and explanations you can check. It assumes you have
 chosen a mode in {doc}`ce-tasks-and-modes` and run the tutorial for it. The
-same steps without code are in {doc}`apply-overview` (Quick Start). The
+same steps without code are in {doc}`apply-overview`. The
 example uses binary classification on a public dataset, standing in for your
 data; each step says what to change for your problem.
+
+**Learning journey, step 4 of 5.** After
+{doc}`reading CE explanations <../foundations/how-to/interpret_explanations>`
+(step 3), this page applies CE to your own model. The last step is
+{doc}`../practitioner/evaluate_ce`.
 
 Install the package with the `viz` extra, which the plotting step needs:
 
@@ -264,7 +269,8 @@ Please:
 
 ## Continue
 
-- **Next:** evaluate before you rely on it: {doc}`../practitioner/evaluate_ce`.
+- **Next (learning journey, step 5 of 5):** evaluate before you rely on it:
+  {doc}`../practitioner/evaluate_ce`.
 - **Go deeper:** the guarantees for your mode in
   {doc}`../foundations/concepts/calibrated_interval_semantics`, and
   {doc}`../foundations/how-to/integrate_with_pipelines` for pipelines.

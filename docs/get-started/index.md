@@ -25,15 +25,9 @@ held-out calibration data and exchangeability. See the
 {doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`;
 exact validity wording remains under CE author review.
 
-This Quick Start explains CE without code.
+This Quick Start gives the big picture and one learning journey through the
+documentation; its first step needs no code.
 
-**To run CE now:** install the package ({doc}`installation`; Python 3.10 or
-later, with the `viz` extra if you want plots). The
-{doc}`Quick API <quick_api>` page has a complete minimal example you can copy
-and run in one go; the {doc}`Python walkthrough <quickstart_walkthrough>`
-then follows the same case step by step, and the other
-{doc}`Python tutorials <../tutorials/index>` cover each task, all with
-executable code and real output.
 
 ## Where CE fits
 
@@ -57,39 +51,37 @@ explanation, each with a reported range. These ranges describe different
 quantities; their meaning depends on the task and output, as the paths below
 explain. CE adds these steps without retraining your model.
 
-## Choose your path
+(choose-your-path)=
 
-::::{grid} 1 1 3 3
-:gutter: 3
+## Your learning journey
 
-:::{grid-item-card} A · Understand CE
-:link: why-ce
-:link-type: doc
+Follow these five steps in order. Each page ends with a link to the next one.
 
-**Why is CE needed, and what changes in the workflow?** For newcomers,
-students and decision-makers.
-:::
+1. **{doc}`CE by example <ce-by-example>`: start here (no code, about 15
+   minutes).** One real prediction, from the model's raw score to a
+   calibrated probability, a factual explanation and alternatives, with every
+   number taken from an executed CE run.
+2. **{doc}`Python walkthrough <quickstart_walkthrough>` (about 45 minutes).**
+   Run the same example yourself, step by step, with the code and real output.
+   Install the package first: {doc}`installation` (Python 3.10 or later, with
+   the `viz` extra for plots).
+3. **{doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`.**
+   What each field of the returned records and plots means, and which range
+   belongs to which quantity.
+4. **{doc}`Apply CE to your own data <apply-to-your-data>`.** Wrap your own
+   model, calibrate, explain, check and save.
+5. **{doc}`Evaluate CE on your own data <../practitioner/evaluate_ce>`.**
+   Empirical checks of probabilities, intervals, threshold events and
+   subgroups on held-out data.
 
-:::{grid-item-card} B · Learn CE by example
-:link: ce-by-example
-:link-type: doc
+**Prefer to start with code?** The {doc}`Quick API <quick_api>` page has a
+complete minimal example you can copy and run in one go; it uses the same
+case as steps 1 and 2.
 
-**What does CE produce for one real prediction, and how do you read it?**
-Real CE output, explained step by step.
-:::
-
-:::{grid-item-card} C · Apply CE to your data
-:link: ce-tasks-and-modes
-:link-type: doc
-
-**Does CE fit my problem, and what does applying it involve?** Tasks, modes
-and the practical workflow, with links to the Python tutorials.
-:::
-::::
-
-**Recommended order:** A → B → C. Each path also stands on its own: if you
-already know machine learning and CE's ideas, go straight to B; if you only
-need to know whether CE fits your problem, start with C.
+**Want the reasons first?** {doc}`Why CE <why-ce>` explains what changes in a
+machine-learning workflow when CE is added, and
+{doc}`Tasks, modes and capabilities <ce-tasks-and-modes>` helps you decide
+whether CE fits your problem.
 
 (before-you-start)=
 

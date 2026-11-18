@@ -63,6 +63,11 @@ without code is [CE by example](ce-by-example.md). The explanation of
 [Why CE](why-ce.md) introduces the role of calibration; other prediction
 tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
+**Learning journey, step 2 of 5.** You may have met this case without code in
+[CE by example](ce-by-example.md) (step 1). After this walkthrough, continue
+with [How to read CE explanations](../foundations/how-to/interpret_explanations.md)
+(step 3).
+
 Install the packages once:
 
 ```bash
@@ -543,6 +548,10 @@ md(r"""
 in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
+
+**Next in the learning journey (step 3 of 5):**
+[How to read CE explanations](../foundations/how-to/interpret_explanations.md)
+explains every field of the records and plots you produced here.
 """)
 
 md(r"""
@@ -882,6 +891,10 @@ example on a public dataset, not clinical decision support.
 [Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
+**Learning journey, step 1 of 5.** This page is the recommended first step
+from the [Quick Start](index.md). Next, the
+[Python walkthrough](quickstart_walkthrough.md) runs the same example in code.
+
 ## 1. The question
 
 A model flags breast-tumour samples as *malignant* or *benign* from
@@ -1023,6 +1036,10 @@ connects the rule, substituted predictions and weight calculation; the
 [interpretation guide](../foundations/how-to/interpret_explanations.md)
 explains the returned records. Other tasks and output quantities are
 distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
+
+**Next in the learning journey (step 2 of 5):** run this same example
+yourself in the [Python walkthrough](quickstart_walkthrough.md). The full
+journey is listed on the [Quick Start](index.md).
 """
 companion = page_dir / "ce-by-example.md"
 companion.write_text(page, encoding="utf-8")

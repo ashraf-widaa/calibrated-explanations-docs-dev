@@ -10,6 +10,10 @@ example on a public dataset, not clinical decision support.
 [Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
+**Learning journey, step 1 of 5.** This page is the recommended first step
+from the [Quick Start](index.md). Next, the
+[Python walkthrough](quickstart_walkthrough.md) runs the same example in code.
+
 ## 1. The question
 
 A model flags breast-tumour samples as *malignant* or *benign* from
@@ -187,3 +191,7 @@ connects the rule, substituted predictions and weight calculation; the
 [interpretation guide](../foundations/how-to/interpret_explanations.md)
 explains the returned records. Other tasks and output quantities are
 distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
+
+**Next in the learning journey (step 2 of 5):** run this same example
+yourself in the [Python walkthrough](quickstart_walkthrough.md). The full
+journey is listed on the [Quick Start](index.md).

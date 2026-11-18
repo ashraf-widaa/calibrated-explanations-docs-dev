@@ -44,15 +44,23 @@ def test_notebook_carries_the_same_number_of_next_step_rows() -> None:
         assert label in notebook, label
 
 
-def test_quick_start_landing_offers_three_paths_in_order() -> None:
+def test_quick_start_landing_offers_one_learning_journey_in_order() -> None:
+    # 2026-11-19: the three parallel A/B/C paths became one numbered journey with a
+    # single recommended first step; Why CE and Tasks & modes stay linked as options.
     text = INDEX.read_text(encoding="utf-8").replace("\r\n", "\n")
-    cards = re.findall(r":::\{grid-item-card\} ([ABC]) · [^\n]*\n:link: ([^\n]+)", text)
-    assert cards == [
-        ("A", "why-ce"),
-        ("B", "ce-by-example"),
-        ("C", "ce-tasks-and-modes"),
+    journey = text.split("## Your learning journey", 1)[1].split("**Prefer to start with code?**", 1)[0]
+    steps = re.findall(r"^\d\. \*\*\{doc\}`[^<`]*<([^>]+)>`", journey, re.MULTILINE)
+    assert steps == [
+        "ce-by-example",
+        "quickstart_walkthrough",
+        "../foundations/how-to/interpret_explanations",
+        "apply-to-your-data",
+        "../practitioner/evaluate_ce",
     ]
-    assert "A \u2192 B \u2192 C" in text
+    assert "start here" in journey
+    assert "{doc}`Quick API <quick_api>`" in text
+    assert "{doc}`Why CE <why-ce>`" in text and "ce-tasks-and-modes" in text
+    assert "(choose-your-path)=" in text
     assert 'srcset="../_static/figures/ce-at-a-glance-narrow.svg"' in text
     assert 'src="../_static/figures/ce-at-a-glance.svg"' in text
 

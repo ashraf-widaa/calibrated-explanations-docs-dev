@@ -10,6 +10,11 @@ without code is [CE by example](ce-by-example.md). The explanation of
 [Why CE](why-ce.md) introduces the role of calibration; other prediction
 tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
+**Learning journey, step 2 of 5.** You may have met this case without code in
+[CE by example](ce-by-example.md) (step 1). After this walkthrough, continue
+with [How to read CE explanations](../foundations/how-to/interpret_explanations.md)
+(step 3).
+
 Install the packages once:
 
 ```bash
@@ -542,6 +547,10 @@ above 0.5.
 in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
+
+**Next in the learning journey (step 3 of 5):**
+[How to read CE explanations](../foundations/how-to/interpret_explanations.md)
+explains every field of the records and plots you produced here.
 
 ## Extra 1. The same workflow for regression
 
