@@ -8,5 +8,4 @@ Authoritative details generated from the source code and supporting schemas.
 :maxdepth: 1
 
 api
-../../schema_v1
 ```

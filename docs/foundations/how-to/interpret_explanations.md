@@ -11,11 +11,12 @@ read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
 {doc}`../concepts/calibrated_interval_semantics`.
 
 ```{raw} html
-<nav class="ce-journey" aria-label="Learning journey, step 3 of 5"><ol><li><a href="../../get-started/installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="../../get-started/quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li aria-current="step"><a href="interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="../../get-started/apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+<nav class="ce-journey" aria-label="Get started, step 4 of 5"><ol><li><a href="../../what-is-ce.html"><span class="ce-journey-n">1</span>What CE is</a></li><li><a href="../../get-started/try-in-browser.html"><span class="ce-journey-n">2</span>Quick Start</a></li><li><a href="../../get-started/installation.html"><span class="ce-journey-n">3</span>Install</a></li><li aria-current="step"><a href="interpret_explanations.html"><span class="ce-journey-n">4</span>Read it</a></li><li><a href="../../get-started/apply-to-your-data.html"><span class="ce-journey-n">5</span>Your data</a></li></ol></nav>
 ```
 
-**Learning journey, step 3 of 5 · about 15 minutes.** Coming from the
-{doc}`Quickstart <../../get-started/quickstart>` or the in-depth
+**Get started, step 4 of 5 · about 15 minutes.** Coming from the
+{doc}`Quick Start <../../get-started/try-in-browser>`, the
+{doc}`Python quickstart <../../get-started/quickstart>` or the in-depth
 {doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`, use this
 page to read the records and plots you produced there. The examples are
 classification; regression outputs are covered in
@@ -252,7 +253,8 @@ After you absorb the tables and plots:
 
 Keeping the interpretation workflow front and centre helps people read calibrated explanations consistently. It does not by itself make a decision safe: the guarantees and their limits are in {doc}`../concepts/calibrated_interval_semantics`.
 
-## Next in the learning journey
+(next-in-the-learning-journey)=
+## Next in Get started
 
-**Step 4 of 5:** {doc}`../../get-started/apply-to-your-data` applies the same
+**Step 5 of 5:** {doc}`../../get-started/apply-to-your-data` applies the same
 calls to your own model and data.

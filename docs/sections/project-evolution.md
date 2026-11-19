@@ -1,70 +1,59 @@
-# CE Project, Vision & Evolution
+# Project
 
-Learn about CE's purpose, research, development, community and ecosystem.
+<span id="ce-project-vision-evolution"></span><span id="reference"></span>
 
-::::{grid} 1 2 3 3
-:gutter: 3
+Find CE's research, status and support: the publications behind the method,
+how to cite it, where development is heading, how the project is governed,
+its license and the separate commercial services.
 
-:::{grid-item-card} About the Project
-:link: https://github.com/Moffran/calibrated_explanations#readme
-:link-type: url
+## Research and publications
 
-The project README: what CE is, the problem it addresses and how to start.
-:::
+The {doc}`Research & Publications <../researcher/index>` hub collects the
+method papers, theory and literature, replication workflows and open
+research directions.
 
-:::{grid-item-card} Research & Publications
-:link: ../researcher/index
-:link-type: doc
+## How to cite CE
 
-Researcher hub, citation and replication resources.
-:::
+{doc}`Citing CE <../citing>` gives the references for the method papers and
+the software, with BibTeX entries.
 
-:::{grid-item-card} Development & Roadmap
-:link: ../ROADMAP
-:link-type: doc
+## Roadmap
 
-Public roadmap for CE development.
-:::
+The {doc}`Roadmap <../ROADMAP>` describes the planned development of the CE
+library.
 
-:::{grid-item-card} Community & Contributions
-:link: ../contributor/index
-:link-type: doc
+## Governance and support
 
-Contributor hub and contribution routes.
-:::
+- {doc}`Governance & support <../foundations/governance/index>`: release,
+  test and documentation policies, and how decisions are made.
+- **Support and feedback:** report library bugs or request features in the
+  [GitHub issue tracker](https://github.com/Moffran/calibrated_explanations/issues);
+  support is best-effort. Feedback on these Beta pages goes to the
+  [Beta documentation repository](https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues).
+- **Contributing:** start with {doc}`Contribute in 4 steps <../contributor/index>`
+  under *Software Architecture & Integration*.
+- **About the project:** the [project README](https://github.com/Moffran/calibrated_explanations#readme)
+  and the [source repository](https://github.com/Moffran/calibrated_explanations).
 
-:::{grid-item-card} CE Ecosystem
-:link: ../plugins
-:link-type: doc
+## License
 
-Optional plugins; companion and commercial resources are separate.
-:::
+CE is open source under the
+[BSD 3-Clause License](https://github.com/Moffran/calibrated_explanations/blob/main/LICENSE).
 
-:::{grid-item-card} Support & Feedback
-:link: https://github.com/Moffran/calibrated_explanations/issues
-:link-type: url
+(commercial-services)=
+## Commercial services
 
-Report library bugs or request features on GitHub; support is best-effort. Feedback on these Beta pages goes to the [Beta documentation repository](https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues).
-:::
-::::
-
-## Reference
-
-- {doc}`Glossary <../glossary/index>`: scientific and software terms, A–Z.
-- {doc}`Parameter reference <../foundations/concepts/parameter-reference>`:
-  the parameters of the main CE calls in one table.
-- {doc}`Citing CE <../citing>`: how to cite the method papers and the software.
+For customized CE solutions and commercial support, contact
+[Grejna AB](https://grejna.ai/#kontakt). These services are separate from the
+open-source library and its license. Optional plugins and companion
+resources are listed under {doc}`Plugins <../plugins>`.
 
 ```{toctree}
 :hidden:
 :maxdepth: 2
 
-Glossary <../glossary/index>
-Parameter Reference <../foundations/concepts/parameter-reference>
 Research & Publications <../researcher/index>
-Citing CE <../citing>
-Development & Roadmap <../ROADMAP>
-Community & Contributions <../contributor/index>
+How to Cite CE <../citing>
+Roadmap <../ROADMAP>
 Governance & Support <../foundations/governance/index>
-Documentation Maintenance <../appendices/rtd_tier_map>
 ```

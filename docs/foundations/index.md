@@ -1,6 +1,8 @@
-# Essential foundations
+# ML and statistical foundations
 
-This section collects the concepts, guides and references you need to
+<span id="essential-foundations"></span>
+
+This page collects the concepts, guides and references you need to
 understand and use calibrated explanations, ordered from first steps to
 advanced material.
 
@@ -40,11 +42,12 @@ operation.
 
 Release, testing and documentation policies are kept separate from the
 scientific explanations: see {doc}`governance/index`, also listed under
-*CE Project, Vision & Evolution* in the sidebar.
+*Project* in the sidebar.
 
 ```{toctree}
 :hidden:
 :maxdepth: 1
 
-concepts/index
+Machine-Learning Essentials <../get-started/ml-foundations>
+More Concepts <concepts/index>
 ```

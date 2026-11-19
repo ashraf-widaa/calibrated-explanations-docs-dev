@@ -11,7 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
-LANDING = DOCS / "sections" / "how-ce-works.md"
+# 2026-11-19 redesign: How CE Works is the second half of the Understand CE landing.
+LANDING = DOCS / "sections" / "understand-ce.md"
 WORKFLOW = DOCS / "foundations" / "concepts" / "ce_workflow.md"
 INTERPRET = DOCS / "foundations" / "how-to" / "interpret_explanations.md"
 METHODS = DOCS / "foundations" / "concepts" / "calibration_methods.md"
@@ -32,19 +33,19 @@ def test_landing_states_the_chain_without_learning_level_labels() -> None:
 
 def test_sidebar_preserves_the_existing_reference_order() -> None:
     index = (DOCS / "index.md").read_text(encoding="utf-8")
-    assert "How CE Works <sections/how-ce-works>" in index
-    group = (DOCS / "sections" / "how-ce-works.md").read_text(encoding="utf-8").split("```{toctree}")[1].split("```")[0]
+    assert "Understand CE <sections/understand-ce>" in index
+    assert 'href="sections/understand-ce.html#how-ce-works"' in index
+    group = LANDING.read_text(encoding="utf-8").split("```{toctree}")[1].split("```")[0]
     order = [
         "foundations/concepts/ce_workflow",
         "foundations/concepts/calibration_methods",
         "foundations/concepts/calibrated_interval_semantics",
+        "foundations/concepts/alternatives",
         "foundations/index",
     ]
-    # 2026-11-18: "How to read CE explanations" moved to Get Started (journey step 3);
-    # the hub still lists it in its reading order.
     positions = [group.index(f"<../{page}>") for page in order]
     assert positions == sorted(positions)
-    assert "Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>" in group
+    assert "Guarantees and Limits by Mode <../foundations/concepts/calibrated_interval_semantics>" in group
 
 
 def test_workflow_table_separates_the_three_output_meanings() -> None:

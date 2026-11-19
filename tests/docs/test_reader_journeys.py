@@ -3,7 +3,7 @@
 Journeys follow the master instruction:
 - Beginner: Homepage -> Quick Start -> first example -> interpretation -> further learning.
 - Practitioner: Homepage -> CE in Practice -> task guide -> example notebook -> API.
-- Researcher: Homepage -> How CE Works -> foundations -> references -> source code.
+- Researcher: Homepage -> How CE Works (in Understand CE) -> foundations -> references -> source code.
 - Developer: Homepage -> Software & Integration -> installation -> API -> source and tests.
 """
 
@@ -33,8 +33,8 @@ JOURNEYS = {
         ("tasks/classification.md", "../_autosummary/calibrated_explanations.core.WrapCalibratedExplainer"),
     ],
     "researcher": [
-        ("index.md", "sections/how-ce-works.html"),
-        ("sections/how-ce-works.md", "../foundations/concepts/ce_workflow"),
+        ("index.md", "sections/understand-ce.html#how-ce-works"),
+        ("sections/understand-ce.md", "../foundations/concepts/ce_workflow"),
         ("foundations/concepts/ce_workflow.md", "calibration_methods"),
         ("foundations/concepts/ce_workflow.md", "calibrated_interval_semantics"),
         ("foundations/concepts/ce_workflow.md", "citing"),

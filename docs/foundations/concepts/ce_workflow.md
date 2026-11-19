@@ -2,6 +2,9 @@
 
 # The CE workflow
 
+*New to the workflow? The {doc}`Quick Start <../../get-started/try-in-browser>`
+walks through it with two worked cases before this page develops it.*
+
 Calibrated Explanations connects a predictive model with calibration data,
 task-specific prediction information and explanations of model responses.
 Following those connections distinguishes what is predicted from how an

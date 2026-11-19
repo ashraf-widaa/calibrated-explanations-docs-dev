@@ -24,8 +24,9 @@ PAGES = [
     "docs/get-started/quickstart_guarded.md",
     "docs/get-started/apply-to-your-data.md",
     "docs/get-started/try-in-browser.md",
+    "docs/integrate/consume-output.md",
 ]
-# try-in-browser.md reads its data from the official repository on GitHub; the test
+# try-in-browser.md and consume-output.md read their data from the official repository on GitHub; the test
 # reads the same files from this checkout (tests/data) so it runs offline.
 GITHUB_DATA = (
     '("https://raw.githubusercontent.com/Moffran/"\n'

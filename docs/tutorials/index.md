@@ -10,7 +10,8 @@ development version that these pages are built from; both print the same
 numbers.
 
 **Before these tutorials.** For the ideas without code, start with the
-{doc}`Quick Start <../get-started/index>`: {doc}`../get-started/why-ce`,
+{doc}`Quick Start <../get-started/try-in-browser>`, then
+{doc}`../get-started/why-ce`,
 {doc}`CE by example <../get-started/ce-by-example>`,
 {doc}`../get-started/ce-tasks-and-modes` and
 {doc}`../get-started/apply-overview`.
@@ -44,7 +45,7 @@ data), {doc}`../foundations/how-to/integrate_with_pipelines` and the
 :maxdepth: 1
 
 Python walkthrough <../get-started/quickstart_walkthrough>
-Classification tutorial <../get-started/quickstart_classification>
-Regression tutorial <../get-started/quickstart_regression>
+Classification Tutorial <../get-started/quickstart_classification>
+Regression and Thresholded Regression <../get-started/quickstart_regression>
 Guarded explanations tutorial <../get-started/quickstart_guarded>
 ```

@@ -26,22 +26,18 @@ def test_landing_pages_have_no_audit_wording(page: str) -> None:
 def test_in_practice_cards_point_to_verified_destinations() -> None:
     text = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
     links = re.findall(r"^:link: (\S+)$", text, flags=re.MULTILINE)
+    # 2026-11-19 redesign: Quick Start, Decision Lab, Expert Lab, Practitioner Hub, in order;
+    # the Quick Start card leads to the same canonical page as Get started.
     assert links == [
-        "https://calibrated-explanations-demo.ju.se/expert",
         "../get-started/try-in-browser",
-        "https://games.grejna.ai/",
         "try-decision-lab",
+        "qs-expert-lab",
         "../practitioner/index",
-        "../tutorials/index",
-        "../tasks/index",
-        "../foundations/how-to/index",
-        "../get-started/apply-to-your-data",
-        "../practitioner/evaluate_ce",
-        "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
     ]
-    assert re.findall(r"^## \d\. ([^:]+):", text, flags=re.MULTILINE) == [
-        "Expert Hub", "Decision Lab", "Practitioner Hub",
+    assert re.findall(r"^:::\{grid-item-card\} (.+)$", text, flags=re.MULTILINE) == [
+        "1. Quick Start", "2. Decision Lab", "3. Expert Lab", "4. Practitioner Hub",
     ]
+    assert "Expert Hub" in text, "the demo's own label is named once"
     assert "Decision Labs" not in text
     assert "not real-world guarantees" in text
 
@@ -81,7 +77,7 @@ def test_v1_stability_statement_is_restored_as_version_specific() -> None:
 def test_compare_page_has_one_descriptive_label() -> None:
     index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
     practice = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
-    what = (SECTIONS / "what-and-why.md").read_text(encoding="utf-8")
+    what = (SECTIONS / "understand-ce.md").read_text(encoding="utf-8")
     assert "Comparison with Other Methods <../compare>" in what
     assert "The Explainability Gap" not in index + what
     assert "{doc}`Comparison with other methods <../compare>`" in practice
@@ -90,12 +86,19 @@ def test_compare_page_has_one_descriptive_label() -> None:
 def test_project_landing_routes_to_readme_and_feedback() -> None:
     text = (SECTIONS / "project-evolution.md").read_text(encoding="utf-8")
     assert "No dedicated page yet" not in text
-    assert ":link: https://github.com/Moffran/calibrated_explanations#readme" in text
-    assert ":link: https://github.com/Moffran/calibrated_explanations/issues" in text
+    assert "(https://github.com/Moffran/calibrated_explanations#readme)" in text
+    assert "(https://github.com/Moffran/calibrated_explanations/issues)" in text
+    # Project order (2026-11-19 redesign) ends with the license and commercial services.
+    headings = re.findall(r"^## (.+)$", text, flags=re.MULTILINE)
+    assert headings == [
+        "Research and publications", "How to cite CE", "Roadmap",
+        "Governance and support", "License", "Commercial services",
+    ]
+    assert "https://grejna.ai/#kontakt" in text
     assert "https://github.com/ashraf-widaa/calibrated-explanations-docs-dev/issues" in text
 
 
-LANDING = ["what-and-why", "how-ce-works", "in-practice", "software-integration", "project-evolution"]
+LANDING = ["understand-ce", "in-practice", "software-integration", "project-evolution"]
 
 
 @pytest.mark.parametrize("name", LANDING)

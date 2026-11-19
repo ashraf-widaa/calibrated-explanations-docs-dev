@@ -10,7 +10,7 @@ without code is [CE by example](ce-by-example.md). The explanation of
 [Why CE](why-ce.md) introduces the role of calibration; other prediction
 tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
-**Learning journey, step 2 of 5, in depth.** The [Quickstart](quickstart.md)
+**Python tutorial, in depth.** The [Python quickstart](quickstart.md)
 runs this example in about 10 minutes; this walkthrough explains every step,
 including how the calibration works. The same case without code is
 [CE by example](ce-by-example.md). After this walkthrough, continue with
@@ -550,7 +550,7 @@ in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
 
-**Next in the learning journey (step 3 of 5):**
+**Next:**
 [How to read CE explanations](../foundations/how-to/interpret_explanations.md)
 explains every field of the records and plots you produced here.
 

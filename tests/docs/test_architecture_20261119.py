@@ -1,9 +1,10 @@
-"""Guards for the 2026-11-19 navigation architecture.
+"""Guards for the five-section navigation architecture (redesign of 2026-11-19).
 
-The sidebar root is Home, Get Started, the four documentation sections and
-Project & Resources. Get Started links to the complete Python journey and
-the browser Quick Start. Each section hub parents its pages through a real toctree,
-no page has two sidebar parents, and no compulsory ML-essentials step remains.
+The sidebar root is Home and five sections: Get started, Understand CE, Use CE,
+Software Architecture & Integration, and Project. Get started is one path with the
+browser Quick Start before installation. Each section hub parents its pages through a
+real toctree, no page has two sidebar parents, ML foundations close Understand CE, and
+API Reference and Contribute in 4 steps are direct children of the software section.
 """
 
 from __future__ import annotations
@@ -36,47 +37,50 @@ def _entries(rel: str) -> list[tuple[str | None, str]]:
     return found
 
 
-def test_sidebar_root_is_home_quick_start_four_sections_and_project() -> None:
-    assert [label for label, _ in _entries("index.md")] == [
-        "Get Started",
-        "CE: What & Why",
-        "How CE Works",
-        "CE in Practice",
-        "CE Software & Integration",
-        "Project & Resources",
+def test_sidebar_root_is_home_and_five_sections() -> None:
+    assert _entries("index.md") == [
+        ("Get Started", "get-started/index"),
+        ("Understand CE", "sections/understand-ce"),
+        ("Use CE", "sections/in-practice"),
+        ("Software Architecture & Integration", "sections/software-integration"),
+        ("Project", "sections/project-evolution"),
     ]
     assert "Home <self>" in _text("index.md")
 
 
 def test_section_hubs_parent_their_pages_in_reading_order() -> None:
     expected = {
-        "sections/what-and-why.md": [
-            "what-is-ce", "get-started/why-ce", "get-started/ce-tasks-and-modes", "compare",
+        "get-started/index.md": [
+            "what-is-ce", "get-started/try-in-browser", "get-started/installation",
+            "foundations/how-to/interpret_explanations", "get-started/apply-to-your-data",
         ],
-        "sections/how-ce-works.md": [
-            "foundations/concepts/ce_workflow",
-            "foundations/concepts/calibration_methods",
-            "foundations/concepts/alternatives",
+        "sections/understand-ce.md": [
+            "get-started/why-ce", "get-started/ce-tasks-and-modes",
+            "foundations/concepts/ce_workflow", "foundations/concepts/calibration_methods",
             "foundations/concepts/calibrated_interval_semantics",
+            "foundations/concepts/alternatives", "compare", "foundations/index",
         ],
         "sections/in-practice.md": [
-            "https://calibrated-explanations-demo.ju.se/expert",
             "https://games.grejna.ai/",
+            "https://calibrated-explanations-demo.ju.se/expert",
             "practitioner/index",
             "tutorials/index",
             "tasks/index",
+            "foundations/how-to/index",
         ],
         "sections/software-integration.md": [
-            "get-started/installation",
-            "get-started/troubleshooting",
+            "integrate/consume-output",
             "get-started/quick_api",
-            "get-started/apply-to-your-data",
-            "foundations/how-to/integrate_with_pipelines",
             "api/index",
-            "foundations/how-to/configure_runtime",
-            "plugins",
+            "foundations/concepts/parameter-reference",
+            "schema_v1",
+            "upgrade/index",
+            "contributor/index",
+            "foundations/concepts/architecture",
         ],
-        "sections/project-evolution.md": ["glossary/index", "researcher/index", "contributor/index"],
+        "sections/project-evolution.md": [
+            "researcher/index", "citing", "ROADMAP", "foundations/governance/index",
+        ],
     }
     for hub, pages in expected.items():
         targets = [target for _, target in _entries(hub)]
@@ -93,19 +97,29 @@ def test_no_page_has_two_sidebar_parents() -> None:
     assert [t for t, n in counts.items() if n > 1] == []
 
 
-def test_ml_essentials_is_optional_not_a_navigation_step() -> None:
-    assert _text("get-started/ml-foundations.md").startswith("---\norphan: true\n---")
-    for path in DOCS.rglob("*.md"):
-        rel = path.relative_to(DOCS).as_posix()
-        assert "get-started/ml-foundations" not in [t for _, t in _entries(rel)], rel
-
-
-def test_get_started_links_to_browser_and_python_journeys() -> None:
-    assert _entries("get-started/index.md") == [
-        ("Quick Start: Try CE in Your Browser", "get-started/try-in-browser"),
-        ("Quickstart", "get-started/quickstart"),
-        ("Read Your First Explanation", "foundations/how-to/interpret_explanations"),
-        ("Evaluate CE", "practitioner/evaluate_ce"),
-        ("CE by Example (No Code)", "get-started/ce-by-example"),
-        ("Coming from SHAP or LIME", "get-started/coming-from-shap-lime"),
+def test_ml_foundations_close_understand_ce_and_are_not_a_get_started_step() -> None:
+    assert not _text("get-started/ml-foundations.md").startswith("---\norphan: true")
+    assert "get-started/ml-foundations" not in [t for _, t in _entries("get-started/index.md")]
+    understand = [t for _, t in _entries("sections/understand-ce.md")]
+    assert understand[-1] == "foundations/index" and understand.index("compare") == len(understand) - 2
+    assert [t for _, t in _entries("foundations/index.md")] == [
+        "get-started/ml-foundations", "foundations/concepts/index",
     ]
+
+
+def test_get_started_is_one_path_with_the_browser_quick_start_before_installation() -> None:
+    assert _entries("get-started/index.md") == [
+        ("What CE Is", "what-is-ce"),
+        ("Quick Start", "get-started/try-in-browser"),
+        ("Installation", "get-started/installation"),
+        ("Read Your First Explanation", "foundations/how-to/interpret_explanations"),
+        ("Apply CE to Your Own Data", "get-started/apply-to-your-data"),
+        ("Coming from SHAP or LIME", "get-started/coming-from-shap-lime"),
+        ("CE by Example (No Code)", "get-started/ce-by-example"),
+    ]
+
+
+def test_api_reference_and_contribute_are_direct_children_of_software_section() -> None:
+    labels = dict((t, l) for l, t in _entries("sections/software-integration.md"))
+    assert labels["api/index"] == "API Reference"
+    assert labels["contributor/index"] == "Contribute in 4 Steps"

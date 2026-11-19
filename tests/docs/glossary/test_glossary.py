@@ -259,9 +259,9 @@ def test_hub_toctree_contains_both_categories() -> None:
 
 
 def test_homepage_links_to_glossary_in_sidebar_and_footer() -> None:
-    """G-2b: Resources sidebar entry plus a visible Project & Resources link."""
+    """G-2b: sidebar entry (under Integrate CE) plus a visible Project & Resources link."""
     index = (DOCS / "index.md").read_text(encoding="utf-8")
-    assert "Glossary <../glossary/index>" in (DOCS / "sections" / "project-evolution.md").read_text(encoding="utf-8")
+    assert "Glossary <../glossary/index>" in (DOCS / "sections" / "software-integration.md").read_text(encoding="utf-8")
     foot = index.split("## Project & Resources", 1)[1].split("```", 1)[0]
     assert 'href="glossary/index.html"' in foot
     assert 'class="ce-section-card' not in foot
@@ -285,7 +285,7 @@ def test_glossary_pages_do_not_display_learning_tier_footers(page: Path) -> None
 # G-P3 (run stage 04): contextual cross-links into the glossary, one per landing page.
 CROSSLINK_PAGES = [
     "foundations/concepts/index.md",
-    "sections/how-ce-works.md",
+    "sections/understand-ce.md",
     "api/index.md",
     "sections/software-integration.md",
     "sections/development-integration.md",
@@ -301,7 +301,8 @@ GLOSSARY_LINK = re.compile(r"glossary/(index|science|software)(\.md)?[>)`]|\{ter
 
 @pytest.mark.parametrize("page", CROSSLINK_PAGES)
 def test_landing_pages_link_to_the_glossary_once(page: str) -> None:
-    text = (DOCS / page).read_text(encoding="utf-8")
+    # The sidebar entry (a hidden toctree line) is navigation, not an in-text link.
+    text = re.sub(r"```\{toctree\}.*?```", "", (DOCS / page).read_text(encoding="utf-8"), flags=re.DOTALL)
     assert len(GLOSSARY_LINK.findall(text)) == 1, page
 
 

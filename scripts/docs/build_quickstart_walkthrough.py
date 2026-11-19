@@ -63,7 +63,7 @@ without code is [CE by example](ce-by-example.md). The explanation of
 [Why CE](why-ce.md) introduces the role of calibration; other prediction
 tasks are covered in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
-**Learning journey, step 2 of 5, in depth.** The [Quickstart](quickstart.md)
+**Python tutorial, in depth.** The [Python quickstart](quickstart.md)
 runs this example in about 10 minutes; this walkthrough explains every step,
 including how the calibration works. The same case without code is
 [CE by example](ce-by-example.md). After this walkthrough, continue with
@@ -551,7 +551,7 @@ in more depth. The extra sections below show regression, guarded
 explanations and ways to shape explanations. The table at the end lists
 where to go next.
 
-**Next in the learning journey (step 3 of 5):**
+**Next:**
 [How to read CE explanations](../foundations/how-to/interpret_explanations.md)
 explains every field of the records and plots you produced here.
 """)
@@ -893,9 +893,9 @@ example on a public dataset, not clinical decision support.
 [Why CE](why-ce.md) explains why CE adds a calibration
 step and how to read its outputs.
 
-**Learning journey: step 2 without code.** This page shows the prediction
-of the [Quickstart](quickstart.md) (step 2 of 5 on [Get started](index.md))
-without any code. Run it yourself in the Quickstart (about 10 minutes) or,
+**Without code.** This page shows the prediction of the
+[Python quickstart](quickstart.md) without any code. Run it yourself in the
+Python quickstart (about 10 minutes) or,
 step by step, in the [Python walkthrough](quickstart_walkthrough.md).
 
 ## 1. The question
@@ -1040,8 +1040,8 @@ connects the rule, substituted predictions and weight calculation; the
 explains the returned records. Other tasks and output quantities are
 distinguished in [Tasks, modes and capabilities](ce-tasks-and-modes.md).
 
-**Next in the learning journey (step 2 of 5):** run this same example
-yourself in the [Quickstart](quickstart.md) (about 10 minutes) or, step by
+Run this same example
+yourself in the [Python quickstart](quickstart.md) (about 10 minutes) or, step by
 step, in the [Python walkthrough](quickstart_walkthrough.md). The full journey
 is listed on [Get started](index.md).
 """

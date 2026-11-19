@@ -8,13 +8,13 @@ example uses binary classification on a public dataset, standing in for your
 data; each step says what to change for your problem.
 
 ```{raw} html
-<nav class="ce-journey" aria-label="Learning journey, step 4 of 5"><ol><li><a href="installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li aria-current="step"><a href="apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
+<nav class="ce-journey" aria-label="Get started, step 5 of 5"><ol><li><a href="../what-is-ce.html"><span class="ce-journey-n">1</span>What CE is</a></li><li><a href="try-in-browser.html"><span class="ce-journey-n">2</span>Quick Start</a></li><li><a href="installation.html"><span class="ce-journey-n">3</span>Install</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">4</span>Read it</a></li><li aria-current="step"><a href="apply-to-your-data.html"><span class="ce-journey-n">5</span>Your data</a></li></ol></nav>
 ```
 
-**Learning journey, step 4 of 5 · about 30 minutes.** After
+**Get started, step 5 of 5 · about 30 minutes.** After
 {doc}`reading CE explanations <../foundations/how-to/interpret_explanations>`
-(step 3), this page applies CE to your own model. The last step is
-{doc}`../practitioner/evaluate_ce`.
+(step 4), this page applies CE to your own model. Afterwards,
+{doc}`evaluate it on your held-out data <../practitioner/evaluate_ce>`.
 
 Install the package with the `viz` extra, which the plotting step needs:
 
@@ -273,8 +273,10 @@ Please:
 
 ## Continue
 
-- **Next (learning journey, step 5 of 5):** evaluate before you rely on it:
+- **Next:** evaluate before you rely on it:
   {doc}`../practitioner/evaluate_ce`.
+- **Then:** choose a route in {ref}`Next steps <quick-start-next>` on
+  {doc}`Get started <index>`.
 - **Go deeper:** the guarantees for your mode in
   {doc}`../foundations/concepts/calibrated_interval_semantics`, and
   {doc}`../foundations/how-to/integrate_with_pipelines` for pipelines.

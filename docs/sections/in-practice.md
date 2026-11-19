@@ -1,143 +1,98 @@
-# CE in Practice: Explore & Apply
+# Use CE: CE in Practice
 
-Try CE interactively, then generate, plot and export explanations for your
-own task.
+<span id="ce-in-practice-explore-apply"></span>
 
-Read this section in order: explore CE in the **Expert Hub**, practise
-decisions under uncertainty in the **Decision Lab**, then use the
-**Practitioner Hub** for runnable task examples and recipes. Demos and games
-illustrate how CE works; they do not validate CE for your data. Mode-specific
-guarantees and their assumptions are stated in
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
+*Where can I follow an example, try CE in my browser, or use it in Python?*
 
-The {doc}`browser Quick Start <../get-started/try-in-browser>` walks through
-both labs with a classification and a regression example side by side.
+This section helps you complete a task with CE. Work through it in order:
+learn the workflow, practise in the browser, then run CE in Python. Demos and
+games illustrate how CE works; they do not validate CE for your data.
+Mode-specific guarantees and their assumptions are stated in
+{doc}`Guarantees and limits by mode <../foundations/concepts/calibrated_interval_semantics>`.
+
+<span id="expert-hub-inspect-ce-in-the-browser"></span><span id="decision-lab-decide-under-uncertainty"></span><span id="practitioner-hub-run-and-apply-ce"></span>
 
 <span id="explore-in-the-browser"></span>
 
-## 1. Expert Hub: inspect CE in the browser
-
 ::::{grid} 1 2 2 2
 :gutter: 3
 
-:::{grid-item-card} Expert Hub
-:link: https://calibrated-explanations-demo.ju.se/expert
-:link-type: url
-
-Load a built-in dataset (Diabetes, Iris or California Housing) or your own,
-then step through **Project**, **Prepare & Calibrate**, **Explain** and
-**Predict**. Under active development.
-:::
-
-:::{grid-item-card} Guided walkthrough of both examples
+:::{grid-item-card} 1. Quick Start
 :link: ../get-started/try-in-browser
 :link-type: doc
 
-Classification and regression in parallel: data, calibration, prediction
-with uncertainty, a factual explanation and one alternative, each with code,
-output and how to read it.
-:::
-::::
-
-## 2. Decision Lab: decide under uncertainty
-
-::::{grid} 1 2 2 2
-:gutter: 3
-
-:::{grid-item-card} Decision Lab Games
-:link: https://games.grejna.ai/
-:link-type: url
-
-Teaching games from Grejna. An assistant offers calibrated advice; you
-decide. Educational; their outputs are not real-world guarantees.
+Follow the CE workflow and interpret your first explanations: one
+classification and one regression case, with a threshold question. No
+installation needed.
 :::
 
-:::{grid-item-card} Two scenarios to start with
+:::{grid-item-card} 2. Decision Lab
 :link: try-decision-lab
 :link-type: ref
 
-Port Authority (CLEAR, HOLD or INSPECT a ship) and Mission Control (send a
-rover or stop): decide, inspect the uncertainty and explanation, reconsider.
+Follow a guided browser scenario and use CE's outputs to decide what to
+investigate or do next. Teaching games from Grejna; their outputs are
+not real-world guarantees.
+:::
+
+:::{grid-item-card} 3. Expert Lab
+:link: qs-expert-lab
+:link-type: ref
+
+Experiment in the browser with the built-in datasets (Diabetes, Iris,
+California Housing) or your own, the model, the split and the outputs. The
+demo's menu calls it *Expert Hub*.
+:::
+
+:::{grid-item-card} 4. Practitioner Hub
+:link: ../practitioner/index
+:link-type: doc
+
+Install CE, run worked Python examples and apply the workflow on your own
+machine.
 :::
 ::::
 
 <span id="run-ce-in-python"></span><span id="apply-and-evaluate"></span>
 
-## 3. Practitioner Hub: run and apply CE
+## Python tutorials and task pages
 
-::::{grid} 1 2 2 2
-:gutter: 3
+- {doc}`Python tutorials <../tutorials/index>`: executable tutorials for
+  classification, regression (interval and thresholded) and guarded
+  explanations, every output checked by the documentation tests.
+- {doc}`Tasks and capabilities <../tasks/index>`: one page per task, with
+  the API calls and a capability map.
+- [Example notebooks](https://github.com/Moffran/calibrated_explanations/tree/main/notebooks)
+  on GitHub: binary and multiclass classification, regression, probabilistic
+  regression and advanced topics.
 
-:::{grid-item-card} Practitioner Hub
-:link: ../practitioner/index
-:link-type: doc
+## How-to guides by goal
 
-Runnable task examples and recipes: generate, plot, narrate and export
-explanations, choose an API style, and follow production playbooks.
-:::
+{doc}`How-to guides <../foundations/how-to/index>` give prerequisites, steps
+and expected output for one task each, grouped by what you want to achieve:
 
-:::{grid-item-card} Python Tutorials
-:link: ../tutorials/index
-:link-type: doc
+| Goal | Guides |
+|---|---|
+| **Explain and visualize** | interpretation, plots, narratives, export |
+| **Calibrate and evaluate** | Mondrian (conditional) calibration, normalization, evaluation on held-out data |
+| **Make decisions** | reject policies, ensured explanations, decision policies |
+| **Deploy and operate** | pipelines, safe defaults, runtime configuration, performance, parallel execution, telemetry, plugins |
+| **Consult compliance playbooks** | EU AI Act, EU data and liability regulation |
 
-Executable step-by-step tutorials with real output for classification,
-regression, guarded explanations and your own data.
-:::
+Choosing between CE and other explanation methods is covered in
+{doc}`Comparison with other methods <../compare>`. What an output means for
+your task is covered in {doc}`Understand CE <understand-ce>`.
 
-:::{grid-item-card} Tasks and Capabilities
-:link: ../tasks/index
-:link-type: doc
-
-Classification, regression and probabilistic regression, with a capability map.
-:::
-
-:::{grid-item-card} How-to Guides
-:link: ../foundations/how-to/index
-:link-type: doc
-
-Short recipes: plotting, exporting, narratives, conditional calibration and
-runtime settings.
-:::
-
-:::{grid-item-card} Use CE on Your Own Data
-:link: ../get-started/apply-to-your-data
-:link-type: doc
-
-The complete fit, calibrate, predict, explain and evaluate workflow.
-:::
-
-:::{grid-item-card} Evaluate CE on Your Data
-:link: ../practitioner/evaluate_ce
-:link-type: doc
-
-Checks of calibrated outputs on held-out data, common mistakes and when not
-to trust the outputs.
-:::
-
-:::{grid-item-card} Example Notebooks
-:link: https://github.com/Moffran/calibrated_explanations/tree/main/notebooks
-:link-type: url
-
-Executable demos on GitHub: binary and multiclass classification, regression,
-probabilistic regression and advanced topics.
-:::
-::::
-
-Choosing between CE and other explanation methods is covered once, in
-{doc}`Comparison with other methods <../compare>` (*CE: What & Why*). What
-an output means for your task is covered in {doc}`How CE Works <how-ce-works>`.
-
-**Next section:** {doc}`CE Software & Integration <software-integration>`.
+**Next section:** {doc}`Software Architecture & Integration <software-integration>`.
 
 ```{toctree}
 :hidden:
 :maxdepth: 2
 
-Expert Hub (browser) <https://calibrated-explanations-demo.ju.se/expert>
 Decision Lab (browser) <https://games.grejna.ai/>
+Expert Lab (browser) <https://calibrated-explanations-demo.ju.se/expert>
 Practitioner Hub <../practitioner/index>
 Python Tutorials <../tutorials/index>
 Tasks and Capabilities <../tasks/index>
 How-to Guides <../foundations/how-to/index>
-Apply CE: The Practical Workflow <../get-started/apply-overview>
 ```

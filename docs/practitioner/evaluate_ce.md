@@ -9,12 +9,10 @@ The checks below are **empirical**: they tell you how CE behaved on your test
 data. They do not prove a guarantee, and they do not replace the conditions in
 the {doc}`semantics reference <../foundations/concepts/calibrated_interval_semantics>`.
 
-```{raw} html
-<nav class="ce-journey" aria-label="Learning journey, step 5 of 5"><ol><li><a href="../get-started/installation.html"><span class="ce-journey-n">1</span>Install</a></li><li><a href="../get-started/quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="../get-started/apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li aria-current="step"><a href="evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
-```
 
-**Learning journey, step 5 of 5 · about 30 minutes.** This is the last step of
-the journey that starts on {doc}`Get started <../get-started/index>`.
+**How-to guide · about 30 minutes.** Check CE's outputs on your own
+held-out data after you
+{doc}`apply CE to your own data <../get-started/apply-to-your-data>`.
 
 ## 1. Set up reproducibly
 
@@ -240,10 +238,11 @@ If groups differ systematically in how hard they are to predict, consider
 *What Mondrian calibration guarantees within each group, and under which
 conditions, is under review by the CE authors.*
 
-## After the learning journey
+(after-the-learning-journey)=
+## Where next
 
 You have now run, read, applied and checked CE. To go deeper, study
-{doc}`how CE works <../sections/how-ce-works>` (workflow, calibration methods
+{doc}`Understand CE <../sections/understand-ce>` (workflow, calibration methods
 and the guarantees by mode), or browse the task guides and playbooks in
 {doc}`CE in Practice <../sections/in-practice>`.
 

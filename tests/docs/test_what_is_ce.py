@@ -40,7 +40,8 @@ def test_assumption_wording_is_marked_under_review() -> None:
 
 def test_page_is_reachable_from_sidebar_and_landing() -> None:
     index = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
-    landing = (ROOT / "docs" / "sections" / "what-and-why.md").read_text(encoding="utf-8")
-    assert "CE: What & Why <sections/what-and-why>" in index
+    landing = (ROOT / "docs" / "get-started" / "index.md").read_text(encoding="utf-8")
+    # 2026-11-19 redesign: What CE is is step 1 of Get started.
+    assert "Get Started <get-started/index>" in index
     assert "What CE Is <../what-is-ce>" in landing
-    assert "{doc}`What CE Is <../what-is-ce>`" in landing
+    assert "{doc}`What CE is <../what-is-ce>`" in landing

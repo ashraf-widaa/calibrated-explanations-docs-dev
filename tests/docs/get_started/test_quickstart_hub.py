@@ -18,12 +18,13 @@ GET_STARTED = DOCS / "get-started"
 INDEX = GET_STARTED / "index.md"
 
 QUICK_START_TOCTREE = [
-    ("Quick Start: Try CE in Your Browser", "try-in-browser"),
-    ("Quickstart", "quickstart"),
+    ("What CE Is", "../what-is-ce"),
+    ("Quick Start", "try-in-browser"),
+    ("Installation", "installation"),
     ("Read Your First Explanation", "../foundations/how-to/interpret_explanations"),
-    ("Evaluate CE", "../practitioner/evaluate_ce"),
-    ("CE by Example (No Code)", "ce-by-example"),
+    ("Apply CE to Your Own Data", "apply-to-your-data"),
     ("Coming from SHAP or LIME", "coming-from-shap-lime"),
+    ("CE by Example (No Code)", "ce-by-example"),
 ]
 CODE_FREE_PAGES = ["ml-foundations", "why-ce", "ce-by-example", "ce-tasks-and-modes", "apply-overview"]
 EXECUTABLE_PAGES = [
@@ -45,7 +46,7 @@ def _toctree(text: str) -> list[tuple[str, str]]:
     return re.findall(r"^(.+?) <([^>]+)>$", block, re.MULTILINE)
 
 
-def test_quick_start_toctree_starts_with_the_browser_walkthrough() -> None:
+def test_get_started_toctree_puts_the_browser_quick_start_before_installation() -> None:
     assert _toctree(_text(INDEX)) == QUICK_START_TOCTREE
 
 
@@ -59,16 +60,17 @@ def test_quick_start_pages_have_no_code_or_derivations(page: str) -> None:
         assert marker not in text, f"{page}: {marker}"
 
 
-def test_landing_links_the_six_other_entry_points_and_one_glossary() -> None:
+def test_next_steps_route_to_theory_browser_python_and_integration_and_one_glossary() -> None:
     text = _text(INDEX)
-    section = text.split("## Where should I go next?", 1)[1].split("```{toctree}", 1)[0]
+    section = text.split("## Next steps", 1)[1].split("```{toctree}", 1)[0]
     for target in (
-        "../sections/what-and-why",
-        "../sections/how-ce-works",
+        "../sections/understand-ce",
+        "try-decision-lab",
+        "qs-expert-lab",
         "../sections/in-practice",
+        "../practitioner/index",
         "../sections/software-integration",
         "../sections/project-evolution",
-        "https://grejna.ai/#kontakt",
     ):
         assert target in section, target
     assert len(re.findall(r"glossary/(index|science|software)", text)) == 1

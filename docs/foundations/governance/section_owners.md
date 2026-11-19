@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Documentation section owners
 
 Every release verifies that each section has an accountable owner. Owners lead

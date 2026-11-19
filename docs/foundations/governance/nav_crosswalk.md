@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Navigation crosswalk
 
 Track where legacy documentation pages now live in the **Standard-004** five-section

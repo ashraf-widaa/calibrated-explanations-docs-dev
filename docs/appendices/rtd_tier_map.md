@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 (rtd-tier-map)=
 
 # Documentation maintenance

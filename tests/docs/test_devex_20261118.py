@@ -1,7 +1,7 @@
 """Guards for the 2026-11-18 developer-experience changes.
 
-The homepage links to Quickstart; the Quickstart is journey step 2; each
-journey page carries a progress bar; the comparison and SHAP/LIME pages answer the
+The homepage links to the Quick Start; the Quick Start is step 2 of Get started;
+each Get started page carries a progress bar; the comparison and SHAP/LIME pages answer the
 adoption question without a superiority claim; and the API reference starts from
 WrapCalibratedExplainer with exceptions and the get_rules() keys documented as the
 library behaves.
@@ -17,11 +17,11 @@ import pytest
 
 DOCS = Path(__file__).resolve().parents[2] / "docs"
 JOURNEY_PAGES = [
+    "what-is-ce.md",
+    "get-started/try-in-browser.md",
     "get-started/installation.md",
-    "get-started/quickstart.md",
     "foundations/how-to/interpret_explanations.md",
     "get-started/apply-to-your-data.md",
-    "practitioner/evaluate_ce.md",
 ]
 
 
@@ -32,8 +32,8 @@ def _text(rel: str) -> str:
 def test_homepage_routes_readers_without_code_or_figures() -> None:
     # Owner decision 2026-11-18: no code blocks and no figures on the homepage.
     page = _text("index.md")
-    intro = page.split("## Documentation", 1)[0]
-    assert "{button-ref} get-started/quickstart" in intro
+    intro = page.split("## Learn Calibrated Explanations", 1)[0]
+    assert "{button-ref} get-started/try-in-browser" in intro
     fences = [line for line in page.splitlines() if line.startswith("```{") is False and line.startswith("```") and line.strip() != "```"]
     assert fences == [], fences
     assert "{figure}" not in page and "<img" not in page
@@ -42,7 +42,7 @@ def test_homepage_routes_readers_without_code_or_figures() -> None:
 @pytest.mark.parametrize(("page", "step"), [(page, i + 1) for i, page in enumerate(JOURNEY_PAGES)])
 def test_journey_pages_carry_a_progress_bar_with_the_current_step(page: str, step: int) -> None:
     text = _text(page)
-    nav = re.search(r'<nav class="ce-journey" aria-label="Learning journey, step (\d) of 5"><ol>(.*?)</ol></nav>', text)
+    nav = re.search(r'<nav class="ce-journey" aria-label="Get started, step (\d) of 5"><ol>(.*?)</ol></nav>', text)
     assert nav, page
     assert int(nav.group(1)) == step
     items = re.findall(r"<li( aria-current=\"step\")?><a href=\"([^\"]+)\">", nav.group(2))

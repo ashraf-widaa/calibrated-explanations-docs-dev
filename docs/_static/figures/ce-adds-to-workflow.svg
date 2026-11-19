@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" role="img" aria-labelledby="ce-w-title ce-w-desc" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <title id="ce-w-title">What CE adds to a supervised prediction workflow</title>
+  <desc id="ce-w-desc">Two aligned lanes share one fitted model. Lane 1, supervised prediction, in blue: the training set is used to fit a model, and the model predicts for a new case; this example baseline returns one value without uncertainty. Lane 2, workflow with CE, in orange: CE takes the same fitted model and a separate labelled calibration set, held out from training, calibrates, and predicts the same new case. It returns a calibrated prediction with its uncertainty, shown as probability bounds on a 0 to 1 scale for classification or as a prediction interval in the target's units for regression, and then factual and alternative explanations.</desc>
+  <defs>
+    <marker id="w-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+    <marker id="w-arrow-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="450" rx="14" fill="#ffffff"/>
+
+  <!-- Lane 1: supervised prediction -->
+  <text x="20" y="28" font-size="16" font-weight="700" fill="#1e3a8a">1 · Supervised prediction</text>
+  <rect x="20" y="40" width="140" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="90" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Training set</text>
+  <text x="90" y="92" text-anchor="middle" font-size="13" fill="#1e40af">labelled data</text>
+  <rect x="200" y="40" width="150" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="275" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Fit a model</text>
+  <text x="275" y="92" text-anchor="middle" font-size="13" fill="#1e40af">learn features → target</text>
+  <rect x="390" y="40" width="150" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="465" y="70" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Predict</text>
+  <text x="465" y="92" text-anchor="middle" font-size="13" fill="#1e40af">for the new case</text>
+  <rect x="580" y="40" width="300" height="70" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="730" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Example baseline: one value</text>
+  <text x="730" y="90" text-anchor="middle" font-size="13" fill="#1e40af">a label or a score, no uncertainty</text>
+  <path d="M160,75 H198" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#w-arrow)"/>
+  <path d="M350,75 H388" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#w-arrow)"/>
+  <path d="M540,75 H578" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#w-arrow)"/>
+
+  <!-- Shared fitted model and new case -->
+  <path d="M275,110 V226" stroke="#64748b" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#w-arrow)"/>
+  <text x="285" y="165" font-size="13" font-style="italic" fill="#334155">same fitted model,</text>
+  <text x="285" y="182" font-size="13" font-style="italic" fill="#334155">unchanged</text>
+  <rect x="400" y="138" width="130" height="50" rx="25" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="465" y="160" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">New case</text>
+  <text x="465" y="178" text-anchor="middle" font-size="12" fill="#334155">target unknown</text>
+  <path d="M465,138 V112" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#w-arrow)"/>
+  <path d="M465,188 V226" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#w-arrow)"/>
+
+  <!-- Lane 2: workflow with CE -->
+  <text x="20" y="218" font-size="16" font-weight="700" fill="#7c2d12">2 · Workflow with CE</text>
+  <rect x="20" y="228" width="140" height="84" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="90" y="256" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Calibration set</text>
+  <text x="90" y="278" text-anchor="middle" font-size="13" fill="#9a3412">separate labelled data,</text>
+  <text x="90" y="296" text-anchor="middle" font-size="13" fill="#9a3412">never used for fitting</text>
+  <rect x="200" y="228" width="150" height="84" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="275" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Calibrate</text>
+  <text x="275" y="282" text-anchor="middle" font-size="13" fill="#9a3412">CE wraps the</text>
+  <text x="275" y="299" text-anchor="middle" font-size="13" fill="#9a3412">fitted model</text>
+  <rect x="390" y="228" width="150" height="84" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="465" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Predict</text>
+  <text x="465" y="282" text-anchor="middle" font-size="13" fill="#9a3412">the same new case,</text>
+  <text x="465" y="299" text-anchor="middle" font-size="13" fill="#9a3412">with uncertainty</text>
+  <path d="M160,270 H198" stroke="#ea580c" stroke-width="2.5" fill="none" marker-end="url(#w-arrow-o)"/>
+  <path d="M350,270 H388" stroke="#ea580c" stroke-width="2.5" fill="none" marker-end="url(#w-arrow-o)"/>
+  <path d="M540,270 H578" stroke="#ea580c" stroke-width="2.5" fill="none" marker-end="url(#w-arrow-o)"/>
+
+  <!-- Calibrated prediction with two distinct uncertainty forms -->
+  <rect x="580" y="228" width="300" height="120" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="730" y="252" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">Calibrated prediction + uncertainty</text>
+  <!-- A: probability bounds on a 0-1 scale -->
+  <text x="655" y="276" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">Classification</text>
+  <line x1="600" y1="300" x2="710" y2="300" stroke="#475569" stroke-width="2"/>
+  <line x1="600" y1="294" x2="600" y2="306" stroke="#475569" stroke-width="2"/>
+  <line x1="710" y1="294" x2="710" y2="306" stroke="#475569" stroke-width="2"/>
+  <text x="600" y="320" text-anchor="middle" font-size="11" fill="#334155">0</text>
+  <text x="710" y="320" text-anchor="middle" font-size="11" fill="#334155">1</text>
+  <rect x="646" y="292" width="20" height="16" fill="#fdba74" stroke="#c2410c" stroke-width="1.5"/>
+  <line x1="656" y1="288" x2="656" y2="312" stroke="#7c2d12" stroke-width="3"/>
+  <text x="655" y="338" text-anchor="middle" font-size="12" fill="#7c2d12">probability bounds</text>
+  <!-- B: prediction interval in target units -->
+  <text x="805" y="276" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">Regression</text>
+  <line x1="750" y1="300" x2="860" y2="300" stroke="#475569" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <line x1="770" y1="300" x2="845" y2="300" stroke="#c2410c" stroke-width="3"/>
+  <line x1="770" y1="291" x2="770" y2="309" stroke="#c2410c" stroke-width="3"/>
+  <line x1="845" y1="291" x2="845" y2="309" stroke="#c2410c" stroke-width="3"/>
+  <circle cx="800" cy="300" r="5" fill="#7c2d12"/>
+  <text x="770" y="322" text-anchor="middle" font-size="11" fill="#334155">low</text>
+  <text x="845" y="322" text-anchor="middle" font-size="11" fill="#334155">high</text>
+  <text x="805" y="338" text-anchor="middle" font-size="12" fill="#7c2d12">interval, target units</text>
+
+  <!-- Explanations -->
+  <path d="M730,348 V370" stroke="#ea580c" stroke-width="2.5" fill="none" marker-end="url(#w-arrow-o)"/>
+  <rect x="580" y="372" width="300" height="66" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2.5"/>
+  <text x="730" y="398" text-anchor="middle" font-size="15" font-weight="700" fill="#7c2d12">Factual and alternative explanations</text>
+  <text x="730" y="422" text-anchor="middle" font-size="13" fill="#9a3412">Why? · What if one condition differed?</text>
+</svg>

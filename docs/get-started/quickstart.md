@@ -1,11 +1,9 @@
-# Quickstart: your first calibrated explanation
+# Python quickstart: your first calibrated explanation
 
-```{raw} html
-<nav class="ce-journey" aria-label="Learning journey, step 2 of 5"><ol><li><a href="installation.html"><span class="ce-journey-n">1</span>Install</a></li><li aria-current="step"><a href="quickstart.html"><span class="ce-journey-n">2</span>First explanation</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">3</span>Read it</a></li><li><a href="apply-to-your-data.html"><span class="ce-journey-n">4</span>Your data</a></li><li><a href="../practitioner/evaluate_ce.html"><span class="ce-journey-n">5</span>Evaluate</a></li></ol></nav>
-```
+<span id="quickstart-your-first-calibrated-explanation"></span>
 
-**Learning journey, step 2 of 5 · about 10 minutes · You need: Python 3.10
-or later.** You will train a model, calibrate it and explain one prediction,
+**Practitioner Hub · about 10 minutes · You need: Python 3.10 or later
+and CE {doc}`installed <installation>`.** You will train a model, calibrate it and explain one prediction,
 and see what CE returns at each step. The example predicts whether a breast
 tumour sample is *benign* or *malignant*, using scikit-learn's built-in
 dataset. Prefer to see the result first, without code? Read
@@ -190,8 +188,9 @@ before reporting a range as a guarantee.
 
 ## Next
 
-- **Next in the learning journey (step 3 of 5):**
-  {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`.
+- **Next:**
+  {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`
+  (step 4 of {doc}`Get started <index>`).
 - **Go deeper on this example:** the
   {doc}`Python walkthrough <quickstart_walkthrough>` explains every step,
   including how the calibration works.

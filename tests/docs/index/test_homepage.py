@@ -1,9 +1,12 @@
-"""Structural tests for the L07 Beta homepage (``docs/index.md``).
+"""Structural tests for the Beta homepage (``docs/index.md``).
 
-They pin the four-part homepage: Introduction & Quick Start (hero with the browser
-Quick Start as the primary action), four documentation cards with the STD-004
-semantics pointer, six Project & Resources links, a separate Commercial Services
-section, and the footer metadata (Beta marker on Beta builds only).
+They pin the homepage of the five-section redesign: the agreed one-sentence
+definition followed directly by a single Quick Start action, the four
+documentation cards (each with its own question), the STD-004 semantics
+pointer, four Project & Resources links (Project, Contribute, Glossary,
+GitHub), a separate Commercial Services section, and the footer metadata
+(Beta marker on Beta builds only). The Beta notice itself is the site-wide
+announcement set in ``conf.py``.
 """
 
 from __future__ import annotations
@@ -14,32 +17,35 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 INDEX = ROOT / "docs" / "index.md"
 CSS = ROOT / "docs" / "_static" / "ce-home.css"
+CONF = ROOT / "docs" / "conf.py"
 
+DEFINITION = (
+    "Calibrated Explanations (CE) is an open-source Python library that provides\n"
+    "uncertainty-aware explanations of individual predictions from supervised\n"
+    "machine-learning models."
+)
+LEARN = "Learn Calibrated Explanations"
 CARDS = [
-    ("sections/what-and-why.html", "Why uncertainty-aware explanations matter and what CE adds."),
-    ("sections/how-ce-works.html", "The theory, methods and key concepts behind CE."),
-    ("sections/in-practice.html", "Interactive demos, task guides and practical playbooks."),
-    (
-        "sections/software-integration.html",
-        "Installation, Python API and integration with models and pipelines.",
-    ),
+    ("sections/understand-ce.html#ce-what-why", "CE: What &amp; Why",
+     "What problem does CE address, and when is it useful?"),
+    ("sections/understand-ce.html#how-ce-works", "How CE Works",
+     "How does the workflow produce calibrated outputs and explanations, and what assumptions matter?"),
+    ("sections/in-practice.html", "CE in Practice",
+     "Where can I follow an example, try CE in my browser, or use it in Python?"),
+    ("sections/software-integration.html", "CE Software Architecture &amp; Integration",
+     "How can I integrate CE into an application or understand and extend its codebase?"),
 ]
 RESOURCES = [
-    ("sections/project-evolution.html", "Purpose, community, ecosystem and support."),
-    ("researcher/index.html", "Method papers, citation and replication."),
-    ("ROADMAP.html", "Planned development of the CE library."),
-    ("glossary/index.html", "Scientific and software terms, A–Z."),
-    ("https://github.com/Moffran/calibrated_explanations", "Source code, issues and contributions."),
-    (
-        "https://github.com/Moffran/calibrated_explanations/blob/main/LICENSE",
-        "Open-source license and usage terms.",
-    ),
+    ("sections/project-evolution.html", "Project"),
+    ("contributor/index.html", "Contribute"),
+    ("glossary/index.html", "Glossary"),
+    ("https://github.com/Moffran/calibrated_explanations", "GitHub Repository"),
 ]
 GREJNA = "https://grejna.ai/#kontakt"
 
 
 def text() -> str:
-    return INDEX.read_text(encoding="utf-8")
+    return INDEX.read_text(encoding="utf-8").replace("\r\n", "\n")
 
 
 def section(name: str) -> str:
@@ -52,51 +58,57 @@ def hrefs(fragment: str, css_class: str) -> list[str]:
     return re.findall(rf'<a class="{css_class}[^"]*" href="([^"]+)"', fragment)
 
 
-def test_hero_keeps_identity_message_and_two_actions() -> None:
+def test_beta_notice_links_to_the_official_documentation() -> None:
+    conf = CONF.read_text(encoding="utf-8")
+    assert "<strong>Beta Documentation</strong>" in conf
+    assert '<a href="https://calibrated-explanations.readthedocs.io/">' in conf
+
+
+def test_definition_is_followed_directly_by_one_quick_start_action() -> None:
     page = text()
-    hero = page.split("\n## Documentation\n", 1)[0]
+    hero = page.split(f"\n## {LEARN}\n", 1)[0]
     assert page.startswith("# Calibrated Explanations [(CE)]{.ce-accent}")
-    assert "Calibrated Explanations (CE) is an open-source Python library" in hero
-    assert hero.count("{button-ref}") == 2
-    # 2026-11-19: the primary action is the guided, no-installation browser Quick Start.
+    assert DEFINITION in hero
+    assert hero.count("{button-ref}") == 1
+    after_definition = hero.split(DEFINITION, 1)[1]
+    assert after_definition.lstrip().startswith(":::{container} ce-hero-actions")
     assert (
         "```{button-ref} get-started/try-in-browser\n:ref-type: doc\n:color: primary\n\n"
-        "Try CE in your browser" in hero
+        "Quick Start\n```" in hero
     )
-    assert "```{button-ref} get-started/quickstart\n:ref-type: doc\n:color: secondary\n:outline:" in hero
+    assert "learn the CE workflow and read your first explanation" in hero
     assert "{doc}`Get started <get-started/index>`" in hero
 
 
-def test_four_documentation_cards_in_order_with_approved_descriptions() -> None:
-    docs = section("Documentation")
-    assert hrefs(docs, "ce-section-card") == [href for href, _ in CARDS]
-    for _, description in CARDS:
-        assert f'<span class="ce-section-desc">{description}</span>' in docs
+def test_four_documentation_cards_each_answer_their_own_question() -> None:
+    learn = section(LEARN)
+    assert hrefs(learn, "ce-section-card") == [href for href, _, _ in CARDS]
+    for _, title, question in CARDS:
+        assert f'<span class="ce-section-title">{title}</span>' in learn
+        assert f'<span class="ce-section-desc">{question}</span>' in learn
 
 
 def test_semantics_pointer_sits_below_the_cards() -> None:
     """STD-004 §5.2: Tier 1 pages carry a short, mode-specific semantics pointer."""
-    docs = section("Documentation")
+    learn = section(LEARN)
     pointer = "Guarantees are mode-specific. See {doc}`Calibrated interval semantics"
-    assert pointer in docs
-    assert docs.index("</nav>") < docs.index(pointer)
+    assert pointer in learn
+    assert learn.index("</nav>") < learn.index(pointer)
     assert text().count("calibrated_interval_semantics>`") == 1
 
 
-def test_project_and_resources_has_exactly_six_links() -> None:
+def test_project_and_resources_links_project_contribute_glossary_and_github() -> None:
     resources = section("Project & Resources")
     assert hrefs(resources, "ce-foot-item") == [href for href, _ in RESOURCES]
-    # Word joiners (&#8288;) around the dash keep "A–Z" on one line; layout only.
-    plain = resources.replace("&#8288;", "")
-    for _, description in RESOURCES:
-        assert f'<span class="ce-foot-sub">{description}</span>' in plain
+    for _, title in RESOURCES:
+        assert f'<span class="ce-foot-title">{title}</span>' in resources
     assert GREJNA not in resources
 
 
-def test_homepage_has_four_parts_and_commercial_services_comes_last() -> None:
+def test_homepage_has_three_parts_and_commercial_services_comes_last() -> None:
     page = text()
     assert re.findall(r"^## (.+)$", page, flags=re.MULTILINE) == [
-        "Documentation",
+        LEARN,
         "Project & Resources",
         "Commercial Services",
     ]

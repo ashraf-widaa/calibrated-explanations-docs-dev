@@ -54,7 +54,10 @@ def test_upgrade_index_in_toctree() -> None:
     hub_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", hub, re.DOTALL))
     assert "sections/software-integration" in index_toctrees
     assert "../upgrade/index>" in hub_toctrees
-    assert "../migration/index>" in hub_toctrees
+    # 2026-11-19 redesign: one Upgrade & migration entry parents the migration guides.
+    upgrade = (DOCS / "upgrade" / "index.md").read_text(encoding="utf-8")
+    upgrade_toctrees = "".join(re.findall(r"```\{toctree\}\n(.*?)```", upgrade, re.DOTALL))
+    assert "../migration/index>" in upgrade_toctrees
 
 
 def test_reject_policy_doc_contract_sections_exist() -> None:

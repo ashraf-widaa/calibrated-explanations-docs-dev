@@ -7,6 +7,7 @@ reserved for the CE authors.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import pytest
@@ -27,8 +28,7 @@ def test_open_author_questions_stay_listed_on_the_canonical_page() -> None:
 
 
 @pytest.mark.parametrize(("hub", "next_target"), [
-    ("sections/what-and-why.md", "how-ce-works"),
-    ("sections/how-ce-works.md", "in-practice"),
+    ("sections/understand-ce.md", "in-practice"),
     ("sections/in-practice.md", "software-integration"),
     ("sections/software-integration.md", "project-evolution"),
 ])
@@ -37,12 +37,20 @@ def test_section_hubs_hand_over_to_the_next_section(hub: str, next_target: str) 
     assert "**Next" in text and f"<{next_target}>`" in text, hub
 
 
-@pytest.mark.parametrize("hub", ["sections/what-and-why.md", "sections/how-ce-works.md"])
-def test_theory_and_motivation_hubs_list_their_pages_in_order(hub: str) -> None:
-    raw = (DOCS / hub).read_text(encoding="utf-8")
-    assert "## Pages in this section" in raw
-    listed = raw.split("## Pages in this section", 1)[1].split("**Next section:**", 1)[0]
-    assert listed.count("\n1. ") == 1 and "\n2. " in listed and "\n3. " in listed
+def test_understand_ce_lists_its_pages_in_one_numbered_order() -> None:
+    """The What & Why and How CE Works halves share one numbered reading order (1-8)."""
+    raw = (DOCS / "sections/understand-ce.md").read_text(encoding="utf-8")
+    listed = raw.split("(ce-what-why)=", 1)[1].split("**Next section:**", 1)[0]
+    numbers = [int(n) for n in re.findall(r"^(\d)\. ", listed, flags=re.MULTILINE)]
+    assert numbers == list(range(1, 9))
+    assert raw.index("(ce-what-why)=") < raw.index("(how-ce-works)=")
+
+
+@pytest.mark.parametrize("old", ["sections/what-and-why.md", "sections/how-ce-works.md"])
+def test_old_section_landings_keep_their_url_and_point_to_understand_ce(old: str) -> None:
+    raw = (DOCS / old).read_text(encoding="utf-8")
+    assert raw.startswith("---\norphan: true\n---")
+    assert "<understand-ce>`" in raw
 
 
 def test_how_to_index_describes_every_guide() -> None:

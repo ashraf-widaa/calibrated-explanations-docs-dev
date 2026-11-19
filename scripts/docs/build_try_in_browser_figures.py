@@ -8,7 +8,9 @@ callouts that match the numbered keys under each figure on the page.
 
 Run from the repository root::
 
-    PYTHONPATH=src python scripts/docs/build_try_in_browser_figures.py
+    PYTHONPATH=src python scripts/docs/build_try_in_browser_figures.py [name ...]
+
+Pass figure names (for example try-thr-factual) to rebuild only those figures.
 
 Callout positions are fractions of the cropped image (x from the left, y from
 the top). If CE's plot layout changes, check the figures and adjust ``CALLOUTS``.
@@ -44,6 +46,7 @@ FIGURES = {
     "try-reg-factual": ("r_factual", {"uncertainty": True}),
     "try-cls-alternatives": ("c_alts", {"filter_top": None}),
     "try-reg-alternatives": ("r_alts", {"filter_top": None}),
+    "try-thr-factual": ("t_factual", {"uncertainty": True}),
 }
 
 # name -> list of (number, x, y) in fractions of the cropped image.
@@ -59,9 +62,13 @@ CALLOUTS: dict[str, list[tuple[int, float, float]]] = {
                              (4, 0.887, 0.077)],
     "try-reg-alternatives": [(1, 0.579, 0.066), (2, 0.375, 0.881), (3, 0.719, 0.763),
                              (4, 0.893, 0.058)],
+    # 1 event probability, 2 axis, 3 weight raising, 4 weight lowering, 5 instance values
+    "try-thr-factual": [(1, 0.889, 0.089), (2, 0.516, 0.254), (3, 0.505, 0.341),
+                        (4, 0.272, 0.599), (5, 0.949, 0.310)],
 }
 TITLE_CROP = 0.07  # fraction of the image height holding CE's file-name title
 ACCENT = "#6d28d9"
+ONLY = set(sys.argv[1:])
 
 
 def run_page() -> dict:
@@ -90,6 +97,8 @@ def render(namespace: dict, workdir: Path) -> dict[str, Path]:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             for name, (var, kwargs) in FIGURES.items():
+                if ONLY and name not in ONLY:
+                    continue
                 namespace[var].plot(show=False, filename=f"{name}.png", **kwargs)
                 paths[name] = workdir / "plots" / f"{name}0.png"
     finally:

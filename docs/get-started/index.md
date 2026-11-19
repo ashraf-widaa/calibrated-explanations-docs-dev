@@ -1,122 +1,113 @@
 # Get started
 
+<span id="where-ce-fits"></span>
+
 <span id="quick-start-understand-explore-and-apply-ce"></span>
 
-**Calibrated Explanations (CE)** wraps a classification or regression model
-you already have. It calibrates the model's outputs on labelled data the model
-has not seen, then explains each calibrated prediction, with a range for the
-prediction and for every feature's weight.
+**Calibrated Explanations (CE)** is an open-source Python library that
+provides uncertainty-aware explanations of individual predictions from
+supervised machine-learning models. It wraps a classification or regression
+model you already have, calibrates the model's outputs on labelled data the
+model has not seen, and then explains each calibrated prediction, with a
+range for the prediction and for every feature's weight.
 
-**You need:**
-
-| You need | Details |
-|---|---|
-| Python 3.10 or later | Tested on Python 3.10 to 3.13 |
-| A scikit-learn-style model | `fit` and `predict`; a classifier also needs `predict_proba` |
-| Labelled data you can split three ways | Training, **calibration** (never shown to the model) and test |
-
-## Where CE fits
+This section takes you from the definition to an explanation of your own
+data. The first two steps need **no installation**.
 
 ```{raw} html
 <figure class="ce-figure">
-  <a href="why-ce.html" title="Why CE: the full workflow, explained">
+  <a href="try-in-browser.html#qs-workflow" title="The workflow, explained step by step in the Quick Start">
     <picture>
-      <source media="(max-width: 600px)" srcset="../_static/figures/ce-at-a-glance-narrow.svg">
-      <img src="../_static/figures/ce-at-a-glance.svg" width="760" height="276" alt="In blue, a conventional workflow: labelled data, train a model, predict a label or a score. In orange, what CE adds: part of the labelled data is held out as a calibration set; CE uses it to calibrate the trained model's outputs (the model itself is unchanged), explains each prediction, and returns a calibrated prediction and an explanation, each with a range.">
+      <source media="(max-width: 600px)" srcset="../_static/figures/ce-adds-to-workflow-narrow.svg">
+      <img src="../_static/figures/ce-adds-to-workflow.svg" width="900" height="450" alt="Two aligned lanes share one fitted model. Lane 1, supervised prediction, in blue: the training set is used to fit a model, and the model predicts for a new case; this example baseline returns one value without uncertainty. Lane 2, workflow with CE, in orange: CE takes the same fitted model and a separate labelled calibration set, held out from training, calibrates, and predicts the same new case. It returns a calibrated prediction with its uncertainty, shown as probability bounds on a 0 to 1 scale for classification or as a prediction interval in the target's units for regression, and then factual and alternative explanations.">
     </picture>
   </a>
-  <figcaption>Blue: a conventional ML workflow. Orange: what CE adds. Schematic; the full workflow is explained in <a href="why-ce.html">Why CE</a>.</figcaption>
+  <figcaption><strong>What CE adds to a supervised prediction workflow.</strong> The Quick Start explains each part of this figure with two worked cases.</figcaption>
 </figure>
 ```
 
-Follow the arrows from labelled data through training to prediction: these
-are the conventional steps. The branch labelled **Calibration set** supplies
-held-out examples to **Calibrate**, and **Explain** uses the calibrated
-outputs to construct explanations. The final box groups the prediction and
-explanation, each with a reported range. These ranges describe different
-quantities; their meaning depends on the task and output, as the paths below
-explain. CE adds these steps without retraining your model.
-
-**No installation yet?** The {doc}`browser Quick Start <try-in-browser>` shows a classification
-and a regression example side by side, with links to run them in the Expert Hub and two
-Decision Lab games (about 20 minutes).
+<span id="your-learning-journey"></span>
 
 (choose-your-path)=
 
-## Your learning journey
+## Your path through this section
 
-Five steps, each about 2 to 30 minutes. Every page ends with a link to the next.
+Every page ends with a link to the next.
 
-1. **{doc}`Install <installation>` (2 minutes).**
+1. **{doc}`What CE is <../what-is-ce>` (5 minutes).** The definition, the
+   problem CE addresses, what it provides and what it does not.
+2. **{doc}`Quick Start <try-in-browser>` (30 minutes, no installation).**
+   Learn the CE workflow and read your first explanations, with one
+   classification and one regression case. Start here if you read only one
+   page.
+3. **{doc}`Installation <installation>` (2 minutes).**
    `pip install "calibrated-explanations[viz]"`; the `viz` extra adds plots.
-2. **{doc}`Quickstart: your first explanation <quickstart>` (10 minutes): start here.**
-   Train a model, calibrate it, and explain one prediction, with every output
-   shown.
-3. **{doc}`Read your first explanation <../foundations/how-to/interpret_explanations>` (15 minutes).**
+4. **{doc}`Read your first explanation <../foundations/how-to/interpret_explanations>` (15 minutes).**
    Which number is the prediction, which is a weight, and what each range is.
-4. **{doc}`Apply CE to your own data <apply-to-your-data>` (30 minutes).**
+5. **{doc}`Apply CE to your own data <apply-to-your-data>` (30 minutes).**
    Split, wrap, calibrate, explain, check and save.
-5. **{doc}`Evaluate CE on your own data <../practitioner/evaluate_ce>` (30 minutes).**
-   Are the probabilities calibrated and the intervals wide enough on *your*
-   held-out data?
+6. **{ref}`Next steps <quick-start-next>`**, below.
 
-**Prefer to see the result before writing code?** {doc}`CE by example <ce-by-example>`
-shows the Quickstart's prediction without code (15 minutes). The
-{doc}`Python walkthrough <quickstart_walkthrough>` is the in-depth version of
-step 2, and the {doc}`Quick API <quick_api>` page is a compact reference of
-the calls.
+**Coming from SHAP or LIME?** {doc}`Map your workflow to CE <coming-from-shap-lime>`,
+then see the {doc}`comparison with other methods <../compare>`.
 
-**Coming from SHAP or LIME?** {doc}`Map your workflow to CE <coming-from-shap-lime>`.
+**Prefer one worked prediction without code?** {doc}`CE by example <ce-by-example>`
+follows a single prediction from the Python quickstart, with every number
+explained.
 
-**Want the reasons first?** {doc}`Why CE <why-ce>` explains what changes in a
-machine-learning workflow when CE is added.
+<span id="which-ce-task-am-i-doing"></span>
 
-## Which CE task am I doing?
+## Which CE mode am I using?
 
-| Your target | CE mode | Prediction call |
+| Your question | CE mode | Prediction call |
 |---|---|---|
-| A class | Classification | `predict_proba(X, uq_interval=True)` |
-| A number, with an interval | Interval regression | `predict(X, uq_interval=True)` |
-| The probability that a number is at most *t* | Probabilistic regression | `predict_proba(X, uq_interval=True, threshold=t)` |
+| Which class, and how probable? | Classification | `predict_proba(X, uq_interval=True)` |
+| Which value, and within what range? | Interval regression | `predict(X, uq_interval=True)` |
+| How probable is it that the value is at most *t*? | Probabilistic (thresholded) regression | `predict_proba(X, uq_interval=True, threshold=t)` |
 
 Every mode explains with `explain_factual(X)` and `explore_alternatives(X)`.
-More detail: {doc}`Tasks, modes and capabilities <ce-tasks-and-modes>`.
-What each range guarantees differs by mode: see
-{doc}`../foundations/concepts/calibrated_interval_semantics`.
+The Quick Start introduces the three modes in
+{ref}`Task, mode and capability <qs-task-mode-capability>`; the full account
+is {doc}`Tasks, modes and capabilities <ce-tasks-and-modes>`. What each range
+guarantees differs by mode: see
+{doc}`Guarantees and limits by mode <../foundations/concepts/calibrated_interval_semantics>`.
+
+<span id="reference-and-further-reading"></span>
 
 (before-you-start)=
 
-## Reference and further reading
+## Look things up
 
-- **Look things up:** the {doc}`Glossary <../glossary/index>` defines the terms,
-  and the {doc}`API reference <../api/index>` gives full signatures.
-- **Go deeper:** {doc}`../foundations/concepts/ce_workflow` gives a learning
-  path from intuition to the mathematics.
-- **Try it in the browser:** the
-  [interactive web demo](https://calibrated-explanations-demo.ju.se/) shows CE
-  without installing anything.
+- The {doc}`Glossary <../glossary/index>` defines the terms.
+- The {doc}`API reference <../api/index>` gives full signatures, and the
+  {doc}`Quick API <quick_api>` the main calls on one page.
+- {doc}`Troubleshooting <troubleshooting>` covers installation and runtime
+  problems.
+
+<span id="where-should-i-go-next"></span>
 
 (quick-start-next)=
 
-## Where should I go next?
+## Next steps
 
-| Section | Go there to |
+| I want to… | Go to |
 |---|---|
-| {doc}`CE: What & Why <../sections/what-and-why>` | Understand why trusting AI outputs is hard, what CE adds and how it compares with other methods |
-| {doc}`How CE Works <../sections/how-ce-works>` | Study the theory: calibration methods, guarantees by mode and how explanations are built |
-| {doc}`CE in Practice <../sections/in-practice>` | Run the Python tutorials, try the demos, follow task guides and evaluate CE on your data |
-| {doc}`CE Software & Integration <../sections/software-integration>` | Install, look up the API, integrate CE into pipelines and fix problems |
-| {doc}`Project & Resources <../sections/project-evolution>` | Find the research and publications, how to cite CE, the roadmap and how to contribute |
-| [Commercial Services](https://grejna.ai/#kontakt) | Contact Grejna AB for customized CE solutions and commercial support, separate from the open-source library and its license |
+| Understand the theory: why CE, calibration by task, guarantees and limits | {doc}`Understand CE <../sections/understand-ce>` |
+| Practise in the browser with a guided scenario | {ref}`Decision Lab <try-decision-lab>` |
+| Experiment with CE outputs in the browser | {ref}`Expert Lab <qs-expert-lab>` |
+| Run the Python tutorials and task recipes | {doc}`CE in Practice <../sections/in-practice>` and the {doc}`Practitioner Hub <../practitioner/index>` |
+| Integrate CE into an application, or understand and extend its code | {doc}`Software Architecture & Integration <../sections/software-integration>` |
+| Find the research, how to cite CE, governance and support | {doc}`Project <../sections/project-evolution>` |
 
 ```{toctree}
 :hidden:
 :maxdepth: 1
 
-Quick Start: Try CE in Your Browser <try-in-browser>
-Quickstart <quickstart>
+What CE Is <../what-is-ce>
+Quick Start <try-in-browser>
+Installation <installation>
 Read Your First Explanation <../foundations/how-to/interpret_explanations>
-Evaluate CE <../practitioner/evaluate_ce>
-CE by Example (No Code) <ce-by-example>
+Apply CE to Your Own Data <apply-to-your-data>
 Coming from SHAP or LIME <coming-from-shap-lime>
+CE by Example (No Code) <ce-by-example>
 ```

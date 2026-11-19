@@ -1,4 +1,4 @@
-# Concepts & architecture
+# More concepts
 
 Understand the theory powering calibrated explanations across binary and
 multiclass classification plus probabilistic and interval regression.
@@ -21,7 +21,6 @@ view when moving from a practical example to the implementation references.
 :hidden:
 :maxdepth: 1
 
-error_handling
 explanation_structures
 guarded_explanations
 probabilistic_regression

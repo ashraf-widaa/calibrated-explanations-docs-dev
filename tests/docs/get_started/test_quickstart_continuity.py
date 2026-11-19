@@ -45,24 +45,24 @@ def test_notebook_carries_the_same_number_of_next_step_rows() -> None:
 
 
 def test_quick_start_landing_offers_one_learning_journey_in_order() -> None:
-    # 2026-11-19: the three parallel A/B/C paths became one numbered journey with a
-    # single recommended first step; Why CE and Tasks & modes stay linked as options.
+    # 2026-11-19 redesign: one numbered path, with the browser Quick Start (step 2)
+    # before installation; Tasks & modes stays linked for the mode question.
     text = INDEX.read_text(encoding="utf-8").replace("\r\n", "\n")
-    journey = text.split("## Your learning journey", 1)[1].split("**Prefer to see the result before writing code?**", 1)[0]
+    journey = text.split("## Your path through this section", 1)[1].split("**Coming from SHAP or LIME?**", 1)[0]
     steps = re.findall(r"^\d\. \*\*\{doc\}`[^<`]*<([^>]+)>`", journey, re.MULTILINE)
     assert steps == [
+        "../what-is-ce",
+        "try-in-browser",
         "installation",
-        "quickstart",
         "../foundations/how-to/interpret_explanations",
         "apply-to-your-data",
-        "../practitioner/evaluate_ce",
     ]
-    assert "start here" in journey
+    assert "start here" in journey.lower()
     assert "{doc}`Quick API <quick_api>`" in text
-    assert "{doc}`Why CE <why-ce>`" in text and "ce-tasks-and-modes" in text
+    assert "ce-tasks-and-modes" in text
     assert "(choose-your-path)=" in text
-    assert 'srcset="../_static/figures/ce-at-a-glance-narrow.svg"' in text
-    assert 'src="../_static/figures/ce-at-a-glance.svg"' in text
+    assert 'srcset="../_static/figures/ce-adds-to-workflow-narrow.svg"' in text
+    assert 'src="../_static/figures/ce-adds-to-workflow.svg"' in text
 
 
 def test_quick_start_landing_links_setup_api_and_deeper_science() -> None:
@@ -70,8 +70,8 @@ def test_quick_start_landing_links_setup_api_and_deeper_science() -> None:
     for target in (
         "<installation>`",
         "<../api/index>",
-        "{doc}`../foundations/concepts/ce_workflow`",
-        "{doc}`../foundations/concepts/calibrated_interval_semantics`",
+        "<../sections/understand-ce>",
+        "<../foundations/concepts/calibrated_interval_semantics>",
     ):
         assert target in text, target
 

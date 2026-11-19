@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Coverage waiver inventory
 
 Track outstanding Standard-003 coverage waivers and remediation ownership. Update

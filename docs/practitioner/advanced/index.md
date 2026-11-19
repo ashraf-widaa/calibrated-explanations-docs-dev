@@ -1,4 +1,11 @@
+---
+orphan: true
+---
+
 # Practitioner advanced topics
+
+These pages are now listed by goal in the {doc}`How-to guides <../../foundations/how-to/index>`, under *CE in Practice*. This page is kept for existing links.
+
 
 Reserve these references for teams that need optional telemetry, performance
 profiling, or PlotSpec visual narratives. Each topic extends the core
@@ -22,17 +29,3 @@ explanation workflow without introducing mandatory dependencies.
   triangular plot tooling to visualise factual vs. alternative trade-offs.
 * {doc}`../../foundations/concepts/telemetry` - Conceptual framing for the
   telemetry model and its boundaries.
-
-```{toctree}
-:maxdepth: 1
-:hidden:
-
-use_plugins
-modality-plugins
-normalization-guide
-reject-policy
-parallel_execution_playbook
-explanation_retrieval
-../../foundations/concepts/telemetry
-../performance-tuning
-```

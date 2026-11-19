@@ -1,19 +1,141 @@
-# Quick Start: try CE in your browser
+# Quick Start: learn the CE workflow and read your first explanation
+
+<span id="quick-start-try-ce-in-your-browser"></span>
 
 <span id="try-ce-in-your-browser"></span>
 
-No installation needed. This page shows what CE does with two small examples
-you can open in the browser, then hands you over to Python when you want to
-run CE yourself. It takes about 20 minutes.
+```{raw} html
+<nav class="ce-journey" aria-label="Get started, step 2 of 5"><ol><li><a href="../what-is-ce.html"><span class="ce-journey-n">1</span>What CE is</a></li><li aria-current="step"><a href="try-in-browser.html"><span class="ce-journey-n">2</span>Quick Start</a></li><li><a href="installation.html"><span class="ce-journey-n">3</span>Install</a></li><li><a href="../foundations/how-to/interpret_explanations.html"><span class="ce-journey-n">4</span>Read it</a></li><li><a href="apply-to-your-data.html"><span class="ce-journey-n">5</span>Your data</a></li></ol></nav>
+```
 
-## CE in four steps: train → calibrate → explain → interpret
+**Get started, step 2 of 5 · about 30 minutes · no installation.** This
+tutorial takes you from a general prediction problem to your first
+calibrated explanation. The core path needs **no installation**: you read two
+worked cases on this page and can open the same examples in the browser.
+Each section ends with links for more depth; you can skip them on a first
+reading.
+
+By the end you will be able to:
+
+- say what a model predicts in a classification task and in a regression task;
+- name the CE mode that answers your question;
+- read a calibrated prediction and its uncertainty;
+- read one factual explanation and one alternative explanation, and say what
+  they do and do not tell you.
+
+:::{admonition} Three ways to continue after this page
+:class: tip
+
+**{ref}`Follow a guided scenario <try-decision-lab>`** in the Decision Lab ·
+**{ref}`Experiment with CE outputs <qs-expert-lab>`** in the Expert Lab ·
+**{ref}`Run the examples in Python <qs-python>`** with the Practitioner Hub.
+:::
+
+(qs-predictive-task)=
+## 1. Define a predictive task
+
+A **dataset** is a table of **observations** (rows), such as patients or
+housing districts. Each observation is described by **input features**
+(columns), such as a patient's glucose level or a district's median income.
+The quantity we want to predict is the **target**.
+
+In **supervised learning** a model is *fitted* (trained) on observations
+whose target is known, so that it learns how the features relate to the
+target. The fitted model then makes a **prediction** for a new observation
+whose target is not yet known.
+
+The form of the target decides the task:
+
+| Task | The target is… | Example on this page |
+|---|---|---|
+| **Classification** | a **category** (a class label) | Does a patient have diabetes? *yes* or *no* |
+| **Regression** | a **numerical quantity** | What is a district's median house value, in US dollars? |
+
+This page follows **one observation of each kind** from start to finish:
+
+- **The diabetes case** is one patient from the Pima Indians Diabetes data
+  (8 features, such as `Glucose`, `BMI` and `Age`; the target `Y` is 1 for
+  diabetes and 0 for no diabetes).
+- **The housing case** is one district from the California Housing data
+  (9 features, such as `median_income` and `ocean_proximity`; the target is the
+  district's median house value in US dollars).
+
+:::{admonition} Optional background
+:class: note
+
+- [Supervised learning, Google for Developers](https://developers.google.com/machine-learning/intro-to-ml/supervised):
+  a short introduction to features, labels (targets), training a model and
+  using it to predict.
+- {doc}`Machine-learning essentials <ml-foundations>`: the same ideas in the
+  vocabulary of these pages, with a CE example.
+:::
+
+(qs-task-mode-capability)=
+## 2. Task, mode and capability
+
+Three words recur throughout the CE documentation. They answer different
+questions:
+
+- The **task** says *what the model predicts*: a class or a number.
+- The **CE mode** says *which question you ask about that prediction* and
+  therefore the form of the calibrated output CE returns.
+- A **capability** is *what you can do with CE* in that mode, such as
+  predicting with uncertainty or explaining a prediction.
+
+A regression model supports two modes, because you can ask two different
+questions about the same number:
+
+| CE mode | Task | Question it answers | Calibrated output |
+|---|---|---|---|
+| **Classification** | Classification | How probable is each class? | A probability with lower and upper bounds |
+| **Interval regression** | Regression | Which value, and within what range? | A prediction with a prediction interval, in the target's units |
+| **Probabilistic (thresholded) regression** | Regression | How probable is it that the value is at most a threshold *t*? | A probability for that event, with lower and upper bounds |
+
+In every mode CE offers two kinds of explanation for one prediction. They are
+introduced by the questions they answer:
+
+- A **factual explanation** answers *"Why this prediction?"* It lists
+  conditions that are true for the observation, such as *Glucose ≤ 132.5*,
+  each with a {term}`feature weight <Feature weight>` and a range for that
+  weight. See {term}`Factual explanation`.
+- An **alternative explanation** answers *"What would the model predict if
+  one condition were different?"* For example: if BMI were below 24.9, what
+  would CE predict, and with what range? See {term}`Alternative explanation`.
+
+More detail: {doc}`Tasks, modes and capabilities <ce-tasks-and-modes>` and
+the {doc}`capabilities manifest <../tasks/capabilities>`.
+
+<span id="ce-in-four-steps-train-calibrate-explain-interpret"></span>
+
+(qs-workflow)=
+## 3. The CE workflow: fit → calibrate → predict → explain → interpret
 
 ```{raw} html
-<ol class="ce-flow" aria-label="The CE workflow in four steps">
-<li><strong>Train</strong><span>Fit a model on the training data.</span></li>
+<figure class="ce-figure" id="qs-workflow-figure">
+  <a href="../_static/figures/ce-adds-to-workflow.svg" title="Open the figure at full size">
+    <picture>
+      <source media="(max-width: 600px)" srcset="../_static/figures/ce-adds-to-workflow-narrow.svg">
+      <img src="../_static/figures/ce-adds-to-workflow.svg" width="900" height="450" alt="Two aligned lanes share one fitted model. Lane 1, supervised prediction, in blue: the training set is used to fit a model, and the model predicts for a new case; this example baseline returns one value without uncertainty. Lane 2, workflow with CE, in orange: CE takes the same fitted model and a separate labelled calibration set, held out from training, calibrates, and predicts the same new case. It returns a calibrated prediction with its uncertainty, shown as probability bounds on a 0 to 1 scale for classification or as a prediction interval in the target's units for regression, and then factual and alternative explanations.">
+    </picture>
+  </a>
+  <figcaption><strong>What CE adds to a supervised prediction workflow.</strong> Lane 1 (blue) is a supervised prediction workflow; its single-value output is an example baseline. Lane 2 (orange) adds CE. Inspect three things: the calibration set is labelled data that is never used to fit the model; CE uses the <em>same</em> fitted model; and the uncertainty takes two different forms, bounds on a probability (0 to 1) or an interval in the target's units.</figcaption>
+</figure>
+```
+
+**Reading the figure.** Lane 1 is what most machine-learning workflows do:
+fit a model on the training set, then predict a new case. Lane 2 keeps that
+model as it is. CE adds a second, separate set of labelled data, the
+calibration set, and uses it to calibrate the model's outputs. It then
+predicts the same new case with its uncertainty and explains that
+prediction.
+
+```{raw} html
+<ol class="ce-flow" aria-label="The CE workflow in five steps">
+<li><strong>Fit</strong><span>Train a model on the training data.</span></li>
 <li><strong>Calibrate</strong><span>Show CE labelled cases the model has never seen.</span></li>
-<li><strong>Explain</strong><span>Ask why the model predicts what it does for one case.</span></li>
-<li><strong>Interpret</strong><span>Read the prediction, its range and the conditions behind it.</span></li>
+<li><strong>Predict</strong><span>Predict a new case, with its uncertainty.</span></li>
+<li><strong>Explain</strong><span>Ask why, and what if, for that case.</span></li>
+<li><strong>Interpret</strong><span>Read each number with the range and assumptions that belong to it.</span></li>
 </ol>
 ```
 
@@ -23,46 +145,56 @@ CE uses three kinds of data, and each has one job:
 |---|---|---|
 | **Training data** | Teaches the model how to make predictions. | {term}`Proper training set` |
 | **Calibration data** | Separate labelled cases. CE compares the model's outputs with the observed outcomes to calibrate class probabilities or estimate prediction intervals, depending on the task. | {term}`Calibration set` |
-| **The case being explained** | One new case, for example a patient or a district. CE predicts it and explains that prediction. | {term}`Local explanation` |
+| **The new case** | One observation to predict and explain, for example a patient or a district. | {term}`Local explanation` |
 
-CE gives two kinds of explanation for one case:
+At each step:
 
-- A **factual explanation** lists the conditions that are true for the case,
-  such as *Glucose ≤ 132.5*, each with a {term}`feature weight <Feature weight>`
-  and a range for that weight. See {term}`Factual explanation`.
-- An **alternative explanation** asks *what if*: if one feature were in
-  another range, what would CE predict, and with what range? See
-  {term}`Alternative explanation`.
+| Step | What to do | Why it matters | What to inspect |
+|---|---|---|---|
+| **Fit** | Train any scikit-learn-style model on the training data. | CE does not change how the model learns. | The model is fitted. |
+| **Calibrate** | Pass the held-out, labelled calibration data to CE. | Calibration is what turns raw model outputs into calibrated probabilities or intervals. | The explainer reports that it is calibrated. |
+| **Predict** | Ask for a prediction with its uncertainty. | A point prediction alone hides how far it can be trusted. | The prediction and its lower and upper values. |
+| **Explain** | Ask for a factual explanation, then alternatives. | Shows which conditions the prediction rests on and how it would respond to other conditions. | The weight of each condition and its range; the prediction under each alternative. |
+| **Interpret** | Read every number with its units, range and mode. | Different ranges describe different quantities and rest on stated assumptions. | Whether a range crosses a decision point, such as 0.5 or a price. |
 
-Each topic has one main page in the documentation. Use these when you want
-more than this page gives:
+**Why CE reserves labelled data for calibration.** A model is usually more
+confident on the data it was fitted on than on new data. To learn how
+reliable the model's outputs are, CE needs labelled cases the model has never
+seen: it compares the model's outputs on those cases with their known
+outcomes. That is the calibration set's only job. It is not used to fit the
+model, and because CE uses it, it cannot double as a test set; keep a
+separate test set if you also want to evaluate.
 
-| Question | Main page | Section |
-|---|---|---|
-| What is CE, and which task am I doing? | {doc}`../what-is-ce`, {doc}`ce-tasks-and-modes` | {doc}`CE: What & Why <../sections/what-and-why>` |
-| What does the output mean for my task? | {doc}`../foundations/concepts/ce_workflow`, {doc}`../foundations/concepts/calibrated_interval_semantics` | {doc}`How CE Works <../sections/how-ce-works>` |
-| How do I generate, plot and export explanations? | {doc}`../practitioner/index` | {doc}`CE in Practice <../sections/in-practice>` |
-| How do I install CE and use it with my model? | {doc}`installation` | {doc}`CE Software & Integration <../sections/software-integration>` |
+:::{admonition} Optional background
+:class: note
 
-## Expert Hub: one classification and one regression example, side by side
+- [Dividing a dataset, Google for Developers](https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets):
+  why training and evaluation use separate data. CE's calibration set is a
+  further, separate split with the role described above.
+- [Probability calibration, scikit-learn](https://scikit-learn.org/stable/modules/calibration.html):
+  what it means in general for a classifier's probabilities to be calibrated.
+  CE's own methods are explained in
+  {doc}`Calibration by task <../foundations/concepts/calibration_methods>`.
+:::
 
-The Expert Lab is called **Expert Hub** in the
-[online CE demo](https://calibrated-explanations-demo.ju.se/expert). Use these
-two built-in examples to compare the tasks:
+<span id="expert-hub-one-classification-and-one-regression-example-side-by-side"></span>
 
-- **Classification:** *Diabetes (Binary Classification)*, the Pima Indians
-  Diabetes data. Does a patient have diabetes?
-- **Regression:** *California Housing (Regression)*. What is the median house
-  value in a district, in US dollars?
+(qs-worked-cases)=
+## 4. Two worked cases, step by step
 
-```{admonition} How to open both examples in the Expert Hub
+You can read both cases on this page. To see them run live, open the same
+built-in examples in the **Expert Lab**, the
+[online CE demo](https://calibrated-explanations-demo.ju.se/expert); its menu
+calls it *Expert Hub*.
+
+```{admonition} Optional: open both cases in the Expert Lab
 :class: tip
 
-The Expert Hub opens one project at a time. Follow these steps for Diabetes,
+The Expert Lab opens one project at a time. Follow these steps for Diabetes,
 then go back to **Project** and repeat them for California Housing. Compare
 the outputs step by step using the walkthrough on this page.
 
-1. Open the [Expert Hub](https://calibrated-explanations-demo.ju.se/expert).
+1. Open the [Expert Lab](https://calibrated-explanations-demo.ju.se/expert).
    The left menu shows **Project**, **Prepare & Calibrate**, **Explain** and
    **Predict**.
 2. On **Project**, under **Quick Start — Demo Datasets**, choose
@@ -289,6 +421,19 @@ depends on whether the district's median house value exceeds a given price.
 :::
 ::::
 
+:::{admonition} What you are looking at
+:class: note
+
+These are the first uncertainty outputs on this page. For the patient, CE
+returns a **calibrated probability** of diabetes with **lower and upper
+bounds**: all three are probabilities between 0 and 1. For the district, CE
+returns a **predicted value** with a **prediction interval** in US dollars.
+Both come from the calibration set, so they carry their documented meaning
+only when the patient or district resembles the calibration cases in the
+sense of *exchangeability*, explained in
+{ref}`Read the uncertainty beside each output <qs-uncertainty>`.
+:::
+
 What each range guarantees, and under which assumptions, is stated once in
 {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`.
 Classification gives bounds for a class probability. Interval regression
@@ -371,7 +516,8 @@ regression. Weights are not causal and do not add up to the prediction.
 :alt: CE factual plot for the diabetes case with six numbered callouts. Top panel, probability bars for diabetes, about 0.51 with a light range from 0.47 to 0.56, and for not diabetes. Lower panel, feature weights from about minus 0.16 to plus 0.3; Age greater than 28.5 and Insulin greater than 113 push towards diabetes, Glucose at most 132.5 pushes away; a grey band surrounds zero.
 :name: try-cls-factual-figure
 
-The factual plot for the diabetes case, annotated.
+Diabetes case, factual plot. Inspect whether the probability range crosses
+0.5, then which weight ranges stay on one side of zero.
 {download}`Full-size diabetes factual plot <try_assets/try-cls-factual.png>`.
 ```
 
@@ -397,7 +543,8 @@ The factual plot for the diabetes case, annotated.
 :alt: CE factual plot for the housing case with five numbered callouts. Top panel, the median prediction about 238,000 dollars with a 90 percent interval from about 173,000 to 327,000 dollars. Lower panel, feature weights in dollars; only median income and longitude have ranges entirely below zero, the other ranges cross zero.
 :name: try-reg-factual-figure
 
-The factual plot for the housing case, annotated.
+Housing case, factual plot. Inspect the width of the interval, then which
+weight ranges stay on one side of zero.
 {download}`Full-size housing factual plot <try_assets/try-reg-factual.png>`.
 ```
 
@@ -494,7 +641,8 @@ in the reported ranges.
 :alt: CE alternative plot for the diabetes case with four numbered callouts. Fourteen alternative conditions on a probability axis from 0 to 1. A shaded band from 0.47 to 0.56 marks the current prediction. Seven alternatives, including BMI below 24.9 at about 0.21 to 0.22, lie below 0.5; the others lie above.
 :name: try-cls-alternatives-figure
 
-The alternative plot for the diabetes case, annotated.
+Diabetes case, alternative plot. Inspect which alternatives lie wholly
+below 0.5, where the predicted class would change.
 {download}`Full-size diabetes alternative plot <try_assets/try-cls-alternatives.png>`.
 ```
 
@@ -515,7 +663,8 @@ The alternative plot for the diabetes case, annotated.
 :alt: CE alternative plot for the housing case with four numbered callouts. Fifteen alternative conditions on a dollar axis from about 0 to 500,000. A shaded band from about 173,000 to 327,000 dollars with a line at about 238,000 marks the current prediction. Each alternative has a median marker and a 90 percent interval; all intervals overlap the shaded band.
 :name: try-reg-alternatives-figure
 
-The alternative plot for the housing case, annotated.
+Housing case, alternative plot. Inspect how far each alternative's
+interval overlaps the current one.
 {download}`Full-size housing alternative plot <try_assets/try-reg-alternatives.png>`.
 ```
 
@@ -534,8 +683,174 @@ would happen if you changed the world: a lower BMI in the data is not a
 treatment plan. Alternatives are explained in
 {doc}`../foundations/concepts/alternatives`.
 
+(try-step-6)=
+### Step 6. The same district, a threshold question
+
+The interval in Step 3 says *where* the house value is likely to lie. A buyer
+with a budget asks a different question. A **threshold** is a cutoff value
+on the target, here $300,000; the **event** is "the value is at most the
+threshold". The question becomes: **how likely is the district's median house
+value to be at most $300,000?** That is the probabilistic (thresholded)
+regression mode, asked of the same model and the same district.
+
+```python
+t = 300_000
+p, (low, high) = reg.predict_proba(r_case, uq_interval=True, threshold=t)
+print(f"P(value <= ${t:,}) = {p[0, 1]:.3f}  "
+      f"range [{low[0]:.3f}, {high[0]:.3f}]")
+
+t_factual = reg.explain_factual(r_case, threshold=t)
+rules = t_factual[0].get_rules()
+order = sorted(range(len(rules["weight"])),
+               key=lambda i: -abs(rules["weight"][i]))
+for i in order[:4]:
+    print(f"{rules['rule'][i]:28s} {rules['weight'][i]:+.3f} "
+          f"[{rules['weight_low'][i]:+.3f}, "
+          f"{rules['weight_high'][i]:+.3f}]")
+t_factual.plot(uncertainty=True)
+
+t_alts = reg.explore_alternatives(r_case, threshold=t)
+alt = t_alts[0].get_rules()
+for i, rule in enumerate(alt["rule"]):
+    if rule.startswith("median_income"):
+        print(f"{rule:22s} P(value <= ${t:,}) {alt['predict'][i]:.3f} "
+              f"[{alt['predict_low'][i]:.3f}, "
+              f"{alt['predict_high'][i]:.3f}]")
+```
+
+```text
+P(value <= $300,000) = 0.905  range [0.904, 0.917]
+longitude > -121.78          +0.544 [+0.529, +0.569]
+median_income <= 5.00        +0.470 [+0.450, +0.480]
+total_bedrooms <= 704.50     +0.179 [+0.119, +0.201]
+housing_median_age <= 50.50  +0.121 [+0.114, +0.123]
+median_income < 3.16   P(value <= $300,000) 0.945 [0.945, 0.948]
+median_income > 3.93   P(value <= $300,000) 0.654 [0.644, 0.678]
+```
+
+**Reading it.** The 90 % interval from Step 3 ($172,503 to $327,324)
+contains $300,000, so on its own it cannot say on which side of the budget
+the value falls. The threshold question answers that directly: CE estimates
+a probability of 0.905 that the value is at most $300,000, with bounds
+[0.904, 0.917]. This is a range for the *probability of an event*, not a range for
+the house value.
+
+The factual explanation now uses probability points towards the event
+*value ≤ $300,000*. The conditions are the same ones that **lowered** the
+predicted value in Step 4 (`longitude > -121.78`, `median_income <= 5.00`);
+here they **raise** the probability of staying under the budget. Both
+readings describe the same model. The alternative shows that if
+`median_income` were above 3.93, the probability would drop to 0.654 (range [0.644, 0.678]).
+
+```{figure} try_assets/try-thr-factual.png
+:alt: CE factual plot for the housing case with the threshold 300,000 dollars, with five numbered callouts. Top panel, probability bars: P of value at most 300,000 is about 0.905, P of value above 300,000 about 0.095. Lower panel, feature weights in probability points; longitude greater than minus 121.78 and median income at most 5.00 raise the probability by about 0.54 and 0.47; ocean proximity greater than 0.5 and latitude at most 37.92 lower it.
+:name: try-thr-factual-figure
+
+Housing case, threshold question *value ≤ $300,000*, factual plot. Inspect
+the top bar first (the event probability and its range), then which weight
+bars point towards the event.
+{download}`Full-size threshold factual plot <try_assets/try-thr-factual.png>`.
+```
+
+1. **Prediction.** The red bar is P(value ≤ $300,000) with its range; the
+   blue bar below is P(value > $300,000).
+2. **Axis.** Probability, from 0 to 1. The weights below use their own
+   axis, in probability points.
+3. **Weight raising the probability.** `longitude > -121.78`: red, to the
+   right.
+4. **Weight lowering the probability.** `ocean_proximity > 0.50`: blue, to
+   the left.
+5. **Instance values.** The district's own value for each feature, the same
+   as in Step 4.
+
+How the threshold mode is calibrated, and why its bounds are reported
+separately from the interval in Step 3, is explained in
+{doc}`Probabilistic and interval regression <../foundations/concepts/probabilistic_regression>`.
+
+(qs-uncertainty)=
+## 5. Read the uncertainty beside each output
+
+This page has shown four different ranges. They look alike in a plot, but
+they describe different quantities and must be read separately:
+
+| Range | Describes | Units | In this tutorial |
+|---|---|---|---|
+| **Class-probability bounds** | The calibrated probability of a class | Probability, 0 to 1 | P(diabetes) 0.510, bounds [0.467, 0.556] (Step 3) |
+| **Prediction interval** | Where the target value is likely to lie | The target's units | $237,814, interval [$172,503, $327,324] (Step 3) |
+| **Bounds on a threshold-event probability** | The probability that the target is at most *t* | Probability, 0 to 1 | P(value ≤ $300,000) 0.905, bounds [0.904, 0.917] (Step 6) |
+| **Feature-weight range** | How much one condition moves the prediction, and how sure CE is of that | Probability points or target units | `median_income <= 5.00`: −$86,776, range [−$176,285, −$21,465] (Step 4) |
+
+**Where the ranges come from.** For classification, CE calibrates with a
+{term}`Venn–Abers predictor`, which returns two calibrated probabilities; CE
+reports a merged probability between them as the prediction. For regression,
+CE uses a {term}`conformal predictive system <Conformal predictive system>`
+(CPS), which turns the calibration errors into a distribution for the new
+case's value; the interval is read from its percentiles (by default the 5th
+and 95th, a 90 % interval). The threshold question combines the two: CPS
+scores followed by Venn–Abers calibration of the event.
+
+**What the ranges rest on.** The statistical meaning of these ranges assumes
+**exchangeability**: in plain language, the calibration cases and the new
+case behave like draws from the same process, so that no case is special and
+their order does not matter. The model must also be fixed before calibration.
+When the new case comes from a different population, for example another
+region or a later year (*distribution shift*), the ranges may no longer mean
+what they say, and CE gives no guarantee under such drift.
+
+**What each mode guarantees.** The guarantees differ by mode and are stated
+once, with their assumptions and non-guarantees, in
+{doc}`Guarantees and limits by mode <../foundations/concepts/calibrated_interval_semantics>`.
+Two points matter for reading this page:
+
+- The class-probability bounds and threshold-event bounds bound a
+  *probability*; they are not a confidence interval for one case. The
+  prediction interval concerns the *target value* and holds on average over
+  cases, not for every case. The exact guarantee wording for each mode is
+  still under review by the CE authors.
+- Feature-weight ranges describe how the model responds to conditions; they
+  are explanation quantities, not causal effects.
+
+**When groups differ.** If you expect the ranges to behave differently for
+defined groups, such as regions or product lines, CE can calibrate each group
+separately. See {doc}`Mondrian (conditional) calibration <../foundations/how-to/conditional_calibration>`;
+this is optional and not needed for this tutorial.
+
+**Alternatives are not interventions.** An alternative explanation reports
+what *the model* would predict under a different feature condition. It does
+not say what would happen if you changed the patient or the district: a lower
+BMI in the data is not a treatment plan. See
+{doc}`Factual and alternative explanations <../foundations/concepts/alternatives>`.
+
+(qs-checkpoint)=
+## 6. Checkpoint and next action
+
+Answer these three questions for the diabetes case before moving on.
+
+:::{dropdown} 1. What does CE predict for the patient?
+The calibrated probability of diabetes is 0.510. A decision rule at 0.5
+would label the patient *diabetes*.
+:::
+
+:::{dropdown} 2. What does the uncertainty of that prediction mean?
+The bounds [0.467, 0.556] straddle 0.5, so the calibrated evidence does not
+clearly favour either class. The bounds are calibrated values of a
+probability, valid under exchangeability with the calibration data; they are
+not a confidence interval for this one patient.
+:::
+
+:::{dropdown} 3. How does the prediction change under one alternative condition?
+If BMI were below 24.9 (the patient's BMI is 28.7), CE would predict 0.220
+with range [0.207, 0.224], wholly below 0.5: the model would predict *no
+diabetes*. This describes the model's response, not the effect of changing the
+patient's BMI.
+:::
+
+Then choose how to continue.
+
+<span id="decision-lab-decide-then-reconsider"></span>
+
 (try-decision-lab)=
-## Decision Lab: decide, then reconsider
+### Follow a guided scenario: Decision Lab
 
 The [Decision Lab](https://games.grejna.ai/) is a set of teaching games from
 Grejna in which you make the decisions and a CE-based assistant advises you.
@@ -546,7 +861,7 @@ The labels below are those of the games' public versions on 18 November
 2026 (Port Authority 1.2.0, Mission Control 2.1.2). Games change; if a label
 differs, look for the same idea.
 
-### Scenario: Port Authority
+#### Scenario: Port Authority
 
 Open [Port Authority](https://games.grejna.ai/games/port-authority) and select
 **Open the harbour**. Select **Next harbour event** until a ship appears in
@@ -577,7 +892,12 @@ Try it with one ship:
    know: an inspection, for example, tells you about the ship itself, which
    no explanation of the model can.
 
-### Scenario: Mission Control
+#### Scenario: Mission Control
+
+*On 19 November 2026 this game opened from its direct link but was not
+listed on the Decision Lab home page, which listed Uncertain Acres, Port
+Authority and Precision Works. If the link stops working, start with Port
+Authority above.*
 
 Open [Mission Control](https://games.grejna.ai/games/mission-control) and
 select **Start** on **WHY? What is it resting on?** (level 4). Under
@@ -604,16 +924,54 @@ mission appears once all three are installed.
    that would help, such as an updated communications or weather check,
    then select **GO** or **STOP**.
 
-## Run CE locally
+(qs-expert-lab)=
+### Experiment with CE outputs: Expert Lab
+
+The **Expert Lab** is the [online CE demo](https://calibrated-explanations-demo.ju.se/expert);
+its menu calls it **Expert Hub**. It runs CE in the browser, with no
+installation. Open the two built-in examples from Section 4 and change one
+thing at a time:
+
+- choose another row under **Test Set Instances** and compare its prediction
+  range with the one on this page;
+- for housing, switch on **Use Threshold (probabilistic regression)** and
+  compare the result with Step 6;
+- change the split proportions on **Project** and see how the ranges respond.
+
+The Expert Lab also offers the Iris data and your own data; it is under
+active development, so labels may change.
+
+<span id="run-ce-locally"></span>
+
+(qs-python)=
+### Run the examples in Python: Practitioner Hub
 
 You have now seen the whole workflow without installing anything. To run it
 yourself:
 
-1. {doc}`Install CE <installation>`: `pip install "calibrated-explanations[viz]"`.
-2. Run the {doc}`Quickstart <quickstart>`: one classification example,
-   step by step, in about 10 minutes.
-3. Continue with {doc}`how to read CE explanations <../foundations/how-to/interpret_explanations>`
-   and {doc}`apply CE to your own data <apply-to-your-data>`.
+1. **Prerequisites.** Python 3.10 or later and a scikit-learn-style model.
+2. {doc}`Install CE <installation>`: `pip install "calibrated-explanations[viz]"`;
+   the `viz` extra adds the plots.
+3. Copy the code blocks of this page, in order, into one Python session: they
+   run as written and print the outputs shown.
+4. Go to the {doc}`Practitioner Hub <../practitioner/index>` for the
+   {doc}`Python quickstart <quickstart>` and the complete
+   {doc}`classification <quickstart_classification>` and
+   {doc}`regression <quickstart_regression>` tutorials, then
+   {doc}`apply CE to your own data <apply-to-your-data>`.
 
-The code on this page also runs as it is: copy the blocks in order into one
-Python session.
+## Go deeper
+
+Each topic has one main page. Use these when you want more than this page
+gives:
+
+| Question | Main page | Section |
+|---|---|---|
+| What is CE, and which mode am I using? | {doc}`../what-is-ce`, {doc}`ce-tasks-and-modes` | {doc}`Get started <index>`, {doc}`Understand CE <../sections/how-ce-works>` |
+| How do I read every element of a plot? | {doc}`../foundations/how-to/interpret_explanations` | {doc}`Get started <index>` |
+| What do the ranges guarantee? | {doc}`../foundations/concepts/ce_workflow`, {doc}`../foundations/concepts/calibrated_interval_semantics` | {doc}`Understand CE <../sections/how-ce-works>` |
+| How do I plot, export or narrate explanations? | {doc}`../foundations/how-to/index` | {doc}`CE in Practice <../sections/in-practice>` |
+| How do I integrate CE into my software? | {doc}`../get-started/quick_api`, {doc}`../api/index` | {doc}`Software Integration & Architecture <../sections/software-integration>` |
+
+**Next:** {doc}`Install CE <installation>`, step 3 of
+{doc}`Get started <index>`.

@@ -1,5 +1,9 @@
 # Tasks, modes and capabilities
 
+*The {doc}`Quick Start <try-in-browser>` introduces tasks, modes and
+capabilities in plain language ({ref}`section 2 <qs-task-mode-capability>`);
+this page is the full account.*
+
 The prediction task and the question being asked determine which CE output
 is meaningful. Classification concerns classes; regression concerns numeric
 targets. CE can explain a target prediction or a probability for an event on

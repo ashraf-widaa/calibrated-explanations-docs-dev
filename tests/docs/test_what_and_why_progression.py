@@ -11,7 +11,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-LANDING = ROOT / "docs" / "sections" / "what-and-why.md"
+# 2026-11-19 redesign: What & Why is the first half of the Understand CE landing.
+LANDING = ROOT / "docs" / "sections" / "understand-ce.md"
 WHAT_IS = ROOT / "docs" / "what-is-ce.md"
 INDEX = ROOT / "docs" / "index.md"
 
@@ -29,7 +30,8 @@ def test_reading_order_targets_exist() -> None:
 
 def test_overview_connects_prediction_to_ce_without_a_navigation_inventory() -> None:
     text = LANDING.read_text(encoding="utf-8")
-    assert text.index("## Predictions, calibration and explanations") < text.index("## What CE adds to the model output")
+    assert text.index("## CE: What & Why") < text.index("## How CE Works")
+    assert "calibrates the model's outputs" in text
     assert "grid-item-card" not in text
     assert "| # | Question |" not in text
 
@@ -39,14 +41,14 @@ def test_regulation_entry_is_relabelled_and_not_a_compliance_claim() -> None:
     # material, so it sits with the other playbooks; What & Why still points to it.
     index = INDEX.read_text(encoding="utf-8")
     landing_raw = LANDING.read_text(encoding="utf-8")
-    playbooks = (ROOT / "docs/practitioner/playbooks/index.md").read_text(encoding="utf-8")
-    assert "eu-ai-act-compliance" in playbooks.split("```{toctree}")[1]
+    howto = (ROOT / "docs/foundations/how-to/index.md").read_text(encoding="utf-8")
+    assert "eu-ai-act-compliance" in howto.split("```{toctree}")[1]
     assert "Trustworthy AI <" not in index + landing_raw
     landing = _flat(LANDING)
     assert "not evidence of compliance" in landing
     assert "eu-ai-act-compliance" in landing
     group = landing_raw.split("```{toctree}")[1].split("```")[0]
-    assert group.index("what-is-ce") < group.index("why-ce") < group.index("compare")
+    assert group.index("why-ce") < group.index("ce-tasks-and-modes") < group.index("compare")
 
 
 def test_calibration_is_distinguished_from_accuracy_and_correctness() -> None:
