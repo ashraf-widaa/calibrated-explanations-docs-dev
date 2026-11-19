@@ -4,6 +4,10 @@
 *.svg
 evaluation/results_sota.pkl
 *.png
+!docs/get-started/try_assets/try-cls-factual.png
+!docs/get-started/try_assets/try-reg-factual.png
+!docs/get-started/try_assets/try-cls-alternatives.png
+!docs/get-started/try_assets/try-reg-alternatives.png
 *.pkl
 .vscode/
 dump/

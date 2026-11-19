@@ -2,9 +2,9 @@
 
 Explore the scientific foundations, statistical mechanisms and assumptions
 behind calibrated explanations. The pages follow one chain, from the
-workflow and the three CE modes through the calibration methods to the
-guarantees each mode provides ({doc}`../foundations/concepts/calibrated_interval_semantics`) and
-the reading of explanation outputs. Readers new to the vocabulary can start
+workflow through calibration by task, then factual and alternative
+explanations, and finally the assumptions and guarantees behind their
+outputs. Readers new to the vocabulary can start
 with the {doc}`Essential Foundations <../foundations/index>` or the
 {doc}`Scientific & Theoretical Glossary <../glossary/science>`.
 
@@ -20,27 +20,8 @@ for the three modes in one table, and
 {ref}`What the guarantees rest on <ce-workflow-guarantees>` separates the
 assumptions from what they do and do not give you.
 
-<span id="read-in-this-order"></span>
-
-## From calibrated prediction to explanation
-
-The {doc}`CE workflow <../foundations/concepts/ce_workflow>` traces how
-calibrated outputs become the inputs to an explanation.
-
-A factual explanation starts with the quantity being predicted, then compares
-it with outputs obtained after substituting feature values. In the existing
-binary example, the probability of benign is 0.286; a substituted scenario
-gives 0.476, so the factual weight is 0.286 − 0.476 = −0.190. The
-{ref}`worked construction <ce-workflow-explanations>` connects the rule,
-substitutions, weight and alternative prediction. These comparisons describe
-the model's responses, not causal effects.
-
-The same distinction helps when
-{doc}`reading explanation records and plots <../foundations/how-to/interpret_explanations>`:
-a prediction and a feature weight are different quantities, even when both
-are accompanied by a range.
-
 <span id="pages-in-this-section"></span>
+<span id="read-in-this-order"></span>
 
 ## Calibration methods and their limits
 
@@ -51,6 +32,21 @@ develops these constructions and their assumptions. The
 {ref}`workflow's task-to-method comparison <ce-workflow-methods>` identifies
 which output is being explained in each mode.
 
+## From calibrated prediction to explanation
+
+The {doc}`CE workflow <../foundations/concepts/ce_workflow>` traces how
+calibrated outputs become the inputs to an explanation. In its binary
+example, the original probability of benign is 0.286 and a substituted
+scenario gives 0.476. The factual weight is the difference, −0.190. The
+{ref}`worked construction <ce-workflow-explanations>` connects the rule,
+substitutions, weight and alternative prediction.
+
+When {doc}`reading explanation records and plots <../foundations/how-to/interpret_explanations>`,
+read the prediction and the feature weight as separate quantities, each with
+its own range.
+
+## Assumptions and guarantees
+
 A range must be interpreted with its construction and assumptions. Prediction
 bounds, target prediction intervals and explanation-weight ranges do not
 share one guarantee. The
@@ -60,23 +56,31 @@ limits.
 
 ## Pages in this section
 
-1. {doc}`The CE workflow <../foundations/concepts/ce_workflow>`: how a
-   calibrated prediction becomes the input of an explanation, with one worked
-   construction.
-2. {doc}`Tasks, modes and capabilities <../get-started/ce-tasks-and-modes>`:
-   which mode answers which question, and the limitations of each.
-3. {doc}`Statistical methods behind CE <../foundations/concepts/calibration_methods>`:
-   Venn–Abers predictors and conformal predictive systems, with the formal
-   statements.
+Read them in this order:
+
+1. {doc}`The CE workflow <../foundations/concepts/ce_workflow>`: train,
+   calibrate, explain; how a calibrated prediction becomes the input of an
+   explanation, with one worked construction.
+2. {doc}`Calibration by task <../foundations/concepts/calibration_methods>`:
+   Venn–Abers predictors for classification and conformal predictive
+   systems for regression, with the formal statements.
+3. Factual and alternative explanations: the
+   {ref}`worked construction in the workflow <ce-workflow-explanations>`
+   builds a factual weight step by step, and
+   {doc}`Alternative explanations <../foundations/concepts/alternatives>`
+   covers the "what if" rules and ensured filters.
 4. {doc}`Guarantees by mode <../foundations/concepts/calibrated_interval_semantics>`:
-   the canonical assumptions, guarantees and non-guarantees, including the
-   {ref}`open questions for the CE authors <open-author-questions>`.
-5. {doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`:
-   records, rule tables and plots (step 3 of the learning journey in
-   {doc}`Get started <../get-started/index>`).
-6. {doc}`Essential foundations <../foundations/index>`: concept pages on
-   alternatives, guarded explanations, probabilistic regression and
-   explanation structures.
+   interval semantics, assumptions, guarantees and non-guarantees, including
+   the {ref}`open questions for the CE authors <open-author-questions>`.
+5. {doc}`Essential foundations <../foundations/index>`: further concept
+   pages on guarded explanations, probabilistic regression and explanation
+   structures.
+
+Related pages in other sections: the task each mode serves is chosen in
+{doc}`Tasks, modes and capabilities <../get-started/ce-tasks-and-modes>`
+(*CE: What & Why*); reading records and plots is taught in
+{doc}`How to read CE explanations <../foundations/how-to/interpret_explanations>`
+(step 3 of the learning journey in {doc}`Get started <../get-started/index>`).
 
 **Next section:** {doc}`CE in Practice <in-practice>`.
 
@@ -85,8 +89,8 @@ limits.
 :maxdepth: 2
 
 The CE Workflow <../foundations/concepts/ce_workflow>
-Tasks, Modes and Capabilities <../get-started/ce-tasks-and-modes>
-Statistical Methods Behind CE <../foundations/concepts/calibration_methods>
+Calibration by Task <../foundations/concepts/calibration_methods>
+Alternative Explanations <../foundations/concepts/alternatives>
 Guarantees by Mode <../foundations/concepts/calibrated_interval_semantics>
 Essential Foundations <../foundations/index>
 ```

@@ -1,9 +1,9 @@
 """Structural tests for the L07 Beta homepage (``docs/index.md``).
 
-They pin the approved information architecture: hero with one Quick Start action, four
-documentation cards, the STD-004 semantics pointer below the cards, four Project &
-Resources links, a separate Commercial Services section, and the footer metadata
-(Beta marker on Beta builds only, STD-004 tier label last).
+They pin the four-part homepage: Introduction & Quick Start (hero with the browser
+Quick Start as the primary action), four documentation cards with the STD-004
+semantics pointer, six Project & Resources links, a separate Commercial Services
+section, and the footer metadata (Beta marker on Beta builds only).
 """
 
 from __future__ import annotations
@@ -25,7 +25,9 @@ CARDS = [
     ),
 ]
 RESOURCES = [
-    ("sections/project-evolution.html", "Research, publications, roadmap and community."),
+    ("sections/project-evolution.html", "Purpose, community, ecosystem and support."),
+    ("researcher/index.html", "Method papers, citation and replication."),
+    ("ROADMAP.html", "Planned development of the CE library."),
     ("glossary/index.html", "Scientific and software terms, A–Z."),
     ("https://github.com/Moffran/calibrated_explanations", "Source code, issues and contributions."),
     (
@@ -54,20 +56,19 @@ def test_hero_keeps_identity_message_and_two_actions() -> None:
     page = text()
     hero = page.split("\n## Documentation\n", 1)[0]
     assert page.startswith("# Calibrated Explanations [(CE)]{.ce-accent}")
-    assert (
-        "Understand machine-learning predictions through calibrated, "
-        "uncertainty-aware explanations." in hero
-    )
-    # 2026-11-18 DevEx review: a primary Quickstart action and a secondary no-code example.
+    assert "Calibrated Explanations (CE) is an open-source Python library" in hero
     assert hero.count("{button-ref}") == 2
-    assert "```{button-ref} get-started/quickstart\n:ref-type: doc\n:color: primary" in hero
-    assert "```{button-ref} get-started/ce-by-example\n:ref-type: doc\n:color: secondary\n:outline:" in hero
-    assert "New to CE? Follow the five-step journey on {doc}`Get started <get-started/index>`." in hero
+    # 2026-11-19: the primary action is the guided, no-installation browser Quick Start.
+    assert (
+        "```{button-ref} get-started/try-in-browser\n:ref-type: doc\n:color: primary\n\n"
+        "Try CE in your browser" in hero
+    )
+    assert "```{button-ref} get-started/quickstart\n:ref-type: doc\n:color: secondary\n:outline:" in hero
+    assert "{doc}`Get started <get-started/index>`" in hero
 
 
 def test_four_documentation_cards_in_order_with_approved_descriptions() -> None:
     docs = section("Documentation")
-    assert "Choose the section that matches your goal." in docs
     assert hrefs(docs, "ce-section-card") == [href for href, _ in CARDS]
     for _, description in CARDS:
         assert f'<span class="ce-section-desc">{description}</span>' in docs
@@ -82,9 +83,8 @@ def test_semantics_pointer_sits_below_the_cards() -> None:
     assert text().count("calibrated_interval_semantics>`") == 1
 
 
-def test_project_and_resources_has_exactly_four_links() -> None:
+def test_project_and_resources_has_exactly_six_links() -> None:
     resources = section("Project & Resources")
-    assert "Explore the research, terminology and open-source project." in resources
     assert hrefs(resources, "ce-foot-item") == [href for href, _ in RESOURCES]
     # Word joiners (&#8288;) around the dash keep "A–Z" on one line; layout only.
     plain = resources.replace("&#8288;", "")
@@ -93,9 +93,13 @@ def test_project_and_resources_has_exactly_four_links() -> None:
     assert GREJNA not in resources
 
 
-def test_commercial_services_is_a_separate_section_after_resources() -> None:
+def test_homepage_has_four_parts_and_commercial_services_comes_last() -> None:
     page = text()
-    assert page.index("\n## Project & Resources\n") < page.index("\n## Commercial Services\n")
+    assert re.findall(r"^## (.+)$", page, flags=re.MULTILINE) == [
+        "Documentation",
+        "Project & Resources",
+        "Commercial Services",
+    ]
     commercial = section("Commercial Services")
     assert hrefs(commercial, "ce-foot-item") == [GREJNA]
     assert (

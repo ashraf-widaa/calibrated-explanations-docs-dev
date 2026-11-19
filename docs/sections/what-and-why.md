@@ -62,14 +62,19 @@ Read them in this order:
 
 1. {doc}`What CE Is <../what-is-ce>`: the canonical definition, the problem
    CE addresses, what it provides and what it does not.
-2. {doc}`Why CE <../get-started/why-ce>`: how a machine-learning workflow
-   changes when CE is added, shown in one figure.
-3. {doc}`Comparison with other methods <../compare>`: what CE answers that
-   attribution methods and conformal prediction alone do not.
+2. {doc}`Why CE <../get-started/why-ce>`: why uncertainty matters, and how a
+   machine-learning workflow changes when CE is added, shown in one figure.
+3. {doc}`Tasks, modes and capabilities <../get-started/ce-tasks-and-modes>`:
+   the tasks CE supports (classification, regression, probabilistic
+   regression) and which question each answers. Use it to choose your task.
+4. {doc}`Comparison with other methods <../compare>`: what CE answers that
+   attribution methods, counterfactual methods and conformal prediction
+   alone do not.
 
-To see CE's outputs on one real prediction first, take
-{doc}`CE by example <../get-started/ce-by-example>`, the first step of the
-{doc}`Quick Start <../get-started/index>` journey.
+Once you know your task, {doc}`How CE Works <how-ce-works>` explains what
+CE's output means for it, and {doc}`CE in Practice <in-practice>` shows how
+to generate and read it. To see CE's outputs without installing anything,
+take the {doc}`browser Quick Start <../get-started/try-in-browser>`.
 
 **Next section:** {doc}`How CE Works <how-ce-works>`.
 
@@ -79,5 +84,6 @@ To see CE's outputs on one real prediction first, take
 
 What CE Is <../what-is-ce>
 Why CE: From a Conventional to a CE Workflow <../get-started/why-ce>
+Tasks, Modes and Capabilities <../get-started/ce-tasks-and-modes>
 Comparison with Other Methods <../compare>
 ```

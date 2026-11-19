@@ -22,6 +22,10 @@
 
 ### Changed
 
+- Added a no-installation browser Quick Start with parallel classification and
+  regression examples and Decision Lab exercises. Clarified the reading order
+  in each of the four documentation sections.
+
 - **Experimental source-faithful documentation refinement:** correct binary and
   threshold-bound indexing, opt-in difficulty estimation and unsupported payload
   calls. Reconcile regulatory references and review questions, shorten ML

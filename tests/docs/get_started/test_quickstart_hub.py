@@ -1,10 +1,8 @@
 """Get Started hub (formerly Quick Start; WP-1, PO decisions D-16 to D-21, revised 2026-11-18).
 
-The hub page itself stays code-free (no code blocks, no derivations). Since the
-2026-11-18 DevEx review its sidebar holds the five learning-journey steps, including
-the executable Quickstart and Apply pages; the other tutorials keep living under
-Python Tutorials. The hub links all other homepage entry points, and the code-free
-"CE by example" page only quotes numbers produced by the Python walkthrough.
+The hub stays code-free and links to the browser Quick Start and Python
+learning journey. The code-free "CE by example" page quotes numbers produced
+by the Python walkthrough.
 """
 
 from __future__ import annotations
@@ -19,13 +17,10 @@ DOCS = ROOT / "docs"
 GET_STARTED = DOCS / "get-started"
 INDEX = GET_STARTED / "index.md"
 
-# 2026-11-18 DevEx review: the Get Started sidebar is the learning journey in order,
-# followed by the no-code example and the SHAP/LIME mapping.
 QUICK_START_TOCTREE = [
-    ("Installation", "installation"),
+    ("Quick Start: Try CE in Your Browser", "try-in-browser"),
     ("Quickstart", "quickstart"),
     ("Read Your First Explanation", "../foundations/how-to/interpret_explanations"),
-    ("Apply CE to Your Own Data", "apply-to-your-data"),
     ("Evaluate CE", "../practitioner/evaluate_ce"),
     ("CE by Example (No Code)", "ce-by-example"),
     ("Coming from SHAP or LIME", "coming-from-shap-lime"),
@@ -50,7 +45,7 @@ def _toctree(text: str) -> list[tuple[str, str]]:
     return re.findall(r"^(.+?) <([^>]+)>$", block, re.MULTILINE)
 
 
-def test_quick_start_toctree_is_paths_a_b_c_only() -> None:
+def test_quick_start_toctree_starts_with_the_browser_walkthrough() -> None:
     assert _toctree(_text(INDEX)) == QUICK_START_TOCTREE
 
 

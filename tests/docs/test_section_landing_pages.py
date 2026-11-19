@@ -26,22 +26,22 @@ def test_landing_pages_have_no_audit_wording(page: str) -> None:
 def test_in_practice_cards_point_to_verified_destinations() -> None:
     text = (SECTIONS / "in-practice.md").read_text(encoding="utf-8")
     links = re.findall(r"^:link: (\S+)$", text, flags=re.MULTILINE)
-    # Batch 2 grouped the same ten destinations: run in Python, apply and
-    # evaluate, explore in the browser.
     assert links == [
+        "https://calibrated-explanations-demo.ju.se/expert",
+        "../get-started/try-in-browser",
+        "https://games.grejna.ai/",
+        "try-decision-lab",
+        "../practitioner/index",
         "../tutorials/index",
-        "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
+        "../tasks/index",
+        "../foundations/how-to/index",
         "../get-started/apply-to-your-data",
         "../practitioner/evaluate_ce",
-        "../tasks/index",
-        "../practitioner/index",
-        "../compare",
-        "https://calibrated-explanations-demo.ju.se/",
-        "https://calibrated-explanations-demo.ju.se/expert",
-        "https://games.grejna.ai/",
+        "https://github.com/Moffran/calibrated_explanations/tree/main/notebooks",
     ]
-    for heading in ("## Run CE in Python", "## Apply and evaluate", "## Explore in the browser"):
-        assert heading in text, heading
+    assert re.findall(r"^## \d\. ([^:]+):", text, flags=re.MULTILINE) == [
+        "Expert Hub", "Decision Lab", "Practitioner Hub",
+    ]
     assert "Decision Labs" not in text
     assert "not real-world guarantees" in text
 
@@ -84,7 +84,7 @@ def test_compare_page_has_one_descriptive_label() -> None:
     what = (SECTIONS / "what-and-why.md").read_text(encoding="utf-8")
     assert "Comparison with Other Methods <../compare>" in what
     assert "The Explainability Gap" not in index + what
-    assert "{grid-item-card} Comparison with Other Methods" in practice
+    assert "{doc}`Comparison with other methods <../compare>`" in practice
 
 
 def test_project_landing_routes_to_readme_and_feedback() -> None:

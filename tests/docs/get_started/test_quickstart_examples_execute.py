@@ -23,7 +23,15 @@ PAGES = [
     "docs/get-started/quickstart_regression.md",
     "docs/get-started/quickstart_guarded.md",
     "docs/get-started/apply-to-your-data.md",
+    "docs/get-started/try-in-browser.md",
 ]
+# try-in-browser.md reads its data from the official repository on GitHub; the test
+# reads the same files from this checkout (tests/data) so it runs offline.
+GITHUB_DATA = (
+    '("https://raw.githubusercontent.com/Moffran/"\n'
+    '        "calibrated_explanations/main/tests/data/")'
+)
+LOCAL_DATA = repr((ROOT / "tests" / "data").as_posix() + "/")
 FENCE = re.compile(r"```python\n(.*?)```(?:\n\n```text\n(.*?)```)?", re.DOTALL)
 
 
@@ -40,7 +48,8 @@ def test_quickstart_blocks_execute_in_order(page: str) -> None:
         for index, (code, published) in enumerate(blocks):
             printed = io.StringIO()
             with contextlib.redirect_stdout(printed):
-                exec(compile(code, f"{page}#block{index}", "exec"), namespace)
+                local_code = code.replace(GITHUB_DATA, LOCAL_DATA)
+                exec(compile(local_code, f"{page}#block{index}", "exec"), namespace)
             if published:
                 assert printed.getvalue() == published, (
                     f"{page} block {index}: printed output differs from the page"

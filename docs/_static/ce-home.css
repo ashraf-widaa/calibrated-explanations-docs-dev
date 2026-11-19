@@ -1047,7 +1047,7 @@ body:has(#calibrated-explanations-ce) .announcement-content {
   margin: 2px 0 14px 34px;
 }
 
-/* Project & Resources: four compact links; 1, 2 or 4 columns. */
+/* Project & Resources: six compact links; 1, 2 or 3 columns. */
 #project-resources .ce-foot {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1068,12 +1068,17 @@ body:has(#calibrated-explanations-ce) .announcement-content {
 
 @media (min-width: 77.5em) {
   #project-resources .ce-foot {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  #project-resources .ce-foot-item:nth-child(3) {
+  #project-resources .ce-foot-item:nth-child(odd) {
     border-left: 1px solid var(--ce-border);
     padding-left: 18px;
+  }
+
+  #project-resources .ce-foot-item:nth-child(3n + 1) {
+    border-left: 0;
+    padding-left: 4px;
   }
 }
 

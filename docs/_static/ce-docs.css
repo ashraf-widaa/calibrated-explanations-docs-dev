@@ -154,3 +154,57 @@
 @media (max-width: 600px) {
   .ce-roles { flex-direction: column; }
 }
+
+/* Quick Start: try CE in your browser (2026-11-19). */
+.ce-flow {
+  counter-reset: ce-flow;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  list-style: none;
+  margin: 0.75rem 0 1.25rem;
+  padding: 0;
+}
+.ce-flow li {
+  border: 1px solid var(--color-background-border);
+  border-radius: 10px;
+  counter-increment: ce-flow;
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+}
+.ce-flow li strong {
+  display: block;
+  font-size: 1.02em;
+}
+.ce-flow li strong::before {
+  color: var(--color-brand-primary);
+  content: counter(ce-flow) ". ";
+}
+.ce-flow li span {
+  color: var(--color-foreground-secondary);
+  display: block;
+  font-size: 0.86em;
+  line-height: 1.4;
+  margin-top: 0.2rem;
+}
+/* Parallel classification / regression columns: two columns on wide screens,
+   stacked by step (classification, then regression) on narrow ones. */
+.ce-parallel .ce-par {
+  border-top: 3px solid var(--color-background-border);
+  min-width: 0;
+  padding-top: 0.4rem;
+}
+.ce-parallel .ce-par-cls { border-top-color: #6d28d9; }
+.ce-parallel .ce-par-reg { border-top-color: #0f766e; }
+.ce-parallel .ce-par div.highlight pre,
+.ce-parallel .ce-par pre {
+  font-size: 0.74em;
+}
+.ce-parallel .ce-par figure img,
+.ce-parallel .ce-par img {
+  height: auto;
+  max-width: 100%;
+}
+.ce-parallel .ce-par ol {
+  font-size: 0.92em;
+}

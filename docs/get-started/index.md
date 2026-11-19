@@ -37,6 +37,10 @@ explanation, each with a reported range. These ranges describe different
 quantities; their meaning depends on the task and output, as the paths below
 explain. CE adds these steps without retraining your model.
 
+**No installation yet?** The {doc}`browser Quick Start <try-in-browser>` shows a classification
+and a regression example side by side, with links to run them in the Expert Hub and two
+Decision Lab games (about 20 minutes).
+
 (choose-your-path)=
 
 ## Your learning journey
@@ -109,10 +113,9 @@ What each range guarantees differs by mode: see
 :hidden:
 :maxdepth: 1
 
-Installation <installation>
+Quick Start: Try CE in Your Browser <try-in-browser>
 Quickstart <quickstart>
 Read Your First Explanation <../foundations/how-to/interpret_explanations>
-Apply CE to Your Own Data <apply-to-your-data>
 Evaluate CE <../practitioner/evaluate_ce>
 CE by Example (No Code) <ce-by-example>
 Coming from SHAP or LIME <coming-from-shap-lime>

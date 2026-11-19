@@ -21,7 +21,6 @@ view when moving from a practical example to the implementation references.
 :hidden:
 :maxdepth: 1
 
-alternatives
 error_handling
 explanation_structures
 guarded_explanations

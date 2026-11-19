@@ -1,6 +1,6 @@
 """Guards for the 2026-11-18 developer-experience changes.
 
-The homepage shows install, code and output; the Quickstart is journey step 2; each
+The homepage links to Quickstart; the Quickstart is journey step 2; each
 journey page carries a progress bar; the comparison and SHAP/LIME pages answer the
 adoption question without a superiority claim; and the API reference starts from
 WrapCalibratedExplainer with exceptions and the get_rules() keys documented as the
@@ -32,9 +32,8 @@ def _text(rel: str) -> str:
 def test_homepage_routes_readers_without_code_or_figures() -> None:
     # Owner decision 2026-11-18: no code blocks and no figures on the homepage.
     page = _text("index.md")
-    start = page.split("## Start here", 1)[1].split("## Documentation", 1)[0]
-    for target in ("get-started/quickstart", "get-started/coming-from-shap-lime", "api/index", "calibration_methods"):
-        assert target in start, target
+    intro = page.split("## Documentation", 1)[0]
+    assert "{button-ref} get-started/quickstart" in intro
     fences = [line for line in page.splitlines() if line.startswith("```{") is False and line.startswith("```") and line.strip() != "```"]
     assert fences == [], fences
     assert "{figure}" not in page and "<img" not in page

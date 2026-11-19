@@ -1,8 +1,8 @@
 """Guards for the 2026-11-19 navigation architecture.
 
 The sidebar root is Home, Get Started, the four documentation sections and
-Project & Resources (Get Started was named Quick Start until the 2026-11-18 DevEx
-review, which also moved the five learning-journey pages under it). Each section hub parents its own pages through a real toctree,
+Project & Resources. Get Started links to the complete Python journey and
+the browser Quick Start. Each section hub parents its pages through a real toctree,
 no page has two sidebar parents, and no compulsory ML-essentials step remains.
 """
 
@@ -30,7 +30,9 @@ def _entries(rel: str) -> list[tuple[str | None, str]]:
                 continue
             m = re.match(r"(.*?)\s*<([^>]+)>$", line)
             label, target = (m.group(1), m.group(2)) if m else (None, line)
-            found.append((label, posixpath.normpath(posixpath.join(posixpath.dirname(rel), target))))
+            if "://" not in target:
+                target = posixpath.normpath(posixpath.join(posixpath.dirname(rel), target))
+            found.append((label, target))
     return found
 
 
@@ -46,25 +48,39 @@ def test_sidebar_root_is_home_quick_start_four_sections_and_project() -> None:
     assert "Home <self>" in _text("index.md")
 
 
-def test_section_hubs_parent_their_pages() -> None:
+def test_section_hubs_parent_their_pages_in_reading_order() -> None:
     expected = {
-        "sections/what-and-why.md": ["what-is-ce", "get-started/why-ce", "compare"],
-        "sections/how-ce-works.md": ["foundations/concepts/ce_workflow", "get-started/ce-tasks-and-modes"],
-        "sections/in-practice.md": ["tutorials/index", "tasks/index", "practitioner/index"],
-        "sections/software-integration.md": ["get-started/quick_api", "api/index"],
-        "get-started/index.md": [
+        "sections/what-and-why.md": [
+            "what-is-ce", "get-started/why-ce", "get-started/ce-tasks-and-modes", "compare",
+        ],
+        "sections/how-ce-works.md": [
+            "foundations/concepts/ce_workflow",
+            "foundations/concepts/calibration_methods",
+            "foundations/concepts/alternatives",
+            "foundations/concepts/calibrated_interval_semantics",
+        ],
+        "sections/in-practice.md": [
+            "https://calibrated-explanations-demo.ju.se/expert",
+            "https://games.grejna.ai/",
+            "practitioner/index",
+            "tutorials/index",
+            "tasks/index",
+        ],
+        "sections/software-integration.md": [
             "get-started/installation",
-            "get-started/quickstart",
-            "foundations/how-to/interpret_explanations",
+            "get-started/troubleshooting",
+            "get-started/quick_api",
             "get-started/apply-to-your-data",
-            "practitioner/evaluate_ce",
+            "foundations/how-to/integrate_with_pipelines",
+            "api/index",
+            "foundations/how-to/configure_runtime",
+            "plugins",
         ],
         "sections/project-evolution.md": ["glossary/index", "researcher/index", "contributor/index"],
     }
     for hub, pages in expected.items():
         targets = [target for _, target in _entries(hub)]
-        for page in pages:
-            assert page in targets, (hub, page)
+        assert [target for target in targets if target in pages] == pages, hub
 
 
 def test_no_page_has_two_sidebar_parents() -> None:
@@ -84,12 +100,11 @@ def test_ml_essentials_is_optional_not_a_navigation_step() -> None:
         assert "get-started/ml-foundations" not in [t for _, t in _entries(rel)], rel
 
 
-def test_get_started_holds_the_learning_journey_in_order() -> None:
+def test_get_started_links_to_browser_and_python_journeys() -> None:
     assert _entries("get-started/index.md") == [
-        ("Installation", "get-started/installation"),
+        ("Quick Start: Try CE in Your Browser", "get-started/try-in-browser"),
         ("Quickstart", "get-started/quickstart"),
         ("Read Your First Explanation", "foundations/how-to/interpret_explanations"),
-        ("Apply CE to Your Own Data", "get-started/apply-to-your-data"),
         ("Evaluate CE", "practitioner/evaluate_ce"),
         ("CE by Example (No Code)", "get-started/ce-by-example"),
         ("Coming from SHAP or LIME", "get-started/coming-from-shap-lime"),

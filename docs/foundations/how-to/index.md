@@ -27,12 +27,8 @@ Each guide answers one task; the concepts behind them are in
 :hidden:
 :maxdepth: 1
 
-configure_telemetry
-configure_runtime
 conditional_calibration
-safe-defaults
 export_explanations
 to_narrative
 plot_with_plotspec
-tune_runtime_performance
 ```
