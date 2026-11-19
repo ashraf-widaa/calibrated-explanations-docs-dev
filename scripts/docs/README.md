@@ -53,6 +53,28 @@ python scripts/docs/check_internal_links.py _build/html [_build/html-baseline]
 It exits with status 1 when a link is broken. External links are not checked;
 use `sphinx -b linkcheck` for those.
 
+## `capture_browser_quickstart.py`
+
+Re-creates the five Expert Hub screenshots of the browser Quick Start
+(`docs/get-started/try-in-browser.md`) by driving the live application with
+Playwright. It is a **manual** tool: it is not run by the Sphinx build, CI or the
+documentation tests.
+
+```bash
+python -m pip install playwright pillow
+python -m playwright install chromium
+python scripts/docs/capture_browser_quickstart.py --out-dir _build/screenshots-new
+```
+
+- It refuses to write into `docs/_static/screenshots/` and never overwrites files
+  unless `--overwrite` is given. Compare the new images and copy the approved ones by
+  hand (`git add -f`, because `*.png` is ignored).
+- When an application label changes, it stops and names the failed step.
+- Decision Lab screenshots vary per session and are captured by hand; the checklist is
+  in the script's docstring.
+- After re-capturing, update the capture date in the Quick Start captions and check
+  the callout positions.
+
 ## Recommended validation before publishing documentation
 
 1. Strict build: `python -m sphinx -W --keep-going -E -b html docs _build/html`

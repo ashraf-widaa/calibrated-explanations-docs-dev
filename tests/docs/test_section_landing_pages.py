@@ -35,7 +35,7 @@ def test_in_practice_cards_point_to_verified_destinations() -> None:
         "../practitioner/index",
     ]
     assert re.findall(r"^:::\{grid-item-card\} (.+)$", text, flags=re.MULTILINE) == [
-        "1. Quick Start", "2. Decision Lab", "3. Expert Lab", "4. Practitioner Hub",
+        "1. Quick Start", "2. Decision Lab", "3. Expert Hub", "4. Practitioner Hub",
     ]
     assert "Expert Hub" in text, "the demo's own label is named once"
     assert "Decision Labs" not in text

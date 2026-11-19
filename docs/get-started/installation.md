@@ -60,8 +60,8 @@ This prints the version selected by your package manager (`1.0.0` or later).
 
 **Next in Get started (step 4 of 5):**
 {doc}`Read your first explanation <../foundations/how-to/interpret_explanations>`.
-To run a first example in Python now, take the
-{doc}`Python quickstart <quickstart>` (about 10 minutes).
+To run a first example in Python now, follow
+{doc}`Your First CE Explanation in Python <first-explanation-python>` (about 30 minutes).
 
 <span id="optional-contributor-fast-path"></span>
 

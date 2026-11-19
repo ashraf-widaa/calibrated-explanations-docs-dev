@@ -1,7 +1,7 @@
 # Why CE: from a conventional to a CE workflow
 
-*The {doc}`Quick Start <try-in-browser>` shows this workflow with two worked
-cases ({ref}`section 3 <qs-workflow>`).*
+*The {doc}`Quick Start <try-in-browser>` introduces this workflow in one minute,
+cases, starting from {ref}`one figure <qs-workflow>`.*
 
 A conventional workflow trains and evaluates a predictive model. CE adds
 calibration and explanations of model responses to that workflow. The

@@ -2,7 +2,8 @@
 
 Install CE, run worked Python examples and apply the CE workflow on your own
 machine. New to CE? Read the {doc}`Quick Start <../get-started/try-in-browser>`
-first; it needs no installation and explains every output used below.
+first; it explains every output used below and offers a browser route with no
+installation.
 
 ## 1. Install
 
@@ -21,8 +22,8 @@ problems are covered in {doc}`Troubleshooting <../get-started/troubleshooting>`.
 
 | Example | What you get |
 |---|---|
-| {doc}`Python quickstart <../get-started/quickstart>` | One classification example, step by step, in about 10 minutes |
-| The {doc}`Quick Start <../get-started/try-in-browser>` code | Its code blocks run as written in one Python session: the diabetes and housing cases, including the threshold question |
+| {doc}`Your First CE Explanation in Python <../get-started/first-explanation-python>` | **Start here.** Install, then one patient and one district from data to calibrated predictions, factual and alternative explanations, and a threshold question (13 steps) |
+| {doc}`Python quickstart <../get-started/quickstart>` | A shorter, single classification example (breast-cancer data), in about 10 minutes |
 | {doc}`Classification tutorial <../get-started/quickstart_classification>` | Binary and multiclass classification, probabilities and their ranges, factual and alternative explanations |
 | {doc}`Regression tutorial <../get-started/quickstart_regression>` | Prediction intervals (interval regression) and threshold probabilities (thresholded regression) from one model |
 | {doc}`Guarded explanations tutorial <../get-started/quickstart_guarded>` | Explanations restricted to typical feature values |

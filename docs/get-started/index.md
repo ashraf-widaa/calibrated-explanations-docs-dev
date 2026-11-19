@@ -12,7 +12,8 @@ model has not seen, and then explains each calibrated prediction, with a
 range for the prediction and for every feature's weight.
 
 This section takes you from the definition to an explanation of your own
-data. The first two steps need **no installation**.
+data. The first two steps need **no installation**; the Quick Start also offers a
+complete Python route for readers who prefer to install CE straight away.
 
 ```{raw} html
 <figure class="ce-figure">
@@ -36,10 +37,11 @@ Every page ends with a link to the next.
 
 1. **{doc}`What CE is <../what-is-ce>` (5 minutes).** The definition, the
    problem CE addresses, what it provides and what it does not.
-2. **{doc}`Quick Start <try-in-browser>` (30 minutes, no installation).**
-   Learn the CE workflow and read your first explanations, with one
-   classification and one regression case. Start here if you read only one
-   page.
+2. **{doc}`Quick Start <try-in-browser>` (15–30 minutes).**
+   Understand what CE adds, choose your task, then create your first
+   explanation in the browser (no installation) or in Python with
+   {doc}`Your First CE Explanation in Python <first-explanation-python>`.
+   Start here if you read only one page.
 3. **{doc}`Installation <installation>` (2 minutes).**
    `pip install "calibrated-explanations[viz]"`; the `viz` extra adds plots.
 4. **{doc}`Read your first explanation <../foundations/how-to/interpret_explanations>` (15 minutes).**
@@ -94,7 +96,8 @@ guarantees differs by mode: see
 |---|---|
 | Understand the theory: why CE, calibration by task, guarantees and limits | {doc}`Understand CE <../sections/understand-ce>` |
 | Practise in the browser with a guided scenario | {ref}`Decision Lab <try-decision-lab>` |
-| Experiment with CE outputs in the browser | {ref}`Expert Lab <qs-expert-lab>` |
+| Experiment with CE outputs in the browser | {ref}`Expert Hub <qs-expert-lab>` |
+| Run a complete first example in Python | {doc}`Your First CE Explanation in Python <first-explanation-python>` |
 | Run the Python tutorials and task recipes | {doc}`CE in Practice <../sections/in-practice>` and the {doc}`Practitioner Hub <../practitioner/index>` |
 | Integrate CE into an application, or understand and extend its code | {doc}`Software Architecture & Integration <../sections/software-integration>` |
 | Find the research, how to cite CE, governance and support | {doc}`Project <../sections/project-evolution>` |
@@ -105,6 +108,7 @@ guarantees differs by mode: see
 
 What CE Is <../what-is-ce>
 Quick Start <try-in-browser>
+Your First CE Explanation in Python <first-explanation-python>
 Installation <installation>
 Read Your First Explanation <../foundations/how-to/interpret_explanations>
 Apply CE to Your Own Data <apply-to-your-data>

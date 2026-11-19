@@ -21,35 +21,34 @@ Mode-specific guarantees and their assumptions are stated in
 :link: ../get-started/try-in-browser
 :link-type: doc
 
-Follow the CE workflow and interpret your first explanations: one
-classification and one regression case, with a threshold question. No
-installation needed.
+Understand what CE adds, choose your task and create your first explanation:
+in the browser with no installation, or in Python.
 :::
 
 :::{grid-item-card} 2. Decision Lab
 :link: try-decision-lab
 :link-type: ref
 
-Follow a guided browser scenario and use CE's outputs to decide what to
-investigate or do next. Teaching games from Grejna; their outputs are
-not real-world guarantees.
+Follow a guided browser scenario (Mission Control, lesson 4; Precision Works
+for regression) and use calibrated advice to decide. Teaching games from
+Grejna, powered by CE Enterprise; their outputs are not real-world guarantees.
 :::
 
-:::{grid-item-card} 3. Expert Lab
+:::{grid-item-card} 3. Expert Hub
 :link: qs-expert-lab
 :link-type: ref
 
 Experiment in the browser with the built-in datasets (Diabetes, Iris,
-California Housing) or your own, the model, the split and the outputs. The
-demo's menu calls it *Expert Hub*.
+California Housing) or your own: calibrate, explain and explore
+alternatives in all three CE modes.
 :::
 
 :::{grid-item-card} 4. Practitioner Hub
 :link: ../practitioner/index
 :link-type: doc
 
-Install CE, run worked Python examples and apply the workflow on your own
-machine.
+Install CE, run {doc}`Your First CE Explanation in Python <../get-started/first-explanation-python>`
+and the tutorials, and apply the workflow on your own machine.
 :::
 ::::
 
@@ -90,7 +89,7 @@ your task is covered in {doc}`Understand CE <understand-ce>`.
 :maxdepth: 2
 
 Decision Lab (browser) <https://games.grejna.ai/>
-Expert Lab (browser) <https://calibrated-explanations-demo.ju.se/expert>
+Expert Hub (browser) <https://calibrated-explanations-demo.ju.se/expert>
 Practitioner Hub <../practitioner/index>
 Python Tutorials <../tutorials/index>
 Tasks and Capabilities <../tasks/index>

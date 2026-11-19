@@ -15,7 +15,8 @@ read {doc}`../concepts/ce_workflow`; the mode-specific range meanings are in
 ```
 
 **Get started, step 4 of 5 · about 15 minutes.** Coming from the
-{doc}`Quick Start <../../get-started/try-in-browser>`, the
+{doc}`Quick Start <../../get-started/try-in-browser>`,
+{doc}`Your First CE Explanation in Python <../../get-started/first-explanation-python>`, the
 {doc}`Python quickstart <../../get-started/quickstart>` or the in-depth
 {doc}`Python walkthrough <../../get-started/quickstart_walkthrough>`, use this
 page to read the records and plots you produced there. The examples are

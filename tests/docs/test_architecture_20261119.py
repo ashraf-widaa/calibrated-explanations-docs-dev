@@ -111,6 +111,7 @@ def test_get_started_is_one_path_with_the_browser_quick_start_before_installatio
     assert _entries("get-started/index.md") == [
         ("What CE Is", "what-is-ce"),
         ("Quick Start", "get-started/try-in-browser"),
+        ("Your First CE Explanation in Python", "get-started/first-explanation-python"),
         ("Installation", "get-started/installation"),
         ("Read Your First Explanation", "foundations/how-to/interpret_explanations"),
         ("Apply CE to Your Own Data", "get-started/apply-to-your-data"),
@@ -120,6 +121,6 @@ def test_get_started_is_one_path_with_the_browser_quick_start_before_installatio
 
 
 def test_api_reference_and_contribute_are_direct_children_of_software_section() -> None:
-    labels = dict((t, l) for l, t in _entries("sections/software-integration.md"))
+    labels = {target: label for label, target in _entries("sections/software-integration.md")}
     assert labels["api/index"] == "API Reference"
     assert labels["contributor/index"] == "Contribute in 4 Steps"

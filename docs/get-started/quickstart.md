@@ -1,4 +1,12 @@
-# Python quickstart: your first calibrated explanation
+# Python quickstart: a ten-minute classification example
+
+<span id="python-quickstart-your-first-calibrated-explanation"></span>
+
+*The main first example is {doc}`Your First CE Explanation in Python <first-explanation-python>`
+(classification and regression, 13 steps). This page is a shorter, single
+classification example on scikit-learn's breast-cancer data; the
+{doc}`Python walkthrough <quickstart_walkthrough>` and {doc}`CE by example <ce-by-example>`
+explain the same case in depth.*
 
 <span id="quickstart-your-first-calibrated-explanation"></span>
 
@@ -12,10 +20,11 @@ dataset. Prefer to see the result first, without code? Read
 ## 1. Install
 
 ```bash
-pip install "calibrated-explanations[viz]"
+pip install "calibrated-explanations[viz,narrative]"
 ```
 
-The `viz` extra adds plotting. Other extras and conda: {doc}`installation`.
+The `viz` extra adds plotting; the `narrative` extra (PyYAML) is needed for the
+text narrative in step 6. Other extras and conda: {doc}`installation`.
 
 ## 2. Split the data three ways
 

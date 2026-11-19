@@ -9,8 +9,9 @@ CE 1.0.2 (`pip install calibrated-explanations`), and with the 1.1.0
 development version that these pages are built from; both print the same
 numbers.
 
-**Before these tutorials.** For the ideas without code, start with the
-{doc}`Quick Start <../get-started/try-in-browser>`, then
+**Before these tutorials.** For the ideas, start with the
+{doc}`Quick Start <../get-started/try-in-browser>`; the first complete Python example is
+{doc}`Your First CE Explanation in Python <../get-started/first-explanation-python>`. Then
 {doc}`../get-started/why-ce`,
 {doc}`CE by example <../get-started/ce-by-example>`,
 {doc}`../get-started/ce-tasks-and-modes` and

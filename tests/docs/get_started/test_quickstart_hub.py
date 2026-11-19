@@ -20,6 +20,7 @@ INDEX = GET_STARTED / "index.md"
 QUICK_START_TOCTREE = [
     ("What CE Is", "../what-is-ce"),
     ("Quick Start", "try-in-browser"),
+    ("Your First CE Explanation in Python", "first-explanation-python"),
     ("Installation", "installation"),
     ("Read Your First Explanation", "../foundations/how-to/interpret_explanations"),
     ("Apply CE to Your Own Data", "apply-to-your-data"),

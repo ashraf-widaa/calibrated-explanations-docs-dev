@@ -1,4 +1,7 @@
-"""Build the annotated figures of ``docs/get-started/try-in-browser.md``.
+"""Build the annotated figures of ``docs/get-started/first-explanation-python.md``.
+
+The page was formerly part of the browser Quick Start (``try-in-browser.md``); the
+images keep their ``try_assets/`` names so existing links stay valid.
 
 The script executes the page's own ``python`` blocks in order (reading the data
 from ``tests/data`` instead of GitHub, the same files), so the figures come from
@@ -32,7 +35,7 @@ import matplotlib.image as mpimg  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-PAGE = ROOT / "docs" / "get-started" / "try-in-browser.md"
+PAGE = ROOT / "docs" / "get-started" / "first-explanation-python.md"
 ASSETS = PAGE.parent / "try_assets"
 URL_LITERAL = (
     '("https://raw.githubusercontent.com/Moffran/"\n'
