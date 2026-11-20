@@ -308,3 +308,11 @@
   outline: 3px solid var(--color-brand-primary);
   outline-offset: 2px;
 }
+
+/* Owner decision 2026-11-20: hide the Read the Docs sidebar ad placement
+   (EthicalAds) on the beta documentation site. */
+[id^="readthedocs-ea"],
+[data-ea-publisher],
+.ethical-sidebar {
+  display: none !important;
+}
